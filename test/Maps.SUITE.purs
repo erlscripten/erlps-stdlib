@@ -1476,107 +1476,130 @@ erlps__t_iterator_1__1 [config_0] | (isEList config_0) =
             [(Tup.Tuple (ErlangAtom "a") (ErlangInt 1)),
              (Tup.Tuple (ErlangAtom "b") (ErlangInt 2))]))
   in let i0_7 = (BIF.do_remote_fun_call "Maps" "erlps__iterator__1" [m0_5])
-  in let match_expr_12 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i0_7])
+  in let arg_8 = (make_string "I0: ~p\n")
+  in let
+    _ =
+      (BIF.do_remote_fun_call "Erlang.Io" "erlps__format__2"
+         [arg_8, (ErlangCons i0_7 ErlangEmptyList)])
+  in let arg_12 = (make_string "I0: ~p\n")
+  in let tail_14 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i0_7])
+  in let
+    _ =
+      (BIF.do_remote_fun_call "Erlang.Io" "erlps__format__2"
+         [arg_12, (ErlangCons tail_14 ErlangEmptyList)])
+  in let match_expr_21 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i0_7])
   in
-    case match_expr_12 of
-      (ErlangTuple [k1_9, v1_10, i1_11]) ->
-        let match_expr_17 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i1_11])
+    case match_expr_21 of
+      (ErlangTuple [k1_18, v1_19, i1_20]) ->
+        let    arg_22 = (make_string "I1: ~p\n")
+        in let tail_24 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i1_20])
+        in let
+          _ =
+            (BIF.do_remote_fun_call "Erlang.Io" "erlps__format__2"
+               [arg_22, (ErlangCons tail_24 ErlangEmptyList)])
+        in let match_expr_31 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i1_20])
         in
-          case match_expr_17 of
-            (ErlangTuple [k2_14, v2_15, i2_16]) ->
-              let match_expr_19 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i2_16])
+          case match_expr_31 of
+            (ErlangTuple [k2_28, v2_29, i2_30]) ->
+              let    arg_32 = (make_string "I2: ~p\n")
+              in let tail_34 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i2_30])
+              in let
+                _ =
+                  (BIF.do_remote_fun_call "Erlang.Io" "erlps__format__2"
+                     [arg_32, (ErlangCons tail_34 ErlangEmptyList)])
+              in let match_expr_38 = (BIF.do_remote_fun_call "Maps" "erlps__next__1" [i2_30])
               in
-                case match_expr_19 of
+                case match_expr_38 of
                   (ErlangAtom "none") ->
-                    let    tail_21 = (ErlangTuple [k1_9, v1_10])
-                    in let tail_25 = (ErlangTuple [k2_14, v2_15])
+                    let    tail_40 = (ErlangTuple [k1_18, v1_19])
+                    in let tail_44 = (ErlangTuple [k2_28, v2_29])
                     in let
-                      kvlist_29 =
+                      kvlist_48 =
                         (BIF.do_remote_fun_call "Lists" "erlps__sort__1"
-                           [(ErlangCons tail_21
-                               (ErlangCons tail_25 ErlangEmptyList))])
-                    in let arg_30 = (BIF.maps__to_list__1 [m0_5])
-                    in let match_expr_33 = (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_30])
+                           [(ErlangCons tail_40
+                               (ErlangCons tail_44 ErlangEmptyList))])
+                    in let arg_49 = (BIF.maps__to_list__1 [m0_5])
+                    in let match_expr_52 = (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_49])
                     in
-                      case match_expr_33 of
-                        kvlist_32 | (kvlist_32 == kvlist_29) ->
+                      case match_expr_52 of
+                        kvlist_51 | (kvlist_51 == kvlist_48) ->
                           let   
-                            vs2_36 =
+                            vs2_55 =
                               (BIF.do_remote_fun_call "Lists" "erlps__seq__2"
                                  [(ErlangInt 1), (ErlangInt 200)])
                           in let
-                            arg_37 =
+                            arg_56 =
                               (flmap
-                                 (\ lc_40 ->
-                                    case lc_40 of
-                                      i_39 ->
+                                 (\ lc_59 ->
+                                    case lc_59 of
+                                      i_58 ->
                                         let   
-                                          tup_el_42 =
-                                            (ErlangTuple [(ErlangAtom "k"), i_39])
+                                          tup_el_61 =
+                                            (ErlangTuple [(ErlangAtom "k"), i_58])
                                         in let
-                                          lc_ret_41 =
-                                            (ErlangTuple [tup_el_42, i_39])
+                                          lc_ret_60 =
+                                            (ErlangTuple [tup_el_61, i_58])
                                         in
-                                          (ErlangCons lc_ret_41 ErlangEmptyList)
+                                          (ErlangCons lc_ret_60 ErlangEmptyList)
                                       _ -> ErlangEmptyList)
-                                 vs2_36)
-                          in let m2_46 = (BIF.maps__from_list__1 [arg_37])
-                          in let arg_48 = (BIF.do_remote_fun_call "Maps" "erlps__iterator__1" [m2_46])
-                          in let arg_47 = (erlps__iter_kv__1 [arg_48])
+                                 vs2_55)
+                          in let m2_65 = (BIF.maps__from_list__1 [arg_56])
+                          in let arg_67 = (BIF.do_remote_fun_call "Maps" "erlps__iterator__1" [m2_65])
+                          in let arg_66 = (erlps__iter_kv__1 [arg_67])
                           in let
-                            kvlist2_50 = (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_47])
-                          in let arg_51 = (BIF.maps__to_list__1 [m2_46])
+                            kvlist2_69 = (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_66])
+                          in let arg_70 = (BIF.maps__to_list__1 [m2_65])
                           in let
-                            match_expr_54 =
-                              (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_51])
+                            match_expr_73 =
+                              (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_70])
                           in
-                            case match_expr_54 of
-                              kvlist2_53 | (kvlist2_53 == kvlist2_50) ->
+                            case match_expr_73 of
+                              kvlist2_72 | (kvlist2_72 == kvlist2_69) ->
                                 let   
-                                  vs3_57 =
+                                  vs3_76 =
                                     (BIF.do_remote_fun_call "Lists" "erlps__seq__2"
-                                       [(ErlangInt 1), (ErlangInt 10000)])
+                                       [(ErlangInt 1), (ErlangInt 4000)])
                                 in let
-                                  arg_58 =
+                                  arg_77 =
                                     (flmap
-                                       (\ lc_61 ->
-                                          case lc_61 of
-                                            i_60 ->
+                                       (\ lc_80 ->
+                                          case lc_80 of
+                                            i_79 ->
                                               let   
-                                                tup_el_63 =
+                                                tup_el_82 =
                                                   (ErlangTuple
-                                                     [(ErlangAtom "k"), i_60])
+                                                     [(ErlangAtom "k"), i_79])
                                               in let
-                                                lc_ret_62 =
+                                                lc_ret_81 =
                                                   (ErlangTuple
-                                                     [tup_el_63, i_60])
+                                                     [tup_el_82, i_79])
                                               in
-                                                (ErlangCons lc_ret_62
+                                                (ErlangCons lc_ret_81
                                                    ErlangEmptyList)
                                             _ -> ErlangEmptyList)
-                                       vs3_57)
-                                in let m3_67 = (BIF.maps__from_list__1 [arg_58])
+                                       vs3_76)
+                                in let m3_86 = (BIF.maps__from_list__1 [arg_77])
                                 in let
-                                  arg_69 = (BIF.do_remote_fun_call "Maps" "erlps__iterator__1" [m3_67])
-                                in let arg_68 = (erlps__iter_kv__1 [arg_69])
+                                  arg_88 = (BIF.do_remote_fun_call "Maps" "erlps__iterator__1" [m3_86])
+                                in let arg_87 = (erlps__iter_kv__1 [arg_88])
                                 in let
-                                  kvlist3_71 =
-                                    (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_68])
-                                in let arg_72 = (BIF.maps__to_list__1 [m3_67])
+                                  kvlist3_90 =
+                                    (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_87])
+                                in let arg_91 = (BIF.maps__to_list__1 [m3_86])
                                 in let
-                                  match_expr_75 =
-                                    (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_72])
+                                  match_expr_94 =
+                                    (BIF.do_remote_fun_call "Lists" "erlps__sort__1" [arg_91])
                                 in
-                                  case match_expr_75 of
-                                    kvlist3_74 | (kvlist3_74 == kvlist3_71) ->
+                                  case match_expr_94 of
+                                    kvlist3_93 | (kvlist3_93 == kvlist3_90) ->
                                       (ErlangAtom "ok")
-                                    _ -> (EXC.badmatch match_expr_75)
-                              _ -> (EXC.badmatch match_expr_54)
-                        _ -> (EXC.badmatch match_expr_33)
-                  _ -> (EXC.badmatch match_expr_19)
-            _ -> (EXC.badmatch match_expr_17)
-      _ -> (EXC.badmatch match_expr_12)
-erlps__t_iterator_1__1 [arg_76] = (EXC.function_clause unit)
+                                    _ -> (EXC.badmatch match_expr_94)
+                              _ -> (EXC.badmatch match_expr_73)
+                        _ -> (EXC.badmatch match_expr_52)
+                  _ -> (EXC.badmatch match_expr_38)
+            _ -> (EXC.badmatch match_expr_31)
+      _ -> (EXC.badmatch match_expr_21)
+erlps__t_iterator_1__1 [arg_95] = (EXC.function_clause unit)
 erlps__t_iterator_1__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 

@@ -178,8 +178,12 @@ t_iterator_1(Config) when is_list(Config) ->
     %% Small map test
     M0 = #{ a => 1, b => 2 },
     I0 = maps:iterator(M0),
+    io:format("I0: ~p\n", [I0]),
+    io:format("I0: ~p\n", [maps:next(I0)]),
     {K1,V1,I1} = maps:next(I0),
+    io:format("I1: ~p\n", [maps:next(I1)]),
     {K2,V2,I2} = maps:next(I1),
+    io:format("I2: ~p\n", [maps:next(I2)]),
     none = maps:next(I2),
 
     KVList = lists:sort([{K1,V1},{K2,V2}]),
@@ -194,7 +198,8 @@ t_iterator_1(Config) when is_list(Config) ->
 
     %% Larger map test
 
-    Vs3 = lists:seq(1,10000),
+    Vs3 = lists:seq(1,4000),
+  %%Vs3 = lists:seq(1,10000),
     M3 = maps:from_list([{{k,I},I}||I<-Vs3]),
     KVList3 = lists:sort(iter_kv(maps:iterator(M3))),
     KVList3 = lists:sort(maps:to_list(M3)),
