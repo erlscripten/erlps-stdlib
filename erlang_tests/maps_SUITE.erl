@@ -56,9 +56,12 @@ t_update_with_3(Config) when is_list(Config) ->
     V1 = value1,
     V2 = <<"value2">>,
     V3 = "value3",
+    io:format("AAAA\n"),
     Map = #{ key1 => V1, key2 => V2, "key3" => V3 },
+    io:format("BBBB\n"),
     Fun = fun(V) -> [V,V,{V,V}] end,
 
+    io:format("TEST: ~p\n", [maps:update_with(key1,Fun,Map)]),
     #{ key1 := [V1,V1,{V1,V1}] } = maps:update_with(key1,Fun,Map),
     #{ key2 := [V2,V2,{V2,V2}] } = maps:update_with(key2,Fun,Map),
     #{ "key3" := [V3,V3,{V3,V3}] } = maps:update_with("key3",Fun,Map),

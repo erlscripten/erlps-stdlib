@@ -6,3 +6,4 @@ nohup.out
 bower_components
 .pulp-cache
 generated-docs
+.psci_modules/
