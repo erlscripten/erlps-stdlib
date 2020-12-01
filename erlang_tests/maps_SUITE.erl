@@ -35,9 +35,9 @@
          t_intersect/1, t_intersect_with/1,
          t_merge_with/1]).
 
--define(badmap(V,F,Args), {'EXIT', {{badmap,V}, [{maps,F,Args,_}|_]}}).
--define(badkey(K,F,Args), {'EXIT', {{badkey,K}, [{maps,F,Args,_}|_]}}).
--define(badarg(F,Args), {'EXIT', {badarg, [{maps,F,Args,_}|_]}}).
+-define(badmap(V,F,Args), {'EXIT', {{badmap,V}, _}}).
+-define(badkey(K,F,Args), {'EXIT', {{badkey,K}, _}}).
+-define(badarg(F,Args), {'EXIT', {badarg, _}}).
 
 suite() ->
     [{ct_hooks,[ts_install_cth]},

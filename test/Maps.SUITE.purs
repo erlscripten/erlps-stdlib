@@ -160,12 +160,9 @@ erlps__t_update_with_3__1 [config_0] | (isEList config_0) =
                         (ErlangTuple [(ErlangAtom "EXIT"),
                                       (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                   (ErlangAtom "b")]),
-                                                    (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                              (ErlangAtom "update_with"),
-                                                                              (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList))),
-                                                                              _]) _)])]) ->
+                                                    _])]) ->
                           let
-                            match_expr_98 =
+                            match_expr_97 =
                               (EXC.tryCatch
                                  (\ _ ->
                                     let   
@@ -196,62 +193,55 @@ erlps__t_update_with_3__1 [config_0] | (isEList config_0) =
                                            [(ErlangAtom "EXIT"), payload_94])
                                       ex_86 -> (EXC.raise ex_86)))
                           in
-                            case match_expr_98 of
+                            case match_expr_97 of
                               (ErlangTuple [(ErlangAtom "EXIT"),
                                             (ErlangTuple [(ErlangAtom "badarg"),
-                                                          (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                    (ErlangAtom "update_with"),
-                                                                                    (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangMap map_97) ErlangEmptyList))),
-                                                                                    _]) _)])]) ->
+                                                          _])]) ->
                                 let
-                                  match_expr_120 =
+                                  match_expr_117 =
                                     (EXC.tryCatch
                                        (\ _ ->
-                                          let arg_105 = (ErlangMap Map.empty)
+                                          let arg_104 = (ErlangMap Map.empty)
                                           in
                                             (BIF.do_remote_fun_call "Maps" "erlps__update_with__3"
                                                [(ErlangCons (ErlangAtom "a")
                                                    (ErlangCons (ErlangAtom "b")
                                                       ErlangEmptyList)),
-                                                fun_28, arg_105]))
-                                       (\ ex_107 ->
-                                          case ex_107 of
+                                                fun_28, arg_104]))
+                                       (\ ex_106 ->
+                                          case ex_106 of
                                             (ErlangTuple [(ErlangAtom "throw"),
-                                                          payload_108, _]) ->
-                                              payload_108
+                                                          payload_107, _]) ->
+                                              payload_107
                                             (ErlangTuple [(ErlangAtom "error"),
-                                                          payload_109,
-                                                          stack_110]) ->
+                                                          payload_108,
+                                                          stack_109]) ->
                                               let
-                                                tup_el_112 =
+                                                tup_el_111 =
                                                   (ErlangTuple
-                                                     [payload_109, stack_110])
+                                                     [payload_108, stack_109])
                                               in
                                                 (ErlangTuple
-                                                   [(ErlangAtom "EXIT"), tup_el_112])
+                                                   [(ErlangAtom "EXIT"), tup_el_111])
                                             (ErlangTuple [(ErlangAtom "exit"),
-                                                          payload_115, _]) ->
+                                                          payload_114, _]) ->
                                               (ErlangTuple
-                                                 [(ErlangAtom "EXIT"), payload_115])
-                                            ex_107 -> (EXC.raise ex_107)))
+                                                 [(ErlangAtom "EXIT"), payload_114])
+                                            ex_106 -> (EXC.raise ex_106)))
                                 in
-                                  case match_expr_120 of
+                                  case match_expr_117 of
                                     (ErlangTuple [(ErlangAtom "EXIT"),
                                                   (ErlangTuple [(ErlangTuple [(ErlangAtom "badkey"),
                                                                               (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList))]),
-                                                                (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                          (ErlangAtom "update_with"),
-                                                                                          (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons fun_118 (ErlangCons (ErlangMap map_119) ErlangEmptyList))),
-                                                                                          _]) _)])]) | (fun_118 ==
-                                                                                                          fun_28) ->
+                                                                _])]) ->
                                       (ErlangAtom "ok")
-                                    _ -> (EXC.badmatch match_expr_120)
-                              _ -> (EXC.badmatch match_expr_98)
+                                    _ -> (EXC.badmatch match_expr_117)
+                              _ -> (EXC.badmatch match_expr_97)
                         _ -> (EXC.badmatch match_expr_76)
                   _ -> (EXC.badmatch match_expr_55)
             _ -> (EXC.badmatch match_expr_46)
       _ -> (EXC.badmatch match_expr_37)
-erlps__t_update_with_3__1 [arg_121] = (EXC.function_clause unit)
+erlps__t_update_with_3__1 [arg_118] = (EXC.function_clause unit)
 erlps__t_update_with_3__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -371,12 +361,9 @@ erlps__t_update_with_4__1 [config_0] | (isEList config_0) =
                               (ErlangTuple [(ErlangAtom "EXIT"),
                                             (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                         (ErlangAtom "b")]),
-                                                          (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                    (ErlangAtom "update_with"),
-                                                                                    (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList))),
-                                                                                    _]) _)])]) ->
+                                                          _])]) ->
                                 let
-                                  match_expr_109 =
+                                  match_expr_108 =
                                     (EXC.tryCatch
                                        (\ _ ->
                                           let   
@@ -410,21 +397,18 @@ erlps__t_update_with_4__1 [config_0] | (isEList config_0) =
                                                  [(ErlangAtom "EXIT"), payload_105])
                                             ex_97 -> (EXC.raise ex_97)))
                                 in
-                                  case match_expr_109 of
+                                  case match_expr_108 of
                                     (ErlangTuple [(ErlangAtom "EXIT"),
                                                   (ErlangTuple [(ErlangAtom "badarg"),
-                                                                (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                          (ErlangAtom "update_with"),
-                                                                                          (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangMap map_108) ErlangEmptyList))),
-                                                                                          _]) _)])]) ->
+                                                                _])]) ->
                                       (ErlangAtom "ok")
-                                    _ -> (EXC.badmatch match_expr_109)
+                                    _ -> (EXC.badmatch match_expr_108)
                               _ -> (EXC.badmatch match_expr_87)
                         _ -> (EXC.badmatch match_expr_66)
                   _ -> (EXC.badmatch match_expr_59)
             _ -> (EXC.badmatch match_expr_49)
       _ -> (EXC.badmatch match_expr_39)
-erlps__t_update_with_4__1 [arg_110] = (EXC.function_clause unit)
+erlps__t_update_with_4__1 [arg_109] = (EXC.function_clause unit)
 erlps__t_update_with_4__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -487,10 +471,7 @@ erlps__t_get_3__1 [config_0] | (isEList config_0) =
                         (ErlangTuple [(ErlangAtom "EXIT"),
                                       (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                   (ErlangAtom "a")]),
-                                                    (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                              (ErlangAtom "get"),
-                                                                              (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "def") ErlangEmptyList))),
-                                                                              _]) _)])]) ->
+                                                    _])]) ->
                           (ErlangAtom "ok")
                         _ -> (EXC.badmatch match_expr_40)
                   _ -> (EXC.badmatch match_expr_19)
@@ -596,10 +577,7 @@ erlps__t_without_2__1 [_config_0] =
             (ErlangTuple [(ErlangAtom "EXIT"),
                           (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                       (ErlangAtom "a")]),
-                                        (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                  (ErlangAtom "without"),
-                                                                  (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons (ErlangAtom "a") ErlangEmptyList)),
-                                                                  _]) _)])]) ->
+                                        _])]) ->
               let
                 match_expr_97 =
                   (EXC.tryCatch
@@ -625,13 +603,9 @@ erlps__t_without_2__1 [_config_0] =
                   (ErlangTuple [(ErlangAtom "EXIT"),
                                 (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                             (ErlangAtom "a")]),
-                                              (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                        (ErlangAtom "without"),
-                                                                        (ErlangCons (ErlangTuple [(ErlangAtom "a"),
-                                                                                                  (ErlangAtom "b")]) (ErlangCons (ErlangAtom "a") ErlangEmptyList)),
-                                                                        _]) _)])]) ->
+                                              _])]) ->
                     let
-                      match_expr_117 =
+                      match_expr_116 =
                         (EXC.tryCatch
                            (\ _ ->
                               let    tup_el_101 = (ErlangBinary (BIN.concat []))
@@ -659,125 +633,108 @@ erlps__t_without_2__1 [_config_0] =
                                   (ErlangTuple [(ErlangAtom "EXIT"), payload_112])
                                 ex_104 -> (EXC.raise ex_104)))
                     in
-                      case match_expr_117 of
+                      case match_expr_116 of
                         (ErlangTuple [(ErlangAtom "EXIT"),
                                       (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                   (ErlangTuple [(ErlangInt 0),
                                                                                 (ErlangBinary bin_e_115),
                                                                                 (ErlangInt 97)])]),
-                                                    (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                              (ErlangAtom "without"),
-                                                                              (ErlangCons ErlangEmptyList (ErlangCons (ErlangTuple [(ErlangInt 0),
-                                                                                                                                    (ErlangBinary bin_e_116),
-                                                                                                                                    (ErlangInt 97)]) ErlangEmptyList)),
-                                                                              _]) _)])]) | (BIN.empty
-                                                                                              bin_e_115)
-                                                                                         , (BIN.empty
-                                                                                              bin_e_116) ->
+                                                    _])]) | (BIN.empty
+                                                               bin_e_115) ->
                           let
-                            match_expr_145 =
+                            match_expr_143 =
                               (EXC.tryCatch
                                  (\ _ ->
                                     let   
-                                      tail_121 =
+                                      tail_120 =
                                         (BIF.erlang__op_neg [(ErlangInt 20)])
                                     in let
-                                      tail_124 =
+                                      tail_123 =
                                         (BIF.erlang__op_neg [(ErlangInt 8)])
                                     in let
-                                      tup_el_129 =
+                                      tup_el_128 =
                                         (ErlangBinary (BIN.concat []))
                                     in let
-                                      arg_127 =
+                                      arg_126 =
                                         (ErlangTuple
-                                           [(ErlangInt 0), tup_el_129,
+                                           [(ErlangInt 0), tup_el_128,
                                             (ErlangInt 97)])
                                     in
                                       (BIF.do_remote_fun_call "Maps" "erlps__without__2"
                                          [(ErlangCons (ErlangAtom "false")
-                                             (ErlangCons tail_121
-                                                (ErlangCons tail_124
+                                             (ErlangCons tail_120
+                                                (ErlangCons tail_123
                                                    ErlangEmptyList))),
-                                          arg_127]))
-                                 (\ ex_132 ->
-                                    case ex_132 of
-                                      (ErlangTuple [(ErlangAtom "throw"), payload_133,
+                                          arg_126]))
+                                 (\ ex_131 ->
+                                    case ex_131 of
+                                      (ErlangTuple [(ErlangAtom "throw"), payload_132,
                                                     _]) ->
-                                        payload_133
-                                      (ErlangTuple [(ErlangAtom "error"), payload_134,
-                                                    stack_135]) ->
+                                        payload_132
+                                      (ErlangTuple [(ErlangAtom "error"), payload_133,
+                                                    stack_134]) ->
                                         let
-                                          tup_el_137 =
+                                          tup_el_136 =
                                             (ErlangTuple
-                                               [payload_134, stack_135])
+                                               [payload_133, stack_134])
                                         in
                                           (ErlangTuple
-                                             [(ErlangAtom "EXIT"), tup_el_137])
-                                      (ErlangTuple [(ErlangAtom "exit"), payload_140,
+                                             [(ErlangAtom "EXIT"), tup_el_136])
+                                      (ErlangTuple [(ErlangAtom "exit"), payload_139,
                                                     _]) ->
                                         (ErlangTuple
-                                           [(ErlangAtom "EXIT"), payload_140])
-                                      ex_132 -> (EXC.raise ex_132)))
+                                           [(ErlangAtom "EXIT"), payload_139])
+                                      ex_131 -> (EXC.raise ex_131)))
                           in
-                            case match_expr_145 of
+                            case match_expr_143 of
                               (ErlangTuple [(ErlangAtom "EXIT"),
                                             (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                         (ErlangTuple [(ErlangInt 0),
-                                                                                      (ErlangBinary bin_e_143),
+                                                                                      (ErlangBinary bin_e_142),
                                                                                       (ErlangInt 97)])]),
-                                                          (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                    (ErlangAtom "without"),
-                                                                                    (ErlangCons (ErlangCons (ErlangAtom "false") (ErlangCons (ErlangInt -20) (ErlangCons (ErlangInt -8) ErlangEmptyList))) (ErlangCons (ErlangTuple [(ErlangInt 0),
-                                                                                                                                                                                                                               (ErlangBinary bin_e_144),
-                                                                                                                                                                                                                               (ErlangInt 97)]) ErlangEmptyList)),
-                                                                                    _]) _)])]) | (BIN.empty
-                                                                                                    bin_e_143)
-                                                                                               , (BIN.empty
-                                                                                                    bin_e_144) ->
+                                                          _])]) | (BIN.empty
+                                                                     bin_e_142) ->
                                 let
-                                  match_expr_161 =
+                                  match_expr_158 =
                                     (EXC.tryCatch
                                        (\ _ ->
-                                          let arg_147 = (ErlangMap Map.empty)
+                                          let arg_145 = (ErlangMap Map.empty)
                                           in
                                             (BIF.do_remote_fun_call "Maps" "erlps__without__2"
-                                               [(ErlangAtom "a"), arg_147]))
-                                       (\ ex_149 ->
-                                          case ex_149 of
+                                               [(ErlangAtom "a"), arg_145]))
+                                       (\ ex_147 ->
+                                          case ex_147 of
                                             (ErlangTuple [(ErlangAtom "throw"),
-                                                          payload_150, _]) ->
-                                              payload_150
+                                                          payload_148, _]) ->
+                                              payload_148
                                             (ErlangTuple [(ErlangAtom "error"),
-                                                          payload_151,
-                                                          stack_152]) ->
+                                                          payload_149,
+                                                          stack_150]) ->
                                               let
-                                                tup_el_154 =
+                                                tup_el_152 =
                                                   (ErlangTuple
-                                                     [payload_151, stack_152])
+                                                     [payload_149, stack_150])
                                               in
                                                 (ErlangTuple
-                                                   [(ErlangAtom "EXIT"), tup_el_154])
+                                                   [(ErlangAtom "EXIT"), tup_el_152])
                                             (ErlangTuple [(ErlangAtom "exit"),
-                                                          payload_157, _]) ->
+                                                          payload_155, _]) ->
                                               (ErlangTuple
-                                                 [(ErlangAtom "EXIT"), payload_157])
-                                            ex_149 -> (EXC.raise ex_149)))
+                                                 [(ErlangAtom "EXIT"), payload_155])
+                                            ex_147 -> (EXC.raise ex_147)))
                                 in
-                                  case match_expr_161 of
+                                  case match_expr_158 of
                                     (ErlangTuple [(ErlangAtom "EXIT"),
                                                   (ErlangTuple [(ErlangAtom "badarg"),
-                                                                (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                          (ErlangAtom "without"),
-                                                                                          (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangMap map_160) ErlangEmptyList)),
-                                                                                          _]) _)])]) ->
+                                                                _])]) ->
                                       (ErlangAtom "ok")
-                                    _ -> (EXC.badmatch match_expr_161)
-                              _ -> (EXC.badmatch match_expr_145)
-                        _ -> (EXC.badmatch match_expr_117)
+                                    _ -> (EXC.badmatch match_expr_158)
+                              _ -> (EXC.badmatch match_expr_143)
+                        _ -> (EXC.badmatch match_expr_116)
                   _ -> (EXC.badmatch match_expr_97)
             _ -> (EXC.badmatch match_expr_79)
       _ -> (EXC.badmatch match_expr_59)
-erlps__t_without_2__1 [arg_162] = (EXC.function_clause unit)
+erlps__t_without_2__1 [arg_159] = (EXC.function_clause unit)
 erlps__t_without_2__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -869,10 +826,7 @@ erlps__t_with_2__1 [_config_0] =
             (ErlangTuple [(ErlangAtom "EXIT"),
                           (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                       (ErlangAtom "a")]),
-                                        (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                  (ErlangAtom "with"),
-                                                                  (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangAtom "b") ErlangEmptyList)) (ErlangCons (ErlangAtom "a") ErlangEmptyList)),
-                                                                  _]) _)])]) ->
+                                        _])]) ->
               let
                 match_expr_93 =
                   (EXC.tryCatch
@@ -898,13 +852,9 @@ erlps__t_with_2__1 [_config_0] =
                   (ErlangTuple [(ErlangAtom "EXIT"),
                                 (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                             (ErlangAtom "a")]),
-                                              (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                        (ErlangAtom "with"),
-                                                                        (ErlangCons (ErlangTuple [(ErlangAtom "a"),
-                                                                                                  (ErlangAtom "b")]) (ErlangCons (ErlangAtom "a") ErlangEmptyList)),
-                                                                        _]) _)])]) ->
+                                              _])]) ->
                     let
-                      match_expr_113 =
+                      match_expr_112 =
                         (EXC.tryCatch
                            (\ _ ->
                               let    tup_el_97 = (ErlangBinary (BIN.concat []))
@@ -931,125 +881,108 @@ erlps__t_with_2__1 [_config_0] =
                                   (ErlangTuple [(ErlangAtom "EXIT"), payload_108])
                                 ex_100 -> (EXC.raise ex_100)))
                     in
-                      case match_expr_113 of
+                      case match_expr_112 of
                         (ErlangTuple [(ErlangAtom "EXIT"),
                                       (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                   (ErlangTuple [(ErlangInt 0),
                                                                                 (ErlangBinary bin_e_111),
                                                                                 (ErlangInt 97)])]),
-                                                    (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                              (ErlangAtom "with"),
-                                                                              (ErlangCons ErlangEmptyList (ErlangCons (ErlangTuple [(ErlangInt 0),
-                                                                                                                                    (ErlangBinary bin_e_112),
-                                                                                                                                    (ErlangInt 97)]) ErlangEmptyList)),
-                                                                              _]) _)])]) | (BIN.empty
-                                                                                              bin_e_111)
-                                                                                         , (BIN.empty
-                                                                                              bin_e_112) ->
+                                                    _])]) | (BIN.empty
+                                                               bin_e_111) ->
                           let
-                            match_expr_141 =
+                            match_expr_139 =
                               (EXC.tryCatch
                                  (\ _ ->
                                     let   
-                                      tail_117 =
+                                      tail_116 =
                                         (BIF.erlang__op_neg [(ErlangInt 20)])
                                     in let
-                                      tail_120 =
+                                      tail_119 =
                                         (BIF.erlang__op_neg [(ErlangInt 8)])
                                     in let
-                                      tup_el_125 =
+                                      tup_el_124 =
                                         (ErlangBinary (BIN.concat []))
                                     in let
-                                      arg_123 =
+                                      arg_122 =
                                         (ErlangTuple
-                                           [(ErlangInt 0), tup_el_125,
+                                           [(ErlangInt 0), tup_el_124,
                                             (ErlangInt 97)])
                                     in
                                       (BIF.do_remote_fun_call "Maps" "erlps__with__2"
                                          [(ErlangCons (ErlangAtom "false")
-                                             (ErlangCons tail_117
-                                                (ErlangCons tail_120
+                                             (ErlangCons tail_116
+                                                (ErlangCons tail_119
                                                    ErlangEmptyList))),
-                                          arg_123]))
-                                 (\ ex_128 ->
-                                    case ex_128 of
-                                      (ErlangTuple [(ErlangAtom "throw"), payload_129,
+                                          arg_122]))
+                                 (\ ex_127 ->
+                                    case ex_127 of
+                                      (ErlangTuple [(ErlangAtom "throw"), payload_128,
                                                     _]) ->
-                                        payload_129
-                                      (ErlangTuple [(ErlangAtom "error"), payload_130,
-                                                    stack_131]) ->
+                                        payload_128
+                                      (ErlangTuple [(ErlangAtom "error"), payload_129,
+                                                    stack_130]) ->
                                         let
-                                          tup_el_133 =
+                                          tup_el_132 =
                                             (ErlangTuple
-                                               [payload_130, stack_131])
+                                               [payload_129, stack_130])
                                         in
                                           (ErlangTuple
-                                             [(ErlangAtom "EXIT"), tup_el_133])
-                                      (ErlangTuple [(ErlangAtom "exit"), payload_136,
+                                             [(ErlangAtom "EXIT"), tup_el_132])
+                                      (ErlangTuple [(ErlangAtom "exit"), payload_135,
                                                     _]) ->
                                         (ErlangTuple
-                                           [(ErlangAtom "EXIT"), payload_136])
-                                      ex_128 -> (EXC.raise ex_128)))
+                                           [(ErlangAtom "EXIT"), payload_135])
+                                      ex_127 -> (EXC.raise ex_127)))
                           in
-                            case match_expr_141 of
+                            case match_expr_139 of
                               (ErlangTuple [(ErlangAtom "EXIT"),
                                             (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                         (ErlangTuple [(ErlangInt 0),
-                                                                                      (ErlangBinary bin_e_139),
+                                                                                      (ErlangBinary bin_e_138),
                                                                                       (ErlangInt 97)])]),
-                                                          (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                    (ErlangAtom "with"),
-                                                                                    (ErlangCons (ErlangCons (ErlangAtom "false") (ErlangCons (ErlangInt -20) (ErlangCons (ErlangInt -8) ErlangEmptyList))) (ErlangCons (ErlangTuple [(ErlangInt 0),
-                                                                                                                                                                                                                               (ErlangBinary bin_e_140),
-                                                                                                                                                                                                                               (ErlangInt 97)]) ErlangEmptyList)),
-                                                                                    _]) _)])]) | (BIN.empty
-                                                                                                    bin_e_139)
-                                                                                               , (BIN.empty
-                                                                                                    bin_e_140) ->
+                                                          _])]) | (BIN.empty
+                                                                     bin_e_138) ->
                                 let
-                                  match_expr_157 =
+                                  match_expr_154 =
                                     (EXC.tryCatch
                                        (\ _ ->
-                                          let arg_143 = (ErlangMap Map.empty)
+                                          let arg_141 = (ErlangMap Map.empty)
                                           in
                                             (BIF.do_remote_fun_call "Maps" "erlps__with__2"
-                                               [(ErlangAtom "a"), arg_143]))
-                                       (\ ex_145 ->
-                                          case ex_145 of
+                                               [(ErlangAtom "a"), arg_141]))
+                                       (\ ex_143 ->
+                                          case ex_143 of
                                             (ErlangTuple [(ErlangAtom "throw"),
-                                                          payload_146, _]) ->
-                                              payload_146
+                                                          payload_144, _]) ->
+                                              payload_144
                                             (ErlangTuple [(ErlangAtom "error"),
-                                                          payload_147,
-                                                          stack_148]) ->
+                                                          payload_145,
+                                                          stack_146]) ->
                                               let
-                                                tup_el_150 =
+                                                tup_el_148 =
                                                   (ErlangTuple
-                                                     [payload_147, stack_148])
+                                                     [payload_145, stack_146])
                                               in
                                                 (ErlangTuple
-                                                   [(ErlangAtom "EXIT"), tup_el_150])
+                                                   [(ErlangAtom "EXIT"), tup_el_148])
                                             (ErlangTuple [(ErlangAtom "exit"),
-                                                          payload_153, _]) ->
+                                                          payload_151, _]) ->
                                               (ErlangTuple
-                                                 [(ErlangAtom "EXIT"), payload_153])
-                                            ex_145 -> (EXC.raise ex_145)))
+                                                 [(ErlangAtom "EXIT"), payload_151])
+                                            ex_143 -> (EXC.raise ex_143)))
                                 in
-                                  case match_expr_157 of
+                                  case match_expr_154 of
                                     (ErlangTuple [(ErlangAtom "EXIT"),
                                                   (ErlangTuple [(ErlangAtom "badarg"),
-                                                                (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                          (ErlangAtom "with"),
-                                                                                          (ErlangCons (ErlangAtom "a") (ErlangCons (ErlangMap map_156) ErlangEmptyList)),
-                                                                                          _]) _)])]) ->
+                                                                _])]) ->
                                       (ErlangAtom "ok")
-                                    _ -> (EXC.badmatch match_expr_157)
-                              _ -> (EXC.badmatch match_expr_141)
-                        _ -> (EXC.badmatch match_expr_113)
+                                    _ -> (EXC.badmatch match_expr_154)
+                              _ -> (EXC.badmatch match_expr_139)
+                        _ -> (EXC.badmatch match_expr_112)
                   _ -> (EXC.badmatch match_expr_93)
             _ -> (EXC.badmatch match_expr_75)
       _ -> (EXC.badmatch match_expr_55)
-erlps__t_with_2__1 [arg_158] = (EXC.function_clause unit)
+erlps__t_with_2__1 [arg_155] = (EXC.function_clause unit)
 erlps__t_with_2__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -1170,12 +1103,9 @@ erlps__t_filter_2__1 [config_0] | (isEList config_0) =
                               (ErlangTuple [(ErlangAtom "EXIT"),
                                             (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                         (ErlangAtom "a")]),
-                                                          (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                    (ErlangAtom "filter"),
-                                                                                    (ErlangCons _ (ErlangCons (ErlangAtom "a") ErlangEmptyList)),
-                                                                                    _]) _)])]) ->
+                                                          _])]) ->
                                 let
-                                  match_expr_94 =
+                                  match_expr_92 =
                                     (EXC.tryCatch
                                        (\ _ ->
                                           let   
@@ -1208,22 +1138,18 @@ erlps__t_filter_2__1 [config_0] | (isEList config_0) =
                                                  [(ErlangAtom "EXIT"), payload_89])
                                             ex_81 -> (EXC.raise ex_81)))
                                 in
-                                  case match_expr_94 of
+                                  case match_expr_92 of
                                     (ErlangTuple [(ErlangAtom "EXIT"),
                                                   (ErlangTuple [(ErlangAtom "badarg"),
-                                                                (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                          (ErlangAtom "filter"),
-                                                                                          (ErlangCons (ErlangBinary bin_e_92) (ErlangCons (ErlangMap map_93) ErlangEmptyList)),
-                                                                                          _]) _)])]) | (BIN.empty
-                                                                                                          bin_e_92) ->
+                                                                _])]) ->
                                       (ErlangAtom "ok")
-                                    _ -> (EXC.badmatch match_expr_94)
+                                    _ -> (EXC.badmatch match_expr_92)
                               _ -> (EXC.badmatch match_expr_76)
                         _ -> (EXC.badmatch match_expr_57)
                   _ -> (EXC.badmatch match_expr_52)
             _ -> (EXC.badmatch match_expr_47)
       _ -> (EXC.badmatch match_expr_43)
-erlps__t_filter_2__1 [arg_95] = (EXC.function_clause unit)
+erlps__t_filter_2__1 [arg_93] = (EXC.function_clause unit)
 erlps__t_filter_2__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -1330,12 +1256,9 @@ erlps__t_fold_3__1 [config_0] | (isEList config_0) =
                         (ErlangTuple [(ErlangAtom "EXIT"),
                                       (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                   (ErlangAtom "a")]),
-                                                    (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                              (ErlangAtom "fold"),
-                                                                              (ErlangCons _ (ErlangCons (ErlangInt 0) (ErlangCons (ErlangAtom "a") ErlangEmptyList))),
-                                                                              _]) _)])]) ->
+                                                    _])]) ->
                           let
-                            match_expr_92 =
+                            match_expr_90 =
                               (EXC.tryCatch
                                  (\ _ ->
                                     let   
@@ -1364,21 +1287,17 @@ erlps__t_fold_3__1 [config_0] | (isEList config_0) =
                                            [(ErlangAtom "EXIT"), payload_87])
                                       ex_79 -> (EXC.raise ex_79)))
                           in
-                            case match_expr_92 of
+                            case match_expr_90 of
                               (ErlangTuple [(ErlangAtom "EXIT"),
                                             (ErlangTuple [(ErlangAtom "badarg"),
-                                                          (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                    (ErlangAtom "fold"),
-                                                                                    (ErlangCons (ErlangBinary bin_e_90) (ErlangCons (ErlangInt 0) (ErlangCons (ErlangMap map_91) ErlangEmptyList))),
-                                                                                    _]) _)])]) | (BIN.empty
-                                                                                                    bin_e_90) ->
+                                                          _])]) ->
                                 (ErlangAtom "ok")
-                              _ -> (EXC.badmatch match_expr_92)
+                              _ -> (EXC.badmatch match_expr_90)
                         _ -> (EXC.badmatch match_expr_73)
                   _ -> (EXC.badmatch match_expr_52)
             _ -> (EXC.badmatch match_expr_36)
       _ -> (EXC.badmatch m0_13)
-erlps__t_fold_3__1 [arg_93] = (EXC.function_clause unit)
+erlps__t_fold_3__1 [arg_91] = (EXC.function_clause unit)
 erlps__t_fold_3__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -1491,12 +1410,9 @@ erlps__t_map_2__1 [config_0] | (isEList config_0) =
                         (ErlangTuple [(ErlangAtom "EXIT"),
                                       (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                   (ErlangAtom "a")]),
-                                                    (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                              (ErlangAtom "map"),
-                                                                              (ErlangCons _ (ErlangCons (ErlangAtom "a") ErlangEmptyList)),
-                                                                              _]) _)])]) ->
+                                                    _])]) ->
                           let
-                            match_expr_87 =
+                            match_expr_85 =
                               (EXC.tryCatch
                                  (\ _ ->
                                     let   
@@ -1525,21 +1441,17 @@ erlps__t_map_2__1 [config_0] | (isEList config_0) =
                                            [(ErlangAtom "EXIT"), payload_82])
                                       ex_74 -> (EXC.raise ex_74)))
                           in
-                            case match_expr_87 of
+                            case match_expr_85 of
                               (ErlangTuple [(ErlangAtom "EXIT"),
                                             (ErlangTuple [(ErlangAtom "badarg"),
-                                                          (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                    (ErlangAtom "map"),
-                                                                                    (ErlangCons (ErlangBinary bin_e_85) (ErlangCons (ErlangMap map_86) ErlangEmptyList)),
-                                                                                    _]) _)])]) | (BIN.empty
-                                                                                                    bin_e_85) ->
+                                                          _])]) ->
                                 (ErlangAtom "ok")
-                              _ -> (EXC.badmatch match_expr_87)
+                              _ -> (EXC.badmatch match_expr_85)
                         _ -> (EXC.badmatch match_expr_69)
                   _ -> (EXC.badmatch m2_44)
             _ -> (EXC.badmatch m1_28)
       _ -> (EXC.badmatch m0_13)
-erlps__t_map_2__1 [arg_88] = (EXC.function_clause unit)
+erlps__t_map_2__1 [arg_86] = (EXC.function_clause unit)
 erlps__t_map_2__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -1793,10 +1705,7 @@ erlps__t_merge_opt__1 [config_0] | (isEList config_0) =
                                           (ErlangTuple [(ErlangAtom "EXIT"),
                                                         (ErlangTuple [(ErlangTuple [(ErlangAtom "badmap"),
                                                                                     (ErlangCons (ErlangAtom "a") (ErlangAtom "b"))]),
-                                                                      (ErlangCons (ErlangTuple [(ErlangAtom "maps"),
-                                                                                                (ErlangAtom "merge"),
-                                                                                                (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangAtom "b")) (ErlangCons (ErlangCons (ErlangAtom "a") (ErlangAtom "b")) ErlangEmptyList)),
-                                                                                                _]) _)])]) ->
+                                                                      _])]) ->
                                             (ErlangAtom "ok")
                                           _ -> (EXC.badmatch match_expr_63)
                                     _ -> (EXC.badmatch match_expr_44)
