@@ -115,7 +115,7 @@ in  upstream
         , repo =
           "https://github.com/erlscripten/erlps-core.git"
         , version =
-          "v0.0.3"
+          "v0.0.4"
         }
     with base58 =
         { dependencies =
