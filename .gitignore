@@ -1,0 +1,8 @@
+node_modules
+output
+nohup.out
+.idea
+.spago
+bower_components
+.pulp-cache
+generated-docs
