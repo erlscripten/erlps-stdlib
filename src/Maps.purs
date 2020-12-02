@@ -242,21 +242,42 @@ erlps__filter__2 [pred_0, iterator_1]
          lop_7 =
            (BIF.erlang__is_function__2
               [pred_0, (ErlangInt (DBI.fromInt 2))])
-       in let lop_11 = (BIF.erlang__is_tuple__1 [iterator_1])
-       in let lop_14 = (BIF.erlang__tuple_size__1 [iterator_1])
        in let
-         rop_13 =
-           (BIF.erlang__op_eq [lop_14, (ErlangInt (DBI.fromInt 3))])
-       in let rop_10 = (BIF.erlang__op_andalso [lop_11, rop_13])
-       in let lop_6 = (BIF.erlang__op_andalso [lop_7, rop_10])
-       in let rop_17 = (BIF.erlang__op_eq [iterator_1, (ErlangAtom "none")])
-       in let lop_5 = (BIF.erlang__op_orelse [lop_6, rop_17])
-       in let arg_22 = (BIF.erlang__hd__1 [iterator_1])
-       in let lop_21 = (BIF.erlang__is_integer__1 [arg_22])
-       in let arg_25 = (BIF.erlang__tl__1 [iterator_1])
-       in let rop_24 = (BIF.erlang__is_map__1 [arg_25])
-       in let rop_20 = (BIF.erlang__op_andalso [lop_21, rop_24])
-       in (BIF.erlang__op_orelse [lop_5, rop_20])) =
+         lop_6 =
+           case lop_7 of
+             (ErlangAtom "false") -> (ErlangAtom "false")
+             (ErlangAtom "true") ->
+               let lop_10 = (BIF.erlang__is_tuple__1 [iterator_1])
+               in
+                 case lop_10 of
+                   (ErlangAtom "false") -> (ErlangAtom "false")
+                   (ErlangAtom "true") ->
+                     let lop_12 = (BIF.erlang__tuple_size__1 [iterator_1])
+                     in
+                       (BIF.erlang__op_eq [lop_12, (ErlangInt (DBI.fromInt 3))])
+                   _ -> (EXC.badarg1 lop_10)
+             _ -> (EXC.badarg1 lop_7)
+       in let
+         lop_5 =
+           case lop_6 of
+             (ErlangAtom "true") -> (ErlangAtom "true")
+             (ErlangAtom "false") ->
+               (BIF.erlang__op_eq [iterator_1, (ErlangAtom "none")])
+             _ -> (EXC.badarg1 lop_6)
+       in
+         case lop_5 of
+           (ErlangAtom "true") -> (ErlangAtom "true")
+           (ErlangAtom "false") ->
+             let    arg_18 = (BIF.erlang__hd__1 [iterator_1])
+             in let lop_17 = (BIF.erlang__is_integer__1 [arg_18])
+             in
+               case lop_17 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   let arg_20 = (BIF.erlang__tl__1 [iterator_1])
+                   in (BIF.erlang__is_map__1 [arg_20])
+                 _ -> (EXC.badarg1 lop_17)
+           _ -> (EXC.badarg1 lop_5)) =
   let arg_2 = (erlps__filter_1__2 [pred_0, iterator_1])
   in (BIF.maps__from_list__1 [arg_2])
 erlps__filter__2 [pred_0, map_1] =
@@ -303,21 +324,42 @@ erlps__fold__3 [fun_0, init_1, iterator_2]
       (let   
          lop_8 =
            (BIF.erlang__is_function__2 [fun_0, (ErlangInt (DBI.fromInt 3))])
-       in let lop_12 = (BIF.erlang__is_tuple__1 [iterator_2])
-       in let lop_15 = (BIF.erlang__tuple_size__1 [iterator_2])
        in let
-         rop_14 =
-           (BIF.erlang__op_eq [lop_15, (ErlangInt (DBI.fromInt 3))])
-       in let rop_11 = (BIF.erlang__op_andalso [lop_12, rop_14])
-       in let lop_7 = (BIF.erlang__op_andalso [lop_8, rop_11])
-       in let rop_18 = (BIF.erlang__op_eq [iterator_2, (ErlangAtom "none")])
-       in let lop_6 = (BIF.erlang__op_orelse [lop_7, rop_18])
-       in let arg_23 = (BIF.erlang__hd__1 [iterator_2])
-       in let lop_22 = (BIF.erlang__is_integer__1 [arg_23])
-       in let arg_26 = (BIF.erlang__tl__1 [iterator_2])
-       in let rop_25 = (BIF.erlang__is_map__1 [arg_26])
-       in let rop_21 = (BIF.erlang__op_andalso [lop_22, rop_25])
-       in (BIF.erlang__op_orelse [lop_6, rop_21])) =
+         lop_7 =
+           case lop_8 of
+             (ErlangAtom "false") -> (ErlangAtom "false")
+             (ErlangAtom "true") ->
+               let lop_11 = (BIF.erlang__is_tuple__1 [iterator_2])
+               in
+                 case lop_11 of
+                   (ErlangAtom "false") -> (ErlangAtom "false")
+                   (ErlangAtom "true") ->
+                     let lop_13 = (BIF.erlang__tuple_size__1 [iterator_2])
+                     in
+                       (BIF.erlang__op_eq [lop_13, (ErlangInt (DBI.fromInt 3))])
+                   _ -> (EXC.badarg1 lop_11)
+             _ -> (EXC.badarg1 lop_8)
+       in let
+         lop_6 =
+           case lop_7 of
+             (ErlangAtom "true") -> (ErlangAtom "true")
+             (ErlangAtom "false") ->
+               (BIF.erlang__op_eq [iterator_2, (ErlangAtom "none")])
+             _ -> (EXC.badarg1 lop_7)
+       in
+         case lop_6 of
+           (ErlangAtom "true") -> (ErlangAtom "true")
+           (ErlangAtom "false") ->
+             let    arg_19 = (BIF.erlang__hd__1 [iterator_2])
+             in let lop_18 = (BIF.erlang__is_integer__1 [arg_19])
+             in
+               case lop_18 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   let arg_21 = (BIF.erlang__tl__1 [iterator_2])
+                   in (BIF.erlang__is_map__1 [arg_21])
+                 _ -> (EXC.badarg1 lop_18)
+           _ -> (EXC.badarg1 lop_6)) =
   (erlps__fold_1__3 [fun_0, init_1, iterator_2])
 erlps__fold__3 [fun_0, init_1, map_2] =
   let arg_3 = (erlps__error_type_iter__1 [map_2])
@@ -363,21 +405,42 @@ erlps__map__2 [fun_0, iterator_1]
       (let   
          lop_7 =
            (BIF.erlang__is_function__2 [fun_0, (ErlangInt (DBI.fromInt 2))])
-       in let lop_11 = (BIF.erlang__is_tuple__1 [iterator_1])
-       in let lop_14 = (BIF.erlang__tuple_size__1 [iterator_1])
        in let
-         rop_13 =
-           (BIF.erlang__op_eq [lop_14, (ErlangInt (DBI.fromInt 3))])
-       in let rop_10 = (BIF.erlang__op_andalso [lop_11, rop_13])
-       in let lop_6 = (BIF.erlang__op_andalso [lop_7, rop_10])
-       in let rop_17 = (BIF.erlang__op_eq [iterator_1, (ErlangAtom "none")])
-       in let lop_5 = (BIF.erlang__op_orelse [lop_6, rop_17])
-       in let arg_22 = (BIF.erlang__hd__1 [iterator_1])
-       in let lop_21 = (BIF.erlang__is_integer__1 [arg_22])
-       in let arg_25 = (BIF.erlang__tl__1 [iterator_1])
-       in let rop_24 = (BIF.erlang__is_map__1 [arg_25])
-       in let rop_20 = (BIF.erlang__op_andalso [lop_21, rop_24])
-       in (BIF.erlang__op_orelse [lop_5, rop_20])) =
+         lop_6 =
+           case lop_7 of
+             (ErlangAtom "false") -> (ErlangAtom "false")
+             (ErlangAtom "true") ->
+               let lop_10 = (BIF.erlang__is_tuple__1 [iterator_1])
+               in
+                 case lop_10 of
+                   (ErlangAtom "false") -> (ErlangAtom "false")
+                   (ErlangAtom "true") ->
+                     let lop_12 = (BIF.erlang__tuple_size__1 [iterator_1])
+                     in
+                       (BIF.erlang__op_eq [lop_12, (ErlangInt (DBI.fromInt 3))])
+                   _ -> (EXC.badarg1 lop_10)
+             _ -> (EXC.badarg1 lop_7)
+       in let
+         lop_5 =
+           case lop_6 of
+             (ErlangAtom "true") -> (ErlangAtom "true")
+             (ErlangAtom "false") ->
+               (BIF.erlang__op_eq [iterator_1, (ErlangAtom "none")])
+             _ -> (EXC.badarg1 lop_6)
+       in
+         case lop_5 of
+           (ErlangAtom "true") -> (ErlangAtom "true")
+           (ErlangAtom "false") ->
+             let    arg_18 = (BIF.erlang__hd__1 [iterator_1])
+             in let lop_17 = (BIF.erlang__is_integer__1 [arg_18])
+             in
+               case lop_17 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   let arg_20 = (BIF.erlang__tl__1 [iterator_1])
+                   in (BIF.erlang__is_map__1 [arg_20])
+                 _ -> (EXC.badarg1 lop_17)
+           _ -> (EXC.badarg1 lop_5)) =
   let arg_2 = (erlps__map_1__2 [fun_0, iterator_1])
   in (BIF.maps__from_list__1 [arg_2])
 erlps__map__2 [fun_0, map_1] =
@@ -485,7 +548,7 @@ erlps__with_1__2 [(ErlangCons k_0 ks_1), map_2] =
       in (ErlangCons tail_6 head_9)
     (ErlangMap map_12) -> (erlps__with_1__2 [ks_1, map_2])
     something_else -> (EXC.case_clause something_else)
-erlps__with_1__2 [ErlangEmptyList, _map_0] = ErlangEmptyList
+erlps__with_1__2 [(ErlangEmptyList), _map_0] = ErlangEmptyList
 erlps__with_1__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__with_1__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -501,20 +564,40 @@ erlps__error_type_iter__1 :: ErlangFun
 erlps__error_type_iter__1 [m_0]
   | (ErlangAtom "true") <-
       (let    lop_3 = (BIF.erlang__is_map__1 [m_0])
-       in let lop_6 = (BIF.erlang__is_tuple__1 [m_0])
-       in let lop_9 = (BIF.erlang__tuple_size__1 [m_0])
        in let
-         rop_8 = (BIF.erlang__op_eq [lop_9, (ErlangInt (DBI.fromInt 3))])
-       in let rop_5 = (BIF.erlang__op_andalso [lop_6, rop_8])
-       in let lop_2 = (BIF.erlang__op_orelse [lop_3, rop_5])
-       in let rop_12 = (BIF.erlang__op_eq [m_0, (ErlangAtom "none")])
-       in let lop_1 = (BIF.erlang__op_orelse [lop_2, rop_12])
-       in let arg_17 = (BIF.erlang__hd__1 [m_0])
-       in let lop_16 = (BIF.erlang__is_integer__1 [arg_17])
-       in let arg_20 = (BIF.erlang__tl__1 [m_0])
-       in let rop_19 = (BIF.erlang__is_map__1 [arg_20])
-       in let rop_15 = (BIF.erlang__op_andalso [lop_16, rop_19])
-       in (BIF.erlang__op_orelse [lop_1, rop_15])) =
+         lop_2 =
+           case lop_3 of
+             (ErlangAtom "true") -> (ErlangAtom "true")
+             (ErlangAtom "false") ->
+               let lop_5 = (BIF.erlang__is_tuple__1 [m_0])
+               in
+                 case lop_5 of
+                   (ErlangAtom "false") -> (ErlangAtom "false")
+                   (ErlangAtom "true") ->
+                     let lop_7 = (BIF.erlang__tuple_size__1 [m_0])
+                     in (BIF.erlang__op_eq [lop_7, (ErlangInt (DBI.fromInt 3))])
+                   _ -> (EXC.badarg1 lop_5)
+             _ -> (EXC.badarg1 lop_3)
+       in let
+         lop_1 =
+           case lop_2 of
+             (ErlangAtom "true") -> (ErlangAtom "true")
+             (ErlangAtom "false") -> (BIF.erlang__op_eq [m_0, (ErlangAtom "none")])
+             _ -> (EXC.badarg1 lop_2)
+       in
+         case lop_1 of
+           (ErlangAtom "true") -> (ErlangAtom "true")
+           (ErlangAtom "false") ->
+             let    arg_13 = (BIF.erlang__hd__1 [m_0])
+             in let lop_12 = (BIF.erlang__is_integer__1 [arg_13])
+             in
+               case lop_12 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   let arg_15 = (BIF.erlang__tl__1 [m_0])
+                   in (BIF.erlang__is_map__1 [arg_15])
+                 _ -> (EXC.badarg1 lop_12)
+           _ -> (EXC.badarg1 lop_1)) =
   (ErlangAtom "badarg")
 erlps__error_type_iter__1 [v_0] =
   (ErlangTuple [(ErlangAtom "badmap"), v_0])

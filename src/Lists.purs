@@ -96,11 +96,11 @@ erlps__append__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__append__1 :: ErlangFun
-erlps__append__1 [(ErlangCons e_0 ErlangEmptyList)] = e_0
+erlps__append__1 [(ErlangCons e_0 (ErlangEmptyList))] = e_0
 erlps__append__1 [(ErlangCons h_0 t_1)] =
   let rop_3 = (erlps__append__1 [t_1])
   in (BIF.erlang__op_append [h_0, rop_3])
-erlps__append__1 [ErlangEmptyList] = ErlangEmptyList
+erlps__append__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__append__1 [arg_0] = (EXC.function_clause unit)
 erlps__append__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -113,9 +113,9 @@ erlps__subtract__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__reverse__1 :: ErlangFun
-erlps__reverse__1 [l_0@ErlangEmptyList] = l_0
-erlps__reverse__1 [l_0@(ErlangCons _ ErlangEmptyList)] = l_0
-erlps__reverse__1 [(ErlangCons a_0 (ErlangCons b_1 ErlangEmptyList))]
+erlps__reverse__1 [l_0@(ErlangEmptyList)] = l_0
+erlps__reverse__1 [l_0@(ErlangCons _ (ErlangEmptyList))] = l_0
+erlps__reverse__1 [(ErlangCons a_0 (ErlangCons b_1 (ErlangEmptyList)))]
   =
   (ErlangCons b_1 (ErlangCons a_0 ErlangEmptyList))
 erlps__reverse__1 [(ErlangCons a_0 (ErlangCons b_1 l_2))] =
@@ -160,7 +160,7 @@ erlps__prefix__2 [(ErlangCons x_0 pretail_1),
                   (ErlangCons x_2 tail_3)]
   | (x_2 == x_0) =
   (erlps__prefix__2 [pretail_1, tail_3])
-erlps__prefix__2 [ErlangEmptyList, list_0] | (isEList list_0) =
+erlps__prefix__2 [(ErlangEmptyList), list_0] | (isEList list_0) =
   (ErlangAtom "true")
 erlps__prefix__2 [(ErlangCons _ _), list_0] | (isEList list_0) =
   (ErlangAtom "false")
@@ -176,15 +176,19 @@ erlps__suffix__2 [suffix_0, list_1] =
   in let
     lop_7 =
       (BIF.erlang__op_greaterEq [delta_6, (ErlangInt (DBI.fromInt 0))])
-  in let lop_11 = (erlps__nthtail__2 [delta_6, list_1])
-  in let rop_10 = (BIF.erlang__op_exactEq [lop_11, suffix_0])
-  in (BIF.erlang__op_andalso [lop_7, rop_10])
-erlps__suffix__2 [arg_15, arg_16] = (EXC.function_clause unit)
+  in
+    case lop_7 of
+      (ErlangAtom "false") -> (ErlangAtom "false")
+      (ErlangAtom "true") ->
+        let lop_10 = (erlps__nthtail__2 [delta_6, list_1])
+        in (BIF.erlang__op_exactEq [lop_10, suffix_0])
+      _ -> (EXC.badarg1 lop_7)
+erlps__suffix__2 [arg_14, arg_15] = (EXC.function_clause unit)
 erlps__suffix__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__droplast__1 :: ErlangFun
-erlps__droplast__1 [(ErlangCons _t_0 ErlangEmptyList)] =
+erlps__droplast__1 [(ErlangCons _t_0 (ErlangEmptyList))] =
   ErlangEmptyList
 erlps__droplast__1 [(ErlangCons h_0 t_1)] =
   let head_3 = (erlps__droplast__1 [t_1])
@@ -203,7 +207,7 @@ erlps__last__1 args =
 erlps__last__2 :: ErlangFun
 erlps__last__2 [_, (ErlangCons e_0 es_1)] =
   (erlps__last__2 [e_0, es_1])
-erlps__last__2 [e_0, ErlangEmptyList] = e_0
+erlps__last__2 [e_0, (ErlangEmptyList)] = e_0
 erlps__last__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__last__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -212,19 +216,27 @@ erlps__seq__2 :: ErlangFun
 erlps__seq__2 [first_0, last_1]
   | (ErlangAtom "true") <-
       (let    lop_10 = (BIF.erlang__is_integer__1 [first_0])
-       in let rop_12 = (BIF.erlang__is_integer__1 [last_1])
-       in let lop_9 = (BIF.erlang__op_andalso [lop_10, rop_12])
        in let
-         lop_15 =
-           (BIF.erlang__op_minus [first_0, (ErlangInt (DBI.fromInt 1))])
-       in let rop_14 = (BIF.erlang__op_lesserEq [lop_15, last_1])
-       in (BIF.erlang__op_andalso [lop_9, rop_14])) =
+         lop_9 =
+           case lop_10 of
+             (ErlangAtom "false") -> (ErlangAtom "false")
+             (ErlangAtom "true") -> (BIF.erlang__is_integer__1 [last_1])
+             _ -> (EXC.badarg1 lop_10)
+       in
+         case lop_9 of
+           (ErlangAtom "false") -> (ErlangAtom "false")
+           (ErlangAtom "true") ->
+             let
+               lop_13 =
+                 (BIF.erlang__op_minus [first_0, (ErlangInt (DBI.fromInt 1))])
+             in (BIF.erlang__op_lesserEq [lop_13, last_1])
+           _ -> (EXC.badarg1 lop_9)) =
   let    lop_3 = (BIF.erlang__op_minus [last_1, first_0])
   in let
     arg_2 =
       (BIF.erlang__op_plus [lop_3, (ErlangInt (DBI.fromInt 1))])
   in (erlps__seq_loop__3 [arg_2, last_1, ErlangEmptyList])
-erlps__seq__2 [arg_19, arg_20] = (EXC.function_clause unit)
+erlps__seq__2 [arg_17, arg_18] = (EXC.function_clause unit)
 erlps__seq__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -280,31 +292,45 @@ erlps__seq__3 [first_0, last_1, inc_2]
           (let   
              lop_4 =
                (BIF.erlang__op_greater [inc_2, (ErlangInt (DBI.fromInt 0))])
-           in let lop_8 = (BIF.erlang__op_minus [first_0, inc_2])
-           in let rop_7 = (BIF.erlang__op_lesserEq [lop_8, last_1])
-           in let lop_3 = (BIF.erlang__op_andalso [lop_4, rop_7])
            in let
-             lop_13 =
-               (BIF.erlang__op_lesser [inc_2, (ErlangInt (DBI.fromInt 0))])
-           in let lop_17 = (BIF.erlang__op_minus [first_0, inc_2])
-           in let rop_16 = (BIF.erlang__op_greaterEq [lop_17, last_1])
-           in let rop_12 = (BIF.erlang__op_andalso [lop_13, rop_16])
-           in (BIF.erlang__op_orelse [lop_3, rop_12])) ->
-      let    lop_22 = (BIF.erlang__op_minus [last_1, first_0])
-      in let lop_21 = (BIF.erlang__op_plus [lop_22, inc_2])
-      in let n_27 = (BIF.erlang__op_div_strict [lop_21, inc_2])
+             lop_3 =
+               case lop_4 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   let lop_7 = (BIF.erlang__op_minus [first_0, inc_2])
+                   in (BIF.erlang__op_lesserEq [lop_7, last_1])
+                 _ -> (EXC.badarg1 lop_4)
+           in
+             case lop_3 of
+               (ErlangAtom "true") -> (ErlangAtom "true")
+               (ErlangAtom "false") ->
+                 let
+                   lop_11 =
+                     (BIF.erlang__op_lesser
+                        [inc_2, (ErlangInt (DBI.fromInt 0))])
+                 in
+                   case lop_11 of
+                     (ErlangAtom "false") -> (ErlangAtom "false")
+                     (ErlangAtom "true") ->
+                       let lop_14 = (BIF.erlang__op_minus [first_0, inc_2])
+                       in (BIF.erlang__op_greaterEq [lop_14, last_1])
+                     _ -> (EXC.badarg1 lop_11)
+               _ -> (EXC.badarg1 lop_3)) ->
+      let    lop_19 = (BIF.erlang__op_minus [last_1, first_0])
+      in let lop_18 = (BIF.erlang__op_plus [lop_19, inc_2])
+      in let n_24 = (BIF.erlang__op_div_strict [lop_18, inc_2])
       in let
-        rop_32 =
-          (BIF.erlang__op_minus [n_27, (ErlangInt (DBI.fromInt 1))])
-      in let lop_30 = (BIF.erlang__op_mult [inc_2, rop_32])
-      in let arg_29 = (BIF.erlang__op_plus [lop_30, first_0])
-      in (erlps__seq_loop__4 [n_27, arg_29, inc_2, ErlangEmptyList])
+        rop_29 =
+          (BIF.erlang__op_minus [n_24, (ErlangInt (DBI.fromInt 1))])
+      in let lop_27 = (BIF.erlang__op_mult [inc_2, rop_29])
+      in let arg_26 = (BIF.erlang__op_plus [lop_27, first_0])
+      in (erlps__seq_loop__4 [n_24, arg_26, inc_2, ErlangEmptyList])
     _ | ((inc_2 == (ErlangInt (DBI.fromInt 0))) &&
            (first_0 == last_1)) ->
       (erlps__seq_loop__4
          [(ErlangInt (DBI.fromInt 1)), first_0, inc_2, ErlangEmptyList])
     _ -> (EXC.if_clause unit)
-erlps__seq__3 [arg_42, arg_43, arg_44] =
+erlps__seq__3 [arg_39, arg_40, arg_41] =
   (EXC.function_clause unit)
 erlps__seq__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -355,7 +381,7 @@ erlps__sum__2 :: ErlangFun
 erlps__sum__2 [(ErlangCons h_0 t_1), sum_2] =
   let arg_4 = (BIF.erlang__op_plus [sum_2, h_0])
   in (erlps__sum__2 [t_1, arg_4])
-erlps__sum__2 [ErlangEmptyList, sum_0] = sum_0
+erlps__sum__2 [(ErlangEmptyList), sum_0] = sum_0
 erlps__sum__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__sum__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -393,7 +419,7 @@ erlps__min__2 [(ErlangCons h_0 t_1), min_2] | (h_0 < min_2) =
   (BIF.erlang__min__2 [t_1, h_0])
 erlps__min__2 [(ErlangCons _ t_0), min_1] =
   (BIF.erlang__min__2 [t_0, min_1])
-erlps__min__2 [ErlangEmptyList, min_0] = min_0
+erlps__min__2 [(ErlangEmptyList), min_0] = min_0
 erlps__min__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__min__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -410,7 +436,7 @@ erlps__max__2 [(ErlangCons h_0 t_1), max_2] | (h_0 > max_2) =
   (BIF.erlang__max__2 [t_1, h_0])
 erlps__max__2 [(ErlangCons _ t_0), max_1] =
   (BIF.erlang__max__2 [t_0, max_1])
-erlps__max__2 [ErlangEmptyList, max_0] = max_0
+erlps__max__2 [(ErlangEmptyList), max_0] = max_0
 erlps__max__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__max__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -421,7 +447,7 @@ erlps__sublist__3 [list_0, (ErlangInt num_1), l_2]
   , (((isEList list_0) && (isENum l_2)) &&
        (l_2 >= (ErlangInt (DBI.fromInt 0)))) =
   (erlps__sublist__2 [list_0, l_2])
-erlps__sublist__3 [ErlangEmptyList, s_0, _l_1]
+erlps__sublist__3 [(ErlangEmptyList), s_0, _l_1]
   | ((isENum s_0) && (s_0 >= (ErlangInt (DBI.fromInt 2)))) =
   ErlangEmptyList
 erlps__sublist__3 [(ErlangCons _h_0 t_1), s_2, l_3]
@@ -466,7 +492,7 @@ erlps__delete__2 [item_0, (ErlangCons item_1 rest_2)]
 erlps__delete__2 [item_0, (ErlangCons h_1 rest_2)] =
   let head_4 = (erlps__delete__2 [item_0, rest_2])
   in (ErlangCons h_1 head_4)
-erlps__delete__2 [_, ErlangEmptyList] = ErlangEmptyList
+erlps__delete__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__delete__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__delete__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -476,7 +502,7 @@ erlps__zip__2 [(ErlangCons x_0 xs_1), (ErlangCons y_2 ys_3)] =
   let    tail_4 = (ErlangTuple [x_0, y_2])
   in let head_7 = (erlps__zip__2 [xs_1, ys_3])
   in (ErlangCons tail_4 head_7)
-erlps__zip__2 [ErlangEmptyList, ErlangEmptyList] =
+erlps__zip__2 [(ErlangEmptyList), (ErlangEmptyList)] =
   ErlangEmptyList
 erlps__zip__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__zip__2 args =
@@ -495,7 +521,7 @@ erlps__unzip__3 [(ErlangCons (ErlangTuple [x_0, y_1]) ts_2),
   =
   (erlps__unzip__3
      [ts_2, (ErlangCons x_0 xs_3), (ErlangCons y_1 ys_4)])
-erlps__unzip__3 [ErlangEmptyList, xs_0, ys_1] =
+erlps__unzip__3 [(ErlangEmptyList), xs_0, ys_1] =
   let    tup_el_2 = (erlps__reverse__1 [xs_0])
   in let tup_el_4 = (erlps__reverse__1 [ys_1])
   in (ErlangTuple [tup_el_2, tup_el_4])
@@ -511,8 +537,8 @@ erlps__zip3__3 [(ErlangCons x_0 xs_1), (ErlangCons y_2 ys_3),
   let    tail_6 = (ErlangTuple [x_0, y_2, z_4])
   in let head_10 = (erlps__zip3__3 [xs_1, ys_3, zs_5])
   in (ErlangCons tail_6 head_10)
-erlps__zip3__3 [ErlangEmptyList, ErlangEmptyList,
-                ErlangEmptyList]
+erlps__zip3__3 [(ErlangEmptyList), (ErlangEmptyList),
+                (ErlangEmptyList)]
   =
   ErlangEmptyList
 erlps__zip3__3 [arg_0, arg_1, arg_2] = (EXC.function_clause unit)
@@ -535,7 +561,7 @@ erlps__unzip3__4 [(ErlangCons (ErlangTuple [x_0, y_1,
   (erlps__unzip3__4
      [ts_3, (ErlangCons x_0 xs_4), (ErlangCons y_1 ys_5),
       (ErlangCons z_2 zs_6)])
-erlps__unzip3__4 [ErlangEmptyList, xs_0, ys_1, zs_2] =
+erlps__unzip3__4 [(ErlangEmptyList), xs_0, ys_1, zs_2] =
   let    tup_el_3 = (erlps__reverse__1 [xs_0])
   in let tup_el_5 = (erlps__reverse__1 [ys_1])
   in let tup_el_7 = (erlps__reverse__1 [zs_2])
@@ -555,7 +581,7 @@ erlps__zipwith__3 [f_0, (ErlangCons x_1 xs_2),
          [f_0, (ErlangCons x_1 (ErlangCons y_3 ErlangEmptyList))])
   in let head_9 = (erlps__zipwith__3 [f_0, xs_2, ys_4])
   in (ErlangCons tail_5 head_9)
-erlps__zipwith__3 [f_0, ErlangEmptyList, ErlangEmptyList]
+erlps__zipwith__3 [f_0, (ErlangEmptyList), (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__zipwith__3 [arg_1, arg_2, arg_3] =
@@ -575,8 +601,8 @@ erlps__zipwith3__4 [f_0, (ErlangCons x_1 xs_2),
              (ErlangCons y_3 (ErlangCons z_5 ErlangEmptyList)))])
   in let head_12 = (erlps__zipwith3__4 [f_0, xs_2, ys_4, zs_6])
   in (ErlangCons tail_7 head_12)
-erlps__zipwith3__4 [f_0, ErlangEmptyList, ErlangEmptyList,
-                    ErlangEmptyList]
+erlps__zipwith3__4 [f_0, (ErlangEmptyList), (ErlangEmptyList),
+                    (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   ErlangEmptyList
 erlps__zipwith3__4 [arg_1, arg_2, arg_3, arg_4] =
@@ -588,12 +614,12 @@ erlps__sort__1 :: ErlangFun
 erlps__sort__1 [l0_3@(ErlangCons x_0 (ErlangCons y_1 l_2))]
   | (x_0 <= y_1) =
   case l_2 of
-    ErlangEmptyList -> l0_3
-    (ErlangCons z_5 ErlangEmptyList) | (y_1 <= z_5) -> l0_3
-    (ErlangCons z_6 ErlangEmptyList) | (x_0 <= z_6) ->
+    (ErlangEmptyList) -> l0_3
+    (ErlangCons z_5 (ErlangEmptyList)) | (y_1 <= z_5) -> l0_3
+    (ErlangCons z_6 (ErlangEmptyList)) | (x_0 <= z_6) ->
       (ErlangCons x_0
          (ErlangCons z_6 (ErlangCons y_1 ErlangEmptyList)))
-    (ErlangCons z_13 ErlangEmptyList) ->
+    (ErlangCons z_13 (ErlangEmptyList)) ->
       (ErlangCons z_13
          (ErlangCons x_0 (ErlangCons y_1 ErlangEmptyList)))
     _ | (x_0 == y_1) ->
@@ -604,22 +630,22 @@ erlps__sort__1 [l0_3@(ErlangCons x_0 (ErlangCons y_1 l_2))]
     something_else -> (EXC.case_clause something_else)
 erlps__sort__1 [(ErlangCons x_0 (ErlangCons y_1 l_2))] =
   case l_2 of
-    ErlangEmptyList ->
+    (ErlangEmptyList) ->
       (ErlangCons y_1 (ErlangCons x_0 ErlangEmptyList))
-    (ErlangCons z_8 ErlangEmptyList) | (x_0 <= z_8) ->
+    (ErlangCons z_8 (ErlangEmptyList)) | (x_0 <= z_8) ->
       (ErlangCons y_1 (ErlangCons x_0 l_2))
-    (ErlangCons z_13 ErlangEmptyList) | (y_1 <= z_13) ->
+    (ErlangCons z_13 (ErlangEmptyList)) | (y_1 <= z_13) ->
       (ErlangCons y_1
          (ErlangCons z_13 (ErlangCons x_0 ErlangEmptyList)))
-    (ErlangCons z_20 ErlangEmptyList) ->
+    (ErlangCons z_20 (ErlangEmptyList)) ->
       (ErlangCons z_20
          (ErlangCons y_1 (ErlangCons x_0 ErlangEmptyList)))
     _ ->
       (erlps__split_2__5
          [x_0, y_1, l_2, ErlangEmptyList, ErlangEmptyList])
     something_else -> (EXC.case_clause something_else)
-erlps__sort__1 [l_0@(ErlangCons _ ErlangEmptyList)] = l_0
-erlps__sort__1 [l_0@ErlangEmptyList] = l_0
+erlps__sort__1 [l_0@(ErlangCons _ (ErlangEmptyList))] = l_0
+erlps__sort__1 [l_0@(ErlangEmptyList)] = l_0
 erlps__sort__1 [arg_1] = (EXC.function_clause unit)
 erlps__sort__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -632,7 +658,7 @@ erlps__sort_1__3 [x_0, (ErlangCons y_1 l_2), r_3] | (x_0 < y_1) =
   (erlps__split_1__5 [x_0, y_1, l_2, r_3, ErlangEmptyList])
 erlps__sort_1__3 [x_0, (ErlangCons y_1 l_2), r_3] =
   (erlps__split_2__5 [x_0, y_1, l_2, r_3, ErlangEmptyList])
-erlps__sort_1__3 [x_0, ErlangEmptyList, r_1] =
+erlps__sort_1__3 [x_0, (ErlangEmptyList), r_1] =
   (BIF.lists__reverse__2 [r_1, (ErlangCons x_0 ErlangEmptyList)])
 erlps__sort_1__3 [arg_6, arg_7, arg_8] =
   (EXC.function_clause unit)
@@ -646,9 +672,9 @@ erlps__merge__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__merge3__3 :: ErlangFun
-erlps__merge3__3 [l1_0, ErlangEmptyList, l3_1] =
+erlps__merge3__3 [l1_0, (ErlangEmptyList), l3_1] =
   (erlps__merge__2 [l1_0, l3_1])
-erlps__merge3__3 [l1_0, l2_1, ErlangEmptyList] =
+erlps__merge3__3 [l1_0, l2_1, (ErlangEmptyList)] =
   (erlps__merge__2 [l1_0, l2_1])
 erlps__merge3__3 [l1_0, (ErlangCons h2_1 t2_2),
                   (ErlangCons h3_3 t3_4)]
@@ -664,9 +690,9 @@ erlps__merge3__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rmerge3__3 :: ErlangFun
-erlps__rmerge3__3 [l1_0, ErlangEmptyList, l3_1] =
+erlps__rmerge3__3 [l1_0, (ErlangEmptyList), l3_1] =
   (erlps__rmerge__2 [l1_0, l3_1])
-erlps__rmerge3__3 [l1_0, l2_1, ErlangEmptyList] =
+erlps__rmerge3__3 [l1_0, l2_1, (ErlangEmptyList)] =
   (erlps__rmerge__2 [l1_0, l2_1])
 erlps__rmerge3__3 [l1_0, (ErlangCons h2_1 t2_2),
                    (ErlangCons h3_3 t3_4)]
@@ -682,7 +708,7 @@ erlps__rmerge3__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__merge__2 :: ErlangFun
-erlps__merge__2 [t1_0, ErlangEmptyList] = t1_0
+erlps__merge__2 [t1_0, (ErlangEmptyList)] = t1_0
 erlps__merge__2 [t1_0, (ErlangCons h2_1 t2_2)] =
   let
     arg_3 = (erlps__merge2_1__4 [t1_0, h2_1, t2_2, ErlangEmptyList])
@@ -692,7 +718,7 @@ erlps__merge__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rmerge__2 :: ErlangFun
-erlps__rmerge__2 [t1_0, ErlangEmptyList] = t1_0
+erlps__rmerge__2 [t1_0, (ErlangEmptyList)] = t1_0
 erlps__rmerge__2 [t1_0, (ErlangCons h2_1 t2_2)] =
   let
     arg_3 = (erlps__rmerge2_1__4 [t1_0, h2_1, t2_2, ErlangEmptyList])
@@ -745,7 +771,7 @@ erlps__do_flatten__2 [(ErlangCons h_0 t_1), tail_2]
 erlps__do_flatten__2 [(ErlangCons h_0 t_1), tail_2] =
   let head_4 = (erlps__do_flatten__2 [t_1, tail_2])
   in (ErlangCons h_0 head_4)
-erlps__do_flatten__2 [ErlangEmptyList, tail_0] = tail_0
+erlps__do_flatten__2 [(ErlangEmptyList), tail_0] = tail_0
 erlps__do_flatten__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__do_flatten__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -766,7 +792,7 @@ erlps__flatlength__2 [(ErlangCons _ t_0), l_1] =
   let
     arg_3 = (BIF.erlang__op_plus [l_1, (ErlangInt (DBI.fromInt 1))])
   in (erlps__flatlength__2 [t_0, arg_3])
-erlps__flatlength__2 [ErlangEmptyList, l_0] = l_0
+erlps__flatlength__2 [(ErlangEmptyList), l_0] = l_0
 erlps__flatlength__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__flatlength__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -789,7 +815,7 @@ erlps__keydelete3__3 [key_0, n_1, (ErlangCons h_2 t_3)]
 erlps__keydelete3__3 [key_0, n_1, (ErlangCons h_2 t_3)] =
   let head_5 = (erlps__keydelete3__3 [key_0, n_1, t_3])
   in (ErlangCons h_2 head_5)
-erlps__keydelete3__3 [_, _, ErlangEmptyList] = ErlangEmptyList
+erlps__keydelete3__3 [_, _, (ErlangEmptyList)] = ErlangEmptyList
 erlps__keydelete3__3 [arg_0, arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__keydelete3__3 args =
@@ -816,7 +842,7 @@ erlps__keyreplace3__4 [key_0, pos_1, (ErlangCons h_2 t_3), new_4]
   =
   let head_6 = (erlps__keyreplace3__4 [key_0, pos_1, t_3, new_4])
   in (ErlangCons h_2 head_6)
-erlps__keyreplace3__4 [_, _, ErlangEmptyList, _] =
+erlps__keyreplace3__4 [_, _, (ErlangEmptyList), _] =
   ErlangEmptyList
 erlps__keyreplace3__4 [arg_0, arg_1, arg_2, arg_3] =
   (EXC.function_clause unit)
@@ -841,7 +867,7 @@ erlps__keytake__4 [key_0, n_1, (ErlangCons h_2 t_3), l_4]
   in (ErlangTuple [(ErlangAtom "value"), h_2, tup_el_7])
 erlps__keytake__4 [key_0, n_1, (ErlangCons h_2 t_3), l_4] =
   (erlps__keytake__4 [key_0, n_1, t_3, (ErlangCons h_2 l_4)])
-erlps__keytake__4 [_k_0, _n_1, ErlangEmptyList, _l_2] =
+erlps__keytake__4 [_k_0, _n_1, (ErlangEmptyList), _l_2] =
   (ErlangAtom "false")
 erlps__keytake__4 [arg_3, arg_4, arg_5, arg_6] =
   (EXC.function_clause unit)
@@ -867,7 +893,7 @@ erlps__keystore2__4 [key_0, n_1, (ErlangCons h_2 t_3), new_4]
 erlps__keystore2__4 [key_0, n_1, (ErlangCons h_2 t_3), new_4] =
   let head_6 = (erlps__keystore2__4 [key_0, n_1, t_3, new_4])
   in (ErlangCons h_2 head_6)
-erlps__keystore2__4 [_key_0, _n_1, ErlangEmptyList, new_2] =
+erlps__keystore2__4 [_key_0, _n_1, (ErlangEmptyList), new_2] =
   (ErlangCons new_2 ErlangEmptyList)
 erlps__keystore2__4 [arg_5, arg_6, arg_7, arg_8] =
   (EXC.function_clause unit)
@@ -878,8 +904,8 @@ erlps__keysort__2 :: ErlangFun
 erlps__keysort__2 [i_0, l_1]
   | ((isENum i_0) && (i_0 > (ErlangInt (DBI.fromInt 0)))) =
   case l_1 of
-    ErlangEmptyList -> l_1
-    (ErlangCons _ ErlangEmptyList) -> l_1
+    (ErlangEmptyList) -> l_1
+    (ErlangCons _ (ErlangEmptyList)) -> l_1
     (ErlangCons x_3 (ErlangCons y_4 t_5)) ->
       let    tup_el_7 = (BIF.erlang__element__2 [i_0, x_3])
       in let tup_el_10 = (BIF.erlang__element__2 [i_0, y_4])
@@ -888,8 +914,8 @@ erlps__keysort__2 [i_0, l_1]
         case case_6 of
           (ErlangTuple [ex_13, ey_14]) | (ex_13 <= ey_14) ->
             case t_5 of
-              ErlangEmptyList -> l_1
-              (ErlangCons z_16 ErlangEmptyList) ->
+              (ErlangEmptyList) -> l_1
+              (ErlangCons z_16 (ErlangEmptyList)) ->
                 let case_17 = (BIF.erlang__element__2 [i_0, z_16])
                 in
                   case case_17 of
@@ -900,6 +926,7 @@ erlps__keysort__2 [i_0, l_1]
                     _ez_28 ->
                       (ErlangCons z_16
                          (ErlangCons x_3 (ErlangCons y_4 ErlangEmptyList)))
+                    something_else -> (EXC.case_clause something_else)
               _ | (x_3 == y_4) ->
                 (erlps__keysort_1__5
                    [i_0, y_4, ey_14, t_5, (ErlangCons x_3 ErlangEmptyList)])
@@ -910,9 +937,9 @@ erlps__keysort__2 [i_0, l_1]
               something_else -> (EXC.case_clause something_else)
           (ErlangTuple [ex_50, ey_51]) ->
             case t_5 of
-              ErlangEmptyList ->
+              (ErlangEmptyList) ->
                 (ErlangCons y_4 (ErlangCons x_3 ErlangEmptyList))
-              (ErlangCons z_57 ErlangEmptyList) ->
+              (ErlangCons z_57 (ErlangEmptyList)) ->
                 let case_58 = (BIF.erlang__element__2 [i_0, z_57])
                 in
                   case case_58 of
@@ -924,6 +951,7 @@ erlps__keysort__2 [i_0, l_1]
                     _ez_73 ->
                       (ErlangCons z_57
                          (ErlangCons y_4 (ErlangCons x_3 ErlangEmptyList)))
+                    something_else -> (EXC.case_clause something_else)
               _ ->
                 (erlps__keysplit_2__8
                    [i_0, x_3, ex_50, y_4, ey_51, t_5, ErlangEmptyList,
@@ -949,7 +977,8 @@ erlps__keysort_1__5 [i_0, x_1, ex_2, (ErlangCons y_3 l_4), r_5] =
       ey_18 ->
         (erlps__keysplit_2__8
            [i_0, x_1, ex_2, y_3, ey_18, l_4, r_5, ErlangEmptyList])
-erlps__keysort_1__5 [_i_0, x_1, _ex_2, ErlangEmptyList, r_3] =
+      something_else -> (EXC.case_clause something_else)
+erlps__keysort_1__5 [_i_0, x_1, _ex_2, (ErlangEmptyList), r_3] =
   (BIF.lists__reverse__2 [r_3, (ErlangCons x_1 ErlangEmptyList)])
 erlps__keysort_1__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
@@ -960,7 +989,7 @@ erlps__keymerge__3 :: ErlangFun
 erlps__keymerge__3 [index_0, t1_1, l2_2]
   | ((isENum index_0) && (index_0 > (ErlangInt (DBI.fromInt 0)))) =
   case l2_2 of
-    ErlangEmptyList -> t1_1
+    (ErlangEmptyList) -> t1_1
     (ErlangCons h2_4 t2_5) ->
       let    e2_8 = (BIF.erlang__element__2 [index_0, h2_4])
       in let
@@ -978,7 +1007,7 @@ erlps__rkeymerge__3 :: ErlangFun
 erlps__rkeymerge__3 [index_0, t1_1, l2_2]
   | ((isENum index_0) && (index_0 > (ErlangInt (DBI.fromInt 0)))) =
   case l2_2 of
-    ErlangEmptyList -> t1_1
+    (ErlangEmptyList) -> t1_1
     (ErlangCons h2_4 t2_5) ->
       let    e2_8 = (BIF.erlang__element__2 [index_0, h2_4])
       in let
@@ -996,8 +1025,8 @@ erlps__ukeysort__2 :: ErlangFun
 erlps__ukeysort__2 [i_0, l_1]
   | ((isENum i_0) && (i_0 > (ErlangInt (DBI.fromInt 0)))) =
   case l_1 of
-    ErlangEmptyList -> l_1
-    (ErlangCons _ ErlangEmptyList) -> l_1
+    (ErlangEmptyList) -> l_1
+    (ErlangCons _ (ErlangEmptyList)) -> l_1
     (ErlangCons x_3 (ErlangCons y_4 t_5)) ->
       let    tup_el_7 = (BIF.erlang__element__2 [i_0, x_3])
       in let tup_el_10 = (BIF.erlang__element__2 [i_0, y_4])
@@ -1008,8 +1037,8 @@ erlps__ukeysort__2 [i_0, l_1]
             (erlps__ukeysort_1__4 [i_0, x_3, ex_13, t_5])
           (ErlangTuple [ex_19, ey_20]) | (ex_19 < ey_20) ->
             case t_5 of
-              ErlangEmptyList -> l_1
-              (ErlangCons z_22 ErlangEmptyList) ->
+              (ErlangEmptyList) -> l_1
+              (ErlangCons z_22 (ErlangEmptyList)) ->
                 let case_23 = (BIF.erlang__element__2 [i_0, z_22])
                 in
                   case case_23 of
@@ -1026,6 +1055,7 @@ erlps__ukeysort__2 [i_0, l_1]
                     _ez_50 ->
                       (ErlangCons z_22
                          (ErlangCons x_3 (ErlangCons y_4 ErlangEmptyList)))
+                    something_else -> (EXC.case_clause something_else)
               _ ->
                 (erlps__ukeysplit_1__8
                    [i_0, x_3, ex_19, y_4, ey_20, t_5, ErlangEmptyList,
@@ -1033,9 +1063,9 @@ erlps__ukeysort__2 [i_0, l_1]
               something_else -> (EXC.case_clause something_else)
           (ErlangTuple [ex_65, ey_66]) ->
             case t_5 of
-              ErlangEmptyList ->
+              (ErlangEmptyList) ->
                 (ErlangCons y_4 (ErlangCons x_3 ErlangEmptyList))
-              (ErlangCons z_72 ErlangEmptyList) ->
+              (ErlangCons z_72 (ErlangEmptyList)) ->
                 let case_73 = (BIF.erlang__element__2 [i_0, z_72])
                 in
                   case case_73 of
@@ -1052,6 +1082,7 @@ erlps__ukeysort__2 [i_0, l_1]
                     _ez_100 ->
                       (ErlangCons z_72
                          (ErlangCons y_4 (ErlangCons x_3 ErlangEmptyList)))
+                    something_else -> (EXC.case_clause something_else)
               _ ->
                 (erlps__ukeysplit_2__5
                    [i_0, y_4, ey_66, t_5, (ErlangCons x_3 ErlangEmptyList)])
@@ -1077,7 +1108,8 @@ erlps__ukeysort_1__4 [i_0, x_1, ex_2, (ErlangCons y_3 l_4)] =
       ey_22 ->
         (erlps__ukeysplit_2__5
            [i_0, y_3, ey_22, l_4, (ErlangCons x_1 ErlangEmptyList)])
-erlps__ukeysort_1__4 [_i_0, x_1, _ex_2, ErlangEmptyList] =
+      something_else -> (EXC.case_clause something_else)
+erlps__ukeysort_1__4 [_i_0, x_1, _ex_2, (ErlangEmptyList)] =
   (ErlangCons x_1 ErlangEmptyList)
 erlps__ukeysort_1__4 [arg_5, arg_6, arg_7, arg_8] =
   (EXC.function_clause unit)
@@ -1088,7 +1120,7 @@ erlps__ukeymerge__3 :: ErlangFun
 erlps__ukeymerge__3 [index_0, l1_1, t2_2]
   | ((isENum index_0) && (index_0 > (ErlangInt (DBI.fromInt 0)))) =
   case l1_1 of
-    ErlangEmptyList -> t2_2
+    (ErlangEmptyList) -> t2_2
     (ErlangCons h1_4 t1_5) ->
       let    e1_8 = (BIF.erlang__element__2 [index_0, h1_4])
       in let
@@ -1106,7 +1138,7 @@ erlps__rukeymerge__3 :: ErlangFun
 erlps__rukeymerge__3 [index_0, t1_1, l2_2]
   | ((isENum index_0) && (index_0 > (ErlangInt (DBI.fromInt 0)))) =
   case l2_2 of
-    ErlangEmptyList -> t1_1
+    (ErlangEmptyList) -> t1_1
     (ErlangCons h2_4 t2_5) ->
       let    e2_8 = (BIF.erlang__element__2 [index_0, h2_4])
       in let
@@ -1131,7 +1163,7 @@ erlps__keymap__3 [fun_0, index_1, (ErlangCons tup_2 tail_3)] =
     tail_4 = (BIF.erlang__setelement__3 [index_1, tup_2, arg_7])
   in let head_12 = (erlps__keymap__3 [fun_0, index_1, tail_3])
   in (ErlangCons tail_4 head_12)
-erlps__keymap__3 [fun_0, index_1, ErlangEmptyList]
+erlps__keymap__3 [fun_0, index_1, (ErlangEmptyList)]
   | (((isENum index_1) &&
         (index_1 >= (ErlangInt (DBI.fromInt 1)))) &&
        (isEFunA fun_0 (ErlangInt (DBI.fromInt 1)))) =
@@ -1142,10 +1174,10 @@ erlps__keymap__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__sort__2 :: ErlangFun
-erlps__sort__2 [fun_0, ErlangEmptyList]
+erlps__sort__2 [fun_0, (ErlangEmptyList)]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
-erlps__sort__2 [fun_0, l_1@(ErlangCons _ ErlangEmptyList)]
+erlps__sort__2 [fun_0, l_1@(ErlangCons _ (ErlangEmptyList))]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   l_1
 erlps__sort__2 [fun_0, (ErlangCons x_1 (ErlangCons y_2 t_3))] =
@@ -1173,7 +1205,7 @@ erlps__merge__3 [fun_0, t1_1, (ErlangCons h2_2 t2_3)]
     arg_4 =
       (erlps__fmerge2_1__5 [t1_1, h2_2, fun_0, t2_3, ErlangEmptyList])
   in (BIF.lists__reverse__2 [arg_4, ErlangEmptyList])
-erlps__merge__3 [fun_0, t1_1, ErlangEmptyList]
+erlps__merge__3 [fun_0, t1_1, (ErlangEmptyList)]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   t1_1
 erlps__merge__3 [arg_2, arg_3, arg_4] =
@@ -1188,7 +1220,7 @@ erlps__rmerge__3 [fun_0, t1_1, (ErlangCons h2_2 t2_3)]
     arg_4 =
       (erlps__rfmerge2_1__5 [t1_1, h2_2, fun_0, t2_3, ErlangEmptyList])
   in (BIF.lists__reverse__2 [arg_4, ErlangEmptyList])
-erlps__rmerge__3 [fun_0, t1_1, ErlangEmptyList]
+erlps__rmerge__3 [fun_0, t1_1, (ErlangEmptyList)]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   t1_1
 erlps__rmerge__3 [arg_2, arg_3, arg_4] =
@@ -1197,10 +1229,10 @@ erlps__rmerge__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__usort__2 :: ErlangFun
-erlps__usort__2 [fun_0, l_1@(ErlangCons _ ErlangEmptyList)]
+erlps__usort__2 [fun_0, l_1@(ErlangCons _ (ErlangEmptyList))]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   l_1
-erlps__usort__2 [fun_0, l_1@ErlangEmptyList]
+erlps__usort__2 [fun_0, l_1@(ErlangEmptyList)]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   l_1
 erlps__usort__2 [fun_0, (ErlangCons x_1 l_2)]
@@ -1227,7 +1259,7 @@ erlps__usort_1__3 [fun_0, x_1, (ErlangCons y_2 l_3)] =
           case case_8 of
             (ErlangAtom "true") ->
               case l_3 of
-                ErlangEmptyList -> (ErlangCons x_1 ErlangEmptyList)
+                (ErlangEmptyList) -> (ErlangCons x_1 ErlangEmptyList)
                 _ -> (erlps__usort_1__3 [fun_0, x_1, l_3])
                 something_else -> (EXC.case_clause something_else)
             (ErlangAtom "false") ->
@@ -1244,7 +1276,7 @@ erlps__usort_1__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__umerge__3 :: ErlangFun
-erlps__umerge__3 [fun_0, ErlangEmptyList, t2_1]
+erlps__umerge__3 [fun_0, (ErlangEmptyList), t2_1]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   t2_1
 erlps__umerge__3 [fun_0, (ErlangCons h1_1 t1_2), t2_3]
@@ -1259,7 +1291,7 @@ erlps__umerge__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rumerge__3 :: ErlangFun
-erlps__rumerge__3 [fun_0, t1_1, ErlangEmptyList]
+erlps__rumerge__3 [fun_0, t1_1, (ErlangEmptyList)]
   | (isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) =
   t1_1
 erlps__rumerge__3 [fun_0, t1_1, (ErlangCons h2_2 t2_3)]
@@ -1278,16 +1310,16 @@ erlps__usort__1 :: ErlangFun
 erlps__usort__1 [l0_3@(ErlangCons x_0 (ErlangCons y_1 l_2))]
   | (x_0 < y_1) =
   case l_2 of
-    ErlangEmptyList -> l0_3
-    (ErlangCons z_5 ErlangEmptyList) | (y_1 < z_5) -> l0_3
-    (ErlangCons z_6 ErlangEmptyList) | (y_1 == z_6) ->
+    (ErlangEmptyList) -> l0_3
+    (ErlangCons z_5 (ErlangEmptyList)) | (y_1 < z_5) -> l0_3
+    (ErlangCons z_6 (ErlangEmptyList)) | (y_1 == z_6) ->
       (ErlangCons x_0 (ErlangCons y_1 ErlangEmptyList))
-    (ErlangCons z_11 ErlangEmptyList) | (z_11 < x_0) ->
+    (ErlangCons z_11 (ErlangEmptyList)) | (z_11 < x_0) ->
       (ErlangCons z_11
          (ErlangCons x_0 (ErlangCons y_1 ErlangEmptyList)))
-    (ErlangCons z_18 ErlangEmptyList) | (z_18 == x_0) ->
+    (ErlangCons z_18 (ErlangEmptyList)) | (z_18 == x_0) ->
       (ErlangCons x_0 (ErlangCons y_1 ErlangEmptyList))
-    (ErlangCons z_23 ErlangEmptyList) ->
+    (ErlangCons z_23 (ErlangEmptyList)) ->
       (ErlangCons x_0
          (ErlangCons z_23 (ErlangCons y_1 ErlangEmptyList)))
     _ ->
@@ -1297,18 +1329,18 @@ erlps__usort__1 [l0_3@(ErlangCons x_0 (ErlangCons y_1 l_2))]
 erlps__usort__1 [(ErlangCons x_0 (ErlangCons y_1 l_2))]
   | (x_0 > y_1) =
   case l_2 of
-    ErlangEmptyList ->
+    (ErlangEmptyList) ->
       (ErlangCons y_1 (ErlangCons x_0 ErlangEmptyList))
-    (ErlangCons z_8 ErlangEmptyList) | (x_0 < z_8) ->
+    (ErlangCons z_8 (ErlangEmptyList)) | (x_0 < z_8) ->
       (ErlangCons y_1 (ErlangCons x_0 l_2))
-    (ErlangCons z_13 ErlangEmptyList) | (x_0 == z_13) ->
+    (ErlangCons z_13 (ErlangEmptyList)) | (x_0 == z_13) ->
       (ErlangCons y_1 (ErlangCons x_0 ErlangEmptyList))
-    (ErlangCons z_18 ErlangEmptyList) | (z_18 < y_1) ->
+    (ErlangCons z_18 (ErlangEmptyList)) | (z_18 < y_1) ->
       (ErlangCons z_18
          (ErlangCons y_1 (ErlangCons x_0 ErlangEmptyList)))
-    (ErlangCons z_25 ErlangEmptyList) | (z_25 == y_1) ->
+    (ErlangCons z_25 (ErlangEmptyList)) | (z_25 == y_1) ->
       (ErlangCons y_1 (ErlangCons x_0 ErlangEmptyList))
-    (ErlangCons z_30 ErlangEmptyList) ->
+    (ErlangCons z_30 (ErlangEmptyList)) ->
       (ErlangCons y_1
          (ErlangCons z_30 (ErlangCons x_0 ErlangEmptyList)))
     _ ->
@@ -1317,8 +1349,8 @@ erlps__usort__1 [(ErlangCons x_0 (ErlangCons y_1 l_2))]
     something_else -> (EXC.case_clause something_else)
 erlps__usort__1 [(ErlangCons x_0 (ErlangCons _y_1 l_2))] =
   (erlps__usort_1__2 [x_0, l_2])
-erlps__usort__1 [l_0@(ErlangCons _ ErlangEmptyList)] = l_0
-erlps__usort__1 [ErlangEmptyList] = ErlangEmptyList
+erlps__usort__1 [l_0@(ErlangCons _ (ErlangEmptyList))] = l_0
+erlps__usort__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__usort__1 [arg_0] = (EXC.function_clause unit)
 erlps__usort__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -1332,7 +1364,7 @@ erlps__usort_1__2 [x_0, (ErlangCons y_1 l_2)] | (x_0 < y_1) =
 erlps__usort_1__2 [x_0, (ErlangCons y_1 l_2)] =
   (erlps__usplit_2__5
      [x_0, y_1, l_2, ErlangEmptyList, ErlangEmptyList])
-erlps__usort_1__2 [x_0, ErlangEmptyList] =
+erlps__usort_1__2 [x_0, (ErlangEmptyList)] =
   (ErlangCons x_0 ErlangEmptyList)
 erlps__usort_1__2 [arg_3, arg_4] = (EXC.function_clause unit)
 erlps__usort_1__2 args =
@@ -1345,9 +1377,9 @@ erlps__umerge__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__umerge3__3 :: ErlangFun
-erlps__umerge3__3 [l1_0, ErlangEmptyList, l3_1] =
+erlps__umerge3__3 [l1_0, (ErlangEmptyList), l3_1] =
   (erlps__umerge__2 [l1_0, l3_1])
-erlps__umerge3__3 [l1_0, l2_1, ErlangEmptyList] =
+erlps__umerge3__3 [l1_0, l2_1, (ErlangEmptyList)] =
   (erlps__umerge__2 [l1_0, l2_1])
 erlps__umerge3__3 [l1_0, (ErlangCons h2_1 t2_2),
                    (ErlangCons h3_3 t3_4)]
@@ -1364,9 +1396,9 @@ erlps__umerge3__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rumerge3__3 :: ErlangFun
-erlps__rumerge3__3 [l1_0, ErlangEmptyList, l3_1] =
+erlps__rumerge3__3 [l1_0, (ErlangEmptyList), l3_1] =
   (erlps__rumerge__2 [l1_0, l3_1])
-erlps__rumerge3__3 [l1_0, l2_1, ErlangEmptyList] =
+erlps__rumerge3__3 [l1_0, l2_1, (ErlangEmptyList)] =
   (erlps__rumerge__2 [l1_0, l2_1])
 erlps__rumerge3__3 [l1_0, (ErlangCons h2_1 t2_2),
                     (ErlangCons h3_3 t3_4)]
@@ -1382,7 +1414,7 @@ erlps__rumerge3__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__umerge__2 :: ErlangFun
-erlps__umerge__2 [ErlangEmptyList, t2_0] = t2_0
+erlps__umerge__2 [(ErlangEmptyList), t2_0] = t2_0
 erlps__umerge__2 [(ErlangCons h1_0 t1_1), t2_2] =
   let
     arg_3 = (erlps__umerge2_2__4 [t1_1, t2_2, ErlangEmptyList, h1_0])
@@ -1392,7 +1424,7 @@ erlps__umerge__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rumerge__2 :: ErlangFun
-erlps__rumerge__2 [t1_0, ErlangEmptyList] = t1_0
+erlps__rumerge__2 [t1_0, (ErlangEmptyList)] = t1_0
 erlps__rumerge__2 [t1_0, (ErlangCons h2_1 t2_2)] =
   let
     arg_3 =
@@ -1413,7 +1445,7 @@ erlps__all__2 [pred_0, (ErlangCons hd_1 tail_2)] =
       (ErlangAtom "true") -> (erlps__all__2 [pred_0, tail_2])
       (ErlangAtom "false") -> (ErlangAtom "false")
       something_else -> (EXC.case_clause something_else)
-erlps__all__2 [pred_0, ErlangEmptyList]
+erlps__all__2 [pred_0, (ErlangEmptyList)]
   | (isEFunA pred_0 (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "true")
 erlps__all__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1431,7 +1463,7 @@ erlps__any__2 [pred_0, (ErlangCons hd_1 tail_2)] =
       (ErlangAtom "true") -> (ErlangAtom "true")
       (ErlangAtom "false") -> (erlps__any__2 [pred_0, tail_2])
       something_else -> (EXC.case_clause something_else)
-erlps__any__2 [pred_0, ErlangEmptyList]
+erlps__any__2 [pred_0, (ErlangEmptyList)]
   | (isEFunA pred_0 (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "false")
 erlps__any__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1445,7 +1477,7 @@ erlps__map__2 [f_0, (ErlangCons h_1 t_2)] =
       (BIF.erlang__apply__2 [f_0, (ErlangCons h_1 ErlangEmptyList)])
   in let head_6 = (erlps__map__2 [f_0, t_2])
   in (ErlangCons tail_3 head_6)
-erlps__map__2 [f_0, ErlangEmptyList]
+erlps__map__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 1))) =
   ErlangEmptyList
 erlps__map__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1459,7 +1491,7 @@ erlps__flatmap__2 [f_0, (ErlangCons hd_1 tail_2)] =
       (BIF.erlang__apply__2 [f_0, (ErlangCons hd_1 ErlangEmptyList)])
   in let rop_6 = (erlps__flatmap__2 [f_0, tail_2])
   in (BIF.erlang__op_append [lop_3, rop_6])
-erlps__flatmap__2 [f_0, ErlangEmptyList]
+erlps__flatmap__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 1))) =
   ErlangEmptyList
 erlps__flatmap__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1473,7 +1505,7 @@ erlps__foldl__3 [f_0, accu_1, (ErlangCons hd_2 tail_3)] =
       (BIF.erlang__apply__2
          [f_0, (ErlangCons hd_2 (ErlangCons accu_1 ErlangEmptyList))])
   in (erlps__foldl__3 [f_0, arg_5, tail_3])
-erlps__foldl__3 [f_0, accu_1, ErlangEmptyList]
+erlps__foldl__3 [f_0, accu_1, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   accu_1
 erlps__foldl__3 [arg_2, arg_3, arg_4] =
@@ -1487,7 +1519,7 @@ erlps__foldr__3 [f_0, accu_1, (ErlangCons hd_2 tail_3)] =
   in
     (BIF.erlang__apply__2
        [f_0, (ErlangCons hd_2 (ErlangCons arg_5 ErlangEmptyList))])
-erlps__foldr__3 [f_0, accu_1, ErlangEmptyList]
+erlps__foldr__3 [f_0, accu_1, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   accu_1
 erlps__foldr__3 [arg_2, arg_3, arg_4] =
@@ -1536,7 +1568,7 @@ erlps__partition__4 [pred_0, (ErlangCons h_1 t_2), as_3, bs_4] =
       (ErlangAtom "false") ->
         (erlps__partition__4 [pred_0, t_2, as_3, (ErlangCons h_1 bs_4)])
       something_else -> (EXC.case_clause something_else)
-erlps__partition__4 [pred_0, ErlangEmptyList, as_1, bs_2]
+erlps__partition__4 [pred_0, (ErlangEmptyList), as_1, bs_2]
   | (isEFunA pred_0 (ErlangInt (DBI.fromInt 1))) =
   let    tup_el_3 = (erlps__reverse__1 [as_1])
   in let tup_el_5 = (erlps__reverse__1 [bs_2])
@@ -1561,7 +1593,7 @@ erlps__filtermap__2 [f_0, (ErlangCons hd_1 tail_2)] =
         in (ErlangCons val_10 head_12)
       (ErlangAtom "false") -> (erlps__filtermap__2 [f_0, tail_2])
       something_else -> (EXC.case_clause something_else)
-erlps__filtermap__2 [f_0, ErlangEmptyList]
+erlps__filtermap__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 1))) =
   ErlangEmptyList
 erlps__filtermap__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1580,7 +1612,7 @@ erlps__foreach__2 [f_0, (ErlangCons hd_1 tail_2)] =
     _ =
       (BIF.erlang__apply__2 [f_0, (ErlangCons hd_1 ErlangEmptyList)])
   in (erlps__foreach__2 [f_0, tail_2])
-erlps__foreach__2 [f_0, ErlangEmptyList]
+erlps__foreach__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "ok")
 erlps__foreach__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1603,7 +1635,7 @@ erlps__mapfoldl__3 [f_0, accu0_1, (ErlangCons hd_2 tail_3)] =
               (ErlangTuple [(ErlangCons r_7 rs_13), accu2_14])
             _ -> (EXC.badmatch match_expr_15)
       _ -> (EXC.badmatch match_expr_9)
-erlps__mapfoldl__3 [f_0, accu_1, ErlangEmptyList]
+erlps__mapfoldl__3 [f_0, accu_1, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   (ErlangTuple [ErlangEmptyList, accu_1])
 erlps__mapfoldl__3 [arg_4, arg_5, arg_6] =
@@ -1627,7 +1659,7 @@ erlps__mapfoldr__3 [f_0, accu0_1, (ErlangCons hd_2 tail_3)] =
               (ErlangTuple [(ErlangCons r_13 rs_7), accu2_14])
             _ -> (EXC.badmatch match_expr_15)
       _ -> (EXC.badmatch match_expr_9)
-erlps__mapfoldr__3 [f_0, accu_1, ErlangEmptyList]
+erlps__mapfoldr__3 [f_0, accu_1, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   (ErlangTuple [ErlangEmptyList, accu_1])
 erlps__mapfoldr__3 [arg_4, arg_5, arg_6] =
@@ -1648,7 +1680,7 @@ erlps__takewhile__2 [pred_0, (ErlangCons hd_1 tail_2)] =
         in (ErlangCons hd_1 head_7)
       (ErlangAtom "false") -> ErlangEmptyList
       something_else -> (EXC.case_clause something_else)
-erlps__takewhile__2 [pred_0, ErlangEmptyList]
+erlps__takewhile__2 [pred_0, (ErlangEmptyList)]
   | (isEFunA pred_0 (ErlangInt (DBI.fromInt 1))) =
   ErlangEmptyList
 erlps__takewhile__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1666,7 +1698,7 @@ erlps__dropwhile__2 [pred_0, rest_3@(ErlangCons hd_1 tail_2)] =
       (ErlangAtom "true") -> (erlps__dropwhile__2 [pred_0, tail_2])
       (ErlangAtom "false") -> rest_3
       something_else -> (EXC.case_clause something_else)
-erlps__dropwhile__2 [pred_0, ErlangEmptyList]
+erlps__dropwhile__2 [pred_0, (ErlangEmptyList)]
   | (isEFunA pred_0 (ErlangInt (DBI.fromInt 1))) =
   ErlangEmptyList
 erlps__dropwhile__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1684,7 +1716,7 @@ erlps__search__2 [pred_0, (ErlangCons hd_1 tail_2)] =
       (ErlangAtom "true") -> (ErlangTuple [(ErlangAtom "value"), hd_1])
       (ErlangAtom "false") -> (erlps__search__2 [pred_0, tail_2])
       something_else -> (EXC.case_clause something_else)
-erlps__search__2 [pred_0, ErlangEmptyList]
+erlps__search__2 [pred_0, (ErlangEmptyList)]
   | (isEFunA pred_0 (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "false")
 erlps__search__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -1713,7 +1745,7 @@ erlps__splitwith__3 [pred_0, (ErlangCons hd_1 tail_2), taken_3] =
         let tup_el_12 = (erlps__reverse__1 [taken_3])
         in (ErlangTuple [tup_el_12, (ErlangCons hd_1 tail_2)])
       something_else -> (EXC.case_clause something_else)
-erlps__splitwith__3 [pred_0, ErlangEmptyList, taken_1]
+erlps__splitwith__3 [pred_0, (ErlangEmptyList), taken_1]
   | (isEFunA pred_0 (ErlangInt (DBI.fromInt 1))) =
   let tup_el_2 = (erlps__reverse__1 [taken_1])
   in (ErlangTuple [tup_el_2, ErlangEmptyList])
@@ -1751,14 +1783,14 @@ erlps__split__3 [n_0, (ErlangCons h_1 t_2), r_3] =
   let
     arg_4 = (BIF.erlang__op_minus [n_0, (ErlangInt (DBI.fromInt 1))])
   in (erlps__split__3 [arg_4, t_2, (ErlangCons h_1 r_3)])
-erlps__split__3 [_, ErlangEmptyList, _] = (ErlangAtom "badarg")
+erlps__split__3 [_, (ErlangEmptyList), _] = (ErlangAtom "badarg")
 erlps__split__3 [arg_0, arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__split__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__join__2 :: ErlangFun
-erlps__join__2 [_sep_0, ErlangEmptyList] = ErlangEmptyList
+erlps__join__2 [_sep_0, (ErlangEmptyList)] = ErlangEmptyList
 erlps__join__2 [sep_0, (ErlangCons h_1 t_2)] =
   let head_4 = (erlps__join_prepend__2 [sep_0, t_2])
   in (ErlangCons h_1 head_4)
@@ -1767,7 +1799,7 @@ erlps__join__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__join_prepend__2 :: ErlangFun
-erlps__join_prepend__2 [_sep_0, ErlangEmptyList] =
+erlps__join_prepend__2 [_sep_0, (ErlangEmptyList)] =
   ErlangEmptyList
 erlps__join_prepend__2 [sep_0, (ErlangCons h_1 t_2)] =
   let head_6 = (erlps__join_prepend__2 [sep_0, t_2])
@@ -1785,13 +1817,13 @@ erlps__split_1__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5]
   | (z_2 >= x_0) =
   (erlps__split_1__5 [z_2, y_1, l_3, (ErlangCons x_0 r_4), rs_5])
 erlps__split_1__5 [x_0, y_1, (ErlangCons z_2 l_3),
-                   ErlangEmptyList, rs_4]
+                   (ErlangEmptyList), rs_4]
   =
   (erlps__split_1__5
      [x_0, y_1, l_3, (ErlangCons z_2 ErlangEmptyList), rs_4])
 erlps__split_1__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5] =
   (erlps__split_1_1__6 [x_0, y_1, l_3, r_4, rs_5, z_2])
-erlps__split_1__5 [x_0, y_1, ErlangEmptyList, r_2, rs_3] =
+erlps__split_1__5 [x_0, y_1, (ErlangEmptyList), r_2, rs_3] =
   (erlps__rmergel__2
      [(ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_2)) rs_3),
       ErlangEmptyList])
@@ -1823,7 +1855,8 @@ erlps__split_1_1__6 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5,
   (erlps__split_1__5
      [z_2, s_6, l_3, ErlangEmptyList,
       (ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_4)) rs_5)])
-erlps__split_1_1__6 [x_0, y_1, ErlangEmptyList, r_2, rs_3, s_4] =
+erlps__split_1_1__6 [x_0, y_1, (ErlangEmptyList), r_2, rs_3, s_4]
+  =
   (erlps__rmergel__2
      [(ErlangCons (ErlangCons s_4 ErlangEmptyList)
          (ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_2)) rs_3)),
@@ -1843,13 +1876,13 @@ erlps__split_2__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5]
   | (z_2 <= x_0) =
   (erlps__split_2__5 [z_2, y_1, l_3, (ErlangCons x_0 r_4), rs_5])
 erlps__split_2__5 [x_0, y_1, (ErlangCons z_2 l_3),
-                   ErlangEmptyList, rs_4]
+                   (ErlangEmptyList), rs_4]
   =
   (erlps__split_2__5
      [x_0, y_1, l_3, (ErlangCons z_2 ErlangEmptyList), rs_4])
 erlps__split_2__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5] =
   (erlps__split_2_1__6 [x_0, y_1, l_3, r_4, rs_5, z_2])
-erlps__split_2__5 [x_0, y_1, ErlangEmptyList, r_2, rs_3] =
+erlps__split_2__5 [x_0, y_1, (ErlangEmptyList), r_2, rs_3] =
   (erlps__mergel__2
      [(ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_2)) rs_3),
       ErlangEmptyList])
@@ -1881,7 +1914,8 @@ erlps__split_2_1__6 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5,
   (erlps__split_2__5
      [z_2, s_6, l_3, ErlangEmptyList,
       (ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_4)) rs_5)])
-erlps__split_2_1__6 [x_0, y_1, ErlangEmptyList, r_2, rs_3, s_4] =
+erlps__split_2_1__6 [x_0, y_1, (ErlangEmptyList), r_2, rs_3, s_4]
+  =
   (erlps__mergel__2
      [(ErlangCons (ErlangCons s_4 ErlangEmptyList)
          (ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_2)) rs_3)),
@@ -1894,7 +1928,7 @@ erlps__split_2_1__6 args =
   (EXC.badarity (ErlangFun 6 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__mergel__2 :: ErlangFun
-erlps__mergel__2 [(ErlangCons ErlangEmptyList l_0), acc_1] =
+erlps__mergel__2 [(ErlangCons (ErlangEmptyList) l_0), acc_1] =
   (erlps__mergel__2 [l_0, acc_1])
 erlps__mergel__2 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangCons (ErlangCons h3_3 t3_4) l_5))),
                   acc_6]
@@ -1904,30 +1938,30 @@ erlps__mergel__2 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangCon
       (erlps__merge3_1__6
          [t1_0, ErlangEmptyList, h2_1, t2_2, h3_3, t3_4])
   in (erlps__mergel__2 [l_5, (ErlangCons tail_9 acc_6)])
-erlps__mergel__2 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) ErlangEmptyList)),
+erlps__mergel__2 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangEmptyList))),
                   acc_3]
   =
   let
     tail_5 = (erlps__merge2_1__4 [t1_0, h2_1, t2_2, ErlangEmptyList])
   in
     (erlps__rmergel__2 [(ErlangCons tail_5 acc_3), ErlangEmptyList])
-erlps__mergel__2 [(ErlangCons l_0 ErlangEmptyList),
-                  ErlangEmptyList]
+erlps__mergel__2 [(ErlangCons l_0 (ErlangEmptyList)),
+                  (ErlangEmptyList)]
   =
   l_0
-erlps__mergel__2 [(ErlangCons l_0 ErlangEmptyList), acc_1] =
+erlps__mergel__2 [(ErlangCons l_0 (ErlangEmptyList)), acc_1] =
   let tail_3 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__rmergel__2 [(ErlangCons tail_3 acc_1), ErlangEmptyList])
-erlps__mergel__2 [ErlangEmptyList, ErlangEmptyList] =
+erlps__mergel__2 [(ErlangEmptyList), (ErlangEmptyList)] =
   ErlangEmptyList
-erlps__mergel__2 [ErlangEmptyList, acc_0] =
+erlps__mergel__2 [(ErlangEmptyList), acc_0] =
   (erlps__rmergel__2 [acc_0, ErlangEmptyList])
-erlps__mergel__2 [(ErlangCons a_0 (ErlangCons ErlangEmptyList l_1)),
+erlps__mergel__2 [(ErlangCons a_0 (ErlangCons (ErlangEmptyList) l_1)),
                   acc_2]
   =
   (erlps__mergel__2 [(ErlangCons a_0 l_1), acc_2])
-erlps__mergel__2 [(ErlangCons a_0 (ErlangCons b_1 (ErlangCons ErlangEmptyList l_2))),
+erlps__mergel__2 [(ErlangCons a_0 (ErlangCons b_1 (ErlangCons (ErlangEmptyList) l_2))),
                   acc_3]
   =
   (erlps__mergel__2 [(ErlangCons a_0 (ErlangCons b_1 l_2)), acc_3])
@@ -1944,7 +1978,7 @@ erlps__rmergel__2 [(ErlangCons (ErlangCons h3_0 t3_1) (ErlangCons (ErlangCons h2
       (erlps__rmerge3_1__6
          [t1_4, ErlangEmptyList, h2_2, t2_3, h3_0, t3_1])
   in (erlps__rmergel__2 [l_5, (ErlangCons tail_9 acc_6)])
-erlps__rmergel__2 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 ErlangEmptyList)),
+erlps__rmergel__2 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 (ErlangEmptyList))),
                    acc_3]
   =
   let
@@ -1952,11 +1986,11 @@ erlps__rmergel__2 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 ErlangEmp
       (erlps__rmerge2_1__4 [t1_2, h2_0, t2_1, ErlangEmptyList])
   in
     (erlps__mergel__2 [(ErlangCons tail_5 acc_3), ErlangEmptyList])
-erlps__rmergel__2 [(ErlangCons l_0 ErlangEmptyList), acc_1] =
+erlps__rmergel__2 [(ErlangCons l_0 (ErlangEmptyList)), acc_1] =
   let tail_3 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__mergel__2 [(ErlangCons tail_3 acc_1), ErlangEmptyList])
-erlps__rmergel__2 [ErlangEmptyList, acc_0] =
+erlps__rmergel__2 [(ErlangEmptyList), acc_0] =
   (erlps__mergel__2 [acc_0, ErlangEmptyList])
 erlps__rmergel__2 [arg_3, arg_4] = (EXC.function_clause unit)
 erlps__rmergel__2 args =
@@ -1971,10 +2005,12 @@ erlps__merge3_1__6 [(ErlangCons h1_0 t1_1), m_2, h2_3, t2_4,
                     h3_5, t3_6]
   =
   (erlps__merge3_21__7 [t1_1, h1_0, h2_3, t2_4, h3_5, t3_6, m_2])
-erlps__merge3_1__6 [ErlangEmptyList, m_0, h2_1, t2_2, h3_3, t3_4]
+erlps__merge3_1__6 [(ErlangEmptyList), m_0, h2_1, t2_2, h3_3,
+                    t3_4]
   | (h2_1 <= h3_3) =
   (erlps__merge2_1__4 [t2_2, h3_3, t3_4, (ErlangCons h2_1 m_0)])
-erlps__merge3_1__6 [ErlangEmptyList, m_0, h2_1, t2_2, h3_3, t3_4]
+erlps__merge3_1__6 [(ErlangEmptyList), m_0, h2_1, t2_2, h3_3,
+                    t3_4]
   =
   (erlps__merge2_2__5 [t2_2, h3_3, t3_4, m_0, h2_1])
 erlps__merge3_1__6 [arg_10, arg_11, arg_12, arg_13, arg_14,
@@ -1993,10 +2029,12 @@ erlps__merge3_2__6 [t1_0, h1_1, m_2, (ErlangCons h2_3 t2_4),
                     h3_5, t3_6]
   =
   (erlps__merge3_21__7 [t1_0, h1_1, h2_3, t2_4, h3_5, t3_6, m_2])
-erlps__merge3_2__6 [t1_0, h1_1, m_2, ErlangEmptyList, h3_3, t3_4]
+erlps__merge3_2__6 [t1_0, h1_1, m_2, (ErlangEmptyList), h3_3,
+                    t3_4]
   | (h1_1 <= h3_3) =
   (erlps__merge2_1__4 [t1_0, h3_3, t3_4, (ErlangCons h1_1 m_2)])
-erlps__merge3_2__6 [t1_0, h1_1, m_2, ErlangEmptyList, h3_3, t3_4]
+erlps__merge3_2__6 [t1_0, h1_1, m_2, (ErlangEmptyList), h3_3,
+                    t3_4]
   =
   (erlps__merge2_2__5 [t1_0, h3_3, t3_4, m_2, h1_1])
 erlps__merge3_2__6 [arg_10, arg_11, arg_12, arg_13, arg_14,
@@ -2033,7 +2071,7 @@ erlps__merge3_12_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
   (erlps__merge3_12_3__6
      [t1_0, h1_1, h2_2, t2_3, (ErlangCons h3_5 m_4), t3_6])
 erlps__merge3_12_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
-                       ErlangEmptyList]
+                       (ErlangEmptyList)]
   =
   (erlps__merge2_1__4 [t1_0, h2_2, t2_3, (ErlangCons h1_1 m_4)])
 erlps__merge3_12_3__6 [arg_11, arg_12, arg_13, arg_14, arg_15,
@@ -2070,7 +2108,7 @@ erlps__merge3_21_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
   (erlps__merge3_21_3__6
      [t1_0, h1_1, h2_2, t2_3, (ErlangCons h3_5 m_4), t3_6])
 erlps__merge3_21_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
-                       ErlangEmptyList]
+                       (ErlangEmptyList)]
   =
   (erlps__merge2_2__5 [t1_0, h2_2, t2_3, m_4, h1_1])
 erlps__merge3_21_3__6 [arg_10, arg_11, arg_12, arg_13, arg_14,
@@ -2089,11 +2127,11 @@ erlps__rmerge3_1__6 [(ErlangCons h1_0 t1_1), m_2, h2_3, t2_4,
                      h3_5, t3_6]
   =
   (erlps__rmerge3_21__7 [t1_1, h1_0, h2_3, t2_4, h3_5, t3_6, m_2])
-erlps__rmerge3_1__6 [ErlangEmptyList, m_0, h2_1, t2_2, h3_3,
+erlps__rmerge3_1__6 [(ErlangEmptyList), m_0, h2_1, t2_2, h3_3,
                      t3_4]
   | (h2_1 <= h3_3) =
   (erlps__rmerge2_2__5 [t2_2, h3_3, t3_4, m_0, h2_1])
-erlps__rmerge3_1__6 [ErlangEmptyList, m_0, h2_1, t2_2, h3_3,
+erlps__rmerge3_1__6 [(ErlangEmptyList), m_0, h2_1, t2_2, h3_3,
                      t3_4]
   =
   (erlps__rmerge2_1__4 [t2_2, h3_3, t3_4, (ErlangCons h2_1 m_0)])
@@ -2113,11 +2151,11 @@ erlps__rmerge3_2__6 [t1_0, h1_1, m_2, (ErlangCons h2_3 t2_4),
                      h3_5, t3_6]
   =
   (erlps__rmerge3_21__7 [t1_0, h1_1, h2_3, t2_4, h3_5, t3_6, m_2])
-erlps__rmerge3_2__6 [t1_0, h1_1, m_2, ErlangEmptyList, h3_3,
+erlps__rmerge3_2__6 [t1_0, h1_1, m_2, (ErlangEmptyList), h3_3,
                      t3_4]
   | (h1_1 <= h3_3) =
   (erlps__rmerge2_2__5 [t1_0, h3_3, t3_4, m_2, h1_1])
-erlps__rmerge3_2__6 [t1_0, h1_1, m_2, ErlangEmptyList, h3_3,
+erlps__rmerge3_2__6 [t1_0, h1_1, m_2, (ErlangEmptyList), h3_3,
                      t3_4]
   =
   (erlps__rmerge2_1__4 [t1_0, h3_3, t3_4, (ErlangCons h1_1 m_2)])
@@ -2155,7 +2193,7 @@ erlps__rmerge3_12_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
   (erlps__rmerge3_2__6
      [t1_0, h1_1, (ErlangCons h2_2 m_4), t2_3, h3_5, t3_6])
 erlps__rmerge3_12_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
-                        ErlangEmptyList]
+                        (ErlangEmptyList)]
   =
   (erlps__rmerge2_2__5 [t1_0, h2_2, t2_3, m_4, h1_1])
 erlps__rmerge3_12_3__6 [arg_10, arg_11, arg_12, arg_13, arg_14,
@@ -2192,7 +2230,7 @@ erlps__rmerge3_21_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
   (erlps__rmerge3_1__6
      [t1_0, (ErlangCons h1_1 m_4), h2_2, t2_3, h3_5, t3_6])
 erlps__rmerge3_21_3__6 [t1_0, h1_1, h2_2, t2_3, m_4,
-                        ErlangEmptyList]
+                        (ErlangEmptyList)]
   =
   (erlps__rmerge2_1__4 [t1_0, h2_2, t2_3, (ErlangCons h1_1 m_4)])
 erlps__rmerge3_21_3__6 [arg_11, arg_12, arg_13, arg_14, arg_15,
@@ -2208,7 +2246,7 @@ erlps__merge2_1__4 [(ErlangCons h1_0 t1_1), h2_2, t2_3, m_4]
   (erlps__merge2_1__4 [t1_1, h2_2, t2_3, (ErlangCons h1_0 m_4)])
 erlps__merge2_1__4 [(ErlangCons h1_0 t1_1), h2_2, t2_3, m_4] =
   (erlps__merge2_2__5 [t1_1, h2_2, t2_3, m_4, h1_0])
-erlps__merge2_1__4 [ErlangEmptyList, h2_0, t2_1, m_2] =
+erlps__merge2_1__4 [(ErlangEmptyList), h2_0, t2_1, m_2] =
   (BIF.lists__reverse__2 [t2_1, (ErlangCons h2_0 m_2)])
 erlps__merge2_1__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -2226,7 +2264,7 @@ erlps__merge2_2__5 [t1_0, hdm_1, (ErlangCons h2_2 t2_3), m_4,
   =
   (erlps__merge2_2__5
      [t1_0, h2_2, t2_3, (ErlangCons hdm_1 m_4), h1_5])
-erlps__merge2_2__5 [t1_0, hdm_1, ErlangEmptyList, m_2, h1_3] =
+erlps__merge2_2__5 [t1_0, hdm_1, (ErlangEmptyList), m_2, h1_3] =
   (BIF.lists__reverse__2
      [t1_0, (ErlangCons h1_3 (ErlangCons hdm_1 m_2))])
 erlps__merge2_2__5 [arg_10, arg_11, arg_12, arg_13, arg_14] =
@@ -2240,7 +2278,7 @@ erlps__rmerge2_1__4 [(ErlangCons h1_0 t1_1), h2_2, t2_3, m_4]
   (erlps__rmerge2_2__5 [t1_1, h2_2, t2_3, m_4, h1_0])
 erlps__rmerge2_1__4 [(ErlangCons h1_0 t1_1), h2_2, t2_3, m_4] =
   (erlps__rmerge2_1__4 [t1_1, h2_2, t2_3, (ErlangCons h1_0 m_4)])
-erlps__rmerge2_1__4 [ErlangEmptyList, h2_0, t2_1, m_2] =
+erlps__rmerge2_1__4 [(ErlangEmptyList), h2_0, t2_1, m_2] =
   (BIF.lists__reverse__2 [t2_1, (ErlangCons h2_0 m_2)])
 erlps__rmerge2_1__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -2258,7 +2296,7 @@ erlps__rmerge2_2__5 [t1_0, hdm_1, (ErlangCons h2_2 t2_3), m_4,
   =
   (erlps__rmerge2_1__4
      [t1_0, h2_2, t2_3, (ErlangCons h1_5 (ErlangCons hdm_1 m_4))])
-erlps__rmerge2_2__5 [t1_0, hdm_1, ErlangEmptyList, m_2, h1_3] =
+erlps__rmerge2_2__5 [t1_0, hdm_1, (ErlangEmptyList), m_2, h1_3] =
   (BIF.lists__reverse__2
      [t1_0, (ErlangCons h1_3 (ErlangCons hdm_1 m_2))])
 erlps__rmerge2_2__5 [arg_10, arg_11, arg_12, arg_13, arg_14] =
@@ -2280,13 +2318,13 @@ erlps__usplit_1__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5]
   | (z_2 == x_0) =
   (erlps__usplit_1__5 [x_0, y_1, l_3, r_4, rs_5])
 erlps__usplit_1__5 [x_0, y_1, (ErlangCons z_2 l_3),
-                    ErlangEmptyList, rs_4]
+                    (ErlangEmptyList), rs_4]
   =
   (erlps__usplit_1__5
      [x_0, y_1, l_3, (ErlangCons z_2 ErlangEmptyList), rs_4])
 erlps__usplit_1__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5] =
   (erlps__usplit_1_1__6 [x_0, y_1, l_3, r_4, rs_5, z_2])
-erlps__usplit_1__5 [x_0, y_1, ErlangEmptyList, r_2, rs_3] =
+erlps__usplit_1__5 [x_0, y_1, (ErlangEmptyList), r_2, rs_3] =
   (erlps__rumergel__3
      [(ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_2)) rs_3),
       ErlangEmptyList, (ErlangAtom "asc")])
@@ -2330,7 +2368,8 @@ erlps__usplit_1_1__6 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5,
   (erlps__usplit_1__5
      [z_2, s_6, l_3, ErlangEmptyList,
       (ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_4)) rs_5)])
-erlps__usplit_1_1__6 [x_0, y_1, ErlangEmptyList, r_2, rs_3, s_4]
+erlps__usplit_1_1__6 [x_0, y_1, (ErlangEmptyList), r_2, rs_3,
+                      s_4]
   =
   (erlps__rumergel__3
      [(ErlangCons (ErlangCons s_4 ErlangEmptyList)
@@ -2357,13 +2396,13 @@ erlps__usplit_2__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5]
   | (z_2 == x_0) =
   (erlps__usplit_2__5 [x_0, y_1, l_3, r_4, rs_5])
 erlps__usplit_2__5 [x_0, y_1, (ErlangCons z_2 l_3),
-                    ErlangEmptyList, rs_4]
+                    (ErlangEmptyList), rs_4]
   =
   (erlps__usplit_2__5
      [x_0, y_1, l_3, (ErlangCons z_2 ErlangEmptyList), rs_4])
 erlps__usplit_2__5 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5] =
   (erlps__usplit_2_1__6 [x_0, y_1, l_3, r_4, rs_5, z_2])
-erlps__usplit_2__5 [x_0, y_1, ErlangEmptyList, r_2, rs_3] =
+erlps__usplit_2__5 [x_0, y_1, (ErlangEmptyList), r_2, rs_3] =
   (erlps__umergel__3
      [(ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_2)) rs_3),
       ErlangEmptyList, (ErlangAtom "desc")])
@@ -2407,7 +2446,8 @@ erlps__usplit_2_1__6 [x_0, y_1, (ErlangCons z_2 l_3), r_4, rs_5,
   (erlps__usplit_2__5
      [z_2, s_6, l_3, ErlangEmptyList,
       (ErlangCons (ErlangCons y_1 (ErlangCons x_0 r_4)) rs_5)])
-erlps__usplit_2_1__6 [x_0, y_1, ErlangEmptyList, r_2, rs_3, s_4]
+erlps__usplit_2_1__6 [x_0, y_1, (ErlangEmptyList), r_2, rs_3,
+                      s_4]
   =
   (erlps__umergel__3
      [(ErlangCons (ErlangCons s_4 ErlangEmptyList)
@@ -2428,7 +2468,8 @@ erlps__umergel__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__umergel__3 :: ErlangFun
-erlps__umergel__3 [(ErlangCons ErlangEmptyList l_0), acc_1, o_2]
+erlps__umergel__3 [(ErlangCons (ErlangEmptyList) l_0), acc_1,
+                   o_2]
   =
   (erlps__umergel__3 [l_0, acc_1, o_2])
 erlps__umergel__3 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangCons (ErlangCons h3_3 t3_4) l_5))),
@@ -2453,11 +2494,11 @@ erlps__umergel__3 [(ErlangCons (ErlangCons h3_0 t3_1) (ErlangCons (ErlangCons h2
   in
     (erlps__umergel__3
        [l_5, (ErlangCons tail_9 acc_6), (ErlangAtom "desc")])
-erlps__umergel__3 [(ErlangCons a_0 (ErlangCons ErlangEmptyList l_1)),
+erlps__umergel__3 [(ErlangCons a_0 (ErlangCons (ErlangEmptyList) l_1)),
                    acc_2, o_3]
   =
   (erlps__umergel__3 [(ErlangCons a_0 l_1), acc_2, o_3])
-erlps__umergel__3 [(ErlangCons a_0 (ErlangCons b_1 (ErlangCons ErlangEmptyList l_2))),
+erlps__umergel__3 [(ErlangCons a_0 (ErlangCons b_1 (ErlangCons (ErlangEmptyList) l_2))),
                    acc_3, o_4]
   =
   (erlps__umergel__3
@@ -2480,19 +2521,20 @@ erlps__umergel__3 [(ErlangCons t2_0 (ErlangCons (ErlangCons h1_1 t1_2) l_3)),
   in
     (erlps__umergel__3
        [l_3, (ErlangCons tail_7 acc_4), (ErlangAtom "desc")])
-erlps__umergel__3 [(ErlangCons l_0 ErlangEmptyList),
-                   ErlangEmptyList, _o_1]
+erlps__umergel__3 [(ErlangCons l_0 (ErlangEmptyList)),
+                   (ErlangEmptyList), _o_1]
   =
   l_0
-erlps__umergel__3 [(ErlangCons l_0 ErlangEmptyList), acc_1, o_2]
+erlps__umergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
+                   o_2]
   =
   let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__rumergel__3
        [(ErlangCons tail_4 acc_1), ErlangEmptyList, o_2])
-erlps__umergel__3 [ErlangEmptyList, ErlangEmptyList, _o_0] =
+erlps__umergel__3 [(ErlangEmptyList), (ErlangEmptyList), _o_0] =
   ErlangEmptyList
-erlps__umergel__3 [ErlangEmptyList, acc_0, o_1] =
+erlps__umergel__3 [(ErlangEmptyList), acc_0, o_1] =
   (erlps__rumergel__3 [acc_0, ErlangEmptyList, o_1])
 erlps__umergel__3 [arg_5, arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -2538,13 +2580,14 @@ erlps__rumergel__3 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) l_3)),
   in
     (erlps__rumergel__3
        [l_3, (ErlangCons tail_7 acc_4), (ErlangAtom "desc")])
-erlps__rumergel__3 [(ErlangCons l_0 ErlangEmptyList), acc_1, o_2]
+erlps__rumergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
+                    o_2]
   =
   let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__umergel__3
        [(ErlangCons tail_4 acc_1), ErlangEmptyList, o_2])
-erlps__rumergel__3 [ErlangEmptyList, acc_0, o_1] =
+erlps__rumergel__3 [(ErlangEmptyList), acc_0, o_1] =
   (erlps__umergel__3 [acc_0, ErlangEmptyList, o_1])
 erlps__rumergel__3 [arg_5, arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -2566,20 +2609,20 @@ erlps__umerge3_1__7 [(ErlangCons h1_0 t1_1), hdm_2, t2_3, h2_4,
   =
   (erlps__umerge3_21__8
      [t1_1, h1_0, t2_3, h2_4, m_5, t3_6, h3_7, hdm_2])
-erlps__umerge3_1__7 [ErlangEmptyList, hdm_0, t2_1, h2_2, m_3,
+erlps__umerge3_1__7 [(ErlangEmptyList), hdm_0, t2_1, h2_2, m_3,
                      t3_4, h3_5]
   | (h2_2 == hdm_0) =
   (erlps__umerge2_1__5 [t2_1, t3_4, m_3, hdm_0, h3_5])
-erlps__umerge3_1__7 [ErlangEmptyList, _hdm_0, t2_1, h2_2, m_3,
+erlps__umerge3_1__7 [(ErlangEmptyList), _hdm_0, t2_1, h2_2, m_3,
                      t3_4, h3_5]
   | (h2_2 <= h3_5) =
   (erlps__umerge2_1__5
      [t2_1, t3_4, (ErlangCons h2_2 m_3), h2_2, h3_5])
-erlps__umerge3_1__7 [ErlangEmptyList, hdm_0, t2_1, h2_2, m_3,
+erlps__umerge3_1__7 [(ErlangEmptyList), hdm_0, t2_1, h2_2, m_3,
                      t3_4, h3_5]
   | (h3_5 == hdm_0) =
   (erlps__umerge2_2__4 [t2_1, t3_4, m_3, h2_2])
-erlps__umerge3_1__7 [ErlangEmptyList, _hdm_0, t2_1, h2_2, m_3,
+erlps__umerge3_1__7 [(ErlangEmptyList), _hdm_0, t2_1, h2_2, m_3,
                      t3_4, h3_5]
   =
   (erlps__umerge2_2__4 [t2_1, t3_4, (ErlangCons h3_5 m_3), h2_2])
@@ -2601,16 +2644,16 @@ erlps__umerge3_2__7 [t1_0, h1_1, (ErlangCons h2_2 t2_3), hdm_4,
   =
   (erlps__umerge3_21__8
      [t1_0, h1_1, t2_3, h2_2, m_5, t3_6, h3_7, hdm_4])
-erlps__umerge3_2__7 [t1_0, h1_1, ErlangEmptyList, _hdm_2, m_3,
+erlps__umerge3_2__7 [t1_0, h1_1, (ErlangEmptyList), _hdm_2, m_3,
                      t3_4, h3_5]
   | (h1_1 <= h3_5) =
   (erlps__umerge2_1__5
      [t1_0, t3_4, (ErlangCons h1_1 m_3), h1_1, h3_5])
-erlps__umerge3_2__7 [t1_0, h1_1, ErlangEmptyList, hdm_2, m_3,
+erlps__umerge3_2__7 [t1_0, h1_1, (ErlangEmptyList), hdm_2, m_3,
                      t3_4, h3_5]
   | (h3_5 == hdm_2) =
   (erlps__umerge2_2__4 [t1_0, t3_4, m_3, h1_1])
-erlps__umerge3_2__7 [t1_0, h1_1, ErlangEmptyList, _hdm_2, m_3,
+erlps__umerge3_2__7 [t1_0, h1_1, (ErlangEmptyList), _hdm_2, m_3,
                      t3_4, h3_5]
   =
   (erlps__umerge2_2__4 [t1_0, t3_4, (ErlangCons h3_5 m_3), h1_1])
@@ -2655,7 +2698,7 @@ erlps__umerge3_12_3__6 [t1_0, h1_1, t2_2, h2_3, m_4,
   (erlps__umerge3_12_3__6
      [t1_0, h1_1, t2_2, h2_3, (ErlangCons h3_5 m_4), t3_6])
 erlps__umerge3_12_3__6 [t1_0, h1_1, t2_2, h2_3, m_4,
-                        ErlangEmptyList]
+                        (ErlangEmptyList)]
   =
   (erlps__umerge2_1__5
      [t1_0, t2_2, (ErlangCons h1_1 m_4), h1_1, h2_3])
@@ -2700,7 +2743,7 @@ erlps__umerge3_21_3__6 [t1_0, h1_1, t2_2, h2_3, m_4,
   (erlps__umerge3_21_3__6
      [t1_0, h1_1, t2_2, h2_3, (ErlangCons h3_5 m_4), t3_6])
 erlps__umerge3_21_3__6 [t1_0, h1_1, t2_2, h2_3, m_4,
-                        ErlangEmptyList]
+                        (ErlangEmptyList)]
   =
   (erlps__umerge2_2__4 [t1_0, t2_2, (ErlangCons h2_3 m_4), h1_1])
 erlps__umerge3_21_3__6 [arg_11, arg_12, arg_13, arg_14, arg_15,
@@ -2726,11 +2769,11 @@ erlps__rumerge3_1__6 [(ErlangCons h1_0 t1_1), t2_2, h2_3, m_4,
   =
   (erlps__rumerge3_1__6
      [t1_1, t2_2, h2_3, (ErlangCons h1_0 m_4), t3_5, h3_6])
-erlps__rumerge3_1__6 [ErlangEmptyList, t2_0, h2_1, m_2, t3_3,
+erlps__rumerge3_1__6 [(ErlangEmptyList), t2_0, h2_1, m_2, t3_3,
                       h3_4]
   | (h2_1 <= h3_4) =
   (erlps__rumerge2_2__5 [t2_0, t3_3, m_2, h3_4, h2_1])
-erlps__rumerge3_1__6 [ErlangEmptyList, t2_0, h2_1, m_2, t3_3,
+erlps__rumerge3_1__6 [(ErlangEmptyList), t2_0, h2_1, m_2, t3_3,
                       h3_4]
   =
   (erlps__rumerge2_1__4 [t2_0, t3_3, (ErlangCons h2_1 m_2), h3_4])
@@ -2778,16 +2821,16 @@ erlps__rumerge3_2__7 [t1_0, (ErlangCons h2_1 t2_2), h2m_3, m_4,
   (erlps__rumerge3_1__6
      [t1_0, t2_2, h2_1, (ErlangCons h1_7 (ErlangCons h2m_3 m_4)),
       t3_5, h3_6])
-erlps__rumerge3_2__7 [t1_0, ErlangEmptyList, h2m_1, m_2, t3_3,
+erlps__rumerge3_2__7 [t1_0, (ErlangEmptyList), h2m_1, m_2, t3_3,
                       h3_4, h1_5]
   | (h1_5 == h2m_1) =
   (erlps__rumerge2_1__4 [t1_0, t3_3, (ErlangCons h1_5 m_2), h3_4])
-erlps__rumerge3_2__7 [t1_0, ErlangEmptyList, h2m_1, m_2, t3_3,
+erlps__rumerge3_2__7 [t1_0, (ErlangEmptyList), h2m_1, m_2, t3_3,
                       h3_4, h1_5]
   | (h1_5 <= h3_4) =
   (erlps__rumerge2_2__5
      [t1_0, t3_3, (ErlangCons h2m_1 m_2), h3_4, h1_5])
-erlps__rumerge3_2__7 [t1_0, ErlangEmptyList, h2m_1, m_2, t3_3,
+erlps__rumerge3_2__7 [t1_0, (ErlangEmptyList), h2m_1, m_2, t3_3,
                       h3_4, h1_5]
   =
   (erlps__rumerge2_1__4
@@ -2832,12 +2875,12 @@ erlps__rumerge3_12_3__7 [t1_0, t2_1, h2_2, m_3,
   =
   (erlps__rumerge3_2__7
      [t1_0, t2_1, h2_2, (ErlangCons h3m_6 m_3), t3_5, h3_4, h1_7])
-erlps__rumerge3_12_3__7 [t1_0, t2_1, h2_2, m_3, ErlangEmptyList,
-                         h3m_4, h1_5]
+erlps__rumerge3_12_3__7 [t1_0, t2_1, h2_2, m_3,
+                         (ErlangEmptyList), h3m_4, h1_5]
   | (h2_2 == h3m_4) =
   (erlps__rumerge2_2__5 [t1_0, t2_1, m_3, h2_2, h1_5])
-erlps__rumerge3_12_3__7 [t1_0, t2_1, h2_2, m_3, ErlangEmptyList,
-                         h3m_4, h1_5]
+erlps__rumerge3_12_3__7 [t1_0, t2_1, h2_2, m_3,
+                         (ErlangEmptyList), h3m_4, h1_5]
   =
   (erlps__rumerge2_2__5
      [t1_0, t2_1, (ErlangCons h3m_4 m_3), h2_2, h1_5])
@@ -2865,12 +2908,12 @@ erlps__rumerge3_21_3__7 [t1_0, t2_1, h2_2, m_3,
   (erlps__rumerge3_1__6
      [t1_0, t2_1, h2_2, (ErlangCons h1_7 (ErlangCons h3m_6 m_3)),
       t3_5, h3_4])
-erlps__rumerge3_21_3__7 [t1_0, t2_1, h2_2, m_3, ErlangEmptyList,
-                         h3m_4, h1_5]
+erlps__rumerge3_21_3__7 [t1_0, t2_1, h2_2, m_3,
+                         (ErlangEmptyList), h3m_4, h1_5]
   | (h1_5 == h3m_4) =
   (erlps__rumerge2_1__4 [t1_0, t2_1, (ErlangCons h1_5 m_3), h2_2])
-erlps__rumerge3_21_3__7 [t1_0, t2_1, h2_2, m_3, ErlangEmptyList,
-                         h3m_4, h1_5]
+erlps__rumerge3_21_3__7 [t1_0, t2_1, h2_2, m_3,
+                         (ErlangEmptyList), h3m_4, h1_5]
   =
   (erlps__rumerge2_1__4
      [t1_0, t2_1, (ErlangCons h1_5 (ErlangCons h3m_4 m_3)), h2_2])
@@ -2895,10 +2938,11 @@ erlps__umerge2_1__5 [(ErlangCons h1_0 t1_1), t2_2, m_3, _hdm_4,
                      h2_5]
   =
   (erlps__umerge2_2__4 [t1_1, t2_2, (ErlangCons h2_5 m_3), h1_0])
-erlps__umerge2_1__5 [ErlangEmptyList, t2_0, m_1, hdm_2, h2_3]
+erlps__umerge2_1__5 [(ErlangEmptyList), t2_0, m_1, hdm_2, h2_3]
   | (h2_3 == hdm_2) =
   (BIF.lists__reverse__2 [t2_0, m_1])
-erlps__umerge2_1__5 [ErlangEmptyList, t2_0, m_1, _hdm_2, h2_3] =
+erlps__umerge2_1__5 [(ErlangEmptyList), t2_0, m_1, _hdm_2, h2_3]
+  =
   (BIF.lists__reverse__2 [t2_0, (ErlangCons h2_3 m_1)])
 erlps__umerge2_1__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
@@ -2912,7 +2956,7 @@ erlps__umerge2_2__4 [t1_0, (ErlangCons h2_1 t2_2), m_3, h1_4]
      [t1_0, t2_2, (ErlangCons h1_4 m_3), h1_4, h2_1])
 erlps__umerge2_2__4 [t1_0, (ErlangCons h2_1 t2_2), m_3, h1_4] =
   (erlps__umerge2_2__4 [t1_0, t2_2, (ErlangCons h2_1 m_3), h1_4])
-erlps__umerge2_2__4 [t1_0, ErlangEmptyList, m_1, h1_2] =
+erlps__umerge2_2__4 [t1_0, (ErlangEmptyList), m_1, h1_2] =
   (BIF.lists__reverse__2 [t1_0, (ErlangCons h1_2 m_1)])
 erlps__umerge2_2__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -2925,7 +2969,7 @@ erlps__rumerge2_1__4 [(ErlangCons h1_0 t1_1), t2_2, m_3, h2_4]
   (erlps__rumerge2_2__5 [t1_1, t2_2, m_3, h2_4, h1_0])
 erlps__rumerge2_1__4 [(ErlangCons h1_0 t1_1), t2_2, m_3, h2_4] =
   (erlps__rumerge2_1__4 [t1_1, t2_2, (ErlangCons h1_0 m_3), h2_4])
-erlps__rumerge2_1__4 [ErlangEmptyList, t2_0, m_1, h2_2] =
+erlps__rumerge2_1__4 [(ErlangEmptyList), t2_0, m_1, h2_2] =
   (BIF.lists__reverse__2 [t2_0, (ErlangCons h2_2 m_1)])
 erlps__rumerge2_1__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -2947,10 +2991,11 @@ erlps__rumerge2_2__5 [t1_0, (ErlangCons h2_1 t2_2), m_3, h2m_4,
   =
   (erlps__rumerge2_1__4
      [t1_0, t2_2, (ErlangCons h1_5 (ErlangCons h2m_4 m_3)), h2_1])
-erlps__rumerge2_2__5 [t1_0, ErlangEmptyList, m_1, h2m_2, h1_3]
+erlps__rumerge2_2__5 [t1_0, (ErlangEmptyList), m_1, h2m_2, h1_3]
   | (h1_3 == h2m_2) =
   (BIF.lists__reverse__2 [t1_0, (ErlangCons h1_3 m_1)])
-erlps__rumerge2_2__5 [t1_0, ErlangEmptyList, m_1, h2m_2, h1_3] =
+erlps__rumerge2_2__5 [t1_0, (ErlangEmptyList), m_1, h2m_2, h1_3]
+  =
   (BIF.lists__reverse__2
      [t1_0, (ErlangCons h1_3 (ErlangCons h2m_2 m_1))])
 erlps__rumerge2_2__5 [arg_10, arg_11, arg_12, arg_13, arg_14] =
@@ -2978,8 +3023,9 @@ erlps__keysplit_1__8 [i_0, x_1, ex_2, y_3, ey_4,
       ez_45 ->
         (erlps__keysplit_1_1__10
            [i_0, x_1, ex_2, y_3, ey_4, ez_45, r_7, rs_8, z_5, l_6])
+      something_else -> (EXC.case_clause something_else)
 erlps__keysplit_1__8 [i_0, x_1, _ex_2, y_3, _ey_4,
-                      ErlangEmptyList, r_5, rs_6]
+                      (ErlangEmptyList), r_5, rs_6]
   =
   (erlps__rkeymergel__4
      [i_0, (ErlangCons (ErlangCons y_3 (ErlangCons x_1 r_5)) rs_6),
@@ -3014,8 +3060,9 @@ erlps__keysplit_1_1__10 [i_0, x_1, ex_2, y_3, ey_4, es_5, r_6,
         (erlps__keysplit_1__8
            [i_0, z_9, ez_55, s_8, es_5, l_10, ErlangEmptyList,
             (ErlangCons (ErlangCons y_3 (ErlangCons x_1 r_6)) rs_7)])
+      something_else -> (EXC.case_clause something_else)
 erlps__keysplit_1_1__10 [i_0, x_1, _ex_2, y_3, _ey_4, _es_5, r_6,
-                         rs_7, s_8, ErlangEmptyList]
+                         rs_7, s_8, (ErlangEmptyList)]
   =
   (erlps__rkeymergel__4
      [i_0,
@@ -3049,8 +3096,9 @@ erlps__keysplit_2__8 [i_0, x_1, ex_2, y_3, ey_4,
       ez_45 ->
         (erlps__keysplit_2_1__10
            [i_0, x_1, ex_2, y_3, ey_4, ez_45, r_7, rs_8, z_5, l_6])
+      something_else -> (EXC.case_clause something_else)
 erlps__keysplit_2__8 [i_0, x_1, _ex_2, y_3, _ey_4,
-                      ErlangEmptyList, r_5, rs_6]
+                      (ErlangEmptyList), r_5, rs_6]
   =
   (erlps__keymergel__4
      [i_0, (ErlangCons (ErlangCons y_3 (ErlangCons x_1 r_5)) rs_6),
@@ -3085,8 +3133,9 @@ erlps__keysplit_2_1__10 [i_0, x_1, ex_2, y_3, ey_4, es_5, r_6,
         (erlps__keysplit_2__8
            [i_0, z_9, ez_55, s_8, es_5, l_10, ErlangEmptyList,
             (ErlangCons (ErlangCons y_3 (ErlangCons x_1 r_6)) rs_7)])
+      something_else -> (EXC.case_clause something_else)
 erlps__keysplit_2_1__10 [i_0, x_1, _ex_2, y_3, _ey_4, _es_5, r_6,
-                         rs_7, s_8, ErlangEmptyList]
+                         rs_7, s_8, (ErlangEmptyList)]
   =
   (erlps__keymergel__4
      [i_0,
@@ -3149,18 +3198,18 @@ erlps__keymergel__4 [i_0,
   in
     (erlps__keymergel__4
        [i_0, l_4, (ErlangCons tail_9 acc_5), (ErlangAtom "desc")])
-erlps__keymergel__4 [_i_0, (ErlangCons l_1 ErlangEmptyList),
-                     ErlangEmptyList, _o_2]
+erlps__keymergel__4 [_i_0, (ErlangCons l_1 (ErlangEmptyList)),
+                     (ErlangEmptyList), _o_2]
   =
   l_1
-erlps__keymergel__4 [i_0, (ErlangCons l_1 ErlangEmptyList),
+erlps__keymergel__4 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                      acc_2, o_3]
   =
   let tail_6 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__rkeymergel__4
        [i_0, (ErlangCons tail_6 acc_2), ErlangEmptyList, o_3])
-erlps__keymergel__4 [i_0, ErlangEmptyList, acc_1, o_2] =
+erlps__keymergel__4 [i_0, (ErlangEmptyList), acc_1, o_2] =
   (erlps__rkeymergel__4 [i_0, acc_1, ErlangEmptyList, o_2])
 erlps__keymergel__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -3218,14 +3267,14 @@ erlps__rkeymergel__4 [i_0,
   in
     (erlps__rkeymergel__4
        [i_0, l_4, (ErlangCons tail_9 acc_5), (ErlangAtom "desc")])
-erlps__rkeymergel__4 [i_0, (ErlangCons l_1 ErlangEmptyList),
+erlps__rkeymergel__4 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                       acc_2, o_3]
   =
   let tail_6 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__keymergel__4
        [i_0, (ErlangCons tail_6 acc_2), ErlangEmptyList, o_3])
-erlps__rkeymergel__4 [i_0, ErlangEmptyList, acc_1, o_2] =
+erlps__rkeymergel__4 [i_0, (ErlangEmptyList), acc_1, o_2] =
   (erlps__keymergel__4 [i_0, acc_1, ErlangEmptyList, o_2])
 erlps__rkeymergel__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -3247,12 +3296,13 @@ erlps__keymerge3_1__10 [i_0, (ErlangCons h1_1 t1_2), m_3, d_4,
         (erlps__keymerge3_21__12
            [i_0, e1_27, h1_1, t1_2, e2_5, h2_6, t2_7, e3_8, h3_9, t3_10,
             m_3, t2_7])
-erlps__keymerge3_1__10 [i_0, ErlangEmptyList, m_1, _d_2, e2_3,
+      something_else -> (EXC.case_clause something_else)
+erlps__keymerge3_1__10 [i_0, (ErlangEmptyList), m_1, _d_2, e2_3,
                         h2_4, t2_5, e3_6, h3_7, t3_8]
   | (e2_3 <= e3_6) =
   (erlps__keymerge2_1__6
      [i_0, t2_5, e3_6, h3_7, t3_8, (ErlangCons h2_4 m_1)])
-erlps__keymerge3_1__10 [i_0, ErlangEmptyList, m_1, _d_2, e2_3,
+erlps__keymerge3_1__10 [i_0, (ErlangEmptyList), m_1, _d_2, e2_3,
                         h2_4, t2_5, _e3_6, h3_7, t3_8]
   =
   (erlps__keymerge2_2__7 [i_0, t2_5, e2_3, h3_7, t3_8, m_1, h2_4])
@@ -3278,12 +3328,13 @@ erlps__keymerge3_2__10 [i_0, e1_1, h1_2, t1_3,
         (erlps__keymerge3_21__12
            [i_0, e1_1, h1_2, t1_3, e2_27, h2_4, t2_5, e3_8, h3_9, t3_10,
             m_6, d_7])
-erlps__keymerge3_2__10 [i_0, e1_1, h1_2, t1_3, ErlangEmptyList,
+      something_else -> (EXC.case_clause something_else)
+erlps__keymerge3_2__10 [i_0, e1_1, h1_2, t1_3, (ErlangEmptyList),
                         m_4, _d_5, e3_6, h3_7, t3_8]
   | (e1_1 <= e3_6) =
   (erlps__keymerge2_1__6
      [i_0, t1_3, e3_6, h3_7, t3_8, (ErlangCons h1_2 m_4)])
-erlps__keymerge3_2__10 [i_0, e1_1, h1_2, t1_3, ErlangEmptyList,
+erlps__keymerge3_2__10 [i_0, e1_1, h1_2, t1_3, (ErlangEmptyList),
                         m_4, _d_5, _e3_6, h3_7, t3_8]
   =
   (erlps__keymerge2_2__7 [i_0, t1_3, e1_1, h3_7, t3_8, m_4, h1_2])
@@ -3329,8 +3380,9 @@ erlps__keymerge3_12_3__9 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
         (erlps__keymerge3_12_3__9
            [i_0, e1_1, h1_2, t1_3, e2_4, h2_5, t2_6, t3_8,
             (ErlangCons h3_7 m_9)])
+      something_else -> (EXC.case_clause something_else)
 erlps__keymerge3_12_3__9 [i_0, _e1_1, h1_2, t1_3, e2_4, h2_5,
-                          t2_6, ErlangEmptyList, m_7]
+                          t2_6, (ErlangEmptyList), m_7]
   =
   (erlps__keymerge2_1__6
      [i_0, t1_3, e2_4, h2_5, t2_6, (ErlangCons h1_2 m_7)])
@@ -3376,8 +3428,9 @@ erlps__keymerge3_21_3__9 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
         (erlps__keymerge3_21_3__9
            [i_0, e1_1, h1_2, t1_3, e2_4, h2_5, t2_6, t3_8,
             (ErlangCons h3_7 m_9)])
+      something_else -> (EXC.case_clause something_else)
 erlps__keymerge3_21_3__9 [i_0, e1_1, h1_2, t1_3, _e2_4, h2_5,
-                          t2_6, ErlangEmptyList, m_7]
+                          t2_6, (ErlangEmptyList), m_7]
   =
   (erlps__keymerge2_2__7 [i_0, t1_3, e1_1, h2_5, t2_6, m_7, h1_2])
 erlps__keymerge3_21_3__9 [arg_15, arg_16, arg_17, arg_18, arg_19,
@@ -3402,12 +3455,13 @@ erlps__rkeymerge3_1__10 [i_0, (ErlangCons h1_1 t1_2), m_3, d_4,
         (erlps__rkeymerge3_21__12
            [i_0, e1_27, h1_1, t1_2, e2_5, h2_6, t2_7, e3_8, h3_9, t3_10,
             m_3, d_4])
-erlps__rkeymerge3_1__10 [i_0, ErlangEmptyList, m_1, _d_2, e2_3,
+      something_else -> (EXC.case_clause something_else)
+erlps__rkeymerge3_1__10 [i_0, (ErlangEmptyList), m_1, _d_2, e2_3,
                          h2_4, t2_5, e3_6, h3_7, t3_8]
   | (e2_3 <= e3_6) =
   (erlps__rkeymerge2_2__7 [i_0, e2_3, t2_5, h3_7, t3_8, m_1, h2_4])
-erlps__rkeymerge3_1__10 [i_0, ErlangEmptyList, m_1, _d_2, _e2_3,
-                         h2_4, t2_5, e3_6, h3_7, t3_8]
+erlps__rkeymerge3_1__10 [i_0, (ErlangEmptyList), m_1, _d_2,
+                         _e2_3, h2_4, t2_5, e3_6, h3_7, t3_8]
   =
   (erlps__rkeymerge2_1__6
      [i_0, t2_5, e3_6, h3_7, t3_8, (ErlangCons h2_4 m_1)])
@@ -3433,12 +3487,13 @@ erlps__rkeymerge3_2__10 [i_0, e1_1, h1_2, t1_3,
         (erlps__rkeymerge3_21__12
            [i_0, e1_1, h1_2, t1_3, e2_27, h2_4, t2_5, e3_8, h3_9, t3_10,
             m_6, t1_3])
-erlps__rkeymerge3_2__10 [i_0, e1_1, h1_2, t1_3, ErlangEmptyList,
-                         m_4, _d_5, e3_6, h3_7, t3_8]
+      something_else -> (EXC.case_clause something_else)
+erlps__rkeymerge3_2__10 [i_0, e1_1, h1_2, t1_3,
+                         (ErlangEmptyList), m_4, _d_5, e3_6, h3_7, t3_8]
   | (e1_1 <= e3_6) =
   (erlps__rkeymerge2_2__7 [i_0, e1_1, t1_3, h3_7, t3_8, m_4, h1_2])
-erlps__rkeymerge3_2__10 [i_0, _e1_1, h1_2, t1_3, ErlangEmptyList,
-                         m_4, _d_5, e3_6, h3_7, t3_8]
+erlps__rkeymerge3_2__10 [i_0, _e1_1, h1_2, t1_3,
+                         (ErlangEmptyList), m_4, _d_5, e3_6, h3_7, t3_8]
   =
   (erlps__rkeymerge2_1__6
      [i_0, t1_3, e3_6, h3_7, t3_8, (ErlangCons h1_2 m_4)])
@@ -3485,8 +3540,9 @@ erlps__rkeymerge3_12_3__9 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
         (erlps__rkeymerge3_2__10
            [i_0, e1_1, h1_2, t1_3, t2_6, (ErlangCons h2_5 m_9), t2_6, e3_25,
             h3_7, t3_8])
+      something_else -> (EXC.case_clause something_else)
 erlps__rkeymerge3_12_3__9 [i_0, e1_1, h1_2, t1_3, _e2_4, h2_5,
-                           t2_6, ErlangEmptyList, m_7]
+                           t2_6, (ErlangEmptyList), m_7]
   =
   (erlps__rkeymerge2_2__7 [i_0, e1_1, t1_3, h2_5, t2_6, m_7, h1_2])
 erlps__rkeymerge3_12_3__9 [arg_15, arg_16, arg_17, arg_18,
@@ -3532,8 +3588,9 @@ erlps__rkeymerge3_21_3__9 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
         (erlps__rkeymerge3_1__10
            [i_0, t1_3, (ErlangCons h1_2 m_9), t1_3, e2_4, h2_5, t2_6, e3_25,
             h3_7, t3_8])
+      something_else -> (EXC.case_clause something_else)
 erlps__rkeymerge3_21_3__9 [i_0, _e1_1, h1_2, t1_3, e2_4, h2_5,
-                           t2_6, ErlangEmptyList, m_7]
+                           t2_6, (ErlangEmptyList), m_7]
   =
   (erlps__rkeymerge2_1__6
      [i_0, t1_3, e2_4, h2_5, t2_6, (ErlangCons h1_2 m_7)])
@@ -3556,8 +3613,9 @@ erlps__keymerge2_1__6 [i_0, (ErlangCons h1_1 t1_2), e2_3, h2_4,
            [i_0, t1_2, e2_3, h2_4, t2_5, (ErlangCons h1_1 m_6)])
       e1_19 ->
         (erlps__keymerge2_2__7 [i_0, t1_2, e1_19, h2_4, t2_5, m_6, h1_1])
-erlps__keymerge2_1__6 [_i_0, ErlangEmptyList, _e2_1, h2_2, t2_3,
-                       m_4]
+      something_else -> (EXC.case_clause something_else)
+erlps__keymerge2_1__6 [_i_0, (ErlangEmptyList), _e2_1, h2_2,
+                       t2_3, m_4]
   =
   (BIF.lists__reverse__2 [t2_3, (ErlangCons h2_2 m_4)])
 erlps__keymerge2_1__6 [arg_9, arg_10, arg_11, arg_12, arg_13,
@@ -3581,8 +3639,9 @@ erlps__keymerge2_2__7 [i_0, t1_1, e1_2, hdm_3,
       _e2_22 ->
         (erlps__keymerge2_2__7
            [i_0, t1_1, e1_2, h2_4, t2_5, (ErlangCons hdm_3 m_6), h1_7])
-erlps__keymerge2_2__7 [_i_0, t1_1, _e1_2, hdm_3, ErlangEmptyList,
-                       m_4, h1_5]
+      something_else -> (EXC.case_clause something_else)
+erlps__keymerge2_2__7 [_i_0, t1_1, _e1_2, hdm_3,
+                       (ErlangEmptyList), m_4, h1_5]
   =
   (BIF.lists__reverse__2
      [t1_1, (ErlangCons h1_5 (ErlangCons hdm_3 m_4))])
@@ -3606,8 +3665,9 @@ erlps__rkeymerge2_1__6 [i_0, (ErlangCons h1_1 t1_2), e2_3, h2_4,
       _e1_18 ->
         (erlps__rkeymerge2_1__6
            [i_0, t1_2, e2_3, h2_4, t2_5, (ErlangCons h1_1 m_6)])
-erlps__rkeymerge2_1__6 [_i_0, ErlangEmptyList, _e2_1, h2_2, t2_3,
-                        m_4]
+      something_else -> (EXC.case_clause something_else)
+erlps__rkeymerge2_1__6 [_i_0, (ErlangEmptyList), _e2_1, h2_2,
+                        t2_3, m_4]
   =
   (BIF.lists__reverse__2 [t2_3, (ErlangCons h2_2 m_4)])
 erlps__rkeymerge2_1__6 [arg_9, arg_10, arg_11, arg_12, arg_13,
@@ -3631,8 +3691,9 @@ erlps__rkeymerge2_2__7 [i_0, e1_1, t1_2, hdm_3,
         (erlps__rkeymerge2_1__6
            [i_0, t1_2, e2_21, h2_4, t2_5,
             (ErlangCons h1_7 (ErlangCons hdm_3 m_6))])
+      something_else -> (EXC.case_clause something_else)
 erlps__rkeymerge2_2__7 [_i_0, _e1_1, t1_2, hdm_3,
-                        ErlangEmptyList, m_4, h1_5]
+                        (ErlangEmptyList), m_4, h1_5]
   =
   (BIF.lists__reverse__2
      [t1_2, (ErlangCons h1_5 (ErlangCons hdm_3 m_4))])
@@ -3669,8 +3730,9 @@ erlps__ukeysplit_1__8 [i_0, x_1, ex_2, y_3, ey_4,
       ez_63 ->
         (erlps__ukeysplit_1_1__10
            [i_0, x_1, ex_2, y_3, ey_4, l_6, r_7, rs_8, z_5, ez_63])
+      something_else -> (EXC.case_clause something_else)
 erlps__ukeysplit_1__8 [i_0, x_1, _ex_2, y_3, _ey_4,
-                       ErlangEmptyList, r_5, rs_6]
+                       (ErlangEmptyList), r_5, rs_6]
   =
   (erlps__rukeymergel__3
      [i_0, (ErlangCons (ErlangCons y_3 (ErlangCons x_1 r_5)) rs_6),
@@ -3714,8 +3776,9 @@ erlps__ukeysplit_1_1__10 [i_0, x_1, ex_2, y_3, ey_4,
         (erlps__ukeysplit_1__8
            [i_0, z_5, ez_88, s_9, es_10, l_6, ErlangEmptyList,
             (ErlangCons (ErlangCons y_3 (ErlangCons x_1 r_7)) rs_8)])
+      something_else -> (EXC.case_clause something_else)
 erlps__ukeysplit_1_1__10 [i_0, x_1, _ex_2, y_3, _ey_4,
-                          ErlangEmptyList, r_5, rs_6, s_7, _es_8]
+                          (ErlangEmptyList), r_5, rs_6, s_7, _es_8]
   =
   (erlps__rukeymergel__3
      [i_0,
@@ -3746,7 +3809,9 @@ erlps__ukeysplit_2__5 [i_0, y_1, ey_2, (ErlangCons z_3 l_4), r_5]
       ez_28 ->
         (erlps__ukeysplit_2__5
            [i_0, z_3, ez_28, l_4, (ErlangCons y_1 r_5)])
-erlps__ukeysplit_2__5 [_i_0, y_1, _ey_2, ErlangEmptyList, r_3] =
+      something_else -> (EXC.case_clause something_else)
+erlps__ukeysplit_2__5 [_i_0, y_1, _ey_2, (ErlangEmptyList), r_3]
+  =
   (ErlangCons y_1 r_3)
 erlps__ukeysplit_2__5 [arg_6, arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -3776,18 +3841,18 @@ erlps__ukeymergel__3 [i_0,
       (erlps__ukeymerge2_2__6
          [i_0, t1_2, arg_12, h1_1, t2_3, ErlangEmptyList])
   in (erlps__ukeymergel__3 [i_0, l_4, (ErlangCons tail_9 acc_5)])
-erlps__ukeymergel__3 [_i_0, (ErlangCons l_1 ErlangEmptyList),
-                      ErlangEmptyList]
+erlps__ukeymergel__3 [_i_0, (ErlangCons l_1 (ErlangEmptyList)),
+                      (ErlangEmptyList)]
   =
   l_1
-erlps__ukeymergel__3 [i_0, (ErlangCons l_1 ErlangEmptyList),
+erlps__ukeymergel__3 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                       acc_2]
   =
   let tail_5 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__rukeymergel__3
        [i_0, (ErlangCons tail_5 acc_2), ErlangEmptyList])
-erlps__ukeymergel__3 [i_0, ErlangEmptyList, acc_1] =
+erlps__ukeymergel__3 [i_0, (ErlangEmptyList), acc_1] =
   (erlps__rukeymergel__3 [i_0, acc_1, ErlangEmptyList])
 erlps__ukeymergel__3 [arg_5, arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -3817,14 +3882,14 @@ erlps__rukeymergel__3 [i_0,
       (erlps__rukeymerge2_1__6
          [i_0, t1_3, arg_12, t2_2, ErlangEmptyList, h2_1])
   in (erlps__rukeymergel__3 [i_0, l_4, (ErlangCons tail_9 acc_5)])
-erlps__rukeymergel__3 [i_0, (ErlangCons l_1 ErlangEmptyList),
+erlps__rukeymergel__3 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                        acc_2]
   =
   let tail_5 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__ukeymergel__3
        [i_0, (ErlangCons tail_5 acc_2), ErlangEmptyList])
-erlps__rukeymergel__3 [i_0, ErlangEmptyList, acc_1] =
+erlps__rukeymergel__3 [i_0, (ErlangEmptyList), acc_1] =
   (erlps__ukeymergel__3 [i_0, acc_1, ErlangEmptyList])
 erlps__rukeymergel__3 [arg_5, arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -3850,21 +3915,22 @@ erlps__ukeymerge3_1__11 [i_0, (ErlangCons h1_1 t1_2), d_3, hdm_4,
         (erlps__ukeymerge3_21__13
            [i_0, e1_41, t1_2, h1_1, e2_5, h2_6, t2_7, e3_9, h3_10, t3_11,
             m_8, hdm_4, t2_7])
-erlps__ukeymerge3_1__11 [i_0, ErlangEmptyList, _d_1, hdm_2, e2_3,
-                         _h2_4, t2_5, m_6, e3_7, h3_8, t3_9]
+      something_else -> (EXC.case_clause something_else)
+erlps__ukeymerge3_1__11 [i_0, (ErlangEmptyList), _d_1, hdm_2,
+                         e2_3, _h2_4, t2_5, m_6, e3_7, h3_8, t3_9]
   | (e2_3 == hdm_2) =
   (erlps__ukeymerge2_1__7
      [i_0, t2_5, e3_7, hdm_2, t3_9, m_6, h3_8])
-erlps__ukeymerge3_1__11 [i_0, ErlangEmptyList, _d_1, _hdm_2,
+erlps__ukeymerge3_1__11 [i_0, (ErlangEmptyList), _d_1, _hdm_2,
                          e2_3, h2_4, t2_5, m_6, e3_7, h3_8, t3_9]
   | (e2_3 <= e3_7) =
   (erlps__ukeymerge2_1__7
      [i_0, t2_5, e3_7, e2_3, t3_9, (ErlangCons h2_4 m_6), h3_8])
-erlps__ukeymerge3_1__11 [i_0, ErlangEmptyList, _d_1, hdm_2, e2_3,
-                         h2_4, t2_5, m_6, e3_7, _h3_8, t3_9]
+erlps__ukeymerge3_1__11 [i_0, (ErlangEmptyList), _d_1, hdm_2,
+                         e2_3, h2_4, t2_5, m_6, e3_7, _h3_8, t3_9]
   | (e3_7 == hdm_2) =
   (erlps__ukeymerge2_2__6 [i_0, t2_5, e2_3, h2_4, t3_9, m_6])
-erlps__ukeymerge3_1__11 [i_0, ErlangEmptyList, _d_1, _hdm_2,
+erlps__ukeymerge3_1__11 [i_0, (ErlangEmptyList), _d_1, _hdm_2,
                          e2_3, h2_4, t2_5, m_6, _e3_7, h3_8, t3_9]
   =
   (erlps__ukeymerge2_2__6
@@ -3892,17 +3958,19 @@ erlps__ukeymerge3_2__11 [i_0, e1_1, t1_2, h1_3,
         (erlps__ukeymerge3_21__13
            [i_0, e1_1, t1_2, h1_3, e2_29, h2_4, t2_5, e3_9, h3_10, t3_11,
             m_8, hdm_6, d_7])
-erlps__ukeymerge3_2__11 [i_0, e1_1, t1_2, h1_3, ErlangEmptyList,
-                         _hdm_4, _d_5, m_6, e3_7, h3_8, t3_9]
+      something_else -> (EXC.case_clause something_else)
+erlps__ukeymerge3_2__11 [i_0, e1_1, t1_2, h1_3,
+                         (ErlangEmptyList), _hdm_4, _d_5, m_6, e3_7, h3_8, t3_9]
   | (e1_1 <= e3_7) =
   (erlps__ukeymerge2_1__7
      [i_0, t1_2, e3_7, e1_1, t3_9, (ErlangCons h1_3 m_6), h3_8])
-erlps__ukeymerge3_2__11 [i_0, e1_1, t1_2, h1_3, ErlangEmptyList,
-                         hdm_4, _d_5, m_6, e3_7, _h3_8, t3_9]
+erlps__ukeymerge3_2__11 [i_0, e1_1, t1_2, h1_3,
+                         (ErlangEmptyList), hdm_4, _d_5, m_6, e3_7, _h3_8, t3_9]
   | (e3_7 == hdm_4) =
   (erlps__ukeymerge2_2__6 [i_0, t1_2, e1_1, h1_3, t3_9, m_6])
-erlps__ukeymerge3_2__11 [i_0, e1_1, t1_2, h1_3, ErlangEmptyList,
-                         _hdm_4, _d_5, m_6, _e3_7, h3_8, t3_9]
+erlps__ukeymerge3_2__11 [i_0, e1_1, t1_2, h1_3,
+                         (ErlangEmptyList), _hdm_4, _d_5, m_6, _e3_7, h3_8,
+                         t3_9]
   =
   (erlps__ukeymerge2_2__6
      [i_0, t1_2, e1_1, h1_3, t3_9, (ErlangCons h3_8 m_6)])
@@ -3954,8 +4022,9 @@ erlps__ukeymerge3_12_3__9 [i_0, e1_1, t1_2, h1_3, e2_4, h2_5,
         (erlps__ukeymerge3_12_3__9
            [i_0, e1_1, t1_2, h1_3, e2_4, h2_5, t2_6, (ErlangCons h3_8 m_7),
             t3_9])
+      something_else -> (EXC.case_clause something_else)
 erlps__ukeymerge3_12_3__9 [i_0, e1_1, t1_2, h1_3, e2_4, h2_5,
-                           t2_6, m_7, ErlangEmptyList]
+                           t2_6, m_7, (ErlangEmptyList)]
   =
   (erlps__ukeymerge2_1__7
      [i_0, t1_2, e2_4, e1_1, t2_6, (ErlangCons h1_3 m_7), h2_5])
@@ -4007,8 +4076,9 @@ erlps__ukeymerge3_21_3__9 [i_0, e1_1, t1_2, h1_3, e2_4, h2_5,
         (erlps__ukeymerge3_21_3__9
            [i_0, e1_1, t1_2, h1_3, e2_4, h2_5, t2_6, (ErlangCons h3_8 m_7),
             t3_9])
+      something_else -> (EXC.case_clause something_else)
 erlps__ukeymerge3_21_3__9 [i_0, e1_1, t1_2, h1_3, _e2_4, h2_5,
-                           t2_6, m_7, ErlangEmptyList]
+                           t2_6, m_7, (ErlangEmptyList)]
   =
   (erlps__ukeymerge2_2__6
      [i_0, t1_2, e1_1, h1_3, t2_6, (ErlangCons h2_5 m_7)])
@@ -4034,12 +4104,13 @@ erlps__rukeymerge3_1__11 [i_0, (ErlangCons h1_1 t1_2), d1_3,
         (erlps__rukeymerge3_21a__13
            [i_0, e1_27, h1_1, t1_2, e2_5, h2_6, t2_7, e3_9, h3_10, t3_11,
             m_8, d1_3, d2_4])
-erlps__rukeymerge3_1__11 [i_0, ErlangEmptyList, _d1_1, _d2_2,
+      something_else -> (EXC.case_clause something_else)
+erlps__rukeymerge3_1__11 [i_0, (ErlangEmptyList), _d1_1, _d2_2,
                           e2_3, h2_4, t2_5, m_6, e3_7, h3_8, t3_9]
   | (e2_3 <= e3_7) =
   (erlps__rukeymerge2_2__8
      [i_0, t2_5, e2_3, t3_9, m_6, e3_7, h3_8, h2_4])
-erlps__rukeymerge3_1__11 [i_0, ErlangEmptyList, _d1_1, _d2_2,
+erlps__rukeymerge3_1__11 [i_0, (ErlangEmptyList), _d1_1, _d2_2,
                           _e2_3, h2_4, t2_5, m_6, e3_7, h3_8, t3_9]
   =
   (erlps__rukeymerge2_1__6
@@ -4113,19 +4184,23 @@ erlps__rukeymerge3_2__11 [i_0, e1_1, h1_2, t1_3,
         (erlps__rukeymerge3_21b__12
            [i_0, e1_1, h1_2, t1_3, e2_42, h2_4, t2_5, e3_9, h3_10, t3_11,
             m_8, h2m_6])
-erlps__rukeymerge3_2__11 [i_0, e1_1, h1_2, t1_3, ErlangEmptyList,
-                          _h2m_4, e2m_5, m_6, e3_7, h3_8, t3_9]
+      something_else -> (EXC.case_clause something_else)
+erlps__rukeymerge3_2__11 [i_0, e1_1, h1_2, t1_3,
+                          (ErlangEmptyList), _h2m_4, e2m_5, m_6, e3_7, h3_8,
+                          t3_9]
   | (e1_1 == e2m_5) =
   (erlps__rukeymerge2_1__6
      [i_0, t1_3, e3_7, t3_9, (ErlangCons h1_2 m_6), h3_8])
-erlps__rukeymerge3_2__11 [i_0, e1_1, h1_2, t1_3, ErlangEmptyList,
-                          h2m_4, _e2m_5, m_6, e3_7, h3_8, t3_9]
+erlps__rukeymerge3_2__11 [i_0, e1_1, h1_2, t1_3,
+                          (ErlangEmptyList), h2m_4, _e2m_5, m_6, e3_7, h3_8,
+                          t3_9]
   | (e1_1 <= e3_7) =
   (erlps__rukeymerge2_2__8
      [i_0, t1_3, e1_1, t3_9, (ErlangCons h2m_4 m_6), e3_7, h3_8,
       h1_2])
 erlps__rukeymerge3_2__11 [i_0, _e1_1, h1_2, t1_3,
-                          ErlangEmptyList, h2m_4, _e2m_5, m_6, e3_7, h3_8, t3_9]
+                          (ErlangEmptyList), h2m_4, _e2m_5, m_6, e3_7, h3_8,
+                          t3_9]
   =
   (erlps__rukeymerge2_1__6
      [i_0, t1_3, e3_7, t3_9, (ErlangCons h1_2 (ErlangCons h2m_4 m_6)),
@@ -4198,13 +4273,14 @@ erlps__rukeymerge3_12_3__11 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
         (erlps__rukeymerge3_2__11
            [i_0, e1_1, h1_2, t1_3, t2_6, h2_5, e2_4, (ErlangCons h3m_9 m_7),
             e3_41, h3_10, t3_11])
+      something_else -> (EXC.case_clause something_else)
 erlps__rukeymerge3_12_3__11 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
-                             t2_6, m_7, e3m_8, _h3m_9, ErlangEmptyList]
+                             t2_6, m_7, e3m_8, _h3m_9, (ErlangEmptyList)]
   | (e2_4 == e3m_8) =
   (erlps__rukeymerge2_2__8
      [i_0, t1_3, e1_1, t2_6, m_7, e2_4, h2_5, h1_2])
 erlps__rukeymerge3_12_3__11 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
-                             t2_6, m_7, _e3m_8, h3m_9, ErlangEmptyList]
+                             t2_6, m_7, _e3m_8, h3m_9, (ErlangEmptyList)]
   =
   (erlps__rukeymerge2_2__8
      [i_0, t1_3, e1_1, t2_6, (ErlangCons h3m_9 m_7), e2_4, h2_5,
@@ -4236,13 +4312,14 @@ erlps__rukeymerge3_21_3__11 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
         (erlps__rukeymerge3_1__11
            [i_0, t1_3, h1_2, t1_3, e2_4, h2_5, t2_6,
             (ErlangCons h1_2 (ErlangCons h3m_9 m_7)), e3_43, h3_10, t3_11])
+      something_else -> (EXC.case_clause something_else)
 erlps__rukeymerge3_21_3__11 [i_0, e1_1, h1_2, t1_3, e2_4, h2_5,
-                             t2_6, m_7, e3m_8, _h3m_9, ErlangEmptyList]
+                             t2_6, m_7, e3m_8, _h3m_9, (ErlangEmptyList)]
   | (e1_1 == e3m_8) =
   (erlps__rukeymerge2_1__6
      [i_0, t1_3, e2_4, t2_6, (ErlangCons h1_2 m_7), h2_5])
 erlps__rukeymerge3_21_3__11 [i_0, _e1_1, h1_2, t1_3, e2_4, h2_5,
-                             t2_6, m_7, _e3m_8, h3m_9, ErlangEmptyList]
+                             t2_6, m_7, _e3m_8, h3m_9, (ErlangEmptyList)]
   =
   (erlps__rukeymerge2_1__6
      [i_0, t1_3, e2_4, t2_6, (ErlangCons h1_2 (ErlangCons h3m_9 m_7)),
@@ -4270,11 +4347,12 @@ erlps__ukeymerge2_1__7 [i_0, (ErlangCons h1_1 t1_2), e2_3, hdm_4,
       e1_28 ->
         (erlps__ukeymerge2_2__6
            [i_0, t1_2, e1_28, h1_1, t2_5, (ErlangCons h2_7 m_6)])
-erlps__ukeymerge2_1__7 [_i_0, ErlangEmptyList, e2_1, hdm_2, t2_3,
-                        m_4, _h2_5]
+      something_else -> (EXC.case_clause something_else)
+erlps__ukeymerge2_1__7 [_i_0, (ErlangEmptyList), e2_1, hdm_2,
+                        t2_3, m_4, _h2_5]
   | (e2_1 == hdm_2) =
   (BIF.lists__reverse__2 [t2_3, m_4])
-erlps__ukeymerge2_1__7 [_i_0, ErlangEmptyList, _e2_1, _hdm_2,
+erlps__ukeymerge2_1__7 [_i_0, (ErlangEmptyList), _e2_1, _hdm_2,
                         t2_3, m_4, h2_5]
   =
   (BIF.lists__reverse__2 [t2_3, (ErlangCons h2_5 m_4)])
@@ -4298,8 +4376,9 @@ erlps__ukeymerge2_2__6 [i_0, t1_1, e1_2, h1_3,
       _e2_20 ->
         (erlps__ukeymerge2_2__6
            [i_0, t1_1, e1_2, h1_3, t2_5, (ErlangCons h2_4 m_6)])
-erlps__ukeymerge2_2__6 [_i_0, t1_1, _e1_2, h1_3, ErlangEmptyList,
-                        m_4]
+      something_else -> (EXC.case_clause something_else)
+erlps__ukeymerge2_2__6 [_i_0, t1_1, _e1_2, h1_3,
+                        (ErlangEmptyList), m_4]
   =
   (BIF.lists__reverse__2 [t1_1, (ErlangCons h1_3 m_4)])
 erlps__ukeymerge2_2__6 [arg_9, arg_10, arg_11, arg_12, arg_13,
@@ -4322,8 +4401,9 @@ erlps__rukeymerge2_1__6 [i_0, (ErlangCons h1_1 t1_2), e2_3, t2_4,
       _e1_19 ->
         (erlps__rukeymerge2_1__6
            [i_0, t1_2, e2_3, t2_4, (ErlangCons h1_1 m_5), h2_6])
-erlps__rukeymerge2_1__6 [_i_0, ErlangEmptyList, _e2_1, t2_2, m_3,
-                         h2_4]
+      something_else -> (EXC.case_clause something_else)
+erlps__rukeymerge2_1__6 [_i_0, (ErlangEmptyList), _e2_1, t2_2,
+                         m_3, h2_4]
   =
   (BIF.lists__reverse__2 [t2_2, (ErlangCons h2_4 m_3)])
 erlps__rukeymerge2_1__6 [arg_9, arg_10, arg_11, arg_12, arg_13,
@@ -4351,12 +4431,13 @@ erlps__rukeymerge2_2__8 [i_0, t1_1, e1_2, (ErlangCons h2_3 t2_4),
         (erlps__rukeymerge2_1__6
            [i_0, t1_1, e2_32, t2_4,
             (ErlangCons h1_8 (ErlangCons h2m_7 m_5)), h2_3])
-erlps__rukeymerge2_2__8 [_i_0, t1_1, e1_2, ErlangEmptyList, m_3,
-                         e2m_4, _h2m_5, h1_6]
+      something_else -> (EXC.case_clause something_else)
+erlps__rukeymerge2_2__8 [_i_0, t1_1, e1_2, (ErlangEmptyList),
+                         m_3, e2m_4, _h2m_5, h1_6]
   | (e1_2 == e2m_4) =
   (BIF.lists__reverse__2 [t1_1, (ErlangCons h1_6 m_3)])
-erlps__rukeymerge2_2__8 [_i_0, t1_1, _e1_2, ErlangEmptyList, m_3,
-                         _e2m_4, h2m_5, h1_6]
+erlps__rukeymerge2_2__8 [_i_0, t1_1, _e1_2, (ErlangEmptyList),
+                         m_3, _e2m_4, h2m_5, h1_6]
   =
   (BIF.lists__reverse__2
      [t1_1, (ErlangCons h1_6 (ErlangCons h2m_5 m_3))])
@@ -4397,7 +4478,8 @@ erlps__fsplit_1__6 [y_0, x_1, fun_2, (ErlangCons z_3 l_4), r_5,
               (erlps__fsplit_1_1__7 [y_0, x_1, fun_2, l_4, r_5, rs_6, z_3])
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__fsplit_1__6 [y_0, x_1, fun_2, ErlangEmptyList, r_3, rs_4]
+erlps__fsplit_1__6 [y_0, x_1, fun_2, (ErlangEmptyList), r_3,
+                    rs_4]
   =
   (erlps__rfmergel__4
      [(ErlangCons (ErlangCons y_0 (ErlangCons x_1 r_3)) rs_4),
@@ -4452,7 +4534,7 @@ erlps__fsplit_1_1__7 [y_0, x_1, fun_2, (ErlangCons z_3 l_4), r_5,
                   something_else -> (EXC.case_clause something_else)
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__fsplit_1_1__7 [y_0, x_1, fun_2, ErlangEmptyList, r_3,
+erlps__fsplit_1_1__7 [y_0, x_1, fun_2, (ErlangEmptyList), r_3,
                       rs_4, s_5]
   =
   (erlps__rfmergel__4
@@ -4496,7 +4578,8 @@ erlps__fsplit_2__6 [y_0, x_1, fun_2, (ErlangCons z_3 l_4), r_5,
               (erlps__fsplit_2_1__7 [y_0, x_1, fun_2, l_4, r_5, rs_6, z_3])
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__fsplit_2__6 [y_0, x_1, fun_2, ErlangEmptyList, r_3, rs_4]
+erlps__fsplit_2__6 [y_0, x_1, fun_2, (ErlangEmptyList), r_3,
+                    rs_4]
   =
   (erlps__fmergel__4
      [(ErlangCons (ErlangCons y_0 (ErlangCons x_1 r_3)) rs_4),
@@ -4551,7 +4634,7 @@ erlps__fsplit_2_1__7 [y_0, x_1, fun_2, (ErlangCons z_3 l_4), r_5,
                   something_else -> (EXC.case_clause something_else)
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__fsplit_2_1__7 [y_0, x_1, fun_2, ErlangEmptyList, r_3,
+erlps__fsplit_2_1__7 [y_0, x_1, fun_2, (ErlangEmptyList), r_3,
                       rs_4, s_5]
   =
   (erlps__fmergel__4
@@ -4584,18 +4667,18 @@ erlps__fmergel__4 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 l_3)),
   in
     (erlps__fmergel__4
        [l_3, (ErlangCons tail_8 acc_4), fun_5, (ErlangAtom "desc")])
-erlps__fmergel__4 [(ErlangCons l_0 ErlangEmptyList),
-                   ErlangEmptyList, _fun_1, _o_2]
+erlps__fmergel__4 [(ErlangCons l_0 (ErlangEmptyList)),
+                   (ErlangEmptyList), _fun_1, _o_2]
   =
   l_0
-erlps__fmergel__4 [(ErlangCons l_0 ErlangEmptyList), acc_1,
+erlps__fmergel__4 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                    fun_2, o_3]
   =
   let tail_5 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__rfmergel__4
        [(ErlangCons tail_5 acc_1), ErlangEmptyList, fun_2, o_3])
-erlps__fmergel__4 [ErlangEmptyList, acc_0, fun_1, o_2] =
+erlps__fmergel__4 [(ErlangEmptyList), acc_0, fun_1, o_2] =
   (erlps__rfmergel__4 [acc_0, ErlangEmptyList, fun_1, o_2])
 erlps__fmergel__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -4621,14 +4704,14 @@ erlps__rfmergel__4 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) l_3)),
   in
     (erlps__rfmergel__4
        [l_3, (ErlangCons tail_8 acc_4), fun_5, (ErlangAtom "desc")])
-erlps__rfmergel__4 [(ErlangCons l_0 ErlangEmptyList), acc_1,
+erlps__rfmergel__4 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                     fun_2, o_3]
   =
   let tail_5 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__fmergel__4
        [(ErlangCons tail_5 acc_1), ErlangEmptyList, fun_2, o_3])
-erlps__rfmergel__4 [ErlangEmptyList, acc_0, fun_1, o_2] =
+erlps__rfmergel__4 [(ErlangEmptyList), acc_0, fun_1, o_2] =
   (erlps__fmergel__4 [acc_0, ErlangEmptyList, fun_1, o_2])
 erlps__rfmergel__4 [arg_7, arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
@@ -4652,7 +4735,8 @@ erlps__fmerge2_1__5 [(ErlangCons h1_0 t1_1), h2_2, fun_3, t2_4,
         (erlps__fmerge2_2__5
            [h1_0, t1_1, fun_3, t2_4, (ErlangCons h2_2 m_5)])
       something_else -> (EXC.case_clause something_else)
-erlps__fmerge2_1__5 [ErlangEmptyList, h2_0, _fun_1, t2_2, m_3] =
+erlps__fmerge2_1__5 [(ErlangEmptyList), h2_0, _fun_1, t2_2, m_3]
+  =
   (BIF.lists__reverse__2 [t2_2, (ErlangCons h2_0 m_3)])
 erlps__fmerge2_1__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
@@ -4676,7 +4760,8 @@ erlps__fmerge2_2__5 [h1_0, t1_1, fun_2, (ErlangCons h2_3 t2_4),
         (erlps__fmerge2_2__5
            [h1_0, t1_1, fun_2, t2_4, (ErlangCons h2_3 m_5)])
       something_else -> (EXC.case_clause something_else)
-erlps__fmerge2_2__5 [h1_0, t1_1, _fun_2, ErlangEmptyList, m_3] =
+erlps__fmerge2_2__5 [h1_0, t1_1, _fun_2, (ErlangEmptyList), m_3]
+  =
   (BIF.lists__reverse__2 [t1_1, (ErlangCons h1_0 m_3)])
 erlps__fmerge2_2__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
@@ -4700,7 +4785,8 @@ erlps__rfmerge2_1__5 [(ErlangCons h1_0 t1_1), h2_2, fun_3, t2_4,
         (erlps__rfmerge2_1__5
            [t1_1, h2_2, fun_3, t2_4, (ErlangCons h1_0 m_5)])
       something_else -> (EXC.case_clause something_else)
-erlps__rfmerge2_1__5 [ErlangEmptyList, h2_0, _fun_1, t2_2, m_3] =
+erlps__rfmerge2_1__5 [(ErlangEmptyList), h2_0, _fun_1, t2_2, m_3]
+  =
   (BIF.lists__reverse__2 [t2_2, (ErlangCons h2_0 m_3)])
 erlps__rfmerge2_1__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
@@ -4724,7 +4810,8 @@ erlps__rfmerge2_2__5 [h1_0, t1_1, fun_2, (ErlangCons h2_3 t2_4),
         (erlps__rfmerge2_1__5
            [t1_1, h2_3, fun_2, t2_4, (ErlangCons h1_0 m_5)])
       something_else -> (EXC.case_clause something_else)
-erlps__rfmerge2_2__5 [h1_0, t1_1, _fun_2, ErlangEmptyList, m_3] =
+erlps__rfmerge2_2__5 [h1_0, t1_1, _fun_2, (ErlangEmptyList), m_3]
+  =
   (BIF.lists__reverse__2 [t1_1, (ErlangCons h1_0 m_3)])
 erlps__rfmerge2_2__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
@@ -4781,7 +4868,8 @@ erlps__ufsplit_1__6 [y_0, x_1, fun_2, (ErlangCons z_3 l_4), r_5,
               (erlps__ufsplit_1_1__7 [y_0, x_1, fun_2, l_4, r_5, rs_6, z_3])
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__ufsplit_1__6 [y_0, x_1, fun_2, ErlangEmptyList, r_3, rs_4]
+erlps__ufsplit_1__6 [y_0, x_1, fun_2, (ErlangEmptyList), r_3,
+                     rs_4]
   =
   (erlps__rufmergel__3
      [(ErlangCons (ErlangCons y_0 (ErlangCons x_1 r_3)) rs_4),
@@ -4869,7 +4957,7 @@ erlps__ufsplit_1_1__7 [y_0, x_1, fun_2, (ErlangCons z_3 l_4),
                   something_else -> (EXC.case_clause something_else)
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__ufsplit_1_1__7 [y_0, x_1, fun_2, ErlangEmptyList, r_3,
+erlps__ufsplit_1_1__7 [y_0, x_1, fun_2, (ErlangEmptyList), r_3,
                        rs_4, s_5]
   =
   (erlps__rufmergel__3
@@ -4909,7 +4997,7 @@ erlps__ufsplit_2__4 [y_0, (ErlangCons z_1 l_2), fun_3, r_4] =
       (ErlangAtom "false") ->
         (erlps__ufsplit_2__4 [z_1, l_2, fun_3, (ErlangCons y_0 r_4)])
       something_else -> (EXC.case_clause something_else)
-erlps__ufsplit_2__4 [y_0, ErlangEmptyList, _fun_1, r_2] =
+erlps__ufsplit_2__4 [y_0, (ErlangEmptyList), _fun_1, r_2] =
   (ErlangCons y_0 r_2)
 erlps__ufsplit_2__4 [arg_5, arg_6, arg_7, arg_8] =
   (EXC.function_clause unit)
@@ -4924,18 +5012,18 @@ erlps__ufmergel__3 [(ErlangCons (ErlangCons h1_0 t1_1) (ErlangCons t2_2 l_3)),
     tail_8 =
       (erlps__ufmerge2_2__5 [h1_0, t1_1, fun_5, t2_2, ErlangEmptyList])
   in (erlps__ufmergel__3 [l_3, (ErlangCons tail_8 acc_4), fun_5])
-erlps__ufmergel__3 [(ErlangCons l_0 ErlangEmptyList),
-                    ErlangEmptyList, _fun_1]
+erlps__ufmergel__3 [(ErlangCons l_0 (ErlangEmptyList)),
+                    (ErlangEmptyList), _fun_1]
   =
   l_0
-erlps__ufmergel__3 [(ErlangCons l_0 ErlangEmptyList), acc_1,
+erlps__ufmergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                     fun_2]
   =
   let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__rufmergel__3
        [(ErlangCons tail_4 acc_1), ErlangEmptyList, fun_2])
-erlps__ufmergel__3 [ErlangEmptyList, acc_0, fun_1] =
+erlps__ufmergel__3 [(ErlangEmptyList), acc_0, fun_1] =
   (erlps__rufmergel__3 [acc_0, ErlangEmptyList, fun_1])
 erlps__ufmergel__3 [arg_5, arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -4951,14 +5039,14 @@ erlps__rufmergel__3 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 l_3)),
       (erlps__rufmerge2_1__5
          [t1_2, h2_0, fun_5, t2_1, ErlangEmptyList])
   in (erlps__rufmergel__3 [l_3, (ErlangCons tail_8 acc_4), fun_5])
-erlps__rufmergel__3 [(ErlangCons l_0 ErlangEmptyList), acc_1,
+erlps__rufmergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                      fun_2]
   =
   let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__ufmergel__3
        [(ErlangCons tail_4 acc_1), ErlangEmptyList, fun_2])
-erlps__rufmergel__3 [ErlangEmptyList, acc_0, fun_1] =
+erlps__rufmergel__3 [(ErlangEmptyList), acc_0, fun_1] =
   (erlps__ufmergel__3 [acc_0, ErlangEmptyList, fun_1])
 erlps__rufmergel__3 [arg_5, arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -4992,7 +5080,7 @@ erlps__ufmerge2_1__6 [(ErlangCons h1_0 t1_1), h2_2, fun_3, t2_4,
                  [h1_0, t1_1, fun_3, t2_4, (ErlangCons h2_2 m_5)])
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__ufmerge2_1__6 [ErlangEmptyList, h2_0, fun_1, t2_2, m_3,
+erlps__ufmerge2_1__6 [(ErlangEmptyList), h2_0, fun_1, t2_2, m_3,
                       hdm_4]
   =
   let
@@ -5029,7 +5117,8 @@ erlps__ufmerge2_2__5 [h1_0, t1_1, fun_2, (ErlangCons h2_3 t2_4),
         (erlps__ufmerge2_2__5
            [h1_0, t1_1, fun_2, t2_4, (ErlangCons h2_3 m_5)])
       something_else -> (EXC.case_clause something_else)
-erlps__ufmerge2_2__5 [h1_0, t1_1, _fun_2, ErlangEmptyList, m_3] =
+erlps__ufmerge2_2__5 [h1_0, t1_1, _fun_2, (ErlangEmptyList), m_3]
+  =
   (BIF.lists__reverse__2 [t1_1, (ErlangCons h1_0 m_3)])
 erlps__ufmerge2_2__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
@@ -5052,7 +5141,8 @@ erlps__rufmerge2_1__5 [(ErlangCons h1_0 t1_1), h2_2, fun_3, t2_4,
         (erlps__rufmerge2_1__5
            [t1_1, h2_2, fun_3, t2_4, (ErlangCons h1_0 m_5)])
       something_else -> (EXC.case_clause something_else)
-erlps__rufmerge2_1__5 [ErlangEmptyList, h2_0, _fun_1, t2_2, m_3]
+erlps__rufmerge2_1__5 [(ErlangEmptyList), h2_0, _fun_1, t2_2,
+                       m_3]
   =
   (BIF.lists__reverse__2 [t2_2, (ErlangCons h2_0 m_3)])
 erlps__rufmerge2_1__5 [arg_8, arg_9, arg_10, arg_11, arg_12] =
@@ -5089,7 +5179,7 @@ erlps__rufmerge2_2__6 [h1_0, t1_1, fun_2, (ErlangCons h2_3 t2_4),
                   (ErlangCons h1_0 (ErlangCons h2m_6 m_5))])
             something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
-erlps__rufmerge2_2__6 [h1_0, t1_1, fun_2, ErlangEmptyList, m_3,
+erlps__rufmerge2_2__6 [h1_0, t1_1, fun_2, (ErlangEmptyList), m_3,
                        h2m_4]
   =
   let

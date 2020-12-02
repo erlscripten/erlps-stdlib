@@ -198,6 +198,7 @@ erlps__insert_1__4 [key_0, value_1,
                   _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_25)
       t1_44 -> (ErlangTuple [key1_2, v_3, t1_44, bigger_5])
+      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__4 [key_0, value_1,
                     (ErlangTuple [key1_2, v_3, smaller_4, bigger_5]), s_6]
   | (key_0 > key1_2) =
@@ -229,6 +230,7 @@ erlps__insert_1__4 [key_0, value_1,
                   _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_25)
       t1_44 -> (ErlangTuple [key1_2, v_3, smaller_4, t1_44])
+      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__4 [key_0, value_1, (ErlangAtom "nil"), s_2]
   | (s_2 == (ErlangInt (DBI.fromInt 0))) =
   let
@@ -315,7 +317,7 @@ erlps__balance_list__2 [l_0, s_1] =
   let match_expr_5 = (erlps__balance_list_1__2 [l_0, s_1])
   in
     case match_expr_5 of
-      (ErlangTuple [t_4, ErlangEmptyList]) -> t_4
+      (ErlangTuple [t_4, (ErlangEmptyList)]) -> t_4
       _ -> (EXC.badmatch match_expr_5)
 erlps__balance_list__2 [arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -731,7 +733,7 @@ erlps__next__1 [(ErlangCons (ErlangTuple [x_0, v_1, _,
   =
   let tup_el_6 = (erlps__iterator__2 [t_2, as_3])
   in (ErlangTuple [x_0, v_1, tup_el_6])
-erlps__next__1 [ErlangEmptyList] = (ErlangAtom "none")
+erlps__next__1 [(ErlangEmptyList)] = (ErlangAtom "none")
 erlps__next__1 [arg_0] = (EXC.function_clause unit)
 erlps__next__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)

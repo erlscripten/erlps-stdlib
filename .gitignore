@@ -9,3 +9,4 @@ generated-docs
 .psci_modules/
 test/Array.SUITE.purs
 test/Maps.SUITE.purs
+test/*.SUITE.purs

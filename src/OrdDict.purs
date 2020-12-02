@@ -48,7 +48,7 @@ erlps__is_key__2 [_key_0,
                   (ErlangCons (ErlangTuple [_k_1, _val_2]) _)]
   =
   (ErlangAtom "true")
-erlps__is_key__2 [_, ErlangEmptyList] = (ErlangAtom "false")
+erlps__is_key__2 [_, (ErlangEmptyList)] = (ErlangAtom "false")
 erlps__is_key__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_key__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -60,9 +60,9 @@ erlps__to_list__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__from_list__1 :: ErlangFun
-erlps__from_list__1 [ErlangEmptyList] = ErlangEmptyList
+erlps__from_list__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__from_list__1 [pair_0@(ErlangCons (ErlangTuple [_,
-                                                      _]) ErlangEmptyList)]
+                                                      _]) (ErlangEmptyList))]
   =
   pair_0
 erlps__from_list__1 [pairs_0] =
@@ -80,7 +80,7 @@ erlps__size__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__is_empty__1 :: ErlangFun
-erlps__is_empty__1 [ErlangEmptyList] = (ErlangAtom "true")
+erlps__is_empty__1 [(ErlangEmptyList)] = (ErlangAtom "true")
 erlps__is_empty__1 [(ErlangCons _ _)] = (ErlangAtom "false")
 erlps__is_empty__1 [arg_0] = (EXC.function_clause unit)
 erlps__is_empty__1 args =
@@ -109,7 +109,7 @@ erlps__find__2 [_key_0,
                 (ErlangCons (ErlangTuple [_k_1, value_2]) _)]
   =
   (ErlangTuple [(ErlangAtom "ok"), value_2])
-erlps__find__2 [_, ErlangEmptyList] = (ErlangAtom "error")
+erlps__find__2 [_, (ErlangEmptyList)] = (ErlangAtom "error")
 erlps__find__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__find__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -120,7 +120,7 @@ erlps__fetch_keys__1 [(ErlangCons (ErlangTuple [key_0,
   =
   let head_3 = (erlps__fetch_keys__1 [dict_1])
   in (ErlangCons key_0 head_3)
-erlps__fetch_keys__1 [ErlangEmptyList] = ErlangEmptyList
+erlps__fetch_keys__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__fetch_keys__1 [arg_0] = (EXC.function_clause unit)
 erlps__fetch_keys__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -139,7 +139,7 @@ erlps__erase__2 [_key_0,
                  (ErlangCons (ErlangTuple [_k_1, _val_2]) dict_3)]
   =
   dict_3
-erlps__erase__2 [_, ErlangEmptyList] = ErlangEmptyList
+erlps__erase__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__erase__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__erase__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -165,7 +165,7 @@ erlps__take_1__3 [_key_0,
   =
   let tup_el_6 = (BIF.lists__reverse__2 [acc_4, d_3])
   in (ErlangTuple [value_2, tup_el_6])
-erlps__take_1__3 [_, ErlangEmptyList, _] = (ErlangAtom "error")
+erlps__take_1__3 [_, (ErlangEmptyList), _] = (ErlangAtom "error")
 erlps__take_1__3 [arg_0, arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__take_1__3 args =
@@ -187,7 +187,7 @@ erlps__store__3 [key_0, new_1,
   =
   let tail_5 = (ErlangTuple [key_0, new_1])
   in (ErlangCons tail_5 dict_4)
-erlps__store__3 [key_0, new_1, ErlangEmptyList] =
+erlps__store__3 [key_0, new_1, (ErlangEmptyList)] =
   let tail_2 = (ErlangTuple [key_0, new_1])
   in (ErlangCons tail_2 ErlangEmptyList)
 erlps__store__3 [arg_6, arg_7, arg_8] =
@@ -217,7 +217,7 @@ erlps__append__3 [key_0, new_1,
          [old_3, (ErlangCons new_1 ErlangEmptyList)])
   in let tail_5 = (ErlangTuple [key_0, tup_el_7])
   in (ErlangCons tail_5 dict_4)
-erlps__append__3 [key_0, new_1, ErlangEmptyList] =
+erlps__append__3 [key_0, new_1, (ErlangEmptyList)] =
   let
     tail_2 =
       (ErlangTuple [key_0, (ErlangCons new_1 ErlangEmptyList)])
@@ -244,7 +244,7 @@ erlps__append_list__3 [key_0, newlist_1,
   let    tup_el_7 = (BIF.erlang__op_append [old_3, newlist_1])
   in let tail_5 = (ErlangTuple [key_0, tup_el_7])
   in (ErlangCons tail_5 dict_4)
-erlps__append_list__3 [key_0, newlist_1, ErlangEmptyList] =
+erlps__append_list__3 [key_0, newlist_1, (ErlangEmptyList)] =
   let tail_2 = (ErlangTuple [key_0, newlist_1])
   in (ErlangCons tail_2 ErlangEmptyList)
 erlps__append_list__3 [arg_6, arg_7, arg_8] =
@@ -292,7 +292,7 @@ erlps__update__4 [key_0, fun_1, _init_2,
          [fun_1, (ErlangCons val_4 ErlangEmptyList)])
   in let tail_6 = (ErlangTuple [key_0, tup_el_8])
   in (ErlangCons tail_6 dict_5)
-erlps__update__4 [key_0, _, init_1, ErlangEmptyList] =
+erlps__update__4 [key_0, _, init_1, (ErlangEmptyList)] =
   let tail_2 = (ErlangTuple [key_0, init_1])
   in (ErlangCons tail_2 ErlangEmptyList)
 erlps__update__4 [arg_6, arg_7, arg_8, arg_9] =
@@ -317,7 +317,7 @@ erlps__update_counter__3 [key_0, incr_1,
   let    tup_el_7 = (BIF.erlang__op_plus [val_3, incr_1])
   in let tail_5 = (ErlangTuple [key_0, tup_el_7])
   in (ErlangCons tail_5 dict_4)
-erlps__update_counter__3 [key_0, incr_1, ErlangEmptyList] =
+erlps__update_counter__3 [key_0, incr_1, (ErlangEmptyList)] =
   let tail_2 = (ErlangTuple [key_0, incr_1])
   in (ErlangCons tail_2 ErlangEmptyList)
 erlps__update_counter__3 [arg_6, arg_7, arg_8] =
@@ -336,7 +336,7 @@ erlps__fold__3 [f_0, acc_1,
           (ErlangCons key_2
              (ErlangCons val_3 (ErlangCons acc_1 ErlangEmptyList)))])
   in (erlps__fold__3 [f_0, arg_6, d_4])
-erlps__fold__3 [f_0, acc_1, ErlangEmptyList]
+erlps__fold__3 [f_0, acc_1, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
 erlps__fold__3 [arg_2, arg_3, arg_4] = (EXC.function_clause unit)
@@ -354,7 +354,7 @@ erlps__map__2 [f_0,
   in let tail_4 = (ErlangTuple [key_1, tup_el_6])
   in let head_10 = (erlps__map__2 [f_0, d_3])
   in (ErlangCons tail_4 head_10)
-erlps__map__2 [f_0, ErlangEmptyList]
+erlps__map__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__map__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -376,7 +376,7 @@ erlps__filter__2 [f_0,
         in (ErlangCons e_3 head_10)
       (ErlangAtom "false") -> (erlps__filter__2 [f_0, d_4])
       something_else -> (EXC.case_clause something_else)
-erlps__filter__2 [f_0, ErlangEmptyList]
+erlps__filter__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__filter__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -411,10 +411,10 @@ erlps__merge__3 [f_0,
   in let tail_7 = (ErlangTuple [k1_1, tup_el_9])
   in let head_14 = (erlps__merge__3 [f_0, d1_3, d2_6])
   in (ErlangCons tail_7 head_14)
-erlps__merge__3 [f_0, ErlangEmptyList, d2_1]
+erlps__merge__3 [f_0, (ErlangEmptyList), d2_1]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   d2_1
-erlps__merge__3 [f_0, d1_1, ErlangEmptyList]
+erlps__merge__3 [f_0, d1_1, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   d1_1
 erlps__merge__3 [arg_2, arg_3, arg_4] =
@@ -428,7 +428,7 @@ erlps__reverse_pairs__2 [(ErlangCons h_0@(ErlangTuple [_,
                          acc_2]
   =
   (erlps__reverse_pairs__2 [t_1, (ErlangCons h_0 acc_2)])
-erlps__reverse_pairs__2 [ErlangEmptyList, acc_0] = acc_0
+erlps__reverse_pairs__2 [(ErlangEmptyList), acc_0] = acc_0
 erlps__reverse_pairs__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__reverse_pairs__2 args =

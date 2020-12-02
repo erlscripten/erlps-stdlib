@@ -144,6 +144,7 @@ erlps__insert_1__3 [key_0,
                   _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_21)
       t1_40 -> (ErlangTuple [key1_1, t1_40, bigger_3])
+      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__3 [key_0,
                     (ErlangTuple [key1_1, smaller_2, bigger_3]), s_4]
   | (key_0 > key1_1) =
@@ -174,6 +175,7 @@ erlps__insert_1__3 [key_0,
                   _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_21)
       t1_40 -> (ErlangTuple [key1_1, smaller_2, t1_40])
+      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__3 [key_0, (ErlangAtom "nil"), (ErlangInt num_1)]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0))) =
   let
@@ -566,7 +568,7 @@ erlps__next__1 :: ErlangFun
 erlps__next__1 [(ErlangCons (ErlangTuple [x_0, _, t_1]) as_2)] =
   let tup_el_4 = (erlps__iterator__2 [t_1, as_2])
   in (ErlangTuple [x_0, tup_el_4])
-erlps__next__1 [ErlangEmptyList] = (ErlangAtom "none")
+erlps__next__1 [(ErlangEmptyList)] = (ErlangAtom "none")
 erlps__next__1 [arg_0] = (EXC.function_clause unit)
 erlps__next__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -623,7 +625,7 @@ erlps__union_1__2 :: ErlangFun
 erlps__union_1__2 [(ErlangCons x_0 xs_1), s_2] =
   let arg_4 = (erlps__add__2 [x_0, s_2])
   in (erlps__union_1__2 [xs_1, arg_4])
-erlps__union_1__2 [ErlangEmptyList, s_0] = s_0
+erlps__union_1__2 [(ErlangEmptyList), s_0] = s_0
 erlps__union_1__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__union_1__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -653,11 +655,11 @@ erlps__union_2__4 [(ErlangCons x_0 xs1_1), (ErlangCons _ ys1_2),
       (BIF.erlang__op_minus [s_4, (ErlangInt (DBI.fromInt 1))])
   in
     (erlps__union_2__4 [xs1_1, ys1_2, (ErlangCons x_0 as_3), arg_10])
-erlps__union_2__4 [ErlangEmptyList, ys_0, as_1, s_2] =
+erlps__union_2__4 [(ErlangEmptyList), ys_0, as_1, s_2] =
   let    arg_5 = (erlps__push__2 [ys_0, as_1])
   in let tup_el_4 = (erlps__balance_revlist__2 [arg_5, s_2])
   in (ErlangTuple [s_2, tup_el_4])
-erlps__union_2__4 [xs_0, ErlangEmptyList, as_1, s_2] =
+erlps__union_2__4 [xs_0, (ErlangEmptyList), as_1, s_2] =
   let    arg_5 = (erlps__push__2 [xs_0, as_1])
   in let tup_el_4 = (erlps__balance_revlist__2 [arg_5, s_2])
   in (ErlangTuple [s_2, tup_el_4])
@@ -669,7 +671,7 @@ erlps__union_2__4 args =
 erlps__push__2 :: ErlangFun
 erlps__push__2 [(ErlangCons x_0 xs_1), as_2] =
   (erlps__push__2 [xs_1, (ErlangCons x_0 as_2)])
-erlps__push__2 [ErlangEmptyList, as_0] = as_0
+erlps__push__2 [(ErlangEmptyList), as_0] = as_0
 erlps__push__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__push__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -724,7 +726,7 @@ erlps__balance_revlist_1__2 args =
 erlps__union__1 :: ErlangFun
 erlps__union__1 [(ErlangCons s_0 ss_1)] =
   (erlps__union_list__2 [s_0, ss_1])
-erlps__union__1 [ErlangEmptyList] = (erlps__empty__0 [])
+erlps__union__1 [(ErlangEmptyList)] = (erlps__empty__0 [])
 erlps__union__1 [arg_0] = (EXC.function_clause unit)
 erlps__union__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -733,7 +735,7 @@ erlps__union_list__2 :: ErlangFun
 erlps__union_list__2 [s_0, (ErlangCons s1_1 ss_2)] =
   let arg_3 = (erlps__union__2 [s_0, s1_1])
   in (erlps__union_list__2 [arg_3, ss_2])
-erlps__union_list__2 [s_0, ErlangEmptyList] = s_0
+erlps__union_list__2 [s_0, (ErlangEmptyList)] = s_0
 erlps__union_list__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__union_list__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -801,7 +803,7 @@ erlps__intersection_1__4 [(ErlangCons x_0 xs_1), t_2, as_3, n_4]
       (ErlangAtom "false") ->
         (erlps__intersection_1__4 [xs_1, t_2, as_3, n_4])
       something_else -> (EXC.case_clause something_else)
-erlps__intersection_1__4 [ErlangEmptyList, _, as_0, n_1] =
+erlps__intersection_1__4 [(ErlangEmptyList), _, as_0, n_1] =
   let tup_el_3 = (erlps__balance_revlist__2 [as_0, n_1])
   in (ErlangTuple [n_1, tup_el_3])
 erlps__intersection_1__4 [arg_6, arg_7, arg_8, arg_9] =
@@ -835,10 +837,10 @@ erlps__intersection_2__4 [(ErlangCons x_0 xs1_1),
   in
     (erlps__intersection_2__4
        [xs1_1, ys1_2, (ErlangCons x_0 as_3), arg_10])
-erlps__intersection_2__4 [ErlangEmptyList, _, as_0, s_1] =
+erlps__intersection_2__4 [(ErlangEmptyList), _, as_0, s_1] =
   let tup_el_3 = (erlps__balance_revlist__2 [as_0, s_1])
   in (ErlangTuple [s_1, tup_el_3])
-erlps__intersection_2__4 [_, ErlangEmptyList, as_0, s_1] =
+erlps__intersection_2__4 [_, (ErlangEmptyList), as_0, s_1] =
   let tup_el_3 = (erlps__balance_revlist__2 [as_0, s_1])
   in (ErlangTuple [s_1, tup_el_3])
 erlps__intersection_2__4 [arg_6, arg_7, arg_8, arg_9] =
@@ -857,7 +859,7 @@ erlps__intersection_list__2 :: ErlangFun
 erlps__intersection_list__2 [s_0, (ErlangCons s1_1 ss_2)] =
   let arg_3 = (erlps__intersection__2 [s_0, s1_1])
   in (erlps__intersection_list__2 [arg_3, ss_2])
-erlps__intersection_list__2 [s_0, ErlangEmptyList] = s_0
+erlps__intersection_list__2 [s_0, (ErlangEmptyList)] = s_0
 erlps__intersection_list__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__intersection_list__2 args =
@@ -883,21 +885,34 @@ erlps__is_disjoint_1__2 [(ErlangTuple [k1_0, smaller1_1,
   | (k1_0 < k2_3) =
   let    op_arg_7 = (erlps__is_member_1__2 [k1_0, smaller2_4])
   in let lop_6 = (BIF.erlang__not__1 [op_arg_7])
-  in let
-    lop_11 = (erlps__is_disjoint_1__2 [smaller1_1, smaller2_4])
-  in let rop_14 = (erlps__is_disjoint_1__2 [bigger_2, tree_5])
-  in let rop_10 = (BIF.erlang__op_andalso [lop_11, rop_14])
-  in (BIF.erlang__op_andalso [lop_6, rop_10])
+  in
+    case lop_6 of
+      (ErlangAtom "false") -> (ErlangAtom "false")
+      (ErlangAtom "true") ->
+        let lop_10 = (erlps__is_disjoint_1__2 [smaller1_1, smaller2_4])
+        in
+          case lop_10 of
+            (ErlangAtom "false") -> (ErlangAtom "false")
+            (ErlangAtom "true") -> (erlps__is_disjoint_1__2 [bigger_2, tree_5])
+            _ -> (EXC.badarg1 lop_10)
+      _ -> (EXC.badarg1 lop_6)
 erlps__is_disjoint_1__2 [(ErlangTuple [k1_0, smaller_1,
                                        bigger1_2]),
                          tree_5@(ErlangTuple [k2_3, _, bigger2_4])]
   | (k1_0 > k2_3) =
   let    op_arg_7 = (erlps__is_member_1__2 [k1_0, bigger2_4])
   in let lop_6 = (BIF.erlang__not__1 [op_arg_7])
-  in let lop_11 = (erlps__is_disjoint_1__2 [bigger1_2, bigger2_4])
-  in let rop_14 = (erlps__is_disjoint_1__2 [smaller_1, tree_5])
-  in let rop_10 = (BIF.erlang__op_andalso [lop_11, rop_14])
-  in (BIF.erlang__op_andalso [lop_6, rop_10])
+  in
+    case lop_6 of
+      (ErlangAtom "false") -> (ErlangAtom "false")
+      (ErlangAtom "true") ->
+        let lop_10 = (erlps__is_disjoint_1__2 [bigger1_2, bigger2_4])
+        in
+          case lop_10 of
+            (ErlangAtom "false") -> (ErlangAtom "false")
+            (ErlangAtom "true") -> (erlps__is_disjoint_1__2 [smaller_1, tree_5])
+            _ -> (EXC.badarg1 lop_10)
+      _ -> (EXC.badarg1 lop_6)
 erlps__is_disjoint_1__2 [(ErlangTuple [_k1_0, _, _]),
                          (ErlangTuple [_k2_1, _, _])]
   =
@@ -971,7 +986,7 @@ erlps__difference_1__4 [(ErlangCons x_0 xs_1), t_2, as_3, n_4] =
           (erlps__difference_1__4
              [xs_1, t_2, (ErlangCons x_0 as_3), arg_17])
       something_else -> (EXC.case_clause something_else)
-erlps__difference_1__4 [ErlangEmptyList, _, as_0, n_1] =
+erlps__difference_1__4 [(ErlangEmptyList), _, as_0, n_1] =
   let tup_el_3 = (erlps__balance_revlist__2 [as_0, n_1])
   in (ErlangTuple [n_1, tup_el_3])
 erlps__difference_1__4 [arg_6, arg_7, arg_8, arg_9] =
@@ -1003,10 +1018,10 @@ erlps__difference_2__4 [(ErlangCons _x_0 xs1_1),
   let
     arg_9 = (BIF.erlang__op_minus [s_5, (ErlangInt (DBI.fromInt 1))])
   in (erlps__difference_2__4 [xs1_1, ys1_3, as_4, arg_9])
-erlps__difference_2__4 [ErlangEmptyList, _ys_0, as_1, s_2] =
+erlps__difference_2__4 [(ErlangEmptyList), _ys_0, as_1, s_2] =
   let tup_el_4 = (erlps__balance_revlist__2 [as_1, s_2])
   in (ErlangTuple [s_2, tup_el_4])
-erlps__difference_2__4 [xs_0, ErlangEmptyList, as_1, s_2] =
+erlps__difference_2__4 [xs_0, (ErlangEmptyList), as_1, s_2] =
   let    arg_5 = (erlps__push__2 [xs_0, as_1])
   in let tup_el_4 = (erlps__balance_revlist__2 [arg_5, s_2])
   in (ErlangTuple [s_2, tup_el_4])
@@ -1056,7 +1071,7 @@ erlps__is_subset_1__2 [(ErlangCons x_0 xs_1), t_2] =
       (ErlangAtom "true") -> (erlps__is_subset_1__2 [xs_1, t_2])
       (ErlangAtom "false") -> (ErlangAtom "false")
       something_else -> (EXC.case_clause something_else)
-erlps__is_subset_1__2 [ErlangEmptyList, _] = (ErlangAtom "true")
+erlps__is_subset_1__2 [(ErlangEmptyList), _] = (ErlangAtom "true")
 erlps__is_subset_1__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_subset_1__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -1073,8 +1088,8 @@ erlps__is_subset_2__2 [(ErlangCons _ xs1_0),
                        (ErlangCons _ ys1_1)]
   =
   (erlps__is_subset_2__2 [xs1_0, ys1_1])
-erlps__is_subset_2__2 [ErlangEmptyList, _] = (ErlangAtom "true")
-erlps__is_subset_2__2 [_, ErlangEmptyList] = (ErlangAtom "false")
+erlps__is_subset_2__2 [(ErlangEmptyList), _] = (ErlangAtom "true")
+erlps__is_subset_2__2 [_, (ErlangEmptyList)] = (ErlangAtom "false")
 erlps__is_subset_2__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_subset_2__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)

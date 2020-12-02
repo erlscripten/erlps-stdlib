@@ -260,8 +260,8 @@ erlps__union__1 :: ErlangFun
 erlps__union__1 [(ErlangCons s1_0 (ErlangCons s2_1 ss_2))] =
   let arg_3 = (erlps__union__2 [s1_0, s2_1])
   in (erlps__union1__2 [arg_3, ss_2])
-erlps__union__1 [(ErlangCons s_0 ErlangEmptyList)] = s_0
-erlps__union__1 [ErlangEmptyList] = (erlps__new__0 [])
+erlps__union__1 [(ErlangCons s_0 (ErlangEmptyList))] = s_0
+erlps__union__1 [(ErlangEmptyList)] = (erlps__new__0 [])
 erlps__union__1 [arg_0] = (EXC.function_clause unit)
 erlps__union__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -270,7 +270,7 @@ erlps__union1__2 :: ErlangFun
 erlps__union1__2 [s1_0, (ErlangCons s2_1 ss_2)] =
   let arg_3 = (erlps__union__2 [s1_0, s2_1])
   in (erlps__union1__2 [arg_3, ss_2])
-erlps__union1__2 [s1_0, ErlangEmptyList] = s1_0
+erlps__union1__2 [s1_0, (ErlangEmptyList)] = s1_0
 erlps__union1__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__union1__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -322,7 +322,7 @@ erlps__intersection__1 [(ErlangCons s1_0 (ErlangCons s2_1 ss_2))]
   =
   let arg_3 = (erlps__intersection__2 [s1_0, s2_1])
   in (erlps__intersection1__2 [arg_3, ss_2])
-erlps__intersection__1 [(ErlangCons s_0 ErlangEmptyList)] = s_0
+erlps__intersection__1 [(ErlangCons s_0 (ErlangEmptyList))] = s_0
 erlps__intersection__1 [arg_1] = (EXC.function_clause unit)
 erlps__intersection__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -331,7 +331,7 @@ erlps__intersection1__2 :: ErlangFun
 erlps__intersection1__2 [s1_0, (ErlangCons s2_1 ss_2)] =
   let arg_3 = (erlps__intersection__2 [s1_0, s2_1])
   in (erlps__intersection1__2 [arg_3, ss_2])
-erlps__intersection1__2 [s1_0, ErlangEmptyList] = s1_0
+erlps__intersection1__2 [s1_0, (ErlangEmptyList)] = s1_0
 erlps__intersection1__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__intersection1__2 args =
@@ -409,13 +409,15 @@ erlps__is_subset__2 [s1_0, s2_1] =
       (ErlangFun 2
          let
            lambda_3 [e_6, sub_7] =
-             let rop_9 = (erlps__is_element__2 [e_6, s2_1])
-             in (BIF.erlang__op_andalso [sub_7, rop_9])
+             case sub_7 of
+               (ErlangAtom "false") -> (ErlangAtom "false")
+               (ErlangAtom "true") -> (erlps__is_element__2 [e_6, s2_1])
+               _ -> (EXC.badarg1 sub_7)
            lambda_3 [arg_4, arg_5] = (EXC.function_clause unit)
            lambda_3 args = (EXC.badarity (ErlangFun 2 lambda_3) args)
          in lambda_3)
   in (erlps__fold__3 [arg_2, (ErlangAtom "true"), s1_0])
-erlps__is_subset__2 [arg_14, arg_15] = (EXC.function_clause unit)
+erlps__is_subset__2 [arg_13, arg_14] = (EXC.function_clause unit)
 erlps__is_subset__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -533,7 +535,7 @@ erlps__fold_bucket__3 [f_0, acc_1, (ErlangCons e_2 bkt_3)] =
       (BIF.erlang__apply__2
          [f_0, (ErlangCons e_2 (ErlangCons acc_1 ErlangEmptyList))])
   in (erlps__fold_bucket__3 [f_0, arg_5, bkt_3])
-erlps__fold_bucket__3 [_, acc_0, ErlangEmptyList] = acc_0
+erlps__fold_bucket__3 [_, acc_0, (ErlangEmptyList)] = acc_0
 erlps__fold_bucket__3 [arg_1, arg_2, arg_3] =
   (EXC.function_clause unit)
 erlps__fold_bucket__3 args =
@@ -590,7 +592,7 @@ erlps__filter_seg_list__4 [f_0, (ErlangCons seg_1 segs_2), fss_3,
           (erlps__filter_seg_list__4
              [f_0, segs_2, (ErlangCons tail_17 fss_3), fc1_12])
       _ -> (EXC.badmatch match_expr_13)
-erlps__filter_seg_list__4 [_, ErlangEmptyList, fss_0, fc_1] =
+erlps__filter_seg_list__4 [_, (ErlangEmptyList), fss_0, fc_1] =
   let tup_el_2 = (BIF.lists__reverse__2 [fss_0, ErlangEmptyList])
   in (ErlangTuple [tup_el_2, fc_1])
 erlps__filter_seg_list__4 [arg_6, arg_7, arg_8, arg_9] =
@@ -611,7 +613,7 @@ erlps__filter_bkt_list__4 [f_0, (ErlangCons bkt0_1 bkts_2),
         (erlps__filter_bkt_list__4
            [f_0, bkts_2, (ErlangCons bkt1_9 fbs_3), fc1_10])
       _ -> (EXC.badmatch match_expr_11)
-erlps__filter_bkt_list__4 [_, ErlangEmptyList, fbs_0, fc_1] =
+erlps__filter_bkt_list__4 [_, (ErlangEmptyList), fbs_0, fc_1] =
   let tup_el_2 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [fbs_0])
   in (ErlangTuple [tup_el_2, fc_1])
 erlps__filter_bkt_list__4 [arg_5, arg_6, arg_7, arg_8] =
@@ -636,7 +638,7 @@ erlps__filter_bucket__4 [f_0, (ErlangCons e_1 bkt_2), fb_3, fc_4]
             (BIF.erlang__op_plus [fc_4, (ErlangInt (DBI.fromInt 1))])
         in (erlps__filter_bucket__4 [f_0, bkt_2, fb_3, arg_17])
       something_else -> (EXC.case_clause something_else)
-erlps__filter_bucket__4 [_, ErlangEmptyList, fb_0, fc_1] =
+erlps__filter_bucket__4 [_, (ErlangEmptyList), fb_0, fc_1] =
   (ErlangTuple [fb_0, fc_1])
 erlps__filter_bucket__4 [arg_4, arg_5, arg_6, arg_7] =
   (EXC.function_clause unit)
@@ -893,17 +895,20 @@ erlps__maybe_contract__2 [t_0, dc_1]
                field_69
              _ -> (EXC.badrecord (ErlangAtom "set"))
        in let lop_60 = (BIF.erlang__op_lesser [lop_61, rop_67])
-       in let
-         lop_72 =
-           case t_0 of
-             (ErlangTuple arr_75) | (DM.Just field_74) <-
-                                      ((arr_75 DA.!! 2)) ->
-               field_74
-             _ -> (EXC.badrecord (ErlangAtom "set"))
-       in let
-         rop_71 =
-           (BIF.erlang__op_greater [lop_72, (ErlangInt (DBI.fromInt 16))])
-       in (BIF.erlang__op_andalso [lop_60, rop_71])) =
+       in
+         case lop_60 of
+           (ErlangAtom "false") -> (ErlangAtom "false")
+           (ErlangAtom "true") ->
+             let
+               lop_71 =
+                 case t_0 of
+                   (ErlangTuple arr_74) | (DM.Just field_73) <-
+                                            ((arr_74 DA.!! 2)) ->
+                     field_73
+                   _ -> (EXC.badrecord (ErlangAtom "set"))
+             in
+               (BIF.erlang__op_greater [lop_71, (ErlangInt (DBI.fromInt 16))])
+           _ -> (EXC.badarg1 lop_60)) =
   let   
     n_5 =
       case t_0 of
@@ -1056,7 +1061,7 @@ erlps__rehash__4 [(ErlangCons e_0 t_1), slot1_2, slot2_3, maxn_4]
               (ErlangTuple [l1_9, (ErlangCons e_0 l2_10)])
             something_else -> (EXC.case_clause something_else)
       _ -> (EXC.badmatch match_expr_11)
-erlps__rehash__4 [ErlangEmptyList, _, _, _] =
+erlps__rehash__4 [(ErlangEmptyList), _, _, _] =
   (ErlangTuple [ErlangEmptyList, ErlangEmptyList])
 erlps__rehash__4 [arg_2, arg_3, arg_4, arg_5] =
   (EXC.function_clause unit)

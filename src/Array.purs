@@ -91,7 +91,7 @@ erlps__new_1__4 [(ErlangCons (ErlangTuple [(ErlangAtom "size"),
 erlps__new_1__4 [(ErlangCons size_0 options_1), _, _, default_2]
   | ((isENum size_0) && (size_0 >= (ErlangInt (DBI.fromInt 0)))) =
   (erlps__new_1__4 [options_1, size_0, (ErlangAtom "true"), default_2])
-erlps__new_1__4 [ErlangEmptyList, size_0, fixed_1, default_2] =
+erlps__new_1__4 [(ErlangEmptyList), size_0, fixed_1, default_2] =
   (erlps__new__3 [size_0, fixed_1, default_2])
 erlps__new_1__4 [_options_0, _size_1, _fixed_2, _default_3] =
   (BIF.erlang__error__1 [(ErlangAtom "badarg")])
@@ -692,6 +692,7 @@ erlps__sparse_push_tuple__4 [n_0, d_1, t_2, l_3] =
         in
           (erlps__sparse_push_tuple__4
              [arg_15, d_1, t_2, (ErlangCons e_14 l_3)])
+      something_else -> (EXC.case_clause something_else)
 erlps__sparse_push_tuple__4 [arg_23, arg_24, arg_25, arg_26] =
   (EXC.function_clause unit)
 erlps__sparse_push_tuple__4 args =
@@ -705,7 +706,7 @@ erlps__from_list__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__from_list__2 :: ErlangFun
-erlps__from_list__2 [ErlangEmptyList, default_0] =
+erlps__from_list__2 [(ErlangEmptyList), default_0] =
   let arg_1 = (ErlangTuple [(ErlangAtom "default"), default_0])
   in (erlps__new__1 [arg_1])
 erlps__from_list__2 [list_0, default_1] | (isEList list_0) =
@@ -733,9 +734,9 @@ erlps__from_list_1__6 [(ErlangInt num_0), xs_1, d_2, n_3, as_4,
   in let e_8 = (BIF.erlang__list_to_tuple__1 [arg_6])
   in
     case xs_1 of
-      ErlangEmptyList ->
+      (ErlangEmptyList) ->
         case es_5 of
-          ErlangEmptyList ->
+          (ErlangEmptyList) ->
             (ErlangTuple [e_8, n_3, (ErlangInt (DBI.fromInt 10))])
           _ ->
             (erlps__from_list_2_0__3
@@ -799,9 +800,9 @@ erlps__from_list_2__6 [(ErlangInt num_0), xs_1, s_2, n_3, as_4,
   let e_7 = (BIF.erlang__list_to_tuple__1 [as_4])
   in
     case xs_1 of
-      ErlangEmptyList ->
+      (ErlangEmptyList) ->
         case es_5 of
-          ErlangEmptyList ->
+          (ErlangEmptyList) ->
             let
               tup_el_12 =
                 (BIF.erlang__op_mult [s_2, (ErlangInt (DBI.fromInt 10))])
@@ -1086,6 +1087,7 @@ erlps__sparse_push_tuple_pairs__5 [n_0, i_1, d_2, t_3, l_4] =
         in
           (erlps__sparse_push_tuple_pairs__5
              [arg_19, arg_22, d_2, t_3, (ErlangCons tail_28 l_4)])
+      something_else -> (EXC.case_clause something_else)
 erlps__sparse_push_tuple_pairs__5 [arg_32, arg_33, arg_34,
                                    arg_35, arg_36]
   =
@@ -1101,7 +1103,7 @@ erlps__from_orddict__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__from_orddict__2 :: ErlangFun
-erlps__from_orddict__2 [ErlangEmptyList, default_0] =
+erlps__from_orddict__2 [(ErlangEmptyList), default_0] =
   let arg_1 = (ErlangTuple [(ErlangAtom "default"), default_0])
   in (erlps__new__1 [arg_1])
 erlps__from_orddict__2 [list_0, default_1] | (isEList list_0) =
@@ -1123,11 +1125,11 @@ erlps__from_orddict__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__from_orddict_0__5 :: ErlangFun
-erlps__from_orddict_0__5 [ErlangEmptyList, n_0, _max_1, _d_2,
+erlps__from_orddict_0__5 [(ErlangEmptyList), n_0, _max_1, _d_2,
                           es_3]
   =
   case es_3 of
-    (ErlangCons e_5 ErlangEmptyList) ->
+    (ErlangCons e_5 (ErlangEmptyList)) ->
       (ErlangTuple [e_5, n_0, (ErlangInt (DBI.fromInt 10))])
     _ ->
       (erlps__collect_leafs__3
@@ -1258,9 +1260,9 @@ erlps__collect_leafs__6 [(ErlangInt num_0), xs_1, s_2, n_3, as_4,
   let e_7 = (BIF.erlang__list_to_tuple__1 [as_4])
   in
     case xs_1 of
-      ErlangEmptyList ->
+      (ErlangEmptyList) ->
         case es_5 of
-          ErlangEmptyList ->
+          (ErlangEmptyList) ->
             let
               tup_el_12 =
                 (BIF.erlang__op_mult [s_2, (ErlangInt (DBI.fromInt 10))])
@@ -1321,8 +1323,8 @@ erlps__collect_leafs__6 [i_0, (ErlangCons x_1 xs_2), s_3, n_4,
   in
     (erlps__collect_leafs__6
        [arg_7, xs_2, s_3, n_4, (ErlangCons x_1 as_5), es_6])
-erlps__collect_leafs__6 [(ErlangInt num_0), ErlangEmptyList, s_1,
-                         n_2, (ErlangCons _ ErlangEmptyList), es_3]
+erlps__collect_leafs__6 [(ErlangInt num_0), (ErlangEmptyList),
+                         s_1, n_2, (ErlangCons _ (ErlangEmptyList)), es_3]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 10))) =
   let    arg_5 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [es_3])
   in let
@@ -1646,6 +1648,7 @@ erlps__sparse_map_3__6 [i_0, t_1, ix_2, f_3, d_4, l_5]
         in
           (erlps__sparse_map_3__6
              [arg_23, t_1, arg_27, f_3, d_4, (ErlangCons tail_33 l_5)])
+      something_else -> (EXC.case_clause something_else)
 erlps__sparse_map_3__6 [_i_0, _e_1, _ix_2, _f_3, _d_4, l_5] = l_5
 erlps__sparse_map_3__6 [arg_6, arg_7, arg_8, arg_9, arg_10,
                         arg_11]
@@ -1863,6 +1866,7 @@ erlps__sparse_foldl_3__7 [i_0, t_1, a_2, ix_3, f_4, d_5, n_6]
         in
           (erlps__sparse_foldl_3__7
              [arg_23, t_1, arg_27, arg_32, f_4, d_5, n_6])
+      something_else -> (EXC.case_clause something_else)
 erlps__sparse_foldl_3__7 [_i_0, _t_1, a_2, _ix_3, _f_4, _d_5,
                           _n_6]
   =
@@ -2075,6 +2079,7 @@ erlps__sparse_foldr_3__6 [i_0, t_1, ix_2, a_3, f_4, d_5] =
                    (ErlangCons e_18 (ErlangCons a_3 ErlangEmptyList)))])
         in
           (erlps__sparse_foldr_3__6 [arg_19, t_1, ix_2, arg_24, f_4, d_5])
+      something_else -> (EXC.case_clause something_else)
 erlps__sparse_foldr_3__6 [arg_33, arg_34, arg_35, arg_36, arg_37,
                           arg_38]
   =
@@ -2099,7 +2104,7 @@ erlps__sparse_size__1 [a_0] =
        (\ _ -> (erlps__sparse_foldr__3 [f_11, ErlangEmptyList, a_0]))
        (\ of_15 ->
           case of_15 of
-            ErlangEmptyList -> (ErlangInt (DBI.fromInt 0))
+            (ErlangEmptyList) -> (ErlangInt (DBI.fromInt 0))
             something_else -> (EXC.try_clause something_else))
        (\ ex_16 ->
           case ex_16 of

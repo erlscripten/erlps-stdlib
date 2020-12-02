@@ -38,7 +38,7 @@ erlps__new__0 args =
 erlps__is_set__1 :: ErlangFun
 erlps__is_set__1 [(ErlangCons e_0 es_1)] =
   (erlps__is_set__2 [es_1, e_0])
-erlps__is_set__1 [ErlangEmptyList] = (ErlangAtom "true")
+erlps__is_set__1 [(ErlangEmptyList)] = (ErlangAtom "true")
 erlps__is_set__1 [_] = (ErlangAtom "false")
 erlps__is_set__1 [arg_0] = (EXC.function_clause unit)
 erlps__is_set__1 args =
@@ -48,7 +48,7 @@ erlps__is_set__2 :: ErlangFun
 erlps__is_set__2 [(ErlangCons e2_0 es_1), e1_2] | (e1_2 < e2_0) =
   (erlps__is_set__2 [es_1, e2_0])
 erlps__is_set__2 [(ErlangCons _ _), _] = (ErlangAtom "false")
-erlps__is_set__2 [ErlangEmptyList, _] = (ErlangAtom "true")
+erlps__is_set__2 [(ErlangEmptyList), _] = (ErlangAtom "true")
 erlps__is_set__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_set__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -84,7 +84,7 @@ erlps__is_element__2 [e_0, (ErlangCons h_1 es_2)] | (e_0 > h_1) =
 erlps__is_element__2 [e_0, (ErlangCons h_1 _)] | (e_0 < h_1) =
   (ErlangAtom "false")
 erlps__is_element__2 [_e_0, (ErlangCons _h_1 _)] = (ErlangAtom "true")
-erlps__is_element__2 [_, ErlangEmptyList] = (ErlangAtom "false")
+erlps__is_element__2 [_, (ErlangEmptyList)] = (ErlangAtom "false")
 erlps__is_element__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_element__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -98,7 +98,7 @@ erlps__add_element__2 [e_0, set_2@(ErlangCons h_1 _)]
   | (e_0 < h_1) =
   (ErlangCons e_0 set_2)
 erlps__add_element__2 [_e_0, set_2@(ErlangCons _h_1 _)] = set_2
-erlps__add_element__2 [e_0, ErlangEmptyList] =
+erlps__add_element__2 [e_0, (ErlangEmptyList)] =
   (ErlangCons e_0 ErlangEmptyList)
 erlps__add_element__2 [arg_3, arg_4] = (EXC.function_clause unit)
 erlps__add_element__2 args =
@@ -113,7 +113,7 @@ erlps__del_element__2 [e_0, set_2@(ErlangCons h_1 _)]
   | (e_0 < h_1) =
   set_2
 erlps__del_element__2 [_e_0, (ErlangCons _h_1 es_2)] = es_2
-erlps__del_element__2 [_, ErlangEmptyList] = ErlangEmptyList
+erlps__del_element__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__del_element__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__del_element__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -134,8 +134,8 @@ erlps__union__2 [(ErlangCons e1_0 es1_1),
   =
   let head_5 = (erlps__union__2 [es1_1, es2_3])
   in (ErlangCons e1_0 head_5)
-erlps__union__2 [ErlangEmptyList, es2_0] = es2_0
-erlps__union__2 [es1_0, ErlangEmptyList] = es1_0
+erlps__union__2 [(ErlangEmptyList), es2_0] = es2_0
+erlps__union__2 [es1_0, (ErlangEmptyList)] = es1_0
 erlps__union__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__union__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -161,8 +161,8 @@ erlps__intersection__2 [(ErlangCons e1_0 es1_1),
   =
   let head_5 = (erlps__intersection__2 [es1_1, es2_3])
   in (ErlangCons e1_0 head_5)
-erlps__intersection__2 [ErlangEmptyList, _] = ErlangEmptyList
-erlps__intersection__2 [_, ErlangEmptyList] = ErlangEmptyList
+erlps__intersection__2 [(ErlangEmptyList), _] = ErlangEmptyList
+erlps__intersection__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__intersection__2 [arg_0, arg_1] =
   (EXC.function_clause unit)
 erlps__intersection__2 args =
@@ -173,7 +173,7 @@ erlps__intersection__1 [(ErlangCons s1_0 (ErlangCons s2_1 ss_2))]
   =
   let arg_3 = (erlps__intersection__2 [s1_0, s2_1])
   in (erlps__intersection1__2 [arg_3, ss_2])
-erlps__intersection__1 [(ErlangCons s_0 ErlangEmptyList)] = s_0
+erlps__intersection__1 [(ErlangCons s_0 (ErlangEmptyList))] = s_0
 erlps__intersection__1 [arg_1] = (EXC.function_clause unit)
 erlps__intersection__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -182,7 +182,7 @@ erlps__intersection1__2 :: ErlangFun
 erlps__intersection1__2 [s1_0, (ErlangCons s2_1 ss_2)] =
   let arg_3 = (erlps__intersection__2 [s1_0, s2_1])
   in (erlps__intersection1__2 [arg_3, ss_2])
-erlps__intersection1__2 [s1_0, ErlangEmptyList] = s1_0
+erlps__intersection1__2 [s1_0, (ErlangEmptyList)] = s1_0
 erlps__intersection1__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__intersection1__2 args =
@@ -201,8 +201,8 @@ erlps__is_disjoint__2 [(ErlangCons _e1_0 _es1_1),
                        (ErlangCons _e2_2 _es2_3)]
   =
   (ErlangAtom "false")
-erlps__is_disjoint__2 [ErlangEmptyList, _] = (ErlangAtom "true")
-erlps__is_disjoint__2 [_, ErlangEmptyList] = (ErlangAtom "true")
+erlps__is_disjoint__2 [(ErlangEmptyList), _] = (ErlangAtom "true")
+erlps__is_disjoint__2 [_, (ErlangEmptyList)] = (ErlangAtom "true")
 erlps__is_disjoint__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_disjoint__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -221,8 +221,8 @@ erlps__subtract__2 [(ErlangCons _e1_0 es1_1),
                     (ErlangCons _e2_2 es2_3)]
   =
   (BIF.erlang__subtract__2 [es1_1, es2_3])
-erlps__subtract__2 [ErlangEmptyList, _] = ErlangEmptyList
-erlps__subtract__2 [es1_0, ErlangEmptyList] = es1_0
+erlps__subtract__2 [(ErlangEmptyList), _] = ErlangEmptyList
+erlps__subtract__2 [es1_0, (ErlangEmptyList)] = es1_0
 erlps__subtract__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__subtract__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -239,8 +239,8 @@ erlps__is_subset__2 [(ErlangCons _e1_0 es1_1),
                      (ErlangCons _e2_2 es2_3)]
   =
   (erlps__is_subset__2 [es1_1, es2_3])
-erlps__is_subset__2 [ErlangEmptyList, _] = (ErlangAtom "true")
-erlps__is_subset__2 [_, ErlangEmptyList] = (ErlangAtom "false")
+erlps__is_subset__2 [(ErlangEmptyList), _] = (ErlangAtom "true")
+erlps__is_subset__2 [_, (ErlangEmptyList)] = (ErlangAtom "false")
 erlps__is_subset__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_subset__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)

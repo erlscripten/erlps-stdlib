@@ -35,6 +35,7 @@ import Erlang.Invoke
 import Lists
 import Array.SUITE
 import Maps.SUITE
+import Lists.SUITE as LS
 
 -- BEWARE - HERE BE DRAGONS - I've lost too many hours debugging alternative helpers
 -- If you think you can make a better wrapper which does not crash the testing infrastructure then please make a PR
@@ -302,3 +303,67 @@ main =
         --it "t_merge_with" do
         --    r <- exec_may_throw erlps__t_merge_with__1 [ErlangEmptyList]
         --    make_ok (ErlangAtom "ok") `shouldEqual` r
+
+    describe_ "Real Lists tests taken from OTP - lists_SUITE.erl" do
+        it "append_1" do
+            r <- exec_may_throw LS.erlps__append_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "append_2" do
+            r <- exec_may_throw LS.erlps__append_2__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "umerge" do
+            r <- exec_may_throw LS.erlps__umerge__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "rumerge" do
+            r <- exec_may_throw LS.erlps__rumerge__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "usort_1" do
+            r <- exec_may_throw LS.erlps__usort_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "usort_rand" do
+            r <- exec_may_throw LS.erlps__usort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "usort_stable" do
+            r <- exec_may_throw LS.erlps__usort_stable__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "keymerge" do
+            r <- exec_may_throw LS.erlps__keymerge__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "rkeymerge" do
+            r <- exec_may_throw LS.erlps__rkeymerge__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keysort_1" do
+            r <- exec_may_throw LS.erlps__keysort_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keysort_rand" do
+            r <- exec_may_throw LS.erlps__keysort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keysort_i" do
+            r <- exec_may_throw LS.erlps__keysort_i__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keysort_stable" do
+            r <- exec_may_throw LS.erlps__keysort_stable__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keysort_error" do
+            r <- exec_may_throw LS.erlps__keysort_error__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "keymember" do
+            r <- exec_may_throw LS.erlps__keymember__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keysearch_keyfind" do
+            r <- exec_may_throw LS.erlps__keysearch_keyfind__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keystore" do
+            r <- exec_may_throw LS.erlps__keystore__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keytake" do
+            r <- exec_may_throw LS.erlps__keytake__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keyreplace" do
+            r <- exec_may_throw LS.erlps__keyreplace__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+
