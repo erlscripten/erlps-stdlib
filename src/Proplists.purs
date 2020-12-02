@@ -654,9 +654,15 @@ erlps__split__3 args =
 
 erlps__maps_prepend__3 :: ErlangFun
 erlps__maps_prepend__3 [key_0, val_1, dict_2] =
-  let map_ext_4 = (ErlangMap Map.empty)
-  in (BIF.maps__merge__2 [dict_2, map_ext_4])
-erlps__maps_prepend__3 [arg_5, arg_6, arg_7] =
+  let    head_7 = (BIF.erlang__map_get__2 [key_0, dict_2])
+  in let
+    map_ext_10 =
+      (ErlangMap (Map.singleton key_0 (ErlangCons val_1 head_7)))
+  in
+    case (findMissingKey dict_2 [key_0]) of
+      (DM.Nothing) -> (BIF.maps__merge__2 [dict_2, map_ext_10])
+      (DM.Just missing_12) -> (EXC.badkey missing_12)
+erlps__maps_prepend__3 [arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__maps_prepend__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)

@@ -147,13 +147,20 @@ erlps__update_with__3 [key_0, fun_1, map_2]
   case map_2 of
     (ErlangMap map_4) | (DM.Just value_5) <-
                           ((Map.lookup key_0 map_4)) ->
-      let map_ext_7 = (ErlangMap Map.empty)
-      in (BIF.maps__merge__2 [map_2, map_ext_7])
-    (ErlangMap map_8) ->
-      let arg_9 = (ErlangTuple [(ErlangAtom "badkey"), key_0])
+      let   
+        val_8 =
+          (BIF.erlang__apply__2
+             [fun_1, (ErlangCons value_5 ErlangEmptyList)])
+      in let map_ext_11 = (ErlangMap (Map.singleton key_0 val_8))
+      in
+        case (findMissingKey map_2 [key_0]) of
+          (DM.Nothing) -> (BIF.maps__merge__2 [map_2, map_ext_11])
+          (DM.Just missing_13) -> (EXC.badkey missing_13)
+    (ErlangMap map_14) ->
+      let arg_15 = (ErlangTuple [(ErlangAtom "badkey"), key_0])
       in
         (BIF.erlang__error__2
-           [arg_9,
+           [arg_15,
             (ErlangCons key_0
                (ErlangCons fun_1 (ErlangCons map_2 ErlangEmptyList)))])
     something_else -> (EXC.case_clause something_else)
@@ -176,11 +183,18 @@ erlps__update_with__4 [key_0, fun_1, init_2, map_3]
   case map_3 of
     (ErlangMap map_5) | (DM.Just value_6) <-
                           ((Map.lookup key_0 map_5)) ->
-      let map_ext_8 = (ErlangMap Map.empty)
-      in (BIF.maps__merge__2 [map_3, map_ext_8])
-    (ErlangMap map_9) ->
-      let map_ext_13 = (ErlangMap (Map.singleton key_0 init_2))
-      in (BIF.maps__merge__2 [map_3, map_ext_13])
+      let   
+        val_9 =
+          (BIF.erlang__apply__2
+             [fun_1, (ErlangCons value_6 ErlangEmptyList)])
+      in let map_ext_12 = (ErlangMap (Map.singleton key_0 val_9))
+      in
+        case (findMissingKey map_3 [key_0]) of
+          (DM.Nothing) -> (BIF.maps__merge__2 [map_3, map_ext_12])
+          (DM.Just missing_14) -> (EXC.badkey missing_14)
+    (ErlangMap map_15) ->
+      let map_ext_19 = (ErlangMap (Map.singleton key_0 init_2))
+      in (BIF.maps__merge__2 [map_3, map_ext_19])
     something_else -> (EXC.case_clause something_else)
 erlps__update_with__4 [key_0, fun_1, init_2, map_3] =
   let arg_4 = (erlps__error_type__1 [map_3])
