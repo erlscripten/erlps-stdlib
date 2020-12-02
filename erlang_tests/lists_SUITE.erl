@@ -160,7 +160,7 @@ append_2(Config) when is_list(Config) ->
     [10, [elem]]=lists:append([10], [[elem]]),
 
     %% Trapping, both crashing and otherwise.
-    [append_trapping_1(N) || N <- lists:seq(0, 20)],
+    [append_trapping_1(N) || N <- lists:seq(0, 10)],
 
     ok.
 
@@ -271,14 +271,14 @@ keymember(Config) when is_list(Config) ->
     true = lists:keymember(d, 2, List),
     true = lists:keymember({x,y,z}, 2, List),
 
-    Long0 = lists:seq(1, 100007),
-    false = lists:keymember(kalle, 1, Long0),
-    Long = lists:foldl(fun(E, A) -> [{1/E,E}|A] end, [], Long0),
-    true = lists:keymember(1, 2, Long),
-    true = lists:keymember(2, 2, Long),
-    true = lists:keymember(1.0, 2, Long),
-    true = lists:keymember(2.0, 2, Long),
-    true = lists:keymember(100006, 2, Long),
+    %Long0 = lists:seq(1, 100007),
+    %false = lists:keymember(kalle, 1, Long0),
+    %Long = lists:foldl(fun(E, A) -> [{1/E,E}|A] end, [], Long0),
+    %true = lists:keymember(1, 2, Long),
+    %true = lists:keymember(2, 2, Long),
+    %true = lists:keymember(1.0, 2, Long),
+    %true = lists:keymember(2.0, 2, Long),
+    %true = lists:keymember(100006, 2, Long),
     ok.
 
 keysearch_keyfind(Config) when is_list(Config) ->
@@ -2514,11 +2514,11 @@ suffix(Config) when is_list(Config) ->
     true = lists:suffix([], [a]),
     true = lists:suffix([], [a,b]),
     true = lists:suffix([], [a,b,c]),
-    true = lists:suffix([a], lists:duplicate(200000, a)),
-    true = lists:suffix(lists:seq(1, 1024),
-			lists:seq(2, 64000) ++ lists:seq(1, 1024)),
-    true = lists:suffix(lists:duplicate(20000, a),
-			lists:duplicate(200000, a)),
+    %%true = lists:suffix([a], lists:duplicate(200000, a)),
+    %%true = lists:suffix(lists:seq(1, 1024),
+		%%	lists:seq(2, 64000) ++ lists:seq(1, 1024)),
+    %%true = lists:suffix(lists:duplicate(20000, a),
+		%%	lists:duplicate(200000, a)),
     true = lists:suffix([2.0,3.0], [1.0,2.0,3.0]),
 
     %% False cases.
@@ -2526,8 +2526,8 @@ suffix(Config) when is_list(Config) ->
     false = lists:suffix([a,b,c], []),
     false = lists:suffix([a,b,c], [b,c]),
     false = lists:suffix([a,b,c], [a,b,c,a,b]),
-    false = lists:suffix(lists:duplicate(199999, a)++[b],
-			 lists:duplicate(200000, a)),
+    %%false = lists:suffix(lists:duplicate(199999, a)++[b],
+		%%	 lists:duplicate(200000, a)),
     false = lists:suffix([2.0,3.0], [1,2,3]),
 
     %% Error cases.
@@ -2558,7 +2558,7 @@ subtract(Config) when is_list(Config) ->
     [d,a,a] = sub([a,b,c,d,a,a], [a,b,c]),
     [d,x,a] = sub([a,b,c,d,a,x,a], [a,b,c,a]),
     [1,2,3,4,5,6,7,8,9,9999,10000,20,21,22] =
-	sub(lists:seq(1, 10000)++[20,21,22], lists:seq(10, 9998)),
+        sub(lists:seq(1, 10000)++[20,21,22], lists:seq(10, 9998)),
 
     %% ERL-986; an integer overflow relating to term comparison
     %% caused subtraction to be inconsistent.
@@ -2580,19 +2580,8 @@ subtract(Config) when is_list(Config) ->
     {'EXIT',_} = (catch sub([a|b], [])),
     {'EXIT',_} = (catch sub([a|b], [a])),
 
-    %% Trapping, both crashing and otherwise.
-    [sub_trapping(N) || N <- lists:seq(0, 18)],
-
-    %% The current implementation chooses which algorithm to use based on
-    %% certain thresholds, and we need proper coverage for all corner cases.
-    [sub_thresholds(N) || N <- lists:seq(0, 32)],
-
-    %% Trapping, both crashing and otherwise.
-    [sub_trapping(N) || N <- lists:seq(0, 18)],
-
-    %% The current implementation chooses which algorithm to use based on
-    %% certain thresholds, and we need proper coverage for all corner cases.
-    [sub_thresholds(N) || N <- lists:seq(0, 32)],
+    [sub_trapping(N) || N <- lists:seq(0, 10)],
+    [sub_thresholds(N) || N <- lists:seq(0, 10)],
 
     ok.
 

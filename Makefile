@@ -18,6 +18,7 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/string.beam -o src/String.purs
 	./erlscripten -s $(BEAM_PATH)/digraph_utils.beam -o src/DigraphUtils.purs
 	./erlscripten -s $(BEAM_PATH)/digraph.beam -o src/Digraph.purs
+	#./erlscripten -s $(BEAM_PATH)/rand.beam -o src/Rand.purs
 
 build_tests:
 	erlc +debug_info erlang_tests/array_SUITE.erl
@@ -32,14 +33,31 @@ build_tests:
 	./erlscripten -s lists_SUITE.beam -o test/Lists.SUITE.purs
 	rm lists_SUITE.beam
 
-	#erlc +debug_info erlang_tests/queue_SUITE.erl
-	#./erlscripten -s queue_SUITE.beam -o test/Queue.SUITE.purs
-	#rm queue_SUITE.beam
+	erlc +debug_info erlang_tests/queue_SUITE.erl
+	./erlscripten -s queue_SUITE.beam -o test/Queue.SUITE.purs
+	rm queue_SUITE.beam
 
-	#%erlc +debug_info erlang_tests/dict_SUITE.erl
-	#./erlscripten -s dict_SUITE.beam -o test/Dict.SUITE.purs
-	#rm dict_SUITE.beam
+	erlc +debug_info erlang_tests/dict_SUITE.erl
+	./erlscripten -s dict_SUITE.beam -o test/Dict.SUITE.purs
+	rm dict_SUITE.beam
 
-	#erlc +debug_info erlang_tests/dict_test_lib.erl
-	#./erlscripten -s dict_test_lib.beam -o test/Dict.Test.Lib.purs
-	#rm dict_test_lib.beam
+	erlc +debug_info erlang_tests/dict_test_lib.erl
+	./erlscripten -s dict_test_lib.beam -o test/Dict.Test.Lib.purs
+	rm dict_test_lib.beam
+
+	erlc +debug_info erlang_tests/proplists_SUITE.erl
+	./erlscripten -s proplists_SUITE.beam -o test/Proplists.SUITE.purs
+	rm proplists_SUITE.beam
+
+	erlc +debug_info erlang_tests/sets_SUITE.erl
+	./erlscripten -s sets_SUITE.beam -o test/Sets.SUITE.purs
+	rm sets_SUITE.beam
+
+	erlc +debug_info erlang_tests/sets_test_lib.erl
+	./erlscripten -s sets_test_lib.beam -o test/Sets.Test.Lib.purs
+	rm sets_test_lib.beam
+
+	erlc +debug_info erlang_tests/math_SUITE.erl
+	./erlscripten -s math_SUITE.beam -o test/Math.SUITE.purs
+	rm math_SUITE.beam
+

@@ -6,6 +6,7 @@ You can edit this file as you like.
 , dependencies =
   [ "arraybuffer"
   , "base58"
+  , "numbers"
   , "bigints"
   , "console"
   , "effect"
