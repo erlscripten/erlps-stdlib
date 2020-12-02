@@ -7,3 +7,5 @@ bower_components
 .pulp-cache
 generated-docs
 .psci_modules/
+test/Array.SUITE.purs
+test/Maps.SUITE.purs

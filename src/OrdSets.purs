@@ -18,6 +18,7 @@ import Data.List as DL
 import Data.Maybe as DM
 import Data.Map as Map
 import Data.Tuple as Tup
+import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
 import Erlang.Helpers
@@ -26,6 +27,7 @@ import Erlang.Type (ErlangFun, ErlangTerm(..))
 import Effect (Effect)
 import Effect.Unsafe (unsafePerformEffect)
 import Effect.Exception (throw)
+import Partial.Unsafe (unsafePartial)
 
 
 erlps__new__0 :: ErlangFun

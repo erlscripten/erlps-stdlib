@@ -19,6 +19,7 @@ import Data.List as DL
 import Data.Maybe as DM
 import Data.Map as Map
 import Data.Tuple as Tup
+import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
 import Erlang.Helpers
@@ -27,6 +28,7 @@ import Erlang.Type (ErlangFun, ErlangTerm(..))
 import Effect (Effect)
 import Effect.Unsafe (unsafePerformEffect)
 import Effect.Exception (throw)
+import Partial.Unsafe (unsafePartial)
 
 
 erlps__new__0 :: ErlangFun
@@ -65,7 +67,8 @@ erlps__from_list__1 [pair_0@(ErlangCons (ErlangTuple [_,
   pair_0
 erlps__from_list__1 [pairs_0] =
   let arg_2 = (erlps__reverse_pairs__2 [pairs_0, ErlangEmptyList])
-  in (BIF.do_remote_fun_call "Lists" "erlps__ukeysort__2" [(ErlangInt 1), arg_2])
+  in
+    (BIF.do_remote_fun_call "Lists" "erlps__ukeysort__2" [(ErlangInt (DBI.fromInt 1)), arg_2])
 erlps__from_list__1 [arg_5] = (EXC.function_clause unit)
 erlps__from_list__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -334,7 +337,7 @@ erlps__fold__3 [f_0, acc_1,
              (ErlangCons val_3 (ErlangCons acc_1 ErlangEmptyList)))])
   in (erlps__fold__3 [f_0, arg_6, d_4])
 erlps__fold__3 [f_0, acc_1, ErlangEmptyList]
-  | (isEFunA f_0 (ErlangInt 3)) =
+  | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
 erlps__fold__3 [arg_2, arg_3, arg_4] = (EXC.function_clause unit)
 erlps__fold__3 args =
@@ -352,7 +355,7 @@ erlps__map__2 [f_0,
   in let head_10 = (erlps__map__2 [f_0, d_3])
   in (ErlangCons tail_4 head_10)
 erlps__map__2 [f_0, ErlangEmptyList]
-  | (isEFunA f_0 (ErlangInt 2)) =
+  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__map__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__map__2 args =
@@ -374,7 +377,7 @@ erlps__filter__2 [f_0,
       (ErlangAtom "false") -> (erlps__filter__2 [f_0, d_4])
       something_else -> (EXC.case_clause something_else)
 erlps__filter__2 [f_0, ErlangEmptyList]
-  | (isEFunA f_0 (ErlangInt 2)) =
+  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__filter__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__filter__2 args =
@@ -409,10 +412,10 @@ erlps__merge__3 [f_0,
   in let head_14 = (erlps__merge__3 [f_0, d1_3, d2_6])
   in (ErlangCons tail_7 head_14)
 erlps__merge__3 [f_0, ErlangEmptyList, d2_1]
-  | (isEFunA f_0 (ErlangInt 3)) =
+  | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   d2_1
 erlps__merge__3 [f_0, d1_1, ErlangEmptyList]
-  | (isEFunA f_0 (ErlangInt 3)) =
+  | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   d1_1
 erlps__merge__3 [arg_2, arg_3, arg_4] =
   (EXC.function_clause unit)

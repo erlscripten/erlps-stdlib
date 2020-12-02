@@ -7,7 +7,7 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/array.beam -o src/Array.purs
 	#./erlscripten -s $(BEAM_PATH)/queue.beam -o src/Queue.purs
 	#./erlscripten -s $(BEAM_PATH)/dict.beam -o src/Dict.purs
-	#./erlscripten -s $(BEAM_PATH)/lists.beam -o src/Lists.purs
+	./erlscripten -s $(BEAM_PATH)/lists.beam -o src/Lists.purs
 	./erlscripten -s $(BEAM_PATH)/gb_sets.beam -o src/GBSets.purs
 	./erlscripten -s $(BEAM_PATH)/gb_trees.beam -o src/GBTrees.purs
 	./erlscripten -s $(BEAM_PATH)/maps.beam -o src/Maps.purs

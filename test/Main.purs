@@ -29,6 +29,7 @@ import Partial.Unsafe
 import Erlang.Type
 import Erlang.Exception
 import Erlang.Builtins as BIF
+import Data.BigInt as DBI
 import Erlang.Invoke
 
 import Lists
@@ -94,7 +95,7 @@ lift_aff_to_erlang_process calc = do
                             AVar.put res res_channel
                         )
                     in
-                       ErlangInt 1))]
+                       ErlangInt (DBI.fromInt 1)))]
             -- At this point we never yielded so the process MUST be alive
             pid <- unpack_ok packed_pid
             AVar.put pid pid_channel
@@ -112,47 +113,48 @@ lift_aff_to_erlang_process calc = do
 
 make_ok term = ErlangTuple [ErlangAtom "ok", term]
 make_err = ErlangAtom "error"
+mkInt :: Int -> ErlangTerm
+mkInt = DBI.fromInt >>> ErlangInt
 
 unpack_ok :: ErlangTerm -> Aff ErlangTerm
 unpack_ok (ErlangTuple [ErlangAtom "ok", term]) = pure term
 unpack_ok _ = do
     1 `shouldEqual` 0
     pure ErlangEmptyList
-
 test_reverse a = do
-    let input = arrayToErlangList $ map ErlangInt a
-    let output = make_ok $ arrayToErlangList $ map ErlangInt (A.reverse a)
+    let input = arrayToErlangList $ map mkInt a
+    let output = make_ok $ arrayToErlangList $ map mkInt (A.reverse a)
     res <- exec_may_throw erlps__reverse__1 [input]
     output `shouldEqual` res
 
 test_sort a = do
-    let input = arrayToErlangList $ map ErlangInt a
-    let output = make_ok $ arrayToErlangList $ map ErlangInt (A.sort a)
+    let input = arrayToErlangList $ map mkInt a
+    let output = make_ok $ arrayToErlangList $ map mkInt (A.sort a)
     res <- exec_may_throw erlps__sort__1 [input]
     output `shouldEqual` res
 
 test_map a ef pf = do
-    let input = arrayToErlangList $ map ErlangInt a
-    let output = make_ok $ arrayToErlangList $ map ErlangInt (map pf a)
+    let input = arrayToErlangList $ map mkInt a
+    let output = make_ok $ arrayToErlangList $ map mkInt (map pf a)
     res <- exec_may_throw erlps__map__2 [ef, input]
     output `shouldEqual` res
 
 test_zip_ok a b = do
-    let input_a = arrayToErlangList $ map ErlangInt a
-    let input_b = arrayToErlangList $ map ErlangInt b
-    let output = make_ok $ arrayToErlangList $ map (\(T.Tuple x y) -> ErlangTuple [x,y]) (A.zip (map ErlangInt a) (map ErlangInt b))
+    let input_a = arrayToErlangList $ map mkInt a
+    let input_b = arrayToErlangList $ map mkInt b
+    let output = make_ok $ arrayToErlangList $ map (\(T.Tuple x y) -> ErlangTuple [x,y]) (A.zip (map mkInt a) (map mkInt b))
     res <- exec_may_throw erlps__zip__2 [input_a, input_b]
     output `shouldEqual` res
 
 test_zip_fail a b = do
-    let input_a = arrayToErlangList $ map ErlangInt a
-    let input_b = arrayToErlangList $ map ErlangInt b
+    let input_a = arrayToErlangList $ map mkInt a
+    let input_b = arrayToErlangList $ map mkInt b
     res <- exec_may_throw erlps__zip__2 [input_a, input_b]
     make_err `shouldEqual` res
 
 test_seq from to expected = do
-    calc <- exec_may_throw erlps__seq__2 [ErlangInt from, ErlangInt to]
-    let out = make_ok $ arrayToErlangList $ map ErlangInt expected
+    calc <- exec_may_throw erlps__seq__2 [mkInt from, mkInt to]
+    let out = make_ok $ arrayToErlangList $ map mkInt expected
     out `shouldEqual` calc
 
 shouldEqualOk a b = make_ok a `shouldEqual` b
@@ -186,7 +188,7 @@ main =
             test_sort [5,3,34,6,2,5,7565,4,3,7,8,5,3]
         it "map/1" do
             test_map [1,2,3,4,5]
-              (ErlangFun 1 (unsafePartial $ \ [ErlangInt a] -> ErlangInt (a*20))) (\x -> x*20)
+              (ErlangFun 1 (unsafePartial $ \ [ErlangInt a] -> ErlangInt (a* DBI.fromInt(20)))) (\x -> x*20)
             test_map [1,2,3,4,5]
               (ErlangFun 1 (unsafePartial $ \ [ErlangInt a] -> ErlangInt (-a))) (\x -> -x)
         it "zip/2" do

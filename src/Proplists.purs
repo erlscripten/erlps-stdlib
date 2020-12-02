@@ -19,6 +19,7 @@ import Data.List as DL
 import Data.Maybe as DM
 import Data.Map as Map
 import Data.Tuple as Tup
+import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
 import Erlang.Helpers
@@ -27,6 +28,7 @@ import Erlang.Type (ErlangFun, ErlangTerm(..))
 import Effect (Effect)
 import Effect.Unsafe (unsafePerformEffect)
 import Effect.Exception (throw)
+import Partial.Unsafe (unsafePartial)
 
 
 erlps__property__1 :: ErlangFun
@@ -84,8 +86,12 @@ erlps__lookup__2 [key_0, (ErlangCons p_1 ps_2)] =
       (ErlangTuple [key_0, (ErlangAtom "true")])
     _ | (ErlangAtom "true") <-
           (let    lop_6 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_5 = (BIF.erlang__op_greaterEq [lop_6, (ErlangInt 1)])
-           in let lop_10 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_5 =
+               (BIF.erlang__op_greaterEq [lop_6, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_10 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_9 = (BIF.erlang__op_exactEq [lop_10, key_0])
            in (BIF.erlang__op_andalso [lop_5, rop_9])) ->
       p_1
@@ -105,8 +111,12 @@ erlps__lookup_all__2 [key_0, (ErlangCons p_1 ps_2)] =
       in (ErlangCons tail_3 head_6)
     _ | (ErlangAtom "true") <-
           (let    lop_10 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_9 = (BIF.erlang__op_greaterEq [lop_10, (ErlangInt 1)])
-           in let lop_14 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_9 =
+               (BIF.erlang__op_greaterEq [lop_10, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_14 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_13 = (BIF.erlang__op_exactEq [lop_14, key_0])
            in (BIF.erlang__op_andalso [lop_9, rop_13])) ->
       let head_19 = (erlps__lookup_all__2 [key_0, ps_2])
@@ -124,8 +134,12 @@ erlps__is_defined__2 [key_0, (ErlangCons p_1 ps_2)] =
     _ | ((isEAtom p_1) && (p_1 == key_0)) -> (ErlangAtom "true")
     _ | (ErlangAtom "true") <-
           (let    lop_4 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_3 = (BIF.erlang__op_greaterEq [lop_4, (ErlangInt 1)])
-           in let lop_8 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_3 =
+               (BIF.erlang__op_greaterEq [lop_4, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_8 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_7 = (BIF.erlang__op_exactEq [lop_8, key_0])
            in (BIF.erlang__op_andalso [lop_3, rop_7])) ->
       (ErlangAtom "true")
@@ -149,8 +163,12 @@ erlps__get_value__3 [key_0, (ErlangCons p_1 ps_2), default_3] =
     _ | ((isEAtom p_1) && (p_1 == key_0)) -> (ErlangAtom "true")
     _ | (ErlangAtom "true") <-
           (let    lop_5 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_4 = (BIF.erlang__op_greaterEq [lop_5, (ErlangInt 1)])
-           in let lop_9 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_4 =
+               (BIF.erlang__op_greaterEq [lop_5, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_9 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_8 = (BIF.erlang__op_exactEq [lop_9, key_0])
            in (BIF.erlang__op_andalso [lop_4, rop_8])) ->
       case p_1 of
@@ -174,8 +192,12 @@ erlps__get_all_values__2 [key_0, (ErlangCons p_1 ps_2)] =
       in (ErlangCons (ErlangAtom "true") head_4)
     _ | (ErlangAtom "true") <-
           (let    lop_8 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_7 = (BIF.erlang__op_greaterEq [lop_8, (ErlangInt 1)])
-           in let lop_12 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_7 =
+               (BIF.erlang__op_greaterEq [lop_8, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_12 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_11 = (BIF.erlang__op_exactEq [lop_12, key_0])
            in (BIF.erlang__op_andalso [lop_7, rop_11])) ->
       case p_1 of
@@ -201,8 +223,12 @@ erlps__append_values__2 [key_0, (ErlangCons p_1 ps_2)] =
       in (ErlangCons (ErlangAtom "true") head_4)
     _ | (ErlangAtom "true") <-
           (let    lop_8 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_7 = (BIF.erlang__op_greaterEq [lop_8, (ErlangInt 1)])
-           in let lop_12 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_7 =
+               (BIF.erlang__op_greaterEq [lop_8, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_12 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_11 = (BIF.erlang__op_exactEq [lop_12, key_0])
            in (BIF.erlang__op_andalso [lop_7, rop_11])) ->
       case p_1 of
@@ -229,8 +255,12 @@ erlps__get_bool__2 [key_0, (ErlangCons p_1 ps_2)] =
     _ | ((isEAtom p_1) && (p_1 == key_0)) -> (ErlangAtom "true")
     _ | (ErlangAtom "true") <-
           (let    lop_4 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_3 = (BIF.erlang__op_greaterEq [lop_4, (ErlangInt 1)])
-           in let lop_8 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_3 =
+               (BIF.erlang__op_greaterEq [lop_4, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_8 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_7 = (BIF.erlang__op_exactEq [lop_8, key_0])
            in (BIF.erlang__op_andalso [lop_3, rop_7])) ->
       case p_1 of
@@ -261,8 +291,12 @@ erlps__get_keys__2 [(ErlangCons p_0 ps_1), keys_2] =
       in (erlps__get_keys__2 [ps_1, arg_4])
     _ | (ErlangAtom "true") <-
           (let lop_7 = (BIF.erlang__tuple_size__1 [p_0])
-           in (BIF.erlang__op_greaterEq [lop_7, (ErlangInt 1)])) ->
-      let    arg_12 = (BIF.erlang__element__2 [(ErlangInt 1), p_0])
+           in
+             (BIF.erlang__op_greaterEq
+                [lop_7, (ErlangInt (DBI.fromInt 1))])) ->
+      let   
+        arg_12 =
+          (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_0])
       in let arg_11 = (BIF.do_remote_fun_call "Sets" "erlps__add_element__2" [arg_12, keys_2])
       in (erlps__get_keys__2 [ps_1, arg_11])
     _ -> (erlps__get_keys__2 [ps_1, keys_2])
@@ -279,8 +313,12 @@ erlps__delete__2 [key_0, (ErlangCons p_1 ps_2)] =
       (erlps__delete__2 [key_0, ps_2])
     _ | (ErlangAtom "true") <-
           (let    lop_6 = (BIF.erlang__tuple_size__1 [p_1])
-           in let lop_5 = (BIF.erlang__op_greaterEq [lop_6, (ErlangInt 1)])
-           in let lop_10 = (BIF.erlang__element__2 [(ErlangInt 1), p_1])
+           in let
+             lop_5 =
+               (BIF.erlang__op_greaterEq [lop_6, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_10 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
            in let rop_9 = (BIF.erlang__op_exactEq [lop_10, key_0])
            in (BIF.erlang__op_andalso [lop_5, rop_9])) ->
       (erlps__delete__2 [key_0, ps_2])
@@ -318,12 +356,18 @@ erlps__substitute_aliases_1__2 [(ErlangCons (ErlangTuple [key_0,
       (erlps__property__2 [key1_1, (ErlangAtom "true")])
     _ | (ErlangAtom "true") <-
           (let    lop_7 = (BIF.erlang__tuple_size__1 [p_3])
-           in let lop_6 = (BIF.erlang__op_greaterEq [lop_7, (ErlangInt 1)])
-           in let lop_11 = (BIF.erlang__element__2 [(ErlangInt 1), p_3])
+           in let
+             lop_6 =
+               (BIF.erlang__op_greaterEq [lop_7, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_11 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_3])
            in let rop_10 = (BIF.erlang__op_exactEq [lop_11, key_0])
            in (BIF.erlang__op_andalso [lop_6, rop_10])) ->
       let
-        arg_15 = (BIF.erlang__setelement__3 [(ErlangInt 1), p_3, key1_1])
+        arg_15 =
+          (BIF.erlang__setelement__3
+             [(ErlangInt (DBI.fromInt 1)), p_3, key1_1])
       in (erlps__property__1 [arg_15])
     _ -> (erlps__substitute_aliases_1__2 [as_2, p_3])
     _ -> (EXC.if_clause unit)
@@ -358,8 +402,12 @@ erlps__substitute_negations_1__2 [(ErlangCons (ErlangTuple [key_0,
       (erlps__property__2 [key1_1, (ErlangAtom "false")])
     _ | (ErlangAtom "true") <-
           (let    lop_7 = (BIF.erlang__tuple_size__1 [p_3])
-           in let lop_6 = (BIF.erlang__op_greaterEq [lop_7, (ErlangInt 1)])
-           in let lop_11 = (BIF.erlang__element__2 [(ErlangInt 1), p_3])
+           in let
+             lop_6 =
+               (BIF.erlang__op_greaterEq [lop_7, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_11 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_3])
            in let rop_10 = (BIF.erlang__op_exactEq [lop_11, key_0])
            in (BIF.erlang__op_andalso [lop_6, rop_10])) ->
       case p_3 of
@@ -414,8 +462,12 @@ erlps__expand_1__3 [p_0, l_1, ps_2] =
     _ | (isEAtom p_0) -> (erlps__expand_2__4 [p_0, p_0, l_1, ps_2])
     _ | (ErlangAtom "true") <-
           (let lop_7 = (BIF.erlang__tuple_size__1 [p_0])
-           in (BIF.erlang__op_greaterEq [lop_7, (ErlangInt 1)])) ->
-      let arg_10 = (BIF.erlang__element__2 [(ErlangInt 1), p_0])
+           in
+             (BIF.erlang__op_greaterEq
+                [lop_7, (ErlangInt (DBI.fromInt 1))])) ->
+      let
+        arg_10 =
+          (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_0])
       in (erlps__expand_2__4 [arg_10, p_0, l_1, ps_2])
     _ -> ps_2
     _ -> (EXC.if_clause unit)
@@ -432,8 +484,11 @@ erlps__expand_2__4 [key_0, p1_1, l_2, (ErlangCons p_3 ps_4)] =
     _ | (ErlangAtom "true") <-
           (let    lop_11 = (BIF.erlang__tuple_size__1 [p_3])
            in let
-             lop_10 = (BIF.erlang__op_greaterEq [lop_11, (ErlangInt 1)])
-           in let lop_15 = (BIF.erlang__element__2 [(ErlangInt 1), p_3])
+             lop_10 =
+               (BIF.erlang__op_greaterEq [lop_11, (ErlangInt (DBI.fromInt 1))])
+           in let
+             lop_15 =
+               (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_3])
            in let rop_14 = (BIF.erlang__op_exactEq [lop_15, key_0])
            in (BIF.erlang__op_andalso [lop_10, rop_14])) ->
       let arg_21 = (erlps__property__1 [p_3])
@@ -573,8 +628,12 @@ erlps__split__3 [(ErlangCons p_0 ps_1), store_2, rest_3] =
           something_else -> (EXC.case_clause something_else)
     _ | (ErlangAtom "true") <-
           (let lop_18 = (BIF.erlang__tuple_size__1 [p_0])
-           in (BIF.erlang__op_greaterEq [lop_18, (ErlangInt 1)])) ->
-      let    key_23 = (BIF.erlang__element__2 [(ErlangInt 1), p_0])
+           in
+             (BIF.erlang__op_greaterEq
+                [lop_18, (ErlangInt (DBI.fromInt 1))])) ->
+      let   
+        key_23 =
+          (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_0])
       in let case_24 = (BIF.erlang__is_map_key__2 [key_23, store_2])
       in
         case case_24 of
