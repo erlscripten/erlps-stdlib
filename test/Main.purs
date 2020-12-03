@@ -326,12 +326,12 @@ main =
         it "usort_1" do
             r <- exec_may_throw LS.erlps__usort_1__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "usort_rand" do
-        --    r <- exec_may_throw LS.erlps__usort_rand__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "usort_stable" do
-        --    r <- exec_may_throw LS.erlps__usort_stable__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "usort_rand" do
+            r <- exec_may_throw LS.erlps__usort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "usort_stable" do
+            r <- exec_may_throw LS.erlps__usort_stable__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
 
         it "keymerge" do
             r <- exec_may_throw LS.erlps__keymerge__1 [ErlangEmptyList]
@@ -342,9 +342,9 @@ main =
         it "keysort_1" do
             r <- exec_may_throw LS.erlps__keysort_1__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "keysort_rand" do
-        --    r <- exec_may_throw LS.erlps__keysort_rand__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "keysort_rand" do
+            r <- exec_may_throw LS.erlps__keysort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
         it "keysort_i" do
             r <- exec_may_throw LS.erlps__keysort_i__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
@@ -380,9 +380,9 @@ main =
         it "sort_1" do
             r <- exec_may_throw LS.erlps__sort_1__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "sort_rand" do
-        --    r <- exec_may_throw LS.erlps__sort_rand__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "sort_rand" do
+            r <- exec_may_throw LS.erlps__sort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
 
         it "ukeymerge" do
             r <- exec_may_throw LS.erlps__ukeymerge__1 [ErlangEmptyList]
@@ -393,15 +393,15 @@ main =
         it "ukeysort_1" do
             r <- exec_may_throw LS.erlps__ukeysort_1__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "ukeysort_rand" do
-        --    r <- exec_may_throw LS.erlps__ukeysort_rand__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "ukeysort_rand" do
+            r <- exec_may_throw LS.erlps__ukeysort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
         it "ukeysort_i" do
             r <- exec_may_throw LS.erlps__ukeysort_i__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "ukeysort_stable" do
-        --    r <- exec_may_throw LS.erlps__ukeysort_stable__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "ukeysort_stable" do
+            r <- exec_may_throw LS.erlps__ukeysort_stable__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
         it "ukeysort_error" do
             r <- exec_may_throw LS.erlps__ukeysort_error__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
@@ -421,9 +421,9 @@ main =
         it "funsort_error" do
             r <- exec_may_throw LS.erlps__funsort_error__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "funsort_rand" do
-        --    r <- exec_may_throw LS.erlps__funsort_rand__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "funsort_rand" do
+            r <- exec_may_throw LS.erlps__funsort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
 
         it "ufunmerge" do
             r <- exec_may_throw LS.erlps__ufunmerge__1 [ErlangEmptyList]
@@ -434,15 +434,15 @@ main =
         it "ufunsort_1" do
             r <- exec_may_throw LS.erlps__ufunsort_1__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "ufunsort_stable" do
-        --    r <- exec_may_throw LS.erlps__ufunsort_stable__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "ufunsort_stable" do
+            r <- exec_may_throw LS.erlps__ufunsort_stable__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
         it "ufunsort_error" do
             r <- exec_may_throw LS.erlps__ufunsort_error__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
-        --it "ufunsort_rand" do
-        --    r <- exec_may_throw LS.erlps__ufunsort_rand__1 [ErlangEmptyList]
-        --    make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "ufunsort_rand" do
+            r <- exec_may_throw LS.erlps__ufunsort_rand__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
 
         it "seq_loop" do
             r <- exec_may_throw LS.erlps__seq_loop__1 [ErlangEmptyList]
