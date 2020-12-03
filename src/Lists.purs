@@ -191,8 +191,8 @@ erlps__droplast__1 :: ErlangFun
 erlps__droplast__1 [(ErlangCons _t_0 (ErlangEmptyList))] =
   ErlangEmptyList
 erlps__droplast__1 [(ErlangCons h_0 t_1)] =
-  let head_3 = (erlps__droplast__1 [t_1])
-  in (ErlangCons h_0 head_3)
+  let tail_3 = (erlps__droplast__1 [t_1])
+  in (ErlangCons h_0 tail_3)
 erlps__droplast__1 [arg_5] = (EXC.function_clause unit)
 erlps__droplast__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -248,19 +248,19 @@ erlps__seq_loop__3 [n_0, x_1, l_2]
   in let
     arg_6 = (BIF.erlang__op_minus [x_1, (ErlangInt (DBI.fromInt 4))])
   in let
-    tail_10 =
+    head_10 =
       (BIF.erlang__op_minus [x_1, (ErlangInt (DBI.fromInt 3))])
   in let
-    tail_14 =
+    head_14 =
       (BIF.erlang__op_minus [x_1, (ErlangInt (DBI.fromInt 2))])
   in let
-    tail_18 =
+    head_18 =
       (BIF.erlang__op_minus [x_1, (ErlangInt (DBI.fromInt 1))])
   in
     (erlps__seq_loop__3
        [arg_3, arg_6,
-        (ErlangCons tail_10
-           (ErlangCons tail_14 (ErlangCons tail_18 (ErlangCons x_1 l_2))))])
+        (ErlangCons head_10
+           (ErlangCons head_14 (ErlangCons head_18 (ErlangCons x_1 l_2))))])
 erlps__seq_loop__3 [n_0, x_1, l_2]
   | (n_0 >= (ErlangInt (DBI.fromInt 2))) =
   let   
@@ -268,11 +268,11 @@ erlps__seq_loop__3 [n_0, x_1, l_2]
   in let
     arg_6 = (BIF.erlang__op_minus [x_1, (ErlangInt (DBI.fromInt 2))])
   in let
-    tail_10 =
+    head_10 =
       (BIF.erlang__op_minus [x_1, (ErlangInt (DBI.fromInt 1))])
   in
     (erlps__seq_loop__3
-       [arg_3, arg_6, (ErlangCons tail_10 (ErlangCons x_1 l_2))])
+       [arg_3, arg_6, (ErlangCons head_10 (ErlangCons x_1 l_2))])
 erlps__seq_loop__3 [(ErlangInt num_0), x_1, l_2]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
   (ErlangCons x_1 l_2)
@@ -473,8 +473,8 @@ erlps__sublist_2__2 [(ErlangCons h_0 t_1), l_2]
   | (l_2 > (ErlangInt (DBI.fromInt 0))) =
   let   
     arg_6 = (BIF.erlang__op_minus [l_2, (ErlangInt (DBI.fromInt 1))])
-  in let head_4 = (erlps__sublist_2__2 [t_1, arg_6])
-  in (ErlangCons h_0 head_4)
+  in let tail_4 = (erlps__sublist_2__2 [t_1, arg_6])
+  in (ErlangCons h_0 tail_4)
 erlps__sublist_2__2 [_, (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 0))) =
   ErlangEmptyList
@@ -490,8 +490,8 @@ erlps__delete__2 [item_0, (ErlangCons item_1 rest_2)]
   | (item_1 == item_0) =
   rest_2
 erlps__delete__2 [item_0, (ErlangCons h_1 rest_2)] =
-  let head_4 = (erlps__delete__2 [item_0, rest_2])
-  in (ErlangCons h_1 head_4)
+  let tail_4 = (erlps__delete__2 [item_0, rest_2])
+  in (ErlangCons h_1 tail_4)
 erlps__delete__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__delete__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__delete__2 args =
@@ -499,9 +499,9 @@ erlps__delete__2 args =
 
 erlps__zip__2 :: ErlangFun
 erlps__zip__2 [(ErlangCons x_0 xs_1), (ErlangCons y_2 ys_3)] =
-  let    tail_4 = (ErlangTuple [x_0, y_2])
-  in let head_7 = (erlps__zip__2 [xs_1, ys_3])
-  in (ErlangCons tail_4 head_7)
+  let    head_4 = (ErlangTuple [x_0, y_2])
+  in let tail_7 = (erlps__zip__2 [xs_1, ys_3])
+  in (ErlangCons head_4 tail_7)
 erlps__zip__2 [(ErlangEmptyList), (ErlangEmptyList)] =
   ErlangEmptyList
 erlps__zip__2 [arg_0, arg_1] = (EXC.function_clause unit)
@@ -534,9 +534,9 @@ erlps__zip3__3 :: ErlangFun
 erlps__zip3__3 [(ErlangCons x_0 xs_1), (ErlangCons y_2 ys_3),
                 (ErlangCons z_4 zs_5)]
   =
-  let    tail_6 = (ErlangTuple [x_0, y_2, z_4])
-  in let head_10 = (erlps__zip3__3 [xs_1, ys_3, zs_5])
-  in (ErlangCons tail_6 head_10)
+  let    head_6 = (ErlangTuple [x_0, y_2, z_4])
+  in let tail_10 = (erlps__zip3__3 [xs_1, ys_3, zs_5])
+  in (ErlangCons head_6 tail_10)
 erlps__zip3__3 [(ErlangEmptyList), (ErlangEmptyList),
                 (ErlangEmptyList)]
   =
@@ -576,11 +576,11 @@ erlps__zipwith__3 [f_0, (ErlangCons x_1 xs_2),
                    (ErlangCons y_3 ys_4)]
   =
   let   
-    tail_5 =
+    head_5 =
       (BIF.erlang__apply__2
          [f_0, (ErlangCons x_1 (ErlangCons y_3 ErlangEmptyList))])
-  in let head_9 = (erlps__zipwith__3 [f_0, xs_2, ys_4])
-  in (ErlangCons tail_5 head_9)
+  in let tail_9 = (erlps__zipwith__3 [f_0, xs_2, ys_4])
+  in (ErlangCons head_5 tail_9)
 erlps__zipwith__3 [f_0, (ErlangEmptyList), (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
@@ -594,13 +594,13 @@ erlps__zipwith3__4 [f_0, (ErlangCons x_1 xs_2),
                     (ErlangCons y_3 ys_4), (ErlangCons z_5 zs_6)]
   =
   let   
-    tail_7 =
+    head_7 =
       (BIF.erlang__apply__2
          [f_0,
           (ErlangCons x_1
              (ErlangCons y_3 (ErlangCons z_5 ErlangEmptyList)))])
-  in let head_12 = (erlps__zipwith3__4 [f_0, xs_2, ys_4, zs_6])
-  in (ErlangCons tail_7 head_12)
+  in let tail_12 = (erlps__zipwith3__4 [f_0, xs_2, ys_4, zs_6])
+  in (ErlangCons head_7 tail_12)
 erlps__zipwith3__4 [f_0, (ErlangEmptyList), (ErlangEmptyList),
                     (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
@@ -769,8 +769,8 @@ erlps__do_flatten__2 [(ErlangCons h_0 t_1), tail_2]
   let arg_4 = (erlps__do_flatten__2 [t_1, tail_2])
   in (erlps__do_flatten__2 [h_0, arg_4])
 erlps__do_flatten__2 [(ErlangCons h_0 t_1), tail_2] =
-  let head_4 = (erlps__do_flatten__2 [t_1, tail_2])
-  in (ErlangCons h_0 head_4)
+  let tail_4 = (erlps__do_flatten__2 [t_1, tail_2])
+  in (ErlangCons h_0 tail_4)
 erlps__do_flatten__2 [(ErlangEmptyList), tail_0] = tail_0
 erlps__do_flatten__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__do_flatten__2 args =
@@ -813,8 +813,8 @@ erlps__keydelete3__3 [key_0, n_1, (ErlangCons h_2 t_3)]
        in (BIF.erlang__op_eq [lop_4, key_0])) =
   t_3
 erlps__keydelete3__3 [key_0, n_1, (ErlangCons h_2 t_3)] =
-  let head_5 = (erlps__keydelete3__3 [key_0, n_1, t_3])
-  in (ErlangCons h_2 head_5)
+  let tail_5 = (erlps__keydelete3__3 [key_0, n_1, t_3])
+  in (ErlangCons h_2 tail_5)
 erlps__keydelete3__3 [_, _, (ErlangEmptyList)] = ErlangEmptyList
 erlps__keydelete3__3 [arg_0, arg_1, arg_2] =
   (EXC.function_clause unit)
@@ -840,8 +840,8 @@ erlps__keyreplace3__4 [key_0, pos_1, (ErlangCons tup_2 tail_3),
   (ErlangCons new_4 tail_3)
 erlps__keyreplace3__4 [key_0, pos_1, (ErlangCons h_2 t_3), new_4]
   =
-  let head_6 = (erlps__keyreplace3__4 [key_0, pos_1, t_3, new_4])
-  in (ErlangCons h_2 head_6)
+  let tail_6 = (erlps__keyreplace3__4 [key_0, pos_1, t_3, new_4])
+  in (ErlangCons h_2 tail_6)
 erlps__keyreplace3__4 [_, _, (ErlangEmptyList), _] =
   ErlangEmptyList
 erlps__keyreplace3__4 [arg_0, arg_1, arg_2, arg_3] =
@@ -891,8 +891,8 @@ erlps__keystore2__4 [key_0, n_1, (ErlangCons h_2 t_3), new_4]
        in (BIF.erlang__op_eq [lop_7, key_0])) =
   (ErlangCons new_4 t_3)
 erlps__keystore2__4 [key_0, n_1, (ErlangCons h_2 t_3), new_4] =
-  let head_6 = (erlps__keystore2__4 [key_0, n_1, t_3, new_4])
-  in (ErlangCons h_2 head_6)
+  let tail_6 = (erlps__keystore2__4 [key_0, n_1, t_3, new_4])
+  in (ErlangCons h_2 tail_6)
 erlps__keystore2__4 [_key_0, _n_1, (ErlangEmptyList), new_2] =
   (ErlangCons new_2 ErlangEmptyList)
 erlps__keystore2__4 [arg_5, arg_6, arg_7, arg_8] =
@@ -1160,9 +1160,9 @@ erlps__keymap__3 [fun_0, index_1, (ErlangCons tup_2 tail_3)] =
       (BIF.erlang__apply__2
          [fun_0, (ErlangCons arg_8 ErlangEmptyList)])
   in let
-    tail_4 = (BIF.erlang__setelement__3 [index_1, tup_2, arg_7])
-  in let head_12 = (erlps__keymap__3 [fun_0, index_1, tail_3])
-  in (ErlangCons tail_4 head_12)
+    head_4 = (BIF.erlang__setelement__3 [index_1, tup_2, arg_7])
+  in let tail_12 = (erlps__keymap__3 [fun_0, index_1, tail_3])
+  in (ErlangCons head_4 tail_12)
 erlps__keymap__3 [fun_0, index_1, (ErlangEmptyList)]
   | (((isENum index_1) &&
         (index_1 >= (ErlangInt (DBI.fromInt 1)))) &&
@@ -1473,10 +1473,10 @@ erlps__any__2 args =
 erlps__map__2 :: ErlangFun
 erlps__map__2 [f_0, (ErlangCons h_1 t_2)] =
   let   
-    tail_3 =
+    head_3 =
       (BIF.erlang__apply__2 [f_0, (ErlangCons h_1 ErlangEmptyList)])
-  in let head_6 = (erlps__map__2 [f_0, t_2])
-  in (ErlangCons tail_3 head_6)
+  in let tail_6 = (erlps__map__2 [f_0, t_2])
+  in (ErlangCons head_3 tail_6)
 erlps__map__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 1))) =
   ErlangEmptyList
@@ -1586,11 +1586,11 @@ erlps__filtermap__2 [f_0, (ErlangCons hd_1 tail_2)] =
   in
     case case_3 of
       (ErlangAtom "true") ->
-        let head_7 = (erlps__filtermap__2 [f_0, tail_2])
-        in (ErlangCons hd_1 head_7)
+        let tail_7 = (erlps__filtermap__2 [f_0, tail_2])
+        in (ErlangCons hd_1 tail_7)
       (ErlangTuple [(ErlangAtom "true"), val_10]) ->
-        let head_12 = (erlps__filtermap__2 [f_0, tail_2])
-        in (ErlangCons val_10 head_12)
+        let tail_12 = (erlps__filtermap__2 [f_0, tail_2])
+        in (ErlangCons val_10 tail_12)
       (ErlangAtom "false") -> (erlps__filtermap__2 [f_0, tail_2])
       something_else -> (EXC.case_clause something_else)
 erlps__filtermap__2 [f_0, (ErlangEmptyList)]
@@ -1676,8 +1676,8 @@ erlps__takewhile__2 [pred_0, (ErlangCons hd_1 tail_2)] =
   in
     case case_3 of
       (ErlangAtom "true") ->
-        let head_7 = (erlps__takewhile__2 [pred_0, tail_2])
-        in (ErlangCons hd_1 head_7)
+        let tail_7 = (erlps__takewhile__2 [pred_0, tail_2])
+        in (ErlangCons hd_1 tail_7)
       (ErlangAtom "false") -> ErlangEmptyList
       something_else -> (EXC.case_clause something_else)
 erlps__takewhile__2 [pred_0, (ErlangEmptyList)]
@@ -1792,8 +1792,8 @@ erlps__split__3 args =
 erlps__join__2 :: ErlangFun
 erlps__join__2 [_sep_0, (ErlangEmptyList)] = ErlangEmptyList
 erlps__join__2 [sep_0, (ErlangCons h_1 t_2)] =
-  let head_4 = (erlps__join_prepend__2 [sep_0, t_2])
-  in (ErlangCons h_1 head_4)
+  let tail_4 = (erlps__join_prepend__2 [sep_0, t_2])
+  in (ErlangCons h_1 tail_4)
 erlps__join__2 [arg_7, arg_8] = (EXC.function_clause unit)
 erlps__join__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -1802,8 +1802,8 @@ erlps__join_prepend__2 :: ErlangFun
 erlps__join_prepend__2 [_sep_0, (ErlangEmptyList)] =
   ErlangEmptyList
 erlps__join_prepend__2 [sep_0, (ErlangCons h_1 t_2)] =
-  let head_6 = (erlps__join_prepend__2 [sep_0, t_2])
-  in (ErlangCons sep_0 (ErlangCons h_1 head_6))
+  let tail_6 = (erlps__join_prepend__2 [sep_0, t_2])
+  in (ErlangCons sep_0 (ErlangCons h_1 tail_6))
 erlps__join_prepend__2 [arg_9, arg_10] =
   (EXC.function_clause unit)
 erlps__join_prepend__2 args =
@@ -1934,25 +1934,25 @@ erlps__mergel__2 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangCon
                   acc_6]
   =
   let
-    tail_9 =
+    head_9 =
       (erlps__merge3_1__6
          [t1_0, ErlangEmptyList, h2_1, t2_2, h3_3, t3_4])
-  in (erlps__mergel__2 [l_5, (ErlangCons tail_9 acc_6)])
+  in (erlps__mergel__2 [l_5, (ErlangCons head_9 acc_6)])
 erlps__mergel__2 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangEmptyList))),
                   acc_3]
   =
   let
-    tail_5 = (erlps__merge2_1__4 [t1_0, h2_1, t2_2, ErlangEmptyList])
+    head_5 = (erlps__merge2_1__4 [t1_0, h2_1, t2_2, ErlangEmptyList])
   in
-    (erlps__rmergel__2 [(ErlangCons tail_5 acc_3), ErlangEmptyList])
+    (erlps__rmergel__2 [(ErlangCons head_5 acc_3), ErlangEmptyList])
 erlps__mergel__2 [(ErlangCons l_0 (ErlangEmptyList)),
                   (ErlangEmptyList)]
   =
   l_0
 erlps__mergel__2 [(ErlangCons l_0 (ErlangEmptyList)), acc_1] =
-  let tail_3 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_3 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
-    (erlps__rmergel__2 [(ErlangCons tail_3 acc_1), ErlangEmptyList])
+    (erlps__rmergel__2 [(ErlangCons head_3 acc_1), ErlangEmptyList])
 erlps__mergel__2 [(ErlangEmptyList), (ErlangEmptyList)] =
   ErlangEmptyList
 erlps__mergel__2 [(ErlangEmptyList), acc_0] =
@@ -1974,22 +1974,22 @@ erlps__rmergel__2 [(ErlangCons (ErlangCons h3_0 t3_1) (ErlangCons (ErlangCons h2
                    acc_6]
   =
   let
-    tail_9 =
+    head_9 =
       (erlps__rmerge3_1__6
          [t1_4, ErlangEmptyList, h2_2, t2_3, h3_0, t3_1])
-  in (erlps__rmergel__2 [l_5, (ErlangCons tail_9 acc_6)])
+  in (erlps__rmergel__2 [l_5, (ErlangCons head_9 acc_6)])
 erlps__rmergel__2 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 (ErlangEmptyList))),
                    acc_3]
   =
   let
-    tail_5 =
+    head_5 =
       (erlps__rmerge2_1__4 [t1_2, h2_0, t2_1, ErlangEmptyList])
   in
-    (erlps__mergel__2 [(ErlangCons tail_5 acc_3), ErlangEmptyList])
+    (erlps__mergel__2 [(ErlangCons head_5 acc_3), ErlangEmptyList])
 erlps__rmergel__2 [(ErlangCons l_0 (ErlangEmptyList)), acc_1] =
-  let tail_3 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_3 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
-    (erlps__mergel__2 [(ErlangCons tail_3 acc_1), ErlangEmptyList])
+    (erlps__mergel__2 [(ErlangCons head_3 acc_1), ErlangEmptyList])
 erlps__rmergel__2 [(ErlangEmptyList), acc_0] =
   (erlps__mergel__2 [acc_0, ErlangEmptyList])
 erlps__rmergel__2 [arg_3, arg_4] = (EXC.function_clause unit)
@@ -2476,24 +2476,24 @@ erlps__umergel__3 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangCo
                    acc_6, (ErlangAtom "asc")]
   =
   let
-    tail_9 =
+    head_9 =
       (erlps__umerge3_1__7
          [t1_0, (ErlangCons h2_1 h3_3), t2_2, h2_1, ErlangEmptyList, t3_4,
           h3_3])
   in
     (erlps__umergel__3
-       [l_5, (ErlangCons tail_9 acc_6), (ErlangAtom "asc")])
+       [l_5, (ErlangCons head_9 acc_6), (ErlangAtom "asc")])
 erlps__umergel__3 [(ErlangCons (ErlangCons h3_0 t3_1) (ErlangCons (ErlangCons h2_2 t2_3) (ErlangCons t1_4 l_5))),
                    acc_6, (ErlangAtom "desc")]
   =
   let
-    tail_9 =
+    head_9 =
       (erlps__umerge3_1__7
          [t1_4, (ErlangCons h2_2 h3_0), t2_3, h2_2, ErlangEmptyList, t3_1,
           h3_0])
   in
     (erlps__umergel__3
-       [l_5, (ErlangCons tail_9 acc_6), (ErlangAtom "desc")])
+       [l_5, (ErlangCons head_9 acc_6), (ErlangAtom "desc")])
 erlps__umergel__3 [(ErlangCons a_0 (ErlangCons (ErlangEmptyList) l_1)),
                    acc_2, o_3]
   =
@@ -2507,20 +2507,20 @@ erlps__umergel__3 [(ErlangCons (ErlangCons h1_0 t1_1) (ErlangCons t2_2 l_3)),
                    acc_4, (ErlangAtom "asc")]
   =
   let
-    tail_7 =
+    head_7 =
       (erlps__umerge2_2__4 [t1_1, t2_2, ErlangEmptyList, h1_0])
   in
     (erlps__umergel__3
-       [l_3, (ErlangCons tail_7 acc_4), (ErlangAtom "asc")])
+       [l_3, (ErlangCons head_7 acc_4), (ErlangAtom "asc")])
 erlps__umergel__3 [(ErlangCons t2_0 (ErlangCons (ErlangCons h1_1 t1_2) l_3)),
                    acc_4, (ErlangAtom "desc")]
   =
   let
-    tail_7 =
+    head_7 =
       (erlps__umerge2_2__4 [t1_2, t2_0, ErlangEmptyList, h1_1])
   in
     (erlps__umergel__3
-       [l_3, (ErlangCons tail_7 acc_4), (ErlangAtom "desc")])
+       [l_3, (ErlangCons head_7 acc_4), (ErlangAtom "desc")])
 erlps__umergel__3 [(ErlangCons l_0 (ErlangEmptyList)),
                    (ErlangEmptyList), _o_1]
   =
@@ -2528,10 +2528,10 @@ erlps__umergel__3 [(ErlangCons l_0 (ErlangEmptyList)),
 erlps__umergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                    o_2]
   =
-  let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__rumergel__3
-       [(ErlangCons tail_4 acc_1), ErlangEmptyList, o_2])
+       [(ErlangCons head_4 acc_1), ErlangEmptyList, o_2])
 erlps__umergel__3 [(ErlangEmptyList), (ErlangEmptyList), _o_0] =
   ErlangEmptyList
 erlps__umergel__3 [(ErlangEmptyList), acc_0, o_1] =
@@ -2546,47 +2546,47 @@ erlps__rumergel__3 [(ErlangCons (ErlangCons h3_0 t3_1) (ErlangCons (ErlangCons h
                     acc_6, (ErlangAtom "asc")]
   =
   let
-    tail_9 =
+    head_9 =
       (erlps__rumerge3_1__6
          [t1_4, t2_3, h2_2, ErlangEmptyList, t3_1, h3_0])
   in
     (erlps__rumergel__3
-       [l_5, (ErlangCons tail_9 acc_6), (ErlangAtom "asc")])
+       [l_5, (ErlangCons head_9 acc_6), (ErlangAtom "asc")])
 erlps__rumergel__3 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) (ErlangCons (ErlangCons h3_3 t3_4) l_5))),
                     acc_6, (ErlangAtom "desc")]
   =
   let
-    tail_9 =
+    head_9 =
       (erlps__rumerge3_1__6
          [t1_0, t2_2, h2_1, ErlangEmptyList, t3_4, h3_3])
   in
     (erlps__rumergel__3
-       [l_5, (ErlangCons tail_9 acc_6), (ErlangAtom "desc")])
+       [l_5, (ErlangCons head_9 acc_6), (ErlangAtom "desc")])
 erlps__rumergel__3 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 l_3)),
                     acc_4, (ErlangAtom "asc")]
   =
   let
-    tail_7 =
+    head_7 =
       (erlps__rumerge2_1__4 [t1_2, t2_1, ErlangEmptyList, h2_0])
   in
     (erlps__rumergel__3
-       [l_3, (ErlangCons tail_7 acc_4), (ErlangAtom "asc")])
+       [l_3, (ErlangCons head_7 acc_4), (ErlangAtom "asc")])
 erlps__rumergel__3 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) l_3)),
                     acc_4, (ErlangAtom "desc")]
   =
   let
-    tail_7 =
+    head_7 =
       (erlps__rumerge2_1__4 [t1_0, t2_2, ErlangEmptyList, h2_1])
   in
     (erlps__rumergel__3
-       [l_3, (ErlangCons tail_7 acc_4), (ErlangAtom "desc")])
+       [l_3, (ErlangCons head_7 acc_4), (ErlangAtom "desc")])
 erlps__rumergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                     o_2]
   =
-  let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__umergel__3
-       [(ErlangCons tail_4 acc_1), ErlangEmptyList, o_2])
+       [(ErlangCons head_4 acc_1), ErlangEmptyList, o_2])
 erlps__rumergel__3 [(ErlangEmptyList), acc_0, o_1] =
   (erlps__umergel__3 [acc_0, ErlangEmptyList, o_1])
 erlps__rumergel__3 [arg_5, arg_6, arg_7] =
@@ -3180,24 +3180,24 @@ erlps__keymergel__4 [i_0,
   =
   let    arg_12 = (BIF.erlang__element__2 [i_0, h2_2])
   in let
-    tail_9 =
+    head_9 =
       (erlps__keymerge2_1__6
          [i_0, t1_1, arg_12, h2_2, t2_3, ErlangEmptyList])
   in
     (erlps__keymergel__4
-       [i_0, l_4, (ErlangCons tail_9 acc_5), (ErlangAtom "asc")])
+       [i_0, l_4, (ErlangCons head_9 acc_5), (ErlangAtom "asc")])
 erlps__keymergel__4 [i_0,
                      (ErlangCons (ErlangCons h2_1 t2_2) (ErlangCons t1_3 l_4)),
                      acc_5, (ErlangAtom "desc")]
   =
   let    arg_12 = (BIF.erlang__element__2 [i_0, h2_1])
   in let
-    tail_9 =
+    head_9 =
       (erlps__keymerge2_1__6
          [i_0, t1_3, arg_12, h2_1, t2_2, ErlangEmptyList])
   in
     (erlps__keymergel__4
-       [i_0, l_4, (ErlangCons tail_9 acc_5), (ErlangAtom "desc")])
+       [i_0, l_4, (ErlangCons head_9 acc_5), (ErlangAtom "desc")])
 erlps__keymergel__4 [_i_0, (ErlangCons l_1 (ErlangEmptyList)),
                      (ErlangEmptyList), _o_2]
   =
@@ -3205,10 +3205,10 @@ erlps__keymergel__4 [_i_0, (ErlangCons l_1 (ErlangEmptyList)),
 erlps__keymergel__4 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                      acc_2, o_3]
   =
-  let tail_6 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
+  let head_6 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__rkeymergel__4
-       [i_0, (ErlangCons tail_6 acc_2), ErlangEmptyList, o_3])
+       [i_0, (ErlangCons head_6 acc_2), ErlangEmptyList, o_3])
 erlps__keymergel__4 [i_0, (ErlangEmptyList), acc_1, o_2] =
   (erlps__rkeymergel__4 [i_0, acc_1, ErlangEmptyList, o_2])
 erlps__keymergel__4 [arg_7, arg_8, arg_9, arg_10] =
@@ -3249,31 +3249,31 @@ erlps__rkeymergel__4 [i_0,
   =
   let    arg_12 = (BIF.erlang__element__2 [i_0, h2_1])
   in let
-    tail_9 =
+    head_9 =
       (erlps__rkeymerge2_1__6
          [i_0, t1_3, arg_12, h2_1, t2_2, ErlangEmptyList])
   in
     (erlps__rkeymergel__4
-       [i_0, l_4, (ErlangCons tail_9 acc_5), (ErlangAtom "asc")])
+       [i_0, l_4, (ErlangCons head_9 acc_5), (ErlangAtom "asc")])
 erlps__rkeymergel__4 [i_0,
                       (ErlangCons t1_1 (ErlangCons (ErlangCons h2_2 t2_3) l_4)),
                       acc_5, (ErlangAtom "desc")]
   =
   let    arg_12 = (BIF.erlang__element__2 [i_0, h2_2])
   in let
-    tail_9 =
+    head_9 =
       (erlps__rkeymerge2_1__6
          [i_0, t1_1, arg_12, h2_2, t2_3, ErlangEmptyList])
   in
     (erlps__rkeymergel__4
-       [i_0, l_4, (ErlangCons tail_9 acc_5), (ErlangAtom "desc")])
+       [i_0, l_4, (ErlangCons head_9 acc_5), (ErlangAtom "desc")])
 erlps__rkeymergel__4 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                       acc_2, o_3]
   =
-  let tail_6 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
+  let head_6 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__keymergel__4
-       [i_0, (ErlangCons tail_6 acc_2), ErlangEmptyList, o_3])
+       [i_0, (ErlangCons head_6 acc_2), ErlangEmptyList, o_3])
 erlps__rkeymergel__4 [i_0, (ErlangEmptyList), acc_1, o_2] =
   (erlps__keymergel__4 [i_0, acc_1, ErlangEmptyList, o_2])
 erlps__rkeymergel__4 [arg_7, arg_8, arg_9, arg_10] =
@@ -3801,11 +3801,11 @@ erlps__ukeysplit_2__5 [i_0, y_1, ey_2, (ErlangCons z_3 l_4), r_5]
       ez_9 | (ey_2 == ez_9) ->
         (erlps__ukeysplit_2__5 [i_0, y_1, ey_2, l_4, r_5])
       ez_15 | (ey_2 < ez_15) ->
-        let tail_24 = (BIF.lists__reverse__2 [r_5, ErlangEmptyList])
+        let head_24 = (BIF.lists__reverse__2 [r_5, ErlangEmptyList])
         in
           (erlps__ukeysplit_1__8
              [i_0, y_1, ey_2, z_3, ez_15, l_4, ErlangEmptyList,
-              (ErlangCons tail_24 ErlangEmptyList)])
+              (ErlangCons head_24 ErlangEmptyList)])
       ez_28 ->
         (erlps__ukeysplit_2__5
            [i_0, z_3, ez_28, l_4, (ErlangCons y_1 r_5)])
@@ -3837,10 +3837,10 @@ erlps__ukeymergel__3 [i_0,
   =
   let    arg_12 = (BIF.erlang__element__2 [i_0, h1_1])
   in let
-    tail_9 =
+    head_9 =
       (erlps__ukeymerge2_2__6
          [i_0, t1_2, arg_12, h1_1, t2_3, ErlangEmptyList])
-  in (erlps__ukeymergel__3 [i_0, l_4, (ErlangCons tail_9 acc_5)])
+  in (erlps__ukeymergel__3 [i_0, l_4, (ErlangCons head_9 acc_5)])
 erlps__ukeymergel__3 [_i_0, (ErlangCons l_1 (ErlangEmptyList)),
                       (ErlangEmptyList)]
   =
@@ -3848,10 +3848,10 @@ erlps__ukeymergel__3 [_i_0, (ErlangCons l_1 (ErlangEmptyList)),
 erlps__ukeymergel__3 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                       acc_2]
   =
-  let tail_5 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
+  let head_5 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__rukeymergel__3
-       [i_0, (ErlangCons tail_5 acc_2), ErlangEmptyList])
+       [i_0, (ErlangCons head_5 acc_2), ErlangEmptyList])
 erlps__ukeymergel__3 [i_0, (ErlangEmptyList), acc_1] =
   (erlps__rukeymergel__3 [i_0, acc_1, ErlangEmptyList])
 erlps__ukeymergel__3 [arg_5, arg_6, arg_7] =
@@ -3878,17 +3878,17 @@ erlps__rukeymergel__3 [i_0,
   =
   let    arg_12 = (BIF.erlang__element__2 [i_0, h2_1])
   in let
-    tail_9 =
+    head_9 =
       (erlps__rukeymerge2_1__6
          [i_0, t1_3, arg_12, t2_2, ErlangEmptyList, h2_1])
-  in (erlps__rukeymergel__3 [i_0, l_4, (ErlangCons tail_9 acc_5)])
+  in (erlps__rukeymergel__3 [i_0, l_4, (ErlangCons head_9 acc_5)])
 erlps__rukeymergel__3 [i_0, (ErlangCons l_1 (ErlangEmptyList)),
                        acc_2]
   =
-  let tail_5 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
+  let head_5 = (BIF.lists__reverse__2 [l_1, ErlangEmptyList])
   in
     (erlps__ukeymergel__3
-       [i_0, (ErlangCons tail_5 acc_2), ErlangEmptyList])
+       [i_0, (ErlangCons head_5 acc_2), ErlangEmptyList])
 erlps__rukeymergel__3 [i_0, (ErlangEmptyList), acc_1] =
   (erlps__ukeymergel__3 [i_0, acc_1, ErlangEmptyList])
 erlps__rukeymergel__3 [arg_5, arg_6, arg_7] =
@@ -4653,20 +4653,20 @@ erlps__fmergel__4 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) l_3)),
                    acc_4, fun_5, (ErlangAtom "asc")]
   =
   let
-    tail_8 =
+    head_8 =
       (erlps__fmerge2_1__5 [t1_0, h2_1, fun_5, t2_2, ErlangEmptyList])
   in
     (erlps__fmergel__4
-       [l_3, (ErlangCons tail_8 acc_4), fun_5, (ErlangAtom "asc")])
+       [l_3, (ErlangCons head_8 acc_4), fun_5, (ErlangAtom "asc")])
 erlps__fmergel__4 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 l_3)),
                    acc_4, fun_5, (ErlangAtom "desc")]
   =
   let
-    tail_8 =
+    head_8 =
       (erlps__fmerge2_1__5 [t1_2, h2_0, fun_5, t2_1, ErlangEmptyList])
   in
     (erlps__fmergel__4
-       [l_3, (ErlangCons tail_8 acc_4), fun_5, (ErlangAtom "desc")])
+       [l_3, (ErlangCons head_8 acc_4), fun_5, (ErlangAtom "desc")])
 erlps__fmergel__4 [(ErlangCons l_0 (ErlangEmptyList)),
                    (ErlangEmptyList), _fun_1, _o_2]
   =
@@ -4674,10 +4674,10 @@ erlps__fmergel__4 [(ErlangCons l_0 (ErlangEmptyList)),
 erlps__fmergel__4 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                    fun_2, o_3]
   =
-  let tail_5 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_5 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__rfmergel__4
-       [(ErlangCons tail_5 acc_1), ErlangEmptyList, fun_2, o_3])
+       [(ErlangCons head_5 acc_1), ErlangEmptyList, fun_2, o_3])
 erlps__fmergel__4 [(ErlangEmptyList), acc_0, fun_1, o_2] =
   (erlps__rfmergel__4 [acc_0, ErlangEmptyList, fun_1, o_2])
 erlps__fmergel__4 [arg_7, arg_8, arg_9, arg_10] =
@@ -4690,27 +4690,27 @@ erlps__rfmergel__4 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 l_3)),
                     acc_4, fun_5, (ErlangAtom "asc")]
   =
   let
-    tail_8 =
+    head_8 =
       (erlps__rfmerge2_1__5 [t1_2, h2_0, fun_5, t2_1, ErlangEmptyList])
   in
     (erlps__rfmergel__4
-       [l_3, (ErlangCons tail_8 acc_4), fun_5, (ErlangAtom "asc")])
+       [l_3, (ErlangCons head_8 acc_4), fun_5, (ErlangAtom "asc")])
 erlps__rfmergel__4 [(ErlangCons t1_0 (ErlangCons (ErlangCons h2_1 t2_2) l_3)),
                     acc_4, fun_5, (ErlangAtom "desc")]
   =
   let
-    tail_8 =
+    head_8 =
       (erlps__rfmerge2_1__5 [t1_0, h2_1, fun_5, t2_2, ErlangEmptyList])
   in
     (erlps__rfmergel__4
-       [l_3, (ErlangCons tail_8 acc_4), fun_5, (ErlangAtom "desc")])
+       [l_3, (ErlangCons head_8 acc_4), fun_5, (ErlangAtom "desc")])
 erlps__rfmergel__4 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                     fun_2, o_3]
   =
-  let tail_5 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_5 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__fmergel__4
-       [(ErlangCons tail_5 acc_1), ErlangEmptyList, fun_2, o_3])
+       [(ErlangCons head_5 acc_1), ErlangEmptyList, fun_2, o_3])
 erlps__rfmergel__4 [(ErlangEmptyList), acc_0, fun_1, o_2] =
   (erlps__fmergel__4 [acc_0, ErlangEmptyList, fun_1, o_2])
 erlps__rfmergel__4 [arg_7, arg_8, arg_9, arg_10] =
@@ -4988,11 +4988,11 @@ erlps__ufsplit_2__4 [y_0, (ErlangCons z_1 l_2), fun_3, r_4] =
           case case_9 of
             (ErlangAtom "true") -> (erlps__ufsplit_2__4 [y_0, l_2, fun_3, r_4])
             (ErlangAtom "false") ->
-              let tail_23 = (BIF.lists__reverse__2 [r_4, ErlangEmptyList])
+              let head_23 = (BIF.lists__reverse__2 [r_4, ErlangEmptyList])
               in
                 (erlps__ufsplit_1__6
                    [z_1, y_0, fun_3, l_2, ErlangEmptyList,
-                    (ErlangCons tail_23 ErlangEmptyList)])
+                    (ErlangCons head_23 ErlangEmptyList)])
             something_else -> (EXC.case_clause something_else)
       (ErlangAtom "false") ->
         (erlps__ufsplit_2__4 [z_1, l_2, fun_3, (ErlangCons y_0 r_4)])
@@ -5009,9 +5009,9 @@ erlps__ufmergel__3 [(ErlangCons (ErlangCons h1_0 t1_1) (ErlangCons t2_2 l_3)),
                     acc_4, fun_5]
   =
   let
-    tail_8 =
+    head_8 =
       (erlps__ufmerge2_2__5 [h1_0, t1_1, fun_5, t2_2, ErlangEmptyList])
-  in (erlps__ufmergel__3 [l_3, (ErlangCons tail_8 acc_4), fun_5])
+  in (erlps__ufmergel__3 [l_3, (ErlangCons head_8 acc_4), fun_5])
 erlps__ufmergel__3 [(ErlangCons l_0 (ErlangEmptyList)),
                     (ErlangEmptyList), _fun_1]
   =
@@ -5019,10 +5019,10 @@ erlps__ufmergel__3 [(ErlangCons l_0 (ErlangEmptyList)),
 erlps__ufmergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                     fun_2]
   =
-  let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__rufmergel__3
-       [(ErlangCons tail_4 acc_1), ErlangEmptyList, fun_2])
+       [(ErlangCons head_4 acc_1), ErlangEmptyList, fun_2])
 erlps__ufmergel__3 [(ErlangEmptyList), acc_0, fun_1] =
   (erlps__rufmergel__3 [acc_0, ErlangEmptyList, fun_1])
 erlps__ufmergel__3 [arg_5, arg_6, arg_7] =
@@ -5035,17 +5035,17 @@ erlps__rufmergel__3 [(ErlangCons (ErlangCons h2_0 t2_1) (ErlangCons t1_2 l_3)),
                      acc_4, fun_5]
   =
   let
-    tail_8 =
+    head_8 =
       (erlps__rufmerge2_1__5
          [t1_2, h2_0, fun_5, t2_1, ErlangEmptyList])
-  in (erlps__rufmergel__3 [l_3, (ErlangCons tail_8 acc_4), fun_5])
+  in (erlps__rufmergel__3 [l_3, (ErlangCons head_8 acc_4), fun_5])
 erlps__rufmergel__3 [(ErlangCons l_0 (ErlangEmptyList)), acc_1,
                      fun_2]
   =
-  let tail_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
+  let head_4 = (BIF.lists__reverse__2 [l_0, ErlangEmptyList])
   in
     (erlps__ufmergel__3
-       [(ErlangCons tail_4 acc_1), ErlangEmptyList, fun_2])
+       [(ErlangCons head_4 acc_1), ErlangEmptyList, fun_2])
 erlps__rufmergel__3 [(ErlangEmptyList), acc_0, fun_1] =
   (erlps__ufmergel__3 [acc_0, ErlangEmptyList, fun_1])
 erlps__rufmergel__3 [arg_5, arg_6, arg_7] =

@@ -118,8 +118,8 @@ erlps__fetch_keys__1 :: ErlangFun
 erlps__fetch_keys__1 [(ErlangCons (ErlangTuple [key_0,
                                                 _]) dict_1)]
   =
-  let head_3 = (erlps__fetch_keys__1 [dict_1])
-  in (ErlangCons key_0 head_3)
+  let tail_3 = (erlps__fetch_keys__1 [dict_1])
+  in (ErlangCons key_0 tail_3)
 erlps__fetch_keys__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__fetch_keys__1 [arg_0] = (EXC.function_clause unit)
 erlps__fetch_keys__1 args =
@@ -133,8 +133,8 @@ erlps__erase__2 [key_0,
 erlps__erase__2 [key_0,
                  (ErlangCons e_2@(ErlangTuple [k_1, _]) dict_3)]
   | (key_0 > k_1) =
-  let head_5 = (erlps__erase__2 [key_0, dict_3])
-  in (ErlangCons e_2 head_5)
+  let tail_5 = (erlps__erase__2 [key_0, dict_3])
+  in (ErlangCons e_2 tail_5)
 erlps__erase__2 [_key_0,
                  (ErlangCons (ErlangTuple [_k_1, _val_2]) dict_3)]
   =
@@ -175,21 +175,21 @@ erlps__store__3 :: ErlangFun
 erlps__store__3 [key_0, new_1,
                  dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
   | (key_0 < k_2) =
-  let tail_4 = (ErlangTuple [key_0, new_1])
-  in (ErlangCons tail_4 dict_3)
+  let head_4 = (ErlangTuple [key_0, new_1])
+  in (ErlangCons head_4 dict_3)
 erlps__store__3 [key_0, new_1,
                  (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
   | (key_0 > k_2) =
-  let head_6 = (erlps__store__3 [key_0, new_1, dict_4])
-  in (ErlangCons e_3 head_6)
+  let tail_6 = (erlps__store__3 [key_0, new_1, dict_4])
+  in (ErlangCons e_3 tail_6)
 erlps__store__3 [key_0, new_1,
                  (ErlangCons (ErlangTuple [_k_2, _old_3]) dict_4)]
   =
-  let tail_5 = (ErlangTuple [key_0, new_1])
-  in (ErlangCons tail_5 dict_4)
+  let head_5 = (ErlangTuple [key_0, new_1])
+  in (ErlangCons head_5 dict_4)
 erlps__store__3 [key_0, new_1, (ErlangEmptyList)] =
-  let tail_2 = (ErlangTuple [key_0, new_1])
-  in (ErlangCons tail_2 ErlangEmptyList)
+  let head_2 = (ErlangTuple [key_0, new_1])
+  in (ErlangCons head_2 ErlangEmptyList)
 erlps__store__3 [arg_6, arg_7, arg_8] =
   (EXC.function_clause unit)
 erlps__store__3 args =
@@ -200,14 +200,14 @@ erlps__append__3 [key_0, new_1,
                   dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
   | (key_0 < k_2) =
   let
-    tail_4 =
+    head_4 =
       (ErlangTuple [key_0, (ErlangCons new_1 ErlangEmptyList)])
-  in (ErlangCons tail_4 dict_3)
+  in (ErlangCons head_4 dict_3)
 erlps__append__3 [key_0, new_1,
                   (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
   | (key_0 > k_2) =
-  let head_6 = (erlps__append__3 [key_0, new_1, dict_4])
-  in (ErlangCons e_3 head_6)
+  let tail_6 = (erlps__append__3 [key_0, new_1, dict_4])
+  in (ErlangCons e_3 tail_6)
 erlps__append__3 [key_0, new_1,
                   (ErlangCons (ErlangTuple [_k_2, old_3]) dict_4)]
   =
@@ -215,13 +215,13 @@ erlps__append__3 [key_0, new_1,
     tup_el_7 =
       (BIF.erlang__op_append
          [old_3, (ErlangCons new_1 ErlangEmptyList)])
-  in let tail_5 = (ErlangTuple [key_0, tup_el_7])
-  in (ErlangCons tail_5 dict_4)
+  in let head_5 = (ErlangTuple [key_0, tup_el_7])
+  in (ErlangCons head_5 dict_4)
 erlps__append__3 [key_0, new_1, (ErlangEmptyList)] =
   let
-    tail_2 =
+    head_2 =
       (ErlangTuple [key_0, (ErlangCons new_1 ErlangEmptyList)])
-  in (ErlangCons tail_2 ErlangEmptyList)
+  in (ErlangCons head_2 ErlangEmptyList)
 erlps__append__3 [arg_8, arg_9, arg_10] =
   (EXC.function_clause unit)
 erlps__append__3 args =
@@ -231,22 +231,22 @@ erlps__append_list__3 :: ErlangFun
 erlps__append_list__3 [key_0, newlist_1,
                        dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
   | (key_0 < k_2) =
-  let tail_4 = (ErlangTuple [key_0, newlist_1])
-  in (ErlangCons tail_4 dict_3)
+  let head_4 = (ErlangTuple [key_0, newlist_1])
+  in (ErlangCons head_4 dict_3)
 erlps__append_list__3 [key_0, newlist_1,
                        (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
   | (key_0 > k_2) =
-  let head_6 = (erlps__append_list__3 [key_0, newlist_1, dict_4])
-  in (ErlangCons e_3 head_6)
+  let tail_6 = (erlps__append_list__3 [key_0, newlist_1, dict_4])
+  in (ErlangCons e_3 tail_6)
 erlps__append_list__3 [key_0, newlist_1,
                        (ErlangCons (ErlangTuple [_k_2, old_3]) dict_4)]
   =
   let    tup_el_7 = (BIF.erlang__op_append [old_3, newlist_1])
-  in let tail_5 = (ErlangTuple [key_0, tup_el_7])
-  in (ErlangCons tail_5 dict_4)
+  in let head_5 = (ErlangTuple [key_0, tup_el_7])
+  in (ErlangCons head_5 dict_4)
 erlps__append_list__3 [key_0, newlist_1, (ErlangEmptyList)] =
-  let tail_2 = (ErlangTuple [key_0, newlist_1])
-  in (ErlangCons tail_2 ErlangEmptyList)
+  let head_2 = (ErlangTuple [key_0, newlist_1])
+  in (ErlangCons head_2 ErlangEmptyList)
 erlps__append_list__3 [arg_6, arg_7, arg_8] =
   (EXC.function_clause unit)
 erlps__append_list__3 args =
@@ -256,8 +256,8 @@ erlps__update__3 :: ErlangFun
 erlps__update__3 [key_0, fun_1,
                   (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
   | (key_0 > k_2) =
-  let head_6 = (erlps__update__3 [key_0, fun_1, dict_4])
-  in (ErlangCons e_3 head_6)
+  let tail_6 = (erlps__update__3 [key_0, fun_1, dict_4])
+  in (ErlangCons e_3 tail_6)
 erlps__update__3 [key_0, fun_1,
                   (ErlangCons (ErlangTuple [k_2, val_3]) dict_4)]
   | (key_0 == k_2) =
@@ -265,8 +265,8 @@ erlps__update__3 [key_0, fun_1,
     tup_el_7 =
       (BIF.erlang__apply__2
          [fun_1, (ErlangCons val_3 ErlangEmptyList)])
-  in let tail_5 = (ErlangTuple [key_0, tup_el_7])
-  in (ErlangCons tail_5 dict_4)
+  in let head_5 = (ErlangTuple [key_0, tup_el_7])
+  in (ErlangCons head_5 dict_4)
 erlps__update__3 [arg_11, arg_12, arg_13] =
   (EXC.function_clause unit)
 erlps__update__3 args =
@@ -276,13 +276,13 @@ erlps__update__4 :: ErlangFun
 erlps__update__4 [key_0, _, init_1,
                   dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
   | (key_0 < k_2) =
-  let tail_4 = (ErlangTuple [key_0, init_1])
-  in (ErlangCons tail_4 dict_3)
+  let head_4 = (ErlangTuple [key_0, init_1])
+  in (ErlangCons head_4 dict_3)
 erlps__update__4 [key_0, fun_1, init_2,
                   (ErlangCons e_4@(ErlangTuple [k_3, _]) dict_5)]
   | (key_0 > k_3) =
-  let head_7 = (erlps__update__4 [key_0, fun_1, init_2, dict_5])
-  in (ErlangCons e_4 head_7)
+  let tail_7 = (erlps__update__4 [key_0, fun_1, init_2, dict_5])
+  in (ErlangCons e_4 tail_7)
 erlps__update__4 [key_0, fun_1, _init_2,
                   (ErlangCons (ErlangTuple [_k_3, val_4]) dict_5)]
   =
@@ -290,11 +290,11 @@ erlps__update__4 [key_0, fun_1, _init_2,
     tup_el_8 =
       (BIF.erlang__apply__2
          [fun_1, (ErlangCons val_4 ErlangEmptyList)])
-  in let tail_6 = (ErlangTuple [key_0, tup_el_8])
-  in (ErlangCons tail_6 dict_5)
+  in let head_6 = (ErlangTuple [key_0, tup_el_8])
+  in (ErlangCons head_6 dict_5)
 erlps__update__4 [key_0, _, init_1, (ErlangEmptyList)] =
-  let tail_2 = (ErlangTuple [key_0, init_1])
-  in (ErlangCons tail_2 ErlangEmptyList)
+  let head_2 = (ErlangTuple [key_0, init_1])
+  in (ErlangCons head_2 ErlangEmptyList)
 erlps__update__4 [arg_6, arg_7, arg_8, arg_9] =
   (EXC.function_clause unit)
 erlps__update__4 args =
@@ -304,22 +304,22 @@ erlps__update_counter__3 :: ErlangFun
 erlps__update_counter__3 [key_0, incr_1,
                           dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
   | (key_0 < k_2) =
-  let tail_4 = (ErlangTuple [key_0, incr_1])
-  in (ErlangCons tail_4 dict_3)
+  let head_4 = (ErlangTuple [key_0, incr_1])
+  in (ErlangCons head_4 dict_3)
 erlps__update_counter__3 [key_0, incr_1,
                           (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
   | (key_0 > k_2) =
-  let head_6 = (erlps__update_counter__3 [key_0, incr_1, dict_4])
-  in (ErlangCons e_3 head_6)
+  let tail_6 = (erlps__update_counter__3 [key_0, incr_1, dict_4])
+  in (ErlangCons e_3 tail_6)
 erlps__update_counter__3 [key_0, incr_1,
                           (ErlangCons (ErlangTuple [_k_2, val_3]) dict_4)]
   =
   let    tup_el_7 = (BIF.erlang__op_plus [val_3, incr_1])
-  in let tail_5 = (ErlangTuple [key_0, tup_el_7])
-  in (ErlangCons tail_5 dict_4)
+  in let head_5 = (ErlangTuple [key_0, tup_el_7])
+  in (ErlangCons head_5 dict_4)
 erlps__update_counter__3 [key_0, incr_1, (ErlangEmptyList)] =
-  let tail_2 = (ErlangTuple [key_0, incr_1])
-  in (ErlangCons tail_2 ErlangEmptyList)
+  let head_2 = (ErlangTuple [key_0, incr_1])
+  in (ErlangCons head_2 ErlangEmptyList)
 erlps__update_counter__3 [arg_6, arg_7, arg_8] =
   (EXC.function_clause unit)
 erlps__update_counter__3 args =
@@ -351,9 +351,9 @@ erlps__map__2 [f_0,
     tup_el_6 =
       (BIF.erlang__apply__2
          [f_0, (ErlangCons key_1 (ErlangCons val_2 ErlangEmptyList))])
-  in let tail_4 = (ErlangTuple [key_1, tup_el_6])
-  in let head_10 = (erlps__map__2 [f_0, d_3])
-  in (ErlangCons tail_4 head_10)
+  in let head_4 = (ErlangTuple [key_1, tup_el_6])
+  in let tail_10 = (erlps__map__2 [f_0, d_3])
+  in (ErlangCons head_4 tail_10)
 erlps__map__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
@@ -372,8 +372,8 @@ erlps__filter__2 [f_0,
   in
     case case_5 of
       (ErlangAtom "true") ->
-        let head_10 = (erlps__filter__2 [f_0, d_4])
-        in (ErlangCons e_3 head_10)
+        let tail_10 = (erlps__filter__2 [f_0, d_4])
+        in (ErlangCons e_3 tail_10)
       (ErlangAtom "false") -> (erlps__filter__2 [f_0, d_4])
       something_else -> (EXC.case_clause something_else)
 erlps__filter__2 [f_0, (ErlangEmptyList)]
@@ -389,15 +389,15 @@ erlps__merge__3 [f_0,
                  (ErlangCons e2_5@(ErlangTuple [k2_4, _]) d2_6)]
   | (k1_1 < k2_4) =
   let
-    head_8 = (erlps__merge__3 [f_0, d1_3, (ErlangCons e2_5 d2_6)])
-  in (ErlangCons e1_2 head_8)
+    tail_8 = (erlps__merge__3 [f_0, d1_3, (ErlangCons e2_5 d2_6)])
+  in (ErlangCons e1_2 tail_8)
 erlps__merge__3 [f_0,
                  (ErlangCons e1_2@(ErlangTuple [k1_1, _]) d1_3),
                  (ErlangCons e2_5@(ErlangTuple [k2_4, _]) d2_6)]
   | (k1_1 > k2_4) =
   let
-    head_8 = (erlps__merge__3 [f_0, (ErlangCons e1_2 d1_3), d2_6])
-  in (ErlangCons e2_5 head_8)
+    tail_8 = (erlps__merge__3 [f_0, (ErlangCons e1_2 d1_3), d2_6])
+  in (ErlangCons e2_5 tail_8)
 erlps__merge__3 [f_0,
                  (ErlangCons (ErlangTuple [k1_1, v1_2]) d1_3),
                  (ErlangCons (ErlangTuple [_k2_4, v2_5]) d2_6)]
@@ -408,9 +408,9 @@ erlps__merge__3 [f_0,
          [f_0,
           (ErlangCons k1_1
              (ErlangCons v1_2 (ErlangCons v2_5 ErlangEmptyList)))])
-  in let tail_7 = (ErlangTuple [k1_1, tup_el_9])
-  in let head_14 = (erlps__merge__3 [f_0, d1_3, d2_6])
-  in (ErlangCons tail_7 head_14)
+  in let head_7 = (ErlangTuple [k1_1, tup_el_9])
+  in let tail_14 = (erlps__merge__3 [f_0, d1_3, d2_6])
+  in (ErlangCons head_7 tail_14)
 erlps__merge__3 [f_0, (ErlangEmptyList), d2_1]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   d2_1

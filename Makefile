@@ -18,7 +18,7 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/string.beam -o src/String.purs
 	./erlscripten -s $(BEAM_PATH)/digraph_utils.beam -o src/DigraphUtils.purs
 	./erlscripten -s $(BEAM_PATH)/digraph.beam -o src/Digraph.purs
-	#./erlscripten -s $(BEAM_PATH)/rand.beam -o src/Rand.purs
+	./erlscripten -s $(BEAM_PATH)/rand.beam -o src/Rand.purs
 
 build_tests:
 	erlc +debug_info erlang_tests/array_SUITE.erl
@@ -60,4 +60,3 @@ build_tests:
 	erlc +debug_info erlang_tests/math_SUITE.erl
 	./erlscripten -s math_SUITE.beam -o test/Math.SUITE.purs
 	rm math_SUITE.beam
-

@@ -302,9 +302,9 @@ erlps__filter_1__2 [pred_0, iter_1] =
         in
           case case_7 of
             (ErlangAtom "true") ->
-              let    tail_11 = (ErlangTuple [k_4, v_5])
-              in let head_14 = (erlps__filter_1__2 [pred_0, nextiter_6])
-              in (ErlangCons tail_11 head_14)
+              let    head_11 = (ErlangTuple [k_4, v_5])
+              in let tail_14 = (erlps__filter_1__2 [pred_0, nextiter_6])
+              in (ErlangCons head_11 tail_14)
             (ErlangAtom "false") -> (erlps__filter_1__2 [pred_0, nextiter_6])
             something_else -> (EXC.case_clause something_else)
       (ErlangAtom "none") -> ErlangEmptyList
@@ -462,9 +462,9 @@ erlps__map_1__2 [fun_0, iter_1] =
           tup_el_9 =
             (BIF.erlang__apply__2
                [fun_0, (ErlangCons k_4 (ErlangCons v_5 ErlangEmptyList))])
-        in let tail_7 = (ErlangTuple [k_4, tup_el_9])
-        in let head_13 = (erlps__map_1__2 [fun_0, nextiter_6])
-        in (ErlangCons tail_7 head_13)
+        in let head_7 = (ErlangTuple [k_4, tup_el_9])
+        in let tail_13 = (erlps__map_1__2 [fun_0, nextiter_6])
+        in (ErlangCons head_7 tail_13)
       (ErlangAtom "none") -> ErlangEmptyList
       something_else -> (EXC.case_clause something_else)
 erlps__map_1__2 [arg_16, arg_17] = (EXC.function_clause unit)
@@ -543,9 +543,9 @@ erlps__with_1__2 :: ErlangFun
 erlps__with_1__2 [(ErlangCons k_0 ks_1), map_2] =
   case map_2 of
     (ErlangMap map_4) | (DM.Just v_5) <- ((Map.lookup k_0 map_4)) ->
-      let    tail_6 = (ErlangTuple [k_0, v_5])
-      in let head_9 = (erlps__with_1__2 [ks_1, map_2])
-      in (ErlangCons tail_6 head_9)
+      let    head_6 = (ErlangTuple [k_0, v_5])
+      in let tail_9 = (erlps__with_1__2 [ks_1, map_2])
+      in (ErlangCons head_6 tail_9)
     (ErlangMap map_12) -> (erlps__with_1__2 [ks_1, map_2])
     something_else -> (EXC.case_clause something_else)
 erlps__with_1__2 [(ErlangEmptyList), _map_0] = ErlangEmptyList

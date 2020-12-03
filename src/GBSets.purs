@@ -512,8 +512,8 @@ erlps__to_list_1__1 args =
 
 erlps__to_list__2 :: ErlangFun
 erlps__to_list__2 [(ErlangTuple [key_0, small_1, big_2]), l_3] =
-  let head_7 = (erlps__to_list__2 [big_2, l_3])
-  in (erlps__to_list__2 [small_1, (ErlangCons key_0 head_7)])
+  let tail_7 = (erlps__to_list__2 [big_2, l_3])
+  in (erlps__to_list__2 [small_1, (ErlangCons key_0 tail_7)])
 erlps__to_list__2 [(ErlangAtom "nil"), l_0] = l_0
 erlps__to_list__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__to_list__2 args =

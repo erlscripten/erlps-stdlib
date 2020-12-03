@@ -82,8 +82,8 @@ erlps__to_list__1 [d_0] =
       (ErlangFun 3
          let
            lambda_2 [key_6, val_7, list_8] =
-             let tail_9 = (ErlangTuple [key_6, val_7])
-             in (ErlangCons tail_9 list_8)
+             let head_9 = (ErlangTuple [key_6, val_7])
+             in (ErlangCons head_9 list_8)
            lambda_2 [arg_3, arg_4, arg_5] = (EXC.function_clause unit)
            lambda_2 args = (EXC.badarity (ErlangFun 3 lambda_2) args)
          in lambda_2)
@@ -350,12 +350,12 @@ erlps__append_bkt__3 [key_0, val_1,
                       (ErlangCons (ErlangCons key_2 bag_3) bkt_4)]
   | (key_2 == key_0) =
   let
-    head_8 =
+    tail_8 =
       (BIF.erlang__op_append
          [bag_3, (ErlangCons val_1 ErlangEmptyList)])
   in
     (ErlangTuple
-       [(ErlangCons (ErlangCons key_0 head_8) bkt_4),
+       [(ErlangCons (ErlangCons key_0 tail_8) bkt_4),
         (ErlangInt (DBI.fromInt 0))])
 erlps__append_bkt__3 [key_0, val_1, (ErlangCons other_2 bkt0_3)]
   =
@@ -403,10 +403,10 @@ erlps__app_list_bkt__3 :: ErlangFun
 erlps__app_list_bkt__3 [key_0, l_1,
                         (ErlangCons (ErlangCons key_2 bag_3) bkt_4)]
   | (key_2 == key_0) =
-  let head_8 = (BIF.erlang__op_append [bag_3, l_1])
+  let tail_8 = (BIF.erlang__op_append [bag_3, l_1])
   in
     (ErlangTuple
-       [(ErlangCons (ErlangCons key_0 head_8) bkt_4),
+       [(ErlangCons (ErlangCons key_0 tail_8) bkt_4),
         (ErlangInt (DBI.fromInt 0))])
 erlps__app_list_bkt__3 [key_0, l_1, (ErlangCons other_2 bkt0_3)]
   =
@@ -510,11 +510,11 @@ erlps__update_bkt__4 [key_0, f_1, _,
                       (ErlangCons (ErlangCons key_2 val_3) bkt_4)]
   | (key_2 == key_0) =
   let
-    head_8 =
+    tail_8 =
       (BIF.erlang__apply__2 [f_1, (ErlangCons val_3 ErlangEmptyList)])
   in
     (ErlangTuple
-       [(ErlangCons (ErlangCons key_0 head_8) bkt_4),
+       [(ErlangCons (ErlangCons key_0 tail_8) bkt_4),
         (ErlangInt (DBI.fromInt 0))])
 erlps__update_bkt__4 [key_0, f_1, i_2,
                       (ErlangCons other_3 bkt0_4)]
@@ -564,10 +564,10 @@ erlps__counter_bkt__3 :: ErlangFun
 erlps__counter_bkt__3 [key_0, i_1,
                        (ErlangCons (ErlangCons key_2 val_3) bkt_4)]
   | (key_2 == key_0) =
-  let head_8 = (BIF.erlang__op_plus [val_3, i_1])
+  let tail_8 = (BIF.erlang__op_plus [val_3, i_1])
   in
     (ErlangTuple
-       [(ErlangCons (ErlangCons key_0 head_8) bkt_4),
+       [(ErlangCons (ErlangCons key_0 tail_8) bkt_4),
         (ErlangInt (DBI.fromInt 0))])
 erlps__counter_bkt__3 [key_0, i_1, (ErlangCons other_2 bkt0_3)] =
   let match_expr_9 = (erlps__counter_bkt__3 [key_0, i_1, bkt0_3])
@@ -890,9 +890,9 @@ erlps__map_seg_list__2 :: ErlangFun
 erlps__map_seg_list__2 [f_0, (ErlangCons seg_1 segs_2)] =
   let    bkts0_4 = (BIF.erlang__tuple_to_list__1 [seg_1])
   in let bkts1_7 = (erlps__map_bkt_list__2 [f_0, bkts0_4])
-  in let tail_8 = (BIF.erlang__list_to_tuple__1 [bkts1_7])
-  in let head_10 = (erlps__map_seg_list__2 [f_0, segs_2])
-  in (ErlangCons tail_8 head_10)
+  in let head_8 = (BIF.erlang__list_to_tuple__1 [bkts1_7])
+  in let tail_10 = (erlps__map_seg_list__2 [f_0, segs_2])
+  in (ErlangCons head_8 tail_10)
 erlps__map_seg_list__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
@@ -903,9 +903,9 @@ erlps__map_seg_list__2 args =
 
 erlps__map_bkt_list__2 :: ErlangFun
 erlps__map_bkt_list__2 [f_0, (ErlangCons bkt0_1 bkts_2)] =
-  let    tail_3 = (erlps__map_bucket__2 [f_0, bkt0_1])
-  in let head_6 = (erlps__map_bkt_list__2 [f_0, bkts_2])
-  in (ErlangCons tail_3 head_6)
+  let    head_3 = (erlps__map_bucket__2 [f_0, bkt0_1])
+  in let tail_6 = (erlps__map_bkt_list__2 [f_0, bkts_2])
+  in (ErlangCons head_3 tail_6)
 erlps__map_bkt_list__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
@@ -919,11 +919,11 @@ erlps__map_bucket__2 [f_0,
                       (ErlangCons (ErlangCons key_1 val_2) bkt_3)]
   =
   let   
-    head_6 =
+    tail_6 =
       (BIF.erlang__apply__2
          [f_0, (ErlangCons key_1 (ErlangCons val_2 ErlangEmptyList))])
-  in let head_10 = (erlps__map_bucket__2 [f_0, bkt_3])
-  in (ErlangCons (ErlangCons key_1 head_6) head_10)
+  in let tail_10 = (erlps__map_bucket__2 [f_0, bkt_3])
+  in (ErlangCons (ErlangCons key_1 tail_6) tail_10)
 erlps__map_bucket__2 [f_0, (ErlangEmptyList)]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
@@ -982,10 +982,10 @@ erlps__filter_seg_list__4 [f_0, (ErlangCons seg_1 segs_2), fss_3,
   in
     case match_expr_13 of
       (ErlangTuple [bkts1_11, fc1_12]) ->
-        let tail_17 = (BIF.erlang__list_to_tuple__1 [bkts1_11])
+        let head_17 = (BIF.erlang__list_to_tuple__1 [bkts1_11])
         in
           (erlps__filter_seg_list__4
-             [f_0, segs_2, (ErlangCons tail_17 fss_3), fc1_12])
+             [f_0, segs_2, (ErlangCons head_17 fss_3), fc1_12])
       _ -> (EXC.badmatch match_expr_13)
 erlps__filter_seg_list__4 [f_0, (ErlangEmptyList), fss_1, fc_2]
   | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =

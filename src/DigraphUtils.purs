@@ -489,8 +489,8 @@ erlps__posttraverse__4 [(ErlangCons v_0 vs_1), g_2, t_3, l_4] =
           let    arg_9 = (ErlangTuple [v_0])
           in let _ = (BIF.do_remote_fun_call "Ets" "erlps__insert__2" [t_3, arg_9])
           in let arg_13 = (erlps__out__3 [g_2, v_0, ErlangEmptyList])
-          in let head_12 = (erlps__posttraverse__4 [arg_13, g_2, t_3, l_4])
-          in (ErlangCons v_0 head_12)
+          in let tail_12 = (erlps__posttraverse__4 [arg_13, g_2, t_3, l_4])
+          in (ErlangCons v_0 tail_12)
         (ErlangAtom "true") -> l_4
         something_else -> (EXC.case_clause something_else)
   in (erlps__posttraverse__4 [vs_1, g_2, t_3, l1_20])

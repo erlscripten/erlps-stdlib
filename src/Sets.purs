@@ -587,10 +587,10 @@ erlps__filter_seg_list__4 [f_0, (ErlangCons seg_1 segs_2), fss_3,
   in
     case match_expr_13 of
       (ErlangTuple [bkts1_11, fc1_12]) ->
-        let tail_17 = (BIF.erlang__list_to_tuple__1 [bkts1_11])
+        let head_17 = (BIF.erlang__list_to_tuple__1 [bkts1_11])
         in
           (erlps__filter_seg_list__4
-             [f_0, segs_2, (ErlangCons tail_17 fss_3), fc1_12])
+             [f_0, segs_2, (ErlangCons head_17 fss_3), fc1_12])
       _ -> (EXC.badmatch match_expr_13)
 erlps__filter_seg_list__4 [_, (ErlangEmptyList), fss_0, fc_1] =
   let tup_el_2 = (BIF.lists__reverse__2 [fss_0, ErlangEmptyList])

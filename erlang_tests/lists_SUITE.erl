@@ -308,15 +308,15 @@ keysearch_keyfind(Config) when is_list(Config) ->
     {value,Third} = key_search_find({5}, 3, List),
     {value,Third} = key_search_find({5.0}, 3, List),
 
-    Long0 = lists:seq(1, 100007),
-    false = key_search_find(kalle, 1, Long0),
-    Long = lists:foldl(fun(E, A) -> [{1/E,float(E)}|A] end, [], Long0),
-    {value,{_,1.0}} = key_search_find(1, 2, Long),
-    {value,{_,1.0}} = key_search_find(1.0, 2, Long),
-    {value,{_,2.0}} = key_search_find(2, 2, Long),
-    {value,{_,2.0}} = key_search_find(2.0, 2, Long),
-    {value,{_,33988.0}} = key_search_find(33988, 2, Long),
-    {value,{_,33988.0}} = key_search_find(33988.0, 2, Long),
+    %%Long0 = lists:seq(1, 100007),
+    %%false = key_search_find(kalle, 1, Long0),
+    %%Long = lists:foldl(fun(E, A) -> [{1/E,float(E)}|A] end, [], Long0),
+    %%{value,{_,1.0}} = key_search_find(1, 2, Long),
+    %%{value,{_,1.0}} = key_search_find(1.0, 2, Long),
+    %%{value,{_,2.0}} = key_search_find(2, 2, Long),
+    %%{value,{_,2.0}} = key_search_find(2.0, 2, Long),
+    %%{value,{_,33988.0}} = key_search_find(33988, 2, Long),
+    %%{value,{_,33988.0}} = key_search_find(33988.0, 2, Long),
     ok.
 
 %% Test both lists:keysearch/3 and lists:keyfind/3. The only

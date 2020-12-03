@@ -621,9 +621,9 @@ erlps__to_list__2 [(ErlangTuple [key_0, value_1, small_2,
                                  big_3]),
                    l_4]
   =
-  let    tail_7 = (ErlangTuple [key_0, value_1])
-  in let head_10 = (erlps__to_list__2 [big_3, l_4])
-  in (erlps__to_list__2 [small_2, (ErlangCons tail_7 head_10)])
+  let    head_7 = (ErlangTuple [key_0, value_1])
+  in let tail_10 = (erlps__to_list__2 [big_3, l_4])
+  in (erlps__to_list__2 [small_2, (ErlangCons head_7 tail_10)])
 erlps__to_list__2 [(ErlangAtom "nil"), l_0] = l_0
 erlps__to_list__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__to_list__2 args =
@@ -640,8 +640,8 @@ erlps__keys__2 :: ErlangFun
 erlps__keys__2 [(ErlangTuple [key_0, _value_1, small_2, big_3]),
                 l_4]
   =
-  let head_8 = (erlps__keys__2 [big_3, l_4])
-  in (erlps__keys__2 [small_2, (ErlangCons key_0 head_8)])
+  let tail_8 = (erlps__keys__2 [big_3, l_4])
+  in (erlps__keys__2 [small_2, (ErlangCons key_0 tail_8)])
 erlps__keys__2 [(ErlangAtom "nil"), l_0] = l_0
 erlps__keys__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__keys__2 args =
@@ -659,8 +659,8 @@ erlps__values__2 [(ErlangTuple [_key_0, value_1, small_2,
                                 big_3]),
                   l_4]
   =
-  let head_8 = (erlps__values__2 [big_3, l_4])
-  in (erlps__values__2 [small_2, (ErlangCons value_1 head_8)])
+  let tail_8 = (erlps__values__2 [big_3, l_4])
+  in (erlps__values__2 [small_2, (ErlangCons value_1 tail_8)])
 erlps__values__2 [(ErlangAtom "nil"), l_0] = l_0
 erlps__values__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__values__2 args =

@@ -227,11 +227,11 @@ erlps__intersection__3 [mod_0, equal_1, ss_2] =
     s_8 =
       (BIF.erlang__apply__3
          [mod_0, (ErlangAtom "intersection"), (ErlangCons ss_2 ErlangEmptyList)])
-  in let tail_14 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [ss_2])
+  in let head_14 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [ss_2])
   in let
     arg_10 =
       (BIF.erlang__apply__3
-         [mod_0, (ErlangAtom "intersection"), (ErlangCons tail_14 ErlangEmptyList)])
+         [mod_0, (ErlangAtom "intersection"), (ErlangCons head_14 ErlangEmptyList)])
   in let
     match_expr_18 =
       (BIF.erlang__apply__2
@@ -317,11 +317,11 @@ erlps__union__3 [mod_0, equal_1, ss_2] =
     s_8 =
       (BIF.erlang__apply__3
          [mod_0, (ErlangAtom "union"), (ErlangCons ss_2 ErlangEmptyList)])
-  in let tail_14 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [ss_2])
+  in let head_14 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [ss_2])
   in let
     arg_10 =
       (BIF.erlang__apply__3
-         [mod_0, (ErlangAtom "union"), (ErlangCons tail_14 ErlangEmptyList)])
+         [mod_0, (ErlangAtom "union"), (ErlangCons head_14 ErlangEmptyList)])
   in let
     match_expr_18 =
       (BIF.erlang__apply__2

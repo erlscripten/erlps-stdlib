@@ -594,8 +594,8 @@ erlps__push_tuple__3 [(ErlangInt num_0), _t_1, l_2]
 erlps__push_tuple__3 [n_0, t_1, l_2] =
   let   
     arg_3 = (BIF.erlang__op_minus [n_0, (ErlangInt (DBI.fromInt 1))])
-  in let tail_8 = (BIF.erlang__element__2 [n_0, t_1])
-  in (erlps__push_tuple__3 [arg_3, t_1, (ErlangCons tail_8 l_2)])
+  in let head_8 = (BIF.erlang__element__2 [n_0, t_1])
+  in (erlps__push_tuple__3 [arg_3, t_1, (ErlangCons head_8 l_2)])
 erlps__push_tuple__3 [arg_12, arg_13, arg_14] =
   (EXC.function_clause unit)
 erlps__push_tuple__3 args =
@@ -939,10 +939,10 @@ erlps__push_pairs__4 [n_0, i_1, e_2, l_3] =
     arg_4 = (BIF.erlang__op_minus [n_0, (ErlangInt (DBI.fromInt 1))])
   in let
     arg_7 = (BIF.erlang__op_minus [i_1, (ErlangInt (DBI.fromInt 1))])
-  in let tail_12 = (ErlangTuple [i_1, e_2])
+  in let head_12 = (ErlangTuple [i_1, e_2])
   in
     (erlps__push_pairs__4
-       [arg_4, arg_7, e_2, (ErlangCons tail_12 l_3)])
+       [arg_4, arg_7, e_2, (ErlangCons head_12 l_3)])
 erlps__push_pairs__4 [arg_16, arg_17, arg_18, arg_19] =
   (EXC.function_clause unit)
 erlps__push_pairs__4 args =
@@ -958,10 +958,10 @@ erlps__push_tuple_pairs__4 [n_0, i_1, t_2, l_3] =
   in let
     arg_7 = (BIF.erlang__op_minus [i_1, (ErlangInt (DBI.fromInt 1))])
   in let tup_el_14 = (BIF.erlang__element__2 [n_0, t_2])
-  in let tail_12 = (ErlangTuple [i_1, tup_el_14])
+  in let head_12 = (ErlangTuple [i_1, tup_el_14])
   in
     (erlps__push_tuple_pairs__4
-       [arg_4, arg_7, t_2, (ErlangCons tail_12 l_3)])
+       [arg_4, arg_7, t_2, (ErlangCons head_12 l_3)])
 erlps__push_tuple_pairs__4 [arg_18, arg_19, arg_20, arg_21] =
   (EXC.function_clause unit)
 erlps__push_tuple_pairs__4 args =
@@ -1083,10 +1083,10 @@ erlps__sparse_push_tuple_pairs__5 [n_0, i_1, d_2, t_3, l_4] =
         in let
           arg_22 =
             (BIF.erlang__op_minus [i_1, (ErlangInt (DBI.fromInt 1))])
-        in let tail_28 = (ErlangTuple [i_1, e_18])
+        in let head_28 = (ErlangTuple [i_1, e_18])
         in
           (erlps__sparse_push_tuple_pairs__5
-             [arg_19, arg_22, d_2, t_3, (ErlangCons tail_28 l_4)])
+             [arg_19, arg_22, d_2, t_3, (ErlangCons head_28 l_4)])
       something_else -> (EXC.case_clause something_else)
 erlps__sparse_push_tuple_pairs__5 [arg_32, arg_33, arg_34,
                                    arg_35, arg_36]
@@ -1309,10 +1309,10 @@ erlps__collect_leafs__6 [i_0, (ErlangCons x_1 xs_2), s_3, n_4,
       _ ->
         let    as_52 = (erlps__push__3 [i_0, s_3, as0_5])
         in let step_55 = (BIF.erlang__op_minus [step0_9, i_0])
-        in let tail_58 = (BIF.erlang__op_mult [step_55, s_3])
+        in let head_58 = (BIF.erlang__op_mult [step_55, s_3])
         in
           (erlps__collect_leafs__6
-             [(ErlangInt (DBI.fromInt 0)), (ErlangCons tail_58 xs_2), s_3,
+             [(ErlangInt (DBI.fromInt 0)), (ErlangCons head_58 xs_2), s_3,
               n_4, as_52, es0_6])
       _ -> (EXC.if_clause unit)
 erlps__collect_leafs__6 [i_0, (ErlangCons x_1 xs_2), s_3, n_4,
@@ -1383,12 +1383,12 @@ erlps__map_1__5 [n_0,
       (BIF.erlang__op_plus [lop_17, (ErlangInt (DBI.fromInt 1))])
   in let arg_21 = (BIF.erlang__op_rem_strict [n_0, s_1])
   in let
-    head_9 =
+    tail_9 =
       (erlps__map_2__9
          [(ErlangInt (DBI.fromInt 1)), e_2, ix_3, f_4, d_5,
           ErlangEmptyList, arg_16, arg_21, s_1])
   in let
-    arg_6 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [(ErlangCons s_1 head_9)])
+    arg_6 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [(ErlangCons s_1 tail_9)])
   in (BIF.erlang__list_to_tuple__1 [arg_6])
 erlps__map_1__5 [n_0, e_1, ix_2, f_3, d_4] | (isENum e_1) =
   let arg_6 = (erlps__unfold__2 [e_1, d_4])
@@ -1414,8 +1414,8 @@ erlps__map_2__9 [i_0, e_1, ix_2, f_3, d_4, l_5, i_6, r_7, _s_8]
   let   
     arg_9 = (BIF.erlang__op_plus [i_0, (ErlangInt (DBI.fromInt 1))])
   in let arg_16 = (BIF.erlang__element__2 [i_0, e_1])
-  in let tail_14 = (erlps__map_1__5 [r_7, arg_16, ix_2, f_3, d_4])
-  in (erlps__map_2_1__3 [arg_9, e_1, (ErlangCons tail_14 l_5)])
+  in let head_14 = (erlps__map_1__5 [r_7, arg_16, ix_2, f_3, d_4])
+  in (erlps__map_2_1__3 [arg_9, e_1, (ErlangCons head_14 l_5)])
 erlps__map_2__9 [i_0, e_1, ix_2, f_3, d_4, l_5, n_6, r_7, s_8] =
   let   
     arg_9 = (BIF.erlang__op_plus [i_0, (ErlangInt (DBI.fromInt 1))])
@@ -1425,10 +1425,10 @@ erlps__map_2__9 [i_0, e_1, ix_2, f_3, d_4, l_5, n_6, r_7, s_8] =
       (BIF.erlang__op_minus [s_8, (ErlangInt (DBI.fromInt 1))])
   in let arg_23 = (BIF.erlang__element__2 [i_0, e_1])
   in let
-    tail_19 = (erlps__map_1__5 [arg_20, arg_23, ix_2, f_3, d_4])
+    head_19 = (erlps__map_1__5 [arg_20, arg_23, ix_2, f_3, d_4])
   in
     (erlps__map_2__9
-       [arg_9, e_1, arg_13, f_3, d_4, (ErlangCons tail_19 l_5), n_6,
+       [arg_9, e_1, arg_13, f_3, d_4, (ErlangCons head_19 l_5), n_6,
         r_7, s_8])
 erlps__map_2__9 [arg_33, arg_34, arg_35, arg_36, arg_37, arg_38,
                  arg_39, arg_40, arg_41]
@@ -1442,8 +1442,8 @@ erlps__map_2_1__3 [i_0, e_1, l_2]
   | (i_0 <= (ErlangInt (DBI.fromInt 10))) =
   let   
     arg_3 = (BIF.erlang__op_plus [i_0, (ErlangInt (DBI.fromInt 1))])
-  in let tail_8 = (BIF.erlang__element__2 [i_0, e_1])
-  in (erlps__map_2_1__3 [arg_3, e_1, (ErlangCons tail_8 l_2)])
+  in let head_8 = (BIF.erlang__element__2 [i_0, e_1])
+  in (erlps__map_2_1__3 [arg_3, e_1, (ErlangCons head_8 l_2)])
 erlps__map_2_1__3 [_i_0, _e_1, l_2] = l_2
 erlps__map_2_1__3 [arg_3, arg_4, arg_5] =
   (EXC.function_clause unit)
@@ -1460,12 +1460,12 @@ erlps__map_3__7 [i_0, e_1, ix_2, f_3, d_4, n_5, l_6]
       (BIF.erlang__op_plus [ix_2, (ErlangInt (DBI.fromInt 1))])
   in let arg_20 = (BIF.erlang__element__2 [i_0, e_1])
   in let
-    tail_18 =
+    head_18 =
       (BIF.erlang__apply__2
          [f_3, (ErlangCons ix_2 (ErlangCons arg_20 ErlangEmptyList))])
   in
     (erlps__map_3__7
-       [arg_7, e_1, arg_11, f_3, d_4, n_5, (ErlangCons tail_18 l_6)])
+       [arg_7, e_1, arg_11, f_3, d_4, n_5, (ErlangCons head_18 l_6)])
 erlps__map_3__7 [i_0, e_1, ix_2, f_3, d_4, n_5, l_6]
   | (i_0 <= (ErlangInt (DBI.fromInt 10))) =
   let   
@@ -1548,12 +1548,12 @@ erlps__sparse_map_1__5 [n_0,
       (BIF.erlang__op_plus [lop_17, (ErlangInt (DBI.fromInt 1))])
   in let arg_21 = (BIF.erlang__op_rem_strict [n_0, s_1])
   in let
-    head_9 =
+    tail_9 =
       (erlps__sparse_map_2__9
          [(ErlangInt (DBI.fromInt 1)), e_2, ix_3, f_4, d_5,
           ErlangEmptyList, arg_16, arg_21, s_1])
   in let
-    arg_6 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [(ErlangCons s_1 head_9)])
+    arg_6 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [(ErlangCons s_1 tail_9)])
   in (BIF.erlang__list_to_tuple__1 [arg_6])
 erlps__sparse_map_1__5 [_n_0, e_1, _ix_2, _f_3, _d_4]
   | (isENum e_1) =
@@ -1579,9 +1579,9 @@ erlps__sparse_map_2__9 [i_0, e_1, ix_2, f_3, d_4, l_5, i_6, r_7,
     arg_9 = (BIF.erlang__op_plus [i_0, (ErlangInt (DBI.fromInt 1))])
   in let arg_16 = (BIF.erlang__element__2 [i_0, e_1])
   in let
-    tail_14 = (erlps__sparse_map_1__5 [r_7, arg_16, ix_2, f_3, d_4])
+    head_14 = (erlps__sparse_map_1__5 [r_7, arg_16, ix_2, f_3, d_4])
   in
-    (erlps__sparse_map_2_1__3 [arg_9, e_1, (ErlangCons tail_14 l_5)])
+    (erlps__sparse_map_2_1__3 [arg_9, e_1, (ErlangCons head_14 l_5)])
 erlps__sparse_map_2__9 [i_0, e_1, ix_2, f_3, d_4, l_5, n_6, r_7,
                         s_8]
   =
@@ -1593,11 +1593,11 @@ erlps__sparse_map_2__9 [i_0, e_1, ix_2, f_3, d_4, l_5, n_6, r_7,
       (BIF.erlang__op_minus [s_8, (ErlangInt (DBI.fromInt 1))])
   in let arg_23 = (BIF.erlang__element__2 [i_0, e_1])
   in let
-    tail_19 =
+    head_19 =
       (erlps__sparse_map_1__5 [arg_20, arg_23, ix_2, f_3, d_4])
   in
     (erlps__sparse_map_2__9
-       [arg_9, e_1, arg_13, f_3, d_4, (ErlangCons tail_19 l_5), n_6,
+       [arg_9, e_1, arg_13, f_3, d_4, (ErlangCons head_19 l_5), n_6,
         r_7, s_8])
 erlps__sparse_map_2__9 [arg_33, arg_34, arg_35, arg_36, arg_37,
                         arg_38, arg_39, arg_40, arg_41]
@@ -1611,9 +1611,9 @@ erlps__sparse_map_2_1__3 [i_0, e_1, l_2]
   | (i_0 <= (ErlangInt (DBI.fromInt 10))) =
   let   
     arg_3 = (BIF.erlang__op_plus [i_0, (ErlangInt (DBI.fromInt 1))])
-  in let tail_8 = (BIF.erlang__element__2 [i_0, e_1])
+  in let head_8 = (BIF.erlang__element__2 [i_0, e_1])
   in
-    (erlps__sparse_map_2_1__3 [arg_3, e_1, (ErlangCons tail_8 l_2)])
+    (erlps__sparse_map_2_1__3 [arg_3, e_1, (ErlangCons head_8 l_2)])
 erlps__sparse_map_2_1__3 [_i_0, _e_1, l_2] = l_2
 erlps__sparse_map_2_1__3 [arg_3, arg_4, arg_5] =
   (EXC.function_clause unit)
@@ -1642,12 +1642,12 @@ erlps__sparse_map_3__6 [i_0, t_1, ix_2, f_3, d_4, l_5]
           arg_27 =
             (BIF.erlang__op_plus [ix_2, (ErlangInt (DBI.fromInt 1))])
         in let
-          tail_33 =
+          head_33 =
             (BIF.erlang__apply__2
                [f_3, (ErlangCons ix_2 (ErlangCons e_22 ErlangEmptyList))])
         in
           (erlps__sparse_map_3__6
-             [arg_23, t_1, arg_27, f_3, d_4, (ErlangCons tail_33 l_5)])
+             [arg_23, t_1, arg_27, f_3, d_4, (ErlangCons head_33 l_5)])
       something_else -> (EXC.case_clause something_else)
 erlps__sparse_map_3__6 [_i_0, _e_1, _ix_2, _f_3, _d_4, l_5] = l_5
 erlps__sparse_map_3__6 [arg_6, arg_7, arg_8, arg_9, arg_10,

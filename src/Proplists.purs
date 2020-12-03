@@ -53,12 +53,12 @@ erlps__unfold__1 :: ErlangFun
 erlps__unfold__1 [(ErlangCons p_0 ps_1)] =
   case (ErlangAtom "true") of
     _ | (isEAtom p_0) ->
-      let    tail_2 = (ErlangTuple [p_0, (ErlangAtom "true")])
-      in let head_5 = (erlps__unfold__1 [ps_1])
-      in (ErlangCons tail_2 head_5)
+      let    head_2 = (ErlangTuple [p_0, (ErlangAtom "true")])
+      in let tail_5 = (erlps__unfold__1 [ps_1])
+      in (ErlangCons head_2 tail_5)
     _ ->
-      let head_8 = (erlps__unfold__1 [ps_1])
-      in (ErlangCons p_0 head_8)
+      let tail_8 = (erlps__unfold__1 [ps_1])
+      in (ErlangCons p_0 tail_8)
     _ -> (EXC.if_clause unit)
 erlps__unfold__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__unfold__1 [arg_0] = (EXC.function_clause unit)
@@ -110,9 +110,9 @@ erlps__lookup_all__2 :: ErlangFun
 erlps__lookup_all__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
     _ | ((isEAtom p_1) && (p_1 == key_0)) ->
-      let    tail_3 = (ErlangTuple [key_0, (ErlangAtom "true")])
-      in let head_6 = (erlps__lookup_all__2 [key_0, ps_2])
-      in (ErlangCons tail_3 head_6)
+      let    head_3 = (ErlangTuple [key_0, (ErlangAtom "true")])
+      in let tail_6 = (erlps__lookup_all__2 [key_0, ps_2])
+      in (ErlangCons head_3 tail_6)
     _ | (ErlangAtom "true") <-
           (let    lop_10 = (BIF.erlang__tuple_size__1 [p_1])
            in let
@@ -127,8 +127,8 @@ erlps__lookup_all__2 [key_0, (ErlangCons p_1 ps_2)] =
                      (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_1])
                  in (BIF.erlang__op_exactEq [lop_13, key_0])
                _ -> (EXC.badarg1 lop_9)) ->
-      let head_18 = (erlps__lookup_all__2 [key_0, ps_2])
-      in (ErlangCons p_1 head_18)
+      let tail_18 = (erlps__lookup_all__2 [key_0, ps_2])
+      in (ErlangCons p_1 tail_18)
     _ -> (erlps__lookup_all__2 [key_0, ps_2])
     _ -> (EXC.if_clause unit)
 erlps__lookup_all__2 [_key_0, (ErlangEmptyList)] =
@@ -205,8 +205,8 @@ erlps__get_all_values__2 :: ErlangFun
 erlps__get_all_values__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
     _ | ((isEAtom p_1) && (p_1 == key_0)) ->
-      let head_4 = (erlps__get_all_values__2 [key_0, ps_2])
-      in (ErlangCons (ErlangAtom "true") head_4)
+      let tail_4 = (erlps__get_all_values__2 [key_0, ps_2])
+      in (ErlangCons (ErlangAtom "true") tail_4)
     _ | (ErlangAtom "true") <-
           (let    lop_8 = (BIF.erlang__tuple_size__1 [p_1])
            in let
@@ -223,8 +223,8 @@ erlps__get_all_values__2 [key_0, (ErlangCons p_1 ps_2)] =
                _ -> (EXC.badarg1 lop_7)) ->
       case p_1 of
         (ErlangTuple [_, value_16]) ->
-          let head_18 = (erlps__get_all_values__2 [key_0, ps_2])
-          in (ErlangCons value_16 head_18)
+          let tail_18 = (erlps__get_all_values__2 [key_0, ps_2])
+          in (ErlangCons value_16 tail_18)
         _ -> (erlps__get_all_values__2 [key_0, ps_2])
         something_else -> (EXC.case_clause something_else)
     _ -> (erlps__get_all_values__2 [key_0, ps_2])
@@ -240,8 +240,8 @@ erlps__append_values__2 :: ErlangFun
 erlps__append_values__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
     _ | ((isEAtom p_1) && (p_1 == key_0)) ->
-      let head_4 = (erlps__append_values__2 [key_0, ps_2])
-      in (ErlangCons (ErlangAtom "true") head_4)
+      let tail_4 = (erlps__append_values__2 [key_0, ps_2])
+      in (ErlangCons (ErlangAtom "true") tail_4)
     _ | (ErlangAtom "true") <-
           (let    lop_8 = (BIF.erlang__tuple_size__1 [p_1])
            in let
@@ -261,8 +261,8 @@ erlps__append_values__2 [key_0, (ErlangCons p_1 ps_2)] =
           let rop_18 = (erlps__append_values__2 [key_0, ps_2])
           in (BIF.erlang__op_append [value_16, rop_18])
         (ErlangTuple [_, value_21]) ->
-          let head_23 = (erlps__append_values__2 [key_0, ps_2])
-          in (ErlangCons value_21 head_23)
+          let tail_23 = (erlps__append_values__2 [key_0, ps_2])
+          in (ErlangCons value_21 tail_23)
         _ -> (erlps__append_values__2 [key_0, ps_2])
         something_else -> (EXC.case_clause something_else)
     _ -> (erlps__append_values__2 [key_0, ps_2])
@@ -356,8 +356,8 @@ erlps__delete__2 [key_0, (ErlangCons p_1 ps_2)] =
                _ -> (EXC.badarg1 lop_5)) ->
       (erlps__delete__2 [key_0, ps_2])
     _ ->
-      let head_16 = (erlps__delete__2 [key_0, ps_2])
-      in (ErlangCons p_1 head_16)
+      let tail_16 = (erlps__delete__2 [key_0, ps_2])
+      in (ErlangCons p_1 tail_16)
     _ -> (EXC.if_clause unit)
 erlps__delete__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__delete__2 [arg_0, arg_1] = (EXC.function_clause unit)
@@ -539,8 +539,8 @@ erlps__expand_2__4 [key_0, p1_1, l_2, (ErlangCons p_3 ps_4)] =
       let arg_20 = (erlps__property__1 [p_3])
       in (erlps__expand_3__5 [key_0, p1_1, arg_20, l_2, ps_4])
     _ ->
-      let head_25 = (erlps__expand_2__4 [key_0, p1_1, l_2, ps_4])
-      in (ErlangCons p_3 head_25)
+      let tail_25 = (erlps__expand_2__4 [key_0, p1_1, l_2, ps_4])
+      in (ErlangCons p_3 tail_25)
     _ -> (EXC.if_clause unit)
 erlps__expand_2__4 [_, _, _, (ErlangEmptyList)] = ErlangEmptyList
 erlps__expand_2__4 [arg_0, arg_1, arg_2, arg_3] =
@@ -552,8 +552,8 @@ erlps__expand_3__5 :: ErlangFun
 erlps__expand_3__5 [key_0, p1_1, p_2, l_3, ps_4] =
   case (ErlangAtom "true") of
     _ | (p1_1 == p_2) ->
-      let head_6 = (erlps__delete__2 [key_0, ps_4])
-      in (ErlangCons l_3 head_6)
+      let tail_6 = (erlps__delete__2 [key_0, ps_4])
+      in (ErlangCons l_3 tail_6)
     _ -> (ErlangCons p_2 ps_4)
     _ -> (EXC.if_clause unit)
 erlps__expand_3__5 [arg_11, arg_12, arg_13, arg_14, arg_15] =
@@ -563,9 +563,9 @@ erlps__expand_3__5 args =
 
 erlps__key_uniq__1 :: ErlangFun
 erlps__key_uniq__1 [(ErlangCons (ErlangTuple [k_0, v_1]) ps_2)] =
-  let    tail_3 = (ErlangTuple [k_0, v_1])
-  in let head_6 = (erlps__key_uniq_1__2 [k_0, ps_2])
-  in (ErlangCons tail_3 head_6)
+  let    head_3 = (ErlangTuple [k_0, v_1])
+  in let tail_6 = (erlps__key_uniq_1__2 [k_0, ps_2])
+  in (ErlangCons head_3 tail_6)
 erlps__key_uniq__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__key_uniq__1 [arg_0] = (EXC.function_clause unit)
 erlps__key_uniq__1 args =
@@ -578,9 +578,9 @@ erlps__key_uniq_1__2 [k_0,
   case (ErlangAtom "true") of
     _ | (k_0 == k1_1) -> (erlps__key_uniq_1__2 [k_0, ps_3])
     _ ->
-      let    tail_6 = (ErlangTuple [k1_1, v_2])
-      in let head_9 = (erlps__key_uniq_1__2 [k1_1, ps_3])
-      in (ErlangCons tail_6 head_9)
+      let    head_6 = (ErlangTuple [k1_1, v_2])
+      in let tail_9 = (erlps__key_uniq_1__2 [k1_1, ps_3])
+      in (ErlangCons head_6 tail_9)
     _ -> (EXC.if_clause unit)
 erlps__key_uniq_1__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__key_uniq_1__2 [arg_0, arg_1] = (EXC.function_clause unit)
@@ -592,8 +592,8 @@ erlps__flatten__1 [(ErlangCons e_0 es_1)] | (isEList e_0) =
   let rop_3 = (erlps__flatten__1 [es_1])
   in (BIF.erlang__op_append [e_0, rop_3])
 erlps__flatten__1 [(ErlangCons e_0 es_1)] =
-  let head_3 = (erlps__flatten__1 [es_1])
-  in (ErlangCons e_0 head_3)
+  let tail_3 = (erlps__flatten__1 [es_1])
+  in (ErlangCons e_0 tail_3)
 erlps__flatten__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__flatten__1 [arg_0] = (EXC.function_clause unit)
 erlps__flatten__1 args =
@@ -699,10 +699,10 @@ erlps__split__3 args =
 
 erlps__maps_prepend__3 :: ErlangFun
 erlps__maps_prepend__3 [key_0, val_1, dict_2] =
-  let    head_7 = (BIF.erlang__map_get__2 [key_0, dict_2])
+  let    tail_7 = (BIF.erlang__map_get__2 [key_0, dict_2])
   in let
     map_ext_10 =
-      (ErlangMap (Map.singleton key_0 (ErlangCons val_1 head_7)))
+      (ErlangMap (Map.singleton key_0 (ErlangCons val_1 tail_7)))
   in
     case (findMissingKey dict_2 [key_0]) of
       (DM.Nothing) -> (BIF.maps__merge__2 [dict_2, map_ext_10])

@@ -92,8 +92,8 @@ erlps__is_element__2 args =
 erlps__add_element__2 :: ErlangFun
 erlps__add_element__2 [e_0, (ErlangCons h_1 es_2)]
   | (e_0 > h_1) =
-  let head_4 = (erlps__add_element__2 [e_0, es_2])
-  in (ErlangCons h_1 head_4)
+  let tail_4 = (erlps__add_element__2 [e_0, es_2])
+  in (ErlangCons h_1 tail_4)
 erlps__add_element__2 [e_0, set_2@(ErlangCons h_1 _)]
   | (e_0 < h_1) =
   (ErlangCons e_0 set_2)
@@ -107,8 +107,8 @@ erlps__add_element__2 args =
 erlps__del_element__2 :: ErlangFun
 erlps__del_element__2 [e_0, (ErlangCons h_1 es_2)]
   | (e_0 > h_1) =
-  let head_4 = (erlps__del_element__2 [e_0, es_2])
-  in (ErlangCons h_1 head_4)
+  let tail_4 = (erlps__del_element__2 [e_0, es_2])
+  in (ErlangCons h_1 tail_4)
 erlps__del_element__2 [e_0, set_2@(ErlangCons h_1 _)]
   | (e_0 < h_1) =
   set_2
@@ -122,18 +122,18 @@ erlps__union__2 :: ErlangFun
 erlps__union__2 [(ErlangCons e1_0 es1_1),
                  set2_3@(ErlangCons e2_2 _)]
   | (e1_0 < e2_2) =
-  let head_5 = (erlps__union__2 [es1_1, set2_3])
-  in (ErlangCons e1_0 head_5)
+  let tail_5 = (erlps__union__2 [es1_1, set2_3])
+  in (ErlangCons e1_0 tail_5)
 erlps__union__2 [set1_1@(ErlangCons e1_0 _),
                  (ErlangCons e2_2 es2_3)]
   | (e1_0 > e2_2) =
-  let head_5 = (erlps__union__2 [es2_3, set1_1])
-  in (ErlangCons e2_2 head_5)
+  let tail_5 = (erlps__union__2 [es2_3, set1_1])
+  in (ErlangCons e2_2 tail_5)
 erlps__union__2 [(ErlangCons e1_0 es1_1),
                  (ErlangCons _e2_2 es2_3)]
   =
-  let head_5 = (erlps__union__2 [es1_1, es2_3])
-  in (ErlangCons e1_0 head_5)
+  let tail_5 = (erlps__union__2 [es1_1, es2_3])
+  in (ErlangCons e1_0 tail_5)
 erlps__union__2 [(ErlangEmptyList), es2_0] = es2_0
 erlps__union__2 [es1_0, (ErlangEmptyList)] = es1_0
 erlps__union__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -159,8 +159,8 @@ erlps__intersection__2 [set1_1@(ErlangCons e1_0 _),
 erlps__intersection__2 [(ErlangCons e1_0 es1_1),
                         (ErlangCons _e2_2 es2_3)]
   =
-  let head_5 = (erlps__intersection__2 [es1_1, es2_3])
-  in (ErlangCons e1_0 head_5)
+  let tail_5 = (erlps__intersection__2 [es1_1, es2_3])
+  in (ErlangCons e1_0 tail_5)
 erlps__intersection__2 [(ErlangEmptyList), _] = ErlangEmptyList
 erlps__intersection__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__intersection__2 [arg_0, arg_1] =
@@ -211,8 +211,8 @@ erlps__subtract__2 :: ErlangFun
 erlps__subtract__2 [(ErlangCons e1_0 es1_1),
                     set2_3@(ErlangCons e2_2 _)]
   | (e1_0 < e2_2) =
-  let head_5 = (BIF.erlang__subtract__2 [es1_1, set2_3])
-  in (ErlangCons e1_0 head_5)
+  let tail_5 = (BIF.erlang__subtract__2 [es1_1, set2_3])
+  in (ErlangCons e1_0 tail_5)
 erlps__subtract__2 [set1_1@(ErlangCons e1_0 _),
                     (ErlangCons e2_2 es2_3)]
   | (e1_0 > e2_2) =

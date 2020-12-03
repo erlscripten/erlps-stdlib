@@ -571,8 +571,8 @@ erlps__filter_f__2 [fun_0, (ErlangCons x_1 f_2)] =
   in
     case case_3 of
       (ErlangAtom "true") ->
-        let head_7 = (erlps__filter_f__2 [fun_0, f_2])
-        in (ErlangCons x_1 head_7)
+        let tail_7 = (erlps__filter_f__2 [fun_0, f_2])
+        in (ErlangCons x_1 tail_7)
       (ErlangAtom "false") -> (erlps__filter_f__2 [fun_0, f_2])
       l_12 | (isEList l_12) ->
         let rop_14 = (erlps__filter_f__2 [fun_0, f_2])
