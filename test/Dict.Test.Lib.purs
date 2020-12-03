@@ -156,13 +156,15 @@ erlps__enter__4 args =
 erlps__erase__3 :: ErlangFun
 erlps__erase__3 [mod_0, key_1, val_2]
   | (ErlangAtom "true") <-
-      (let lop_10 = (BIF.erlang__op_exactEq [mod_0, (ErlangAtom "dict")])
-       in
-         case lop_10 of
-           (ErlangAtom "true") -> (ErlangAtom "true")
-           (ErlangAtom "false") ->
-             (BIF.erlang__op_exactEq [mod_0, (ErlangAtom "orddict")])
-           _ -> (EXC.badarg1 lop_10)) =
+      ((falsifyErrors
+          (\ _ ->
+             let lop_10 = (BIF.erlang__op_exactEq [mod_0, (ErlangAtom "dict")])
+             in
+               case lop_10 of
+                 (ErlangAtom "true") -> (ErlangAtom "true")
+                 (ErlangAtom "false") ->
+                   (BIF.erlang__op_exactEq [mod_0, (ErlangAtom "orddict")])
+                 _ -> (EXC.badarg1 lop_10)))) =
   (BIF.erlang__apply__3
      [mod_0, (ErlangAtom "erase"),
       (ErlangCons key_1 (ErlangCons val_2 ErlangEmptyList))])

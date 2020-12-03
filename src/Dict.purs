@@ -112,9 +112,18 @@ erlps__from_list__1 args =
 erlps__size__1 :: ErlangFun
 erlps__size__1 [(ErlangTuple [(ErlangAtom "dict"), n_0, _, _, _, _, _,
                               _, _])]
-  | ((isENum n_0) && (n_0 >= (ErlangInt (DBI.fromInt 0)))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             let lop_1 = (BIF.erlang__is_integer__1 [n_0])
+             in
+               case lop_1 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   (BIF.erlang__op_greaterEq [n_0, (ErlangInt (DBI.fromInt 0))])
+                 _ -> (EXC.badarg1 lop_1)))) =
   n_0
-erlps__size__1 [arg_1] = (EXC.function_clause unit)
+erlps__size__1 [arg_5] = (EXC.function_clause unit)
 erlps__size__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -538,7 +547,7 @@ erlps__update_bkt__4 args =
 
 erlps__update_counter__3 :: ErlangFun
 erlps__update_counter__3 [key_0, incr_1, d0_2]
-  | (ErlangAtom "true") <- ((BIF.erlang__is_number__1 [incr_1])) =
+  | (isENum incr_1) =
   let    slot_5 = (erlps__get_slot__2 [d0_2, key_0])
   in let
     arg_6 =
@@ -555,7 +564,7 @@ erlps__update_counter__3 [key_0, incr_1, d0_2]
       (ErlangTuple [d1_15, ic_16]) ->
         (erlps__maybe_expand__2 [d1_15, ic_16])
       _ -> (EXC.badmatch match_expr_17)
-erlps__update_counter__3 [arg_21, arg_22, arg_23] =
+erlps__update_counter__3 [arg_20, arg_21, arg_22] =
   (EXC.function_clause unit)
 erlps__update_counter__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -607,21 +616,23 @@ erlps__filter__2 args =
 erlps__merge__3 :: ErlangFun
 erlps__merge__3 [f_0, d1_1, d2_2]
   | (ErlangAtom "true") <-
-      (let   
-         lop_24 =
-           case d1_1 of
-             (ErlangTuple arr_27) | (DM.Just field_26) <-
-                                      ((arr_27 DA.!! 1)) ->
-               field_26
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in let
-         rop_28 =
-           case d2_2 of
-             (ErlangTuple arr_31) | (DM.Just field_30) <-
-                                      ((arr_31 DA.!! 1)) ->
-               field_30
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in (BIF.erlang__op_lesser [lop_24, rop_28])) =
+      ((falsifyErrors
+          (\ _ ->
+             let   
+               lop_24 =
+                 case d1_1 of
+                   (ErlangTuple arr_27) | (DM.Just field_26) <-
+                                            ((arr_27 DA.!! 1)) ->
+                     field_26
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in let
+               rop_28 =
+                 case d2_2 of
+                   (ErlangTuple arr_31) | (DM.Just field_30) <-
+                                            ((arr_31 DA.!! 1)) ->
+                     field_30
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in (BIF.erlang__op_lesser [lop_24, rop_28])))) =
   let
     arg_3 =
       (ErlangFun 3
@@ -688,14 +699,16 @@ erlps__get_slot__2 [t_0, key_1] =
   in
     case (ErlangAtom "true") of
       _ | (ErlangAtom "true") <-
-            (let
-               rop_9 =
-                 case t_0 of
-                   (ErlangTuple arr_12) | (DM.Just field_11) <-
-                                            ((arr_12 DA.!! 2)) ->
-                     field_11
-                   _ -> (EXC.badrecord (ErlangAtom "dict"))
-             in (BIF.erlang__op_greater [h_7, rop_9])) ->
+            ((falsifyErrors
+                (\ _ ->
+                   let
+                     rop_9 =
+                       case t_0 of
+                         (ErlangTuple arr_12) | (DM.Just field_11) <-
+                                                  ((arr_12 DA.!! 2)) ->
+                           field_11
+                         _ -> (EXC.badrecord (ErlangAtom "dict"))
+                   in (BIF.erlang__op_greater [h_7, rop_9])))) ->
         let
           rop_14 =
             case t_0 of
@@ -803,7 +816,11 @@ erlps__fold_dict__3 args =
 
 erlps__fold_segs__4 :: ErlangFun
 erlps__fold_segs__4 [f_0, acc_1, segs_2, i_3]
-  | (i_3 >= (ErlangInt (DBI.fromInt 1))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             (BIF.erlang__op_greaterEq
+                [i_3, (ErlangInt (DBI.fromInt 1))])))) =
   let    seg_6 = (BIF.erlang__element__2 [i_3, segs_2])
   in let arg_12 = (BIF.erlang__tuple_size__1 [seg_6])
   in let arg_8 = (erlps__fold_seg__4 [f_0, acc_1, seg_6, arg_12])
@@ -822,7 +839,11 @@ erlps__fold_segs__4 args =
 
 erlps__fold_seg__4 :: ErlangFun
 erlps__fold_seg__4 [f_0, acc_1, seg_2, i_3]
-  | (i_3 >= (ErlangInt (DBI.fromInt 1))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             (BIF.erlang__op_greaterEq
+                [i_3, (ErlangInt (DBI.fromInt 1))])))) =
   let    arg_8 = (BIF.erlang__element__2 [i_3, seg_2])
   in let arg_5 = (erlps__fold_bucket__3 [f_0, acc_1, arg_8])
   in let
@@ -1120,22 +1141,24 @@ erlps__maybe_expand__2 args =
 erlps__maybe_expand_aux__2 :: ErlangFun
 erlps__maybe_expand_aux__2 [t0_0, ic_1]
   | (ErlangAtom "true") <-
-      (let   
-         lop_66 =
-           case t0_0 of
-             (ErlangTuple arr_69) | (DM.Just field_68) <-
-                                      ((arr_69 DA.!! 1)) ->
-               field_68
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in let lop_65 = (BIF.erlang__op_plus [lop_66, ic_1])
-       in let
-         rop_71 =
-           case t0_0 of
-             (ErlangTuple arr_74) | (DM.Just field_73) <-
-                                      ((arr_74 DA.!! 5)) ->
-               field_73
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in (BIF.erlang__op_greater [lop_65, rop_71])) =
+      ((falsifyErrors
+          (\ _ ->
+             let   
+               lop_66 =
+                 case t0_0 of
+                   (ErlangTuple arr_69) | (DM.Just field_68) <-
+                                            ((arr_69 DA.!! 1)) ->
+                     field_68
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in let lop_65 = (BIF.erlang__op_plus [lop_66, ic_1])
+             in let
+               rop_71 =
+                 case t0_0 of
+                   (ErlangTuple arr_74) | (DM.Just field_73) <-
+                                            ((arr_74 DA.!! 5)) ->
+                     field_73
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in (BIF.erlang__op_greater [lop_65, rop_71])))) =
   let    t_3 = (erlps__maybe_expand_segs__1 [t0_0])
   in let
     lop_4 =
@@ -1223,21 +1246,23 @@ erlps__maybe_expand_aux__2 args =
 erlps__maybe_expand_segs__1 :: ErlangFun
 erlps__maybe_expand_segs__1 [t_0]
   | (ErlangAtom "true") <-
-      (let   
-         lop_31 =
-           case t_0 of
-             (ErlangTuple arr_34) | (DM.Just field_33) <-
-                                      ((arr_34 DA.!! 2)) ->
-               field_33
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in let
-         rop_35 =
-           case t_0 of
-             (ErlangTuple arr_38) | (DM.Just field_37) <-
-                                      ((arr_38 DA.!! 3)) ->
-               field_37
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in (BIF.erlang__op_exactEq [lop_31, rop_35])) =
+      ((falsifyErrors
+          (\ _ ->
+             let   
+               lop_31 =
+                 case t_0 of
+                   (ErlangTuple arr_34) | (DM.Just field_33) <-
+                                            ((arr_34 DA.!! 2)) ->
+                     field_33
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in let
+               rop_35 =
+                 case t_0 of
+                   (ErlangTuple arr_38) | (DM.Just field_37) <-
+                                            ((arr_38 DA.!! 3)) ->
+                     field_37
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in (BIF.erlang__op_exactEq [lop_31, rop_35])))) =
   let   
     rop_4 =
       case t_0 of
@@ -1288,36 +1313,39 @@ erlps__maybe_expand_segs__1 args =
 erlps__maybe_contract__2 :: ErlangFun
 erlps__maybe_contract__2 [t_0, dc_1]
   | (ErlangAtom "true") <-
-      (let   
-         lop_62 =
-           case t_0 of
-             (ErlangTuple arr_65) | (DM.Just field_64) <-
-                                      ((arr_65 DA.!! 1)) ->
-               field_64
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in let lop_61 = (BIF.erlang__op_minus [lop_62, dc_1])
-       in let
-         rop_67 =
-           case t_0 of
-             (ErlangTuple arr_70) | (DM.Just field_69) <-
-                                      ((arr_70 DA.!! 6)) ->
-               field_69
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in let lop_60 = (BIF.erlang__op_lesser [lop_61, rop_67])
-       in
-         case lop_60 of
-           (ErlangAtom "false") -> (ErlangAtom "false")
-           (ErlangAtom "true") ->
-             let
-               lop_71 =
+      ((falsifyErrors
+          (\ _ ->
+             let   
+               lop_62 =
                  case t_0 of
-                   (ErlangTuple arr_74) | (DM.Just field_73) <-
-                                            ((arr_74 DA.!! 2)) ->
-                     field_73
+                   (ErlangTuple arr_65) | (DM.Just field_64) <-
+                                            ((arr_65 DA.!! 1)) ->
+                     field_64
                    _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in let lop_61 = (BIF.erlang__op_minus [lop_62, dc_1])
+             in let
+               rop_67 =
+                 case t_0 of
+                   (ErlangTuple arr_70) | (DM.Just field_69) <-
+                                            ((arr_70 DA.!! 6)) ->
+                     field_69
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in let lop_60 = (BIF.erlang__op_lesser [lop_61, rop_67])
              in
-               (BIF.erlang__op_greater [lop_71, (ErlangInt (DBI.fromInt 16))])
-           _ -> (EXC.badarg1 lop_60)) =
+               case lop_60 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   let
+                     lop_71 =
+                       case t_0 of
+                         (ErlangTuple arr_74) | (DM.Just field_73) <-
+                                                  ((arr_74 DA.!! 2)) ->
+                           field_73
+                         _ -> (EXC.badrecord (ErlangAtom "dict"))
+                   in
+                     (BIF.erlang__op_greater
+                        [lop_71, (ErlangInt (DBI.fromInt 16))])
+                 _ -> (EXC.badarg1 lop_60)))) =
   let   
     n_5 =
       case t_0 of
@@ -1396,21 +1424,23 @@ erlps__maybe_contract__2 args =
 erlps__maybe_contract_segs__1 :: ErlangFun
 erlps__maybe_contract_segs__1 [t_0]
   | (ErlangAtom "true") <-
-      (let   
-         lop_27 =
-           case t_0 of
-             (ErlangTuple arr_30) | (DM.Just field_29) <-
-                                      ((arr_30 DA.!! 2)) ->
-               field_29
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in let
-         rop_31 =
-           case t_0 of
-             (ErlangTuple arr_34) | (DM.Just field_33) <-
-                                      ((arr_34 DA.!! 4)) ->
-               field_33
-             _ -> (EXC.badrecord (ErlangAtom "dict"))
-       in (BIF.erlang__op_exactEq [lop_27, rop_31])) =
+      ((falsifyErrors
+          (\ _ ->
+             let   
+               lop_27 =
+                 case t_0 of
+                   (ErlangTuple arr_30) | (DM.Just field_29) <-
+                                            ((arr_30 DA.!! 2)) ->
+                     field_29
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in let
+               rop_31 =
+                 case t_0 of
+                   (ErlangTuple arr_34) | (DM.Just field_33) <-
+                                            ((arr_34 DA.!! 4)) ->
+                     field_33
+                   _ -> (EXC.badrecord (ErlangAtom "dict"))
+             in (BIF.erlang__op_exactEq [lop_27, rop_31])))) =
   let   
     lop_3 =
       case t_0 of

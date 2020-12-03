@@ -51,9 +51,19 @@ erlps__is_empty__1 args =
 
 erlps__size__1 :: ErlangFun
 erlps__size__1 [(ErlangTuple [size_0, _])]
-  | ((isENum size_0) && (size_0 >= (ErlangInt (DBI.fromInt 0)))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             let lop_1 = (BIF.erlang__is_integer__1 [size_0])
+             in
+               case lop_1 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   (BIF.erlang__op_greaterEq
+                      [size_0, (ErlangInt (DBI.fromInt 0))])
+                 _ -> (EXC.badarg1 lop_1)))) =
   size_0
-erlps__size__1 [arg_1] = (EXC.function_clause unit)
+erlps__size__1 [arg_5] = (EXC.function_clause unit)
 erlps__size__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -67,11 +77,15 @@ erlps__lookup__2 args =
 erlps__lookup_1__2 :: ErlangFun
 erlps__lookup_1__2 [key_0,
                     (ErlangTuple [key1_1, _, smaller_2, _])]
-  | (key_0 < key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [key_0, key1_1])))) =
   (erlps__lookup_1__2 [key_0, smaller_2])
 erlps__lookup_1__2 [key_0,
                     (ErlangTuple [key1_1, _, _, bigger_2])]
-  | (key_0 > key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, key1_1])))) =
   (erlps__lookup_1__2 [key_0, bigger_2])
 erlps__lookup_1__2 [_, (ErlangTuple [_, value_0, _, _])] =
   (ErlangTuple [(ErlangAtom "value"), value_0])
@@ -90,11 +104,15 @@ erlps__is_defined__2 args =
 erlps__is_defined_1__2 :: ErlangFun
 erlps__is_defined_1__2 [key_0,
                         (ErlangTuple [key1_1, _, smaller_2, _])]
-  | (key_0 < key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [key_0, key1_1])))) =
   (erlps__is_defined_1__2 [key_0, smaller_2])
 erlps__is_defined_1__2 [key_0,
                         (ErlangTuple [key1_1, _, _, bigger_2])]
-  | (key_0 > key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, key1_1])))) =
   (erlps__is_defined_1__2 [key_0, bigger_2])
 erlps__is_defined_1__2 [_, (ErlangTuple [_, _, _, _])] =
   (ErlangAtom "true")
@@ -113,10 +131,14 @@ erlps__get__2 args =
 
 erlps__get_1__2 :: ErlangFun
 erlps__get_1__2 [key_0, (ErlangTuple [key1_1, _, smaller_2, _])]
-  | (key_0 < key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [key_0, key1_1])))) =
   (erlps__get_1__2 [key_0, smaller_2])
 erlps__get_1__2 [key_0, (ErlangTuple [key1_1, _, _, bigger_2])]
-  | (key_0 > key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, key1_1])))) =
   (erlps__get_1__2 [key_0, bigger_2])
 erlps__get_1__2 [_, (ErlangTuple [_, value_0, _, _])] = value_0
 erlps__get_1__2 [arg_1, arg_2] = (EXC.function_clause unit)
@@ -135,12 +157,16 @@ erlps__update__3 args =
 erlps__update_1__3 :: ErlangFun
 erlps__update_1__3 [key_0, value_1,
                     (ErlangTuple [key1_2, v_3, smaller_4, bigger_5])]
-  | (key_0 < key1_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [key_0, key1_2])))) =
   let tup_el_8 = (erlps__update_1__3 [key_0, value_1, smaller_4])
   in (ErlangTuple [key1_2, v_3, tup_el_8, bigger_5])
 erlps__update_1__3 [key_0, value_1,
                     (ErlangTuple [key1_2, v_3, smaller_4, bigger_5])]
-  | (key_0 > key1_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, key1_2])))) =
   let tup_el_9 = (erlps__update_1__3 [key_0, value_1, bigger_5])
   in (ErlangTuple [key1_2, v_3, smaller_4, tup_el_9])
 erlps__update_1__3 [key_0, value_1,
@@ -154,7 +180,7 @@ erlps__update_1__3 args =
 
 erlps__insert__3 :: ErlangFun
 erlps__insert__3 [key_0, val_1, (ErlangTuple [s_2, t_3])]
-  | (isENum s_2) =
+  | (isEInt s_2) =
   let   
     s1_6 = (BIF.erlang__op_plus [s_2, (ErlangInt (DBI.fromInt 1))])
   in let arg_12 = (BIF.erlang__op_mult [s1_6, s1_6])
@@ -169,7 +195,9 @@ erlps__insert__3 args =
 erlps__insert_1__4 :: ErlangFun
 erlps__insert_1__4 [key_0, value_1,
                     (ErlangTuple [key1_2, v_3, smaller_4, bigger_5]), s_6]
-  | (key_0 < key1_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [key_0, key1_2])))) =
   let   
     arg_11 = (BIF.erlang__bsr__2 [s_6, (ErlangInt (DBI.fromInt 1))])
   in let
@@ -193,15 +221,20 @@ erlps__insert_1__4 [key_0, value_1,
               in let p_38 = (BIF.erlang__op_mult [ss_35, ss_35])
               in
                 case (ErlangAtom "true") of
-                  _ | (h_30 > p_38) -> (erlps__balance__2 [t_21, ss_35])
+                  _ | (ErlangAtom "true") <-
+                        ((falsifyErrors
+                            (\ _ -> (BIF.erlang__op_greater [h_30, p_38])))) ->
+                    (erlps__balance__2 [t_21, ss_35])
                   _ -> (ErlangTuple [t_21, h_30, ss_35])
                   _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_25)
-      t1_44 -> (ErlangTuple [key1_2, v_3, t1_44, bigger_5])
+      t1_46 -> (ErlangTuple [key1_2, v_3, t1_46, bigger_5])
       something_else -> (EXC.case_clause something_else)
 erlps__insert_1__4 [key_0, value_1,
                     (ErlangTuple [key1_2, v_3, smaller_4, bigger_5]), s_6]
-  | (key_0 > key1_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, key1_2])))) =
   let   
     arg_11 = (BIF.erlang__bsr__2 [s_6, (ErlangInt (DBI.fromInt 1))])
   in let
@@ -225,11 +258,14 @@ erlps__insert_1__4 [key_0, value_1,
               in let p_38 = (BIF.erlang__op_mult [ss_35, ss_35])
               in
                 case (ErlangAtom "true") of
-                  _ | (h_30 > p_38) -> (erlps__balance__2 [t_21, ss_35])
+                  _ | (ErlangAtom "true") <-
+                        ((falsifyErrors
+                            (\ _ -> (BIF.erlang__op_greater [h_30, p_38])))) ->
+                    (erlps__balance__2 [t_21, ss_35])
                   _ -> (ErlangTuple [t_21, h_30, ss_35])
                   _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_25)
-      t1_44 -> (ErlangTuple [key1_2, v_3, smaller_4, t1_44])
+      t1_46 -> (ErlangTuple [key1_2, v_3, smaller_4, t1_46])
       something_else -> (EXC.case_clause something_else)
 erlps__insert_1__4 [key_0, value_1, (ErlangAtom "nil"), s_2]
   | (s_2 == (ErlangInt (DBI.fromInt 0))) =
@@ -326,7 +362,10 @@ erlps__balance_list__2 args =
 
 erlps__balance_list_1__2 :: ErlangFun
 erlps__balance_list_1__2 [l_0, s_1]
-  | (s_1 > (ErlangInt (DBI.fromInt 1))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             (BIF.erlang__op_greater [s_1, (ErlangInt (DBI.fromInt 1))])))) =
   let   
     sm_4 = (BIF.erlang__op_minus [s_1, (ErlangInt (DBI.fromInt 1))])
   in let
@@ -385,25 +424,38 @@ erlps__delete_any__2 args =
 
 erlps__delete__2 :: ErlangFun
 erlps__delete__2 [key_0, (ErlangTuple [s_1, t_2])]
-  | ((isENum s_1) && (s_1 >= (ErlangInt (DBI.fromInt 0)))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             let lop_9 = (BIF.erlang__is_integer__1 [s_1])
+             in
+               case lop_9 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   (BIF.erlang__op_greaterEq [s_1, (ErlangInt (DBI.fromInt 0))])
+                 _ -> (EXC.badarg1 lop_9)))) =
   let   
     tup_el_3 =
       (BIF.erlang__op_minus [s_1, (ErlangInt (DBI.fromInt 1))])
   in let tup_el_6 = (erlps__delete_1__2 [key_0, t_2])
   in (ErlangTuple [tup_el_3, tup_el_6])
-erlps__delete__2 [arg_9, arg_10] = (EXC.function_clause unit)
+erlps__delete__2 [arg_13, arg_14] = (EXC.function_clause unit)
 erlps__delete__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__delete_1__2 :: ErlangFun
 erlps__delete_1__2 [key_0,
                     (ErlangTuple [key1_1, value_2, smaller_3, larger_4])]
-  | (key_0 < key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [key_0, key1_1])))) =
   let smaller1_7 = (erlps__delete_1__2 [key_0, smaller_3])
   in (ErlangTuple [key1_1, value_2, smaller1_7, larger_4])
 erlps__delete_1__2 [key_0,
                     (ErlangTuple [key1_1, value_2, smaller_3, bigger_4])]
-  | (key_0 > key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, key1_1])))) =
   let bigger1_7 = (erlps__delete_1__2 [key_0, bigger_4])
   in (ErlangTuple [key1_1, value_2, smaller_3, bigger1_7])
 erlps__delete_1__2 [_, (ErlangTuple [_, _, smaller_0, larger_1])]
@@ -441,7 +493,16 @@ erlps__take_any__2 args =
 
 erlps__take__2 :: ErlangFun
 erlps__take__2 [key_0, (ErlangTuple [s_1, t_2])]
-  | ((isENum s_1) && (s_1 >= (ErlangInt (DBI.fromInt 0)))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             let lop_14 = (BIF.erlang__is_integer__1 [s_1])
+             in
+               case lop_14 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   (BIF.erlang__op_greaterEq [s_1, (ErlangInt (DBI.fromInt 0))])
+                 _ -> (EXC.badarg1 lop_14)))) =
   let match_expr_7 = (erlps__take_1__2 [key_0, t_2])
   in
     case match_expr_7 of
@@ -452,14 +513,16 @@ erlps__take__2 [key_0, (ErlangTuple [s_1, t_2])]
         in let tup_el_9 = (ErlangTuple [tup_el_10, res_6])
         in (ErlangTuple [value_5, tup_el_9])
       _ -> (EXC.badmatch match_expr_7)
-erlps__take__2 [arg_14, arg_15] = (EXC.function_clause unit)
+erlps__take__2 [arg_18, arg_19] = (EXC.function_clause unit)
 erlps__take__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__take_1__2 :: ErlangFun
 erlps__take_1__2 [key_0,
                   (ErlangTuple [key1_1, value_2, smaller_3, larger_4])]
-  | (key_0 < key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [key_0, key1_1])))) =
   let match_expr_9 = (erlps__take_1__2 [key_0, smaller_3])
   in
     case match_expr_9 of
@@ -470,7 +533,9 @@ erlps__take_1__2 [key_0,
       _ -> (EXC.badmatch match_expr_9)
 erlps__take_1__2 [key_0,
                   (ErlangTuple [key1_1, value_2, smaller_3, bigger_4])]
-  | (key_0 > key1_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, key1_1])))) =
   let match_expr_9 = (erlps__take_1__2 [key_0, bigger_4])
   in
     case match_expr_9 of
@@ -490,7 +555,17 @@ erlps__take_1__2 args =
 
 erlps__take_smallest__1 :: ErlangFun
 erlps__take_smallest__1 [(ErlangTuple [size_0, tree_1])]
-  | ((isENum size_0) && (size_0 >= (ErlangInt (DBI.fromInt 0)))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             let lop_14 = (BIF.erlang__is_integer__1 [size_0])
+             in
+               case lop_14 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   (BIF.erlang__op_greaterEq
+                      [size_0, (ErlangInt (DBI.fromInt 0))])
+                 _ -> (EXC.badarg1 lop_14)))) =
   let match_expr_6 = (erlps__take_smallest1__1 [tree_1])
   in
     case match_expr_6 of
@@ -501,7 +576,7 @@ erlps__take_smallest__1 [(ErlangTuple [size_0, tree_1])]
         in let tup_el_9 = (ErlangTuple [tup_el_10, larger_5])
         in (ErlangTuple [key_3, value_4, tup_el_9])
       _ -> (EXC.badmatch match_expr_6)
-erlps__take_smallest__1 [arg_14] = (EXC.function_clause unit)
+erlps__take_smallest__1 [arg_18] = (EXC.function_clause unit)
 erlps__take_smallest__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -547,7 +622,17 @@ erlps__smallest_1__1 args =
 
 erlps__take_largest__1 :: ErlangFun
 erlps__take_largest__1 [(ErlangTuple [size_0, tree_1])]
-  | ((isENum size_0) && (size_0 >= (ErlangInt (DBI.fromInt 0)))) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             let lop_14 = (BIF.erlang__is_integer__1 [size_0])
+             in
+               case lop_14 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") ->
+                   (BIF.erlang__op_greaterEq
+                      [size_0, (ErlangInt (DBI.fromInt 0))])
+                 _ -> (EXC.badarg1 lop_14)))) =
   let match_expr_6 = (erlps__take_largest1__1 [tree_1])
   in
     case match_expr_6 of
@@ -558,7 +643,7 @@ erlps__take_largest__1 [(ErlangTuple [size_0, tree_1])]
         in let tup_el_9 = (ErlangTuple [tup_el_10, smaller_5])
         in (ErlangTuple [key_3, value_4, tup_el_9])
       _ -> (EXC.badmatch match_expr_6)
-erlps__take_largest__1 [arg_14] = (EXC.function_clause unit)
+erlps__take_largest__1 [arg_18] = (EXC.function_clause unit)
 erlps__take_largest__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
@@ -711,7 +796,8 @@ erlps__iterator_1_from__2 args =
 erlps__iterator_from__3 :: ErlangFun
 erlps__iterator_from__3 [s_0, (ErlangTuple [k_1, _, _, t_2]),
                          as_3]
-  | (k_1 < s_0) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [k_1, s_0])))) =
   (erlps__iterator_from__3 [s_0, t_2, as_3])
 erlps__iterator_from__3 [_,
                          t_0@(ErlangTuple [_, _, (ErlangAtom "nil"), _]), as_1]

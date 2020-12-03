@@ -45,7 +45,9 @@ erlps__is_set__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__is_set__2 :: ErlangFun
-erlps__is_set__2 [(ErlangCons e2_0 es_1), e1_2] | (e1_2 < e2_0) =
+erlps__is_set__2 [(ErlangCons e2_0 es_1), e1_2]
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e1_2, e2_0])))) =
   (erlps__is_set__2 [es_1, e2_0])
 erlps__is_set__2 [(ErlangCons _ _), _] = (ErlangAtom "false")
 erlps__is_set__2 [(ErlangEmptyList), _] = (ErlangAtom "true")
@@ -79,9 +81,13 @@ erlps__from_list__1 args =
   (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__is_element__2 :: ErlangFun
-erlps__is_element__2 [e_0, (ErlangCons h_1 es_2)] | (e_0 > h_1) =
+erlps__is_element__2 [e_0, (ErlangCons h_1 es_2)]
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_greater [e_0, h_1])))) =
   (erlps__is_element__2 [e_0, es_2])
-erlps__is_element__2 [e_0, (ErlangCons h_1 _)] | (e_0 < h_1) =
+erlps__is_element__2 [e_0, (ErlangCons h_1 _)]
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e_0, h_1])))) =
   (ErlangAtom "false")
 erlps__is_element__2 [_e_0, (ErlangCons _h_1 _)] = (ErlangAtom "true")
 erlps__is_element__2 [_, (ErlangEmptyList)] = (ErlangAtom "false")
@@ -91,11 +97,13 @@ erlps__is_element__2 args =
 
 erlps__add_element__2 :: ErlangFun
 erlps__add_element__2 [e_0, (ErlangCons h_1 es_2)]
-  | (e_0 > h_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_greater [e_0, h_1])))) =
   let tail_4 = (erlps__add_element__2 [e_0, es_2])
   in (ErlangCons h_1 tail_4)
 erlps__add_element__2 [e_0, set_2@(ErlangCons h_1 _)]
-  | (e_0 < h_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e_0, h_1])))) =
   (ErlangCons e_0 set_2)
 erlps__add_element__2 [_e_0, set_2@(ErlangCons _h_1 _)] = set_2
 erlps__add_element__2 [e_0, (ErlangEmptyList)] =
@@ -106,11 +114,13 @@ erlps__add_element__2 args =
 
 erlps__del_element__2 :: ErlangFun
 erlps__del_element__2 [e_0, (ErlangCons h_1 es_2)]
-  | (e_0 > h_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_greater [e_0, h_1])))) =
   let tail_4 = (erlps__del_element__2 [e_0, es_2])
   in (ErlangCons h_1 tail_4)
 erlps__del_element__2 [e_0, set_2@(ErlangCons h_1 _)]
-  | (e_0 < h_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e_0, h_1])))) =
   set_2
 erlps__del_element__2 [_e_0, (ErlangCons _h_1 es_2)] = es_2
 erlps__del_element__2 [_, (ErlangEmptyList)] = ErlangEmptyList
@@ -121,12 +131,15 @@ erlps__del_element__2 args =
 erlps__union__2 :: ErlangFun
 erlps__union__2 [(ErlangCons e1_0 es1_1),
                  set2_3@(ErlangCons e2_2 _)]
-  | (e1_0 < e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e1_0, e2_2])))) =
   let tail_5 = (erlps__union__2 [es1_1, set2_3])
   in (ErlangCons e1_0 tail_5)
 erlps__union__2 [set1_1@(ErlangCons e1_0 _),
                  (ErlangCons e2_2 es2_3)]
-  | (e1_0 > e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [e1_0, e2_2])))) =
   let tail_5 = (erlps__union__2 [es2_3, set1_1])
   in (ErlangCons e2_2 tail_5)
 erlps__union__2 [(ErlangCons e1_0 es1_1),
@@ -150,11 +163,14 @@ erlps__union__1 args =
 erlps__intersection__2 :: ErlangFun
 erlps__intersection__2 [(ErlangCons e1_0 es1_1),
                         set2_3@(ErlangCons e2_2 _)]
-  | (e1_0 < e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e1_0, e2_2])))) =
   (erlps__intersection__2 [es1_1, set2_3])
 erlps__intersection__2 [set1_1@(ErlangCons e1_0 _),
                         (ErlangCons e2_2 es2_3)]
-  | (e1_0 > e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [e1_0, e2_2])))) =
   (erlps__intersection__2 [es2_3, set1_1])
 erlps__intersection__2 [(ErlangCons e1_0 es1_1),
                         (ErlangCons _e2_2 es2_3)]
@@ -191,11 +207,14 @@ erlps__intersection1__2 args =
 erlps__is_disjoint__2 :: ErlangFun
 erlps__is_disjoint__2 [(ErlangCons e1_0 es1_1),
                        set2_3@(ErlangCons e2_2 _)]
-  | (e1_0 < e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e1_0, e2_2])))) =
   (erlps__is_disjoint__2 [es1_1, set2_3])
 erlps__is_disjoint__2 [set1_1@(ErlangCons e1_0 _),
                        (ErlangCons e2_2 es2_3)]
-  | (e1_0 > e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [e1_0, e2_2])))) =
   (erlps__is_disjoint__2 [es2_3, set1_1])
 erlps__is_disjoint__2 [(ErlangCons _e1_0 _es1_1),
                        (ErlangCons _e2_2 _es2_3)]
@@ -210,12 +229,15 @@ erlps__is_disjoint__2 args =
 erlps__subtract__2 :: ErlangFun
 erlps__subtract__2 [(ErlangCons e1_0 es1_1),
                     set2_3@(ErlangCons e2_2 _)]
-  | (e1_0 < e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e1_0, e2_2])))) =
   let tail_5 = (BIF.erlang__subtract__2 [es1_1, set2_3])
   in (ErlangCons e1_0 tail_5)
 erlps__subtract__2 [set1_1@(ErlangCons e1_0 _),
                     (ErlangCons e2_2 es2_3)]
-  | (e1_0 > e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [e1_0, e2_2])))) =
   (BIF.erlang__subtract__2 [set1_1, es2_3])
 erlps__subtract__2 [(ErlangCons _e1_0 es1_1),
                     (ErlangCons _e2_2 es2_3)]
@@ -229,11 +251,14 @@ erlps__subtract__2 args =
 
 erlps__is_subset__2 :: ErlangFun
 erlps__is_subset__2 [(ErlangCons e1_0 _), (ErlangCons e2_1 _)]
-  | (e1_0 < e2_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [e1_0, e2_1])))) =
   (ErlangAtom "false")
 erlps__is_subset__2 [set1_1@(ErlangCons e1_0 _),
                      (ErlangCons e2_2 es2_3)]
-  | (e1_0 > e2_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [e1_0, e2_2])))) =
   (erlps__is_subset__2 [set1_1, es2_3])
 erlps__is_subset__2 [(ErlangCons _e1_0 es1_1),
                      (ErlangCons _e2_2 es2_3)]

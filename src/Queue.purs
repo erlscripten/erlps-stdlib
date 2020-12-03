@@ -445,51 +445,83 @@ erlps__split__2 [(ErlangInt num_0), q_3@(ErlangTuple [r_1, f_2])]
   let tup_el_4 = (ErlangTuple [ErlangEmptyList, ErlangEmptyList])
   in (ErlangTuple [tup_el_4, q_3])
 erlps__split__2 [n_0, q_3@(ErlangTuple [r_1, f_2])]
-  | ((((isENum n_0) && (n_0 >= (ErlangInt (DBI.fromInt 1)))) &&
-        (isEList r_1)) &&
-       (isEList f_2)) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ ->
+             let    lop_61 = (BIF.erlang__is_integer__1 [n_0])
+             in let
+               lop_60 =
+                 case lop_61 of
+                   (ErlangAtom "false") -> (ErlangAtom "false")
+                   (ErlangAtom "true") ->
+                     (BIF.erlang__op_greaterEq
+                        [n_0, (ErlangInt (DBI.fromInt 1))])
+                   _ -> (EXC.badarg1 lop_61)
+             in let
+               lop_59 =
+                 case lop_60 of
+                   (ErlangAtom "false") -> (ErlangAtom "false")
+                   (ErlangAtom "true") -> (BIF.erlang__is_list__1 [r_1])
+                   _ -> (EXC.badarg1 lop_60)
+             in
+               case lop_59 of
+                 (ErlangAtom "false") -> (ErlangAtom "false")
+                 (ErlangAtom "true") -> (BIF.erlang__is_list__1 [f_2])
+                 _ -> (EXC.badarg1 lop_59)))) =
   let lf_5 = (BIF.erlang__length__1 [f_2])
   in
     case (ErlangAtom "true") of
-      _ | (n_0 < lf_5) ->
+      _ | (ErlangAtom "true") <-
+            ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [n_0, lf_5])))) ->
         case f_2 of
-          (ErlangCons x_6 f1_7) ->
+          (ErlangCons x_8 f1_9) ->
             let
-              arg_9 = (BIF.erlang__op_minus [n_0, (ErlangInt (DBI.fromInt 1))])
+              arg_11 =
+                (BIF.erlang__op_minus [n_0, (ErlangInt (DBI.fromInt 1))])
             in
               (erlps__split_f1_to_r2__5
-                 [arg_9, r_1, f1_7, ErlangEmptyList,
-                  (ErlangCons x_6 ErlangEmptyList)])
+                 [arg_11, r_1, f1_9, ErlangEmptyList,
+                  (ErlangCons x_8 ErlangEmptyList)])
           _ -> (EXC.badmatch f_2)
-      _ | (n_0 > lf_5) ->
-        let    lr_19 = (BIF.erlang__length__1 [r_1])
-        in let rop_21 = (BIF.erlang__op_minus [n_0, lf_5])
-        in let m_24 = (BIF.erlang__op_minus [lr_19, rop_21])
+      _ | (ErlangAtom "true") <-
+            ((falsifyErrors
+                (\ _ -> (BIF.erlang__op_greater [n_0, lf_5])))) ->
+        let    lr_23 = (BIF.erlang__length__1 [r_1])
+        in let rop_25 = (BIF.erlang__op_minus [n_0, lf_5])
+        in let m_28 = (BIF.erlang__op_minus [lr_23, rop_25])
         in
           case (ErlangAtom "true") of
-            _ | (m_24 < (ErlangInt (DBI.fromInt 0))) ->
+            _ | (ErlangAtom "true") <-
+                  ((falsifyErrors
+                      (\ _ ->
+                         (BIF.erlang__op_lesser
+                            [m_28, (ErlangInt (DBI.fromInt 0))])))) ->
               (BIF.erlang__error__2
                  [(ErlangAtom "badarg"),
                   (ErlangCons n_0 (ErlangCons q_3 ErlangEmptyList))])
-            _ | (m_24 > (ErlangInt (DBI.fromInt 0))) ->
+            _ | (ErlangAtom "true") <-
+                  ((falsifyErrors
+                      (\ _ ->
+                         (BIF.erlang__op_greater
+                            [m_28, (ErlangInt (DBI.fromInt 0))])))) ->
               case r_1 of
-                (ErlangCons x_31 r1_32) ->
+                (ErlangCons x_39 r1_40) ->
                   let
-                    arg_34 =
-                      (BIF.erlang__op_minus [m_24, (ErlangInt (DBI.fromInt 1))])
+                    arg_42 =
+                      (BIF.erlang__op_minus [m_28, (ErlangInt (DBI.fromInt 1))])
                   in
                     (erlps__split_r1_to_f2__5
-                       [arg_34, r1_32, f_2, (ErlangCons x_31 ErlangEmptyList),
+                       [arg_42, r1_40, f_2, (ErlangCons x_39 ErlangEmptyList),
                         ErlangEmptyList])
                 _ -> (EXC.badmatch r_1)
             _ ->
-              let tup_el_44 = (ErlangTuple [ErlangEmptyList, ErlangEmptyList])
-              in (ErlangTuple [q_3, tup_el_44])
+              let tup_el_52 = (ErlangTuple [ErlangEmptyList, ErlangEmptyList])
+              in (ErlangTuple [q_3, tup_el_52])
             _ -> (EXC.if_clause unit)
       _ ->
-        let    tup_el_47 = (erlps__f2r__1 [f_2])
-        in let tup_el_49 = (erlps__r2f__1 [r_1])
-        in (ErlangTuple [tup_el_47, tup_el_49])
+        let    tup_el_55 = (erlps__f2r__1 [f_2])
+        in let tup_el_57 = (erlps__r2f__1 [r_1])
+        in (ErlangTuple [tup_el_55, tup_el_57])
       _ -> (EXC.if_clause unit)
 erlps__split__2 [n_0, q_1] =
   (BIF.erlang__error__2

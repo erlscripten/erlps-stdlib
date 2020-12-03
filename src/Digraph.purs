@@ -949,17 +949,21 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
                                (ErlangCons v2_2 ErlangEmptyList))])
                     in (ErlangTuple [(ErlangAtom "error"), tup_el_31])
                   (ErlangAtom "false") | (ErlangAtom "true") <-
-                                     (let
-                                        lop_38 =
-                                          case g_4 of
-                                            (ErlangTuple arr_41) | (DM.Just field_40) <-
-                                                                     ((arr_41 DA.!!
-                                                                         4)) ->
-                                              field_40
-                                            _ -> (EXC.badrecord (ErlangAtom "digraph"))
-                                      in
-                                        (BIF.erlang__op_exactEq
-                                           [lop_38, (ErlangAtom "false")])) ->
+                                     ((falsifyErrors
+                                         (\ _ ->
+                                            let
+                                              lop_38 =
+                                                case g_4 of
+                                                  (ErlangTuple arr_41) | (DM.Just field_40) <-
+                                                                           ((arr_41 DA.!!
+                                                                               4)) ->
+                                                    field_40
+                                                  _ ->
+                                                    (EXC.badrecord
+                                                       (ErlangAtom "digraph"))
+                                            in
+                                              (BIF.erlang__op_exactEq
+                                                 [lop_38, (ErlangAtom "false")])))) ->
                     (erlps__acyclic_add_edge__5 [e_0, v1_1, v2_2, label_3, g_4])
                   (ErlangAtom "false") ->
                     (erlps__do_insert_edge__5 [e_0, v1_1, v2_2, label_3, g_4])
@@ -982,22 +986,25 @@ erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"), _,
       (ErlangCons (ErlangTuple [e_7, vert1_8, vert2_9,
                                 _]) (ErlangEmptyList)) | (e_7 == e_1)
                                                        , (ErlangAtom "true") <-
-                                                           (let
-                                                              lop_10 =
-                                                                (BIF.erlang__op_exactNeq
-                                                                   [vert1_8,
-                                                                    v1_2])
-                                                            in
-                                                              case lop_10 of
-                                                                (ErlangAtom "true") ->
-                                                                  (ErlangAtom "true")
-                                                                (ErlangAtom "false") ->
-                                                                  (BIF.erlang__op_exactNeq
-                                                                     [vert2_9,
-                                                                      v2_3])
-                                                                _ ->
-                                                                  (EXC.badarg1
-                                                                     lop_10)) ->
+                                                           ((falsifyErrors
+                                                               (\ _ ->
+                                                                  let
+                                                                    lop_10 =
+                                                                      (BIF.erlang__op_exactNeq
+                                                                         [vert1_8,
+                                                                          v1_2])
+                                                                  in
+                                                                    case lop_10 of
+                                                                      (ErlangAtom "true") ->
+                                                                        (ErlangAtom
+                                                                           "true")
+                                                                      (ErlangAtom "false") ->
+                                                                        (BIF.erlang__op_exactNeq
+                                                                           [vert2_9,
+                                                                            v2_3])
+                                                                      _ ->
+                                                                        (EXC.badarg1
+                                                                           lop_10)))) ->
         (ErlangAtom "true")
       _ -> (ErlangAtom "false")
       something_else -> (EXC.case_clause something_else)
@@ -1108,7 +1115,9 @@ erlps__get_path__3 args =
 
 erlps__prune_short_path__2 :: ErlangFun
 erlps__prune_short_path__2 [counter_0, min_1]
-  | (counter_0 < min_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_lesser [counter_0, min_1])))) =
   (ErlangAtom "short")
 erlps__prune_short_path__2 [_counter_0, _min_1] = (ErlangAtom "ok")
 erlps__prune_short_path__2 [arg_2, arg_3] =

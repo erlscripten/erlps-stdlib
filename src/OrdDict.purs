@@ -38,11 +38,14 @@ erlps__new__0 args =
 
 erlps__is_key__2 :: ErlangFun
 erlps__is_key__2 [key_0, (ErlangCons (ErlangTuple [k_1, _]) _)]
-  | (key_0 < k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_1])))) =
   (ErlangAtom "false")
 erlps__is_key__2 [key_0,
                   (ErlangCons (ErlangTuple [k_1, _]) dict_2)]
-  | (key_0 > k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_1])))) =
   (erlps__is_key__2 [key_0, dict_2])
 erlps__is_key__2 [_key_0,
                   (ErlangCons (ErlangTuple [_k_1, _val_2]) _)]
@@ -88,22 +91,28 @@ erlps__is_empty__1 args =
 
 erlps__fetch__2 :: ErlangFun
 erlps__fetch__2 [key_0, (ErlangCons (ErlangTuple [k_1, _]) d_2)]
-  | (key_0 > k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_1])))) =
   (erlps__fetch__2 [key_0, d_2])
 erlps__fetch__2 [key_0,
                  (ErlangCons (ErlangTuple [k_1, value_2]) _)]
-  | (key_0 == k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_eq [key_0, k_1])))) =
   value_2
-erlps__fetch__2 [arg_3, arg_4] = (EXC.function_clause unit)
+erlps__fetch__2 [arg_5, arg_6] = (EXC.function_clause unit)
 erlps__fetch__2 args =
   (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__find__2 :: ErlangFun
 erlps__find__2 [key_0, (ErlangCons (ErlangTuple [k_1, _]) _)]
-  | (key_0 < k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_1])))) =
   (ErlangAtom "error")
 erlps__find__2 [key_0, (ErlangCons (ErlangTuple [k_1, _]) d_2)]
-  | (key_0 > k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_1])))) =
   (erlps__find__2 [key_0, d_2])
 erlps__find__2 [_key_0,
                 (ErlangCons (ErlangTuple [_k_1, value_2]) _)]
@@ -128,11 +137,14 @@ erlps__fetch_keys__1 args =
 erlps__erase__2 :: ErlangFun
 erlps__erase__2 [key_0,
                  (ErlangCons e_2@(ErlangTuple [k_1, _]) dict_3)]
-  | (key_0 < k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_1])))) =
   (ErlangCons e_2 dict_3)
 erlps__erase__2 [key_0,
                  (ErlangCons e_2@(ErlangTuple [k_1, _]) dict_3)]
-  | (key_0 > k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_1])))) =
   let tail_5 = (erlps__erase__2 [key_0, dict_3])
   in (ErlangCons e_2 tail_5)
 erlps__erase__2 [_key_0,
@@ -154,11 +166,14 @@ erlps__take__2 args =
 erlps__take_1__3 :: ErlangFun
 erlps__take_1__3 [key_0, (ErlangCons (ErlangTuple [k_1, _]) _),
                   _acc_2]
-  | (key_0 < k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_1])))) =
   (ErlangAtom "error")
 erlps__take_1__3 [key_0,
                   (ErlangCons p_2@(ErlangTuple [k_1, _]) d_3), acc_4]
-  | (key_0 > k_1) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_1])))) =
   (erlps__take_1__3 [key_0, d_3, (ErlangCons p_2 acc_4)])
 erlps__take_1__3 [_key_0,
                   (ErlangCons (ErlangTuple [_k_1, value_2]) d_3), acc_4]
@@ -174,12 +189,15 @@ erlps__take_1__3 args =
 erlps__store__3 :: ErlangFun
 erlps__store__3 [key_0, new_1,
                  dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
-  | (key_0 < k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_2])))) =
   let head_4 = (ErlangTuple [key_0, new_1])
   in (ErlangCons head_4 dict_3)
 erlps__store__3 [key_0, new_1,
                  (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
-  | (key_0 > k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_2])))) =
   let tail_6 = (erlps__store__3 [key_0, new_1, dict_4])
   in (ErlangCons e_3 tail_6)
 erlps__store__3 [key_0, new_1,
@@ -198,14 +216,17 @@ erlps__store__3 args =
 erlps__append__3 :: ErlangFun
 erlps__append__3 [key_0, new_1,
                   dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
-  | (key_0 < k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_2])))) =
   let
     head_4 =
       (ErlangTuple [key_0, (ErlangCons new_1 ErlangEmptyList)])
   in (ErlangCons head_4 dict_3)
 erlps__append__3 [key_0, new_1,
                   (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
-  | (key_0 > k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_2])))) =
   let tail_6 = (erlps__append__3 [key_0, new_1, dict_4])
   in (ErlangCons e_3 tail_6)
 erlps__append__3 [key_0, new_1,
@@ -230,12 +251,15 @@ erlps__append__3 args =
 erlps__append_list__3 :: ErlangFun
 erlps__append_list__3 [key_0, newlist_1,
                        dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
-  | (key_0 < k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_2])))) =
   let head_4 = (ErlangTuple [key_0, newlist_1])
   in (ErlangCons head_4 dict_3)
 erlps__append_list__3 [key_0, newlist_1,
                        (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
-  | (key_0 > k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_2])))) =
   let tail_6 = (erlps__append_list__3 [key_0, newlist_1, dict_4])
   in (ErlangCons e_3 tail_6)
 erlps__append_list__3 [key_0, newlist_1,
@@ -255,19 +279,22 @@ erlps__append_list__3 args =
 erlps__update__3 :: ErlangFun
 erlps__update__3 [key_0, fun_1,
                   (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
-  | (key_0 > k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_2])))) =
   let tail_6 = (erlps__update__3 [key_0, fun_1, dict_4])
   in (ErlangCons e_3 tail_6)
 erlps__update__3 [key_0, fun_1,
                   (ErlangCons (ErlangTuple [k_2, val_3]) dict_4)]
-  | (key_0 == k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_eq [key_0, k_2])))) =
   let   
     tup_el_7 =
       (BIF.erlang__apply__2
          [fun_1, (ErlangCons val_3 ErlangEmptyList)])
   in let head_5 = (ErlangTuple [key_0, tup_el_7])
   in (ErlangCons head_5 dict_4)
-erlps__update__3 [arg_11, arg_12, arg_13] =
+erlps__update__3 [arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__update__3 args =
   (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -275,12 +302,15 @@ erlps__update__3 args =
 erlps__update__4 :: ErlangFun
 erlps__update__4 [key_0, _, init_1,
                   dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
-  | (key_0 < k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_2])))) =
   let head_4 = (ErlangTuple [key_0, init_1])
   in (ErlangCons head_4 dict_3)
 erlps__update__4 [key_0, fun_1, init_2,
                   (ErlangCons e_4@(ErlangTuple [k_3, _]) dict_5)]
-  | (key_0 > k_3) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_3])))) =
   let tail_7 = (erlps__update__4 [key_0, fun_1, init_2, dict_5])
   in (ErlangCons e_4 tail_7)
 erlps__update__4 [key_0, fun_1, _init_2,
@@ -303,12 +333,15 @@ erlps__update__4 args =
 erlps__update_counter__3 :: ErlangFun
 erlps__update_counter__3 [key_0, incr_1,
                           dict_3@(ErlangCons (ErlangTuple [k_2, _]) _)]
-  | (key_0 < k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [key_0, k_2])))) =
   let head_4 = (ErlangTuple [key_0, incr_1])
   in (ErlangCons head_4 dict_3)
 erlps__update_counter__3 [key_0, incr_1,
                           (ErlangCons e_3@(ErlangTuple [k_2, _]) dict_4)]
-  | (key_0 > k_2) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [key_0, k_2])))) =
   let tail_6 = (erlps__update_counter__3 [key_0, incr_1, dict_4])
   in (ErlangCons e_3 tail_6)
 erlps__update_counter__3 [key_0, incr_1,
@@ -387,14 +420,17 @@ erlps__merge__3 :: ErlangFun
 erlps__merge__3 [f_0,
                  (ErlangCons e1_2@(ErlangTuple [k1_1, _]) d1_3),
                  (ErlangCons e2_5@(ErlangTuple [k2_4, _]) d2_6)]
-  | (k1_1 < k2_4) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors (\ _ -> (BIF.erlang__op_lesser [k1_1, k2_4])))) =
   let
     tail_8 = (erlps__merge__3 [f_0, d1_3, (ErlangCons e2_5 d2_6)])
   in (ErlangCons e1_2 tail_8)
 erlps__merge__3 [f_0,
                  (ErlangCons e1_2@(ErlangTuple [k1_1, _]) d1_3),
                  (ErlangCons e2_5@(ErlangTuple [k2_4, _]) d2_6)]
-  | (k1_1 > k2_4) =
+  | (ErlangAtom "true") <-
+      ((falsifyErrors
+          (\ _ -> (BIF.erlang__op_greater [k1_1, k2_4])))) =
   let
     tail_8 = (erlps__merge__3 [f_0, (ErlangCons e1_2 d1_3), d2_6])
   in (ErlangCons e2_5 tail_8)
