@@ -69,7 +69,7 @@ erlps__new__2 args =
 
 erlps__empty__1 :: ErlangFun
 erlps__empty__1 [mod_0] =
-  let match_expr_3 = (BIF.do_remote_fun_call "Code" "erlps__ensure_loaded__1" [mod_0])
+  let match_expr_3 = (BIF.code__ensure_loaded__1 [mod_0])
   in
     case match_expr_3 of
       (ErlangTuple [(ErlangAtom "module"), mod_2]) | (mod_2 == mod_0) ->
@@ -99,7 +99,7 @@ erlps__to_list__2 args =
 
 erlps__from_list__2 :: ErlangFun
 erlps__from_list__2 [mod_0, l_1] =
-  let match_expr_4 = (BIF.do_remote_fun_call "Code" "erlps__ensure_loaded__1" [mod_0])
+  let match_expr_4 = (BIF.code__ensure_loaded__1 [mod_0])
   in
     case match_expr_4 of
       (ErlangTuple [(ErlangAtom "module"), mod_3]) | (mod_3 == mod_0) ->
@@ -126,7 +126,7 @@ erlps__from_list__2 args =
 
 erlps__enter__4 :: ErlangFun
 erlps__enter__4 [mod_0, key_1, val_2, dict_3] =
-  let match_expr_6 = (BIF.do_remote_fun_call "Code" "erlps__ensure_loaded__1" [mod_0])
+  let match_expr_6 = (BIF.code__ensure_loaded__1 [mod_0])
   in
     case match_expr_6 of
       (ErlangTuple [(ErlangAtom "module"), mod_5]) | (mod_5 == mod_0) ->

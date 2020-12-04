@@ -41,6 +41,7 @@ import Dict.SUITE as DS
 import Proplists.SUITE as PropS
 import Sets.SUITE as SetsS
 import Math.SUITE as MathS
+import Sofs.SUITE as SofsS
 
 -- BEWARE - HERE BE DRAGONS - I've lost too many hours debugging alternative helpers
 -- If you think you can make a better wrapper which does not crash the testing infrastructure then please make a PR
@@ -632,4 +633,201 @@ main =
     describe_ "Real Math tests taken from OTP - math_SUITE.erl" do
         it "floor_ceil" do
             r <- exec_may_throw MathS.erlps__floor_ceil__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+    describe_ "Real Sofs tests taken from OTP - sofs_SUITE.erl" do
+        it "from_term_1" do
+            r <- exec_may_throw SofsS.erlps__from_term_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "set_1" do
+            r <- exec_may_throw SofsS.erlps__set_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "from_sets_1" do
+            r <- exec_may_throw SofsS.erlps__from_sets_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "relation_1" do
+            r <- exec_may_throw SofsS.erlps__relation_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "a_function_1" do
+            r <- exec_may_throw SofsS.erlps__a_function_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "family_1" do
+            r <- exec_may_throw SofsS.erlps__family_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "relation_to_family_1" do
+            r <- exec_may_throw SofsS.erlps__relation_to_family_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "domain_1" do
+            r <- exec_may_throw SofsS.erlps__domain_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "range_1" do
+            r <- exec_may_throw SofsS.erlps__range_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "image" do
+            r <- exec_may_throw SofsS.erlps__image__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "inverse_image" do
+            r <- exec_may_throw SofsS.erlps__inverse_image__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "inverse_1" do
+            r <- exec_may_throw SofsS.erlps__inverse_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "converse_1" do
+            r <- exec_may_throw SofsS.erlps__converse_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "no_elements_1" do
+            r <- exec_may_throw SofsS.erlps__no_elements_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "substitution" do
+            r <- exec_may_throw SofsS.erlps__substitution__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "restriction" do
+            r <- exec_may_throw SofsS.erlps__restriction__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "drestriction" do
+            r <- exec_may_throw SofsS.erlps__drestriction__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "projection" do
+            r <- exec_may_throw SofsS.erlps__projection__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "strict_relation_1" do
+            r <- exec_may_throw SofsS.erlps__strict_relation_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "extension" do
+            r <- exec_may_throw SofsS.erlps__extension__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "weak_relation_1" do
+            r <- exec_may_throw SofsS.erlps__weak_relation_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "to_sets_1" do
+            r <- exec_may_throw SofsS.erlps__to_sets_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "specification" do
+            r <- exec_may_throw SofsS.erlps__specification__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "union_1" do
+            r <- exec_may_throw SofsS.erlps__union_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "intersection_1" do
+            r <- exec_may_throw SofsS.erlps__intersection_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "difference" do
+            r <- exec_may_throw SofsS.erlps__difference__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "symdiff" do
+            r <- exec_may_throw SofsS.erlps__symdiff__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "symmetric_partition" do
+            r <- exec_may_throw SofsS.erlps__symmetric_partition__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "is_sofs_set_1" do
+            r <- exec_may_throw SofsS.erlps__is_sofs_set_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "is_set_1" do
+            r <- exec_may_throw SofsS.erlps__is_set_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "is_equal" do
+            r <- exec_may_throw SofsS.erlps__is_equal__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "is_subset" do
+            r <- exec_may_throw SofsS.erlps__is_subset__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "is_a_function_1" do
+            r <- exec_may_throw SofsS.erlps__is_a_function_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "is_disjoint" do
+            r <- exec_may_throw SofsS.erlps__is_disjoint__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "join" do
+            r <- exec_may_throw SofsS.erlps__join__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "canonical" do
+            r <- exec_may_throw SofsS.erlps__canonical__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "composite_1" do
+            r <- exec_may_throw SofsS.erlps__composite_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "relative_product_1" do
+            r <- exec_may_throw SofsS.erlps__relative_product_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "relative_product_2" do
+            r <- exec_may_throw SofsS.erlps__relative_product_2__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "product_1" do
+            r <- exec_may_throw SofsS.erlps__product_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "partition_1" do
+            r <- exec_may_throw SofsS.erlps__partition_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "partition_3" do
+            r <- exec_may_throw SofsS.erlps__partition_3__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "multiple_relative_product" do
+            r <- exec_may_throw SofsS.erlps__multiple_relative_product__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "digraph" do
+            r <- exec_may_throw SofsS.erlps__digraph__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "constant_function" do
+            r <- exec_may_throw SofsS.erlps__constant_function__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "misc" do
+            r <- exec_may_throw SofsS.erlps__misc__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "family_specification" do
+            r <- exec_may_throw SofsS.erlps__family_specification__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "family_domain_1" do
+            r <- exec_may_throw SofsS.erlps__family_domain_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "family_range_1" do
+            r <- exec_may_throw SofsS.erlps__family_range_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "family_to_relation_1" do
+            r <- exec_may_throw SofsS.erlps__family_to_relation_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "union_of_family_1" do
+            r <- exec_may_throw SofsS.erlps__union_of_family_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "intersection_of_family_1" do
+            r <- exec_may_throw SofsS.erlps__intersection_of_family_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "family_projection" do
+            r <- exec_may_throw SofsS.erlps__family_projection__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "family_difference" do
+            r <- exec_may_throw SofsS.erlps__family_difference__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "family_intersection_1" do
+            r <- exec_may_throw SofsS.erlps__family_intersection_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "family_intersection_2" do
+            r <- exec_may_throw SofsS.erlps__family_intersection_2__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "family_union_1" do
+            r <- exec_may_throw SofsS.erlps__family_union_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "family_union_2" do
+            r <- exec_may_throw SofsS.erlps__family_union_2__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "partition_family" do
+            r <- exec_may_throw SofsS.erlps__partition_family__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
