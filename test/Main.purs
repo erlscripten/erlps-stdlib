@@ -42,6 +42,7 @@ import Proplists.SUITE as PropS
 import Sets.SUITE as SetsS
 import Math.SUITE as MathS
 import Sofs.SUITE as SofsS
+import Erl.Scan.SUITE as ESS
 
 -- BEWARE - HERE BE DRAGONS - I've lost too many hours debugging alternative helpers
 -- If you think you can make a better wrapper which does not crash the testing infrastructure then please make a PR
@@ -830,4 +831,33 @@ main =
 
         it "partition_family" do
             r <- exec_may_throw SofsS.erlps__partition_family__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+    describe_ "Real Erlang Lexer/Parser tests taken from OTP - erl_scan_SUITE.erl" do
+        it "iso88591" do
+            r <- exec_may_throw ESS.erlps__iso88591__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "otp_7810" do
+            r <- exec_may_throw ESS.erlps__otp_7810__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "otp_10990" do
+            r <- exec_may_throw ESS.erlps__otp_10990__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "otp_10992" do
+            r <- exec_may_throw ESS.erlps__otp_10992__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "otp_11807" do
+            r <- exec_may_throw ESS.erlps__otp_11807__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "otp_16480" do
+            r <- exec_may_throw ESS.erlps__otp_16480__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "otp_17024" do
+            r <- exec_may_throw ESS.erlps__otp_17024__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "error_1" do
+            r <- exec_may_throw ESS.erlps__error_1__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "error_2" do
+            r <- exec_may_throw ESS.erlps__error_2__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r

@@ -20,6 +20,12 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/digraph.beam -o src/Digraph.purs
 	./erlscripten -s $(BEAM_PATH)/rand.beam -o src/Rand.purs
 	./erlscripten -s $(BEAM_PATH)/sofs.beam -o src/Sofs.purs
+	./erlscripten -s $(BEAM_PATH)/erl_parse.beam -o src/Erl.Parse.purs
+	./erlscripten -s $(BEAM_PATH)/erl_anno.beam -o src/Erl.Anno.purs
+
+	erlc +debug_info erlang_src/erl_scan.erl
+	./erlscripten -s erl_scan.beam -o src/Erl.Scan.purs
+	rm erl_scan.beam
 
 build_tests:
 	erlc +debug_info erlang_tests/array_SUITE.erl
@@ -65,4 +71,8 @@ build_tests:
 	erlc +debug_info erlang_tests/sofs_SUITE.erl
 	./erlscripten -s sofs_SUITE.beam -o test/Sofs.SUITE.purs
 	rm sofs_SUITE.beam
+
+	erlc +debug_info erlang_tests/erl_scan_SUITE.erl
+	./erlscripten -s erl_scan_SUITE.beam -o test/Erl.Scan.SUITE.purs
+	rm erl_scan_SUITE.beam
 

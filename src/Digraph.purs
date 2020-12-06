@@ -29,7 +29,8 @@ import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
 import Erlang.Helpers
 import Erlang.Exception as EXC
-import Erlang.Type (ErlangFun, ErlangTerm(..))
+import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
+                    weakNEq, weakLt, weakLeq, weakGeq, weakGt)
 import Effect (Effect)
 import Effect.Unsafe (unsafePerformEffect)
 import Effect.Exception (throw)
@@ -39,13 +40,15 @@ import Partial.Unsafe (unsafePartial)
 erlps__new__0 :: ErlangFun
 erlps__new__0 [] = (erlps__new__1 [ErlangEmptyList])
 erlps__new__0 args =
-  (EXC.badarity (ErlangFun 0 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 0 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__new__1 :: ErlangFun
 erlps__new__1 [type_0] =
   let
     case_1 =
-      (erlps__check_type__3 [type_0, (ErlangAtom "protected"), ErlangEmptyList])
+      (erlps__check_type__3
+         [type_0, (ErlangAtom "protected"), ErlangEmptyList])
   in
     case case_1 of
       (ErlangTuple [access_5, ts_6]) ->
@@ -80,22 +83,28 @@ erlps__new__1 [type_0] =
                 (ErlangCons head_30 (ErlangCons head_34 ErlangEmptyList))])
         in let
           arg_39 =
-            (ErlangTuple [(ErlangAtom "digraph"), v_13, e_20, n_27, (ErlangAtom "true")])
+            (ErlangTuple
+               [(ErlangAtom "digraph"), v_13, e_20, n_27, (ErlangAtom "true")])
         in (erlps__set_type__2 [ts_6, arg_39])
       (ErlangAtom "error") -> (BIF.erlang__error__1 [(ErlangAtom "badarg")])
       something_else -> (EXC.case_clause something_else)
 erlps__new__1 [arg_46] = (EXC.function_clause unit)
 erlps__new__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__check_type__3 :: ErlangFun
 erlps__check_type__3 [(ErlangCons (ErlangAtom "acyclic") ts_0), a_1, l_2]
   =
-  let head_6 = (ErlangTuple [(ErlangAtom "cyclic"), (ErlangAtom "false")])
+  let
+    head_6 =
+      (ErlangTuple [(ErlangAtom "cyclic"), (ErlangAtom "false")])
   in (erlps__check_type__3 [ts_0, a_1, (ErlangCons head_6 l_2)])
 erlps__check_type__3 [(ErlangCons (ErlangAtom "cyclic") ts_0), a_1, l_2]
   =
-  let head_6 = (ErlangTuple [(ErlangAtom "cyclic"), (ErlangAtom "true")])
+  let
+    head_6 =
+      (ErlangTuple [(ErlangAtom "cyclic"), (ErlangAtom "true")])
   in (erlps__check_type__3 [ts_0, a_1, (ErlangCons head_6 l_2)])
 erlps__check_type__3 [(ErlangCons (ErlangAtom "protected") ts_0), _, l_1] =
   (erlps__check_type__3 [ts_0, (ErlangAtom "protected"), l_1])
@@ -107,7 +116,8 @@ erlps__check_type__3 [_, _, _] = (ErlangAtom "error")
 erlps__check_type__3 [arg_0, arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__check_type__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__set_type__2 :: ErlangFun
 erlps__set_type__2 [(ErlangCons (ErlangTuple [(ErlangAtom "cyclic"),
@@ -119,13 +129,15 @@ erlps__set_type__2 [(ErlangCons (ErlangTuple [(ErlangAtom "cyclic"),
       case g_2 of
         (ErlangTuple [(ErlangAtom "digraph"), vtab_7, etab_8, ntab_9,
                       cyclic_10]) ->
-          (ErlangTuple [(ErlangAtom "digraph"), vtab_7, etab_8, ntab_9, v_0])
+          (ErlangTuple
+             [(ErlangAtom "digraph"), vtab_7, etab_8, ntab_9, v_0])
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in (erlps__set_type__2 [ks_1, arg_4])
 erlps__set_type__2 [(ErlangEmptyList), g_0] = g_0
 erlps__set_type__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__set_type__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__delete__1 :: ErlangFun
 erlps__delete__1 [g_0] =
@@ -135,14 +147,16 @@ erlps__delete__1 [g_0] =
         (ErlangTuple arr_4) | (DM.Just field_3) <- ((arr_4 DA.!! 1)) ->
           field_3
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let _ = (BIF.do_remote_fun_call "Ets" "erlps__delete__1" [arg_1])
+  in let
+    _ = (BIF.do_remote_fun_call "Ets" "erlps__delete__1" [arg_1])
   in let
     arg_5 =
       case g_0 of
         (ErlangTuple arr_8) | (DM.Just field_7) <- ((arr_8 DA.!! 2)) ->
           field_7
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let _ = (BIF.do_remote_fun_call "Ets" "erlps__delete__1" [arg_5])
+  in let
+    _ = (BIF.do_remote_fun_call "Ets" "erlps__delete__1" [arg_5])
   in let
     arg_9 =
       case g_0 of
@@ -153,7 +167,8 @@ erlps__delete__1 [g_0] =
   in (BIF.do_remote_fun_call "Ets" "erlps__delete__1" [arg_9])
 erlps__delete__1 [arg_13] = (EXC.function_clause unit)
 erlps__delete__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__info__1 :: ErlangFun
 erlps__info__1 [g_0] =
@@ -191,24 +206,35 @@ erlps__info__1 [g_0] =
         something_else -> (EXC.case_clause something_else)
   in let
     protection_20 =
-      (BIF.do_remote_fun_call "Ets" "erlps__info__2" [vt_4, (ErlangAtom "protection")])
+      (BIF.do_remote_fun_call "Ets" "erlps__info__2"
+         [vt_4, (ErlangAtom "protection")])
   in let
-    lop_22 = (BIF.do_remote_fun_call "Ets" "erlps__info__2" [vt_4, (ErlangAtom "memory")])
+    lop_22 =
+      (BIF.do_remote_fun_call "Ets" "erlps__info__2"
+         [vt_4, (ErlangAtom "memory")])
   in let
-    rop_25 = (BIF.do_remote_fun_call "Ets" "erlps__info__2" [et_8, (ErlangAtom "memory")])
+    rop_25 =
+      (BIF.do_remote_fun_call "Ets" "erlps__info__2"
+         [et_8, (ErlangAtom "memory")])
   in let lop_21 = (BIF.erlang__op_plus [lop_22, rop_25])
   in let
-    rop_28 = (BIF.do_remote_fun_call "Ets" "erlps__info__2" [nt_12, (ErlangAtom "memory")])
+    rop_28 =
+      (BIF.do_remote_fun_call "Ets" "erlps__info__2"
+         [nt_12, (ErlangAtom "memory")])
   in let memory_31 = (BIF.erlang__op_plus [lop_21, rop_28])
-  in let head_32 = (ErlangTuple [(ErlangAtom "cyclicity"), cyclicity_17])
+  in let
+    head_32 = (ErlangTuple [(ErlangAtom "cyclicity"), cyclicity_17])
   in let head_36 = (ErlangTuple [(ErlangAtom "memory"), memory_31])
-  in let head_40 = (ErlangTuple [(ErlangAtom "protection"), protection_20])
+  in let
+    head_40 =
+      (ErlangTuple [(ErlangAtom "protection"), protection_20])
   in
     (ErlangCons head_32
        (ErlangCons head_36 (ErlangCons head_40 ErlangEmptyList)))
 erlps__info__1 [arg_44] = (EXC.function_clause unit)
 erlps__info__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__add_vertex__1 :: ErlangFun
 erlps__add_vertex__1 [g_0] =
@@ -217,7 +243,8 @@ erlps__add_vertex__1 [g_0] =
   in (erlps__do_add_vertex__2 [arg_1, g_0])
 erlps__add_vertex__1 [arg_6] = (EXC.function_clause unit)
 erlps__add_vertex__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__add_vertex__2 :: ErlangFun
 erlps__add_vertex__2 [g_0, v_1] =
@@ -225,7 +252,8 @@ erlps__add_vertex__2 [g_0, v_1] =
   in (erlps__do_add_vertex__2 [arg_2, g_0])
 erlps__add_vertex__2 [arg_6, arg_7] = (EXC.function_clause unit)
 erlps__add_vertex__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__add_vertex__3 :: ErlangFun
 erlps__add_vertex__3 [g_0, v_1, d_2] =
@@ -234,14 +262,16 @@ erlps__add_vertex__3 [g_0, v_1, d_2] =
 erlps__add_vertex__3 [arg_7, arg_8, arg_9] =
   (EXC.function_clause unit)
 erlps__add_vertex__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__del_vertex__2 :: ErlangFun
 erlps__del_vertex__2 [g_0, v_1] =
   (erlps__do_del_vertex__2 [v_1, g_0])
 erlps__del_vertex__2 [arg_4, arg_5] = (EXC.function_clause unit)
 erlps__del_vertex__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__del_vertices__2 :: ErlangFun
 erlps__del_vertices__2 [g_0, vs_1] =
@@ -249,7 +279,8 @@ erlps__del_vertices__2 [g_0, vs_1] =
 erlps__del_vertices__2 [arg_4, arg_5] =
   (EXC.function_clause unit)
 erlps__del_vertices__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__vertex__2 :: ErlangFun
 erlps__vertex__2 [g_0, v_1] =
@@ -259,7 +290,9 @@ erlps__vertex__2 [g_0, v_1] =
         (ErlangTuple arr_6) | (DM.Just field_5) <- ((arr_6 DA.!! 1)) ->
           field_5
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let case_2 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, v_1])
+  in let
+    case_2 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, v_1])
   in
     case case_2 of
       (ErlangEmptyList) -> (ErlangAtom "false")
@@ -267,7 +300,8 @@ erlps__vertex__2 [g_0, v_1] =
       something_else -> (EXC.case_clause something_else)
 erlps__vertex__2 [arg_9, arg_10] = (EXC.function_clause unit)
 erlps__vertex__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__no_vertices__1 :: ErlangFun
 erlps__no_vertices__1 [g_0] =
@@ -277,10 +311,13 @@ erlps__no_vertices__1 [g_0] =
         (ErlangTuple arr_4) | (DM.Just field_3) <- ((arr_4 DA.!! 1)) ->
           field_3
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in (BIF.do_remote_fun_call "Ets" "erlps__info__2" [arg_1, (ErlangAtom "size")])
+  in
+    (BIF.do_remote_fun_call "Ets" "erlps__info__2"
+       [arg_1, (ErlangAtom "size")])
 erlps__no_vertices__1 [arg_6] = (EXC.function_clause unit)
 erlps__no_vertices__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__vertices__1 :: ErlangFun
 erlps__vertices__1 [g_0] =
@@ -290,7 +327,8 @@ erlps__vertices__1 [g_0] =
         (ErlangTuple arr_4) | (DM.Just field_3) <- ((arr_4 DA.!! 1)) ->
           field_3
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let tup_el_7 = (ErlangTuple [(ErlangAtom "$1"), (ErlangAtom "_")])
+  in let
+    tup_el_7 = (ErlangTuple [(ErlangAtom "$1"), (ErlangAtom "_")])
   in let
     head_6 =
       (ErlangTuple
@@ -301,21 +339,24 @@ erlps__vertices__1 [g_0] =
        [arg_1, (ErlangCons head_6 ErlangEmptyList)])
 erlps__vertices__1 [arg_15] = (EXC.function_clause unit)
 erlps__vertices__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__source_vertices__1 :: ErlangFun
 erlps__source_vertices__1 [g_0] =
   (erlps__collect_vertices__2 [g_0, (ErlangAtom "in")])
 erlps__source_vertices__1 [arg_3] = (EXC.function_clause unit)
 erlps__source_vertices__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__sink_vertices__1 :: ErlangFun
 erlps__sink_vertices__1 [g_0] =
   (erlps__collect_vertices__2 [g_0, (ErlangAtom "out")])
 erlps__sink_vertices__1 [arg_3] = (EXC.function_clause unit)
 erlps__sink_vertices__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__in_degree__2 :: ErlangFun
 erlps__in_degree__2 [g_0, v_1] =
@@ -326,11 +367,14 @@ erlps__in_degree__2 [g_0, v_1] =
           field_5
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_7 = (ErlangTuple [(ErlangAtom "in"), v_1])
-  in let arg_2 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
+  in let
+    arg_2 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
   in (BIF.erlang__length__1 [arg_2])
 erlps__in_degree__2 [arg_10, arg_11] = (EXC.function_clause unit)
 erlps__in_degree__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__in_neighbours__2 :: ErlangFun
 erlps__in_neighbours__2 [g_0, v_1] =
@@ -347,14 +391,17 @@ erlps__in_neighbours__2 [g_0, v_1] =
           field_7
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_12 = (ErlangTuple [(ErlangAtom "in"), v_1])
-  in let arg_10 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [nt_9, arg_12])
+  in let
+    arg_10 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [nt_9, arg_12])
   in
     (erlps__collect_elems__3
        [arg_10, et_5, (ErlangInt (DBI.fromInt 2))])
 erlps__in_neighbours__2 [arg_17, arg_18] =
   (EXC.function_clause unit)
 erlps__in_neighbours__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__in_edges__2 :: ErlangFun
 erlps__in_edges__2 [g_0, v_1] =
@@ -365,7 +412,9 @@ erlps__in_edges__2 [g_0, v_1] =
           field_5
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_7 = (ErlangTuple [(ErlangAtom "in"), v_1])
-  in let lc_src_2 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
+  in let
+    lc_src_2 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
   in
     (flmap
        (\ lc_11 ->
@@ -376,7 +425,8 @@ erlps__in_edges__2 [g_0, v_1] =
        lc_src_2)
 erlps__in_edges__2 [arg_13, arg_14] = (EXC.function_clause unit)
 erlps__in_edges__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__out_degree__2 :: ErlangFun
 erlps__out_degree__2 [g_0, v_1] =
@@ -387,12 +437,15 @@ erlps__out_degree__2 [g_0, v_1] =
           field_5
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_7 = (ErlangTuple [(ErlangAtom "out"), v_1])
-  in let arg_2 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
+  in let
+    arg_2 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
   in (BIF.erlang__length__1 [arg_2])
 erlps__out_degree__2 [arg_10, arg_11] =
   (EXC.function_clause unit)
 erlps__out_degree__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__out_neighbours__2 :: ErlangFun
 erlps__out_neighbours__2 [g_0, v_1] =
@@ -409,14 +462,17 @@ erlps__out_neighbours__2 [g_0, v_1] =
           field_7
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_12 = (ErlangTuple [(ErlangAtom "out"), v_1])
-  in let arg_10 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [nt_9, arg_12])
+  in let
+    arg_10 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [nt_9, arg_12])
   in
     (erlps__collect_elems__3
        [arg_10, et_5, (ErlangInt (DBI.fromInt 3))])
 erlps__out_neighbours__2 [arg_17, arg_18] =
   (EXC.function_clause unit)
 erlps__out_neighbours__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__out_edges__2 :: ErlangFun
 erlps__out_edges__2 [g_0, v_1] =
@@ -427,7 +483,9 @@ erlps__out_edges__2 [g_0, v_1] =
           field_5
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_7 = (ErlangTuple [(ErlangAtom "out"), v_1])
-  in let lc_src_2 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
+  in let
+    lc_src_2 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
   in
     (flmap
        (\ lc_11 ->
@@ -438,7 +496,8 @@ erlps__out_edges__2 [g_0, v_1] =
        lc_src_2)
 erlps__out_edges__2 [arg_13, arg_14] = (EXC.function_clause unit)
 erlps__out_edges__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__add_edge__3 :: ErlangFun
 erlps__add_edge__3 [g_0, v1_1, v2_2] =
@@ -449,7 +508,8 @@ erlps__add_edge__3 [g_0, v1_1, v2_2] =
 erlps__add_edge__3 [arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
 erlps__add_edge__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__add_edge__4 :: ErlangFun
 erlps__add_edge__4 [g_0, v1_1, v2_2, d_3] =
@@ -459,7 +519,8 @@ erlps__add_edge__4 [g_0, v1_1, v2_2, d_3] =
 erlps__add_edge__4 [arg_11, arg_12, arg_13, arg_14] =
   (EXC.function_clause unit)
 erlps__add_edge__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__add_edge__5 :: ErlangFun
 erlps__add_edge__5 [g_0, e_1, v1_2, v2_3, d_4] =
@@ -468,21 +529,24 @@ erlps__add_edge__5 [g_0, e_1, v1_2, v2_3, d_4] =
 erlps__add_edge__5 [arg_11, arg_12, arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__add_edge__5 args =
-  (EXC.badarity (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__del_edge__2 :: ErlangFun
 erlps__del_edge__2 [g_0, e_1] =
   (erlps__do_del_edges__2 [(ErlangCons e_1 ErlangEmptyList), g_0])
 erlps__del_edge__2 [arg_6, arg_7] = (EXC.function_clause unit)
 erlps__del_edge__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__del_edges__2 :: ErlangFun
 erlps__del_edges__2 [g_0, es_1] =
   (erlps__do_del_edges__2 [es_1, g_0])
 erlps__del_edges__2 [arg_4, arg_5] = (EXC.function_clause unit)
 erlps__del_edges__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__no_edges__1 :: ErlangFun
 erlps__no_edges__1 [g_0] =
@@ -492,10 +556,13 @@ erlps__no_edges__1 [g_0] =
         (ErlangTuple arr_4) | (DM.Just field_3) <- ((arr_4 DA.!! 2)) ->
           field_3
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in (BIF.do_remote_fun_call "Ets" "erlps__info__2" [arg_1, (ErlangAtom "size")])
+  in
+    (BIF.do_remote_fun_call "Ets" "erlps__info__2"
+       [arg_1, (ErlangAtom "size")])
 erlps__no_edges__1 [arg_6] = (EXC.function_clause unit)
 erlps__no_edges__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__edges__1 :: ErlangFun
 erlps__edges__1 [g_0] =
@@ -508,7 +575,8 @@ erlps__edges__1 [g_0] =
   in let
     tup_el_7 =
       (ErlangTuple
-         [(ErlangAtom "$1"), (ErlangAtom "_"), (ErlangAtom "_"), (ErlangAtom "_")])
+         [(ErlangAtom "$1"), (ErlangAtom "_"), (ErlangAtom "_"),
+          (ErlangAtom "_")])
   in let
     head_6 =
       (ErlangTuple
@@ -519,7 +587,8 @@ erlps__edges__1 [g_0] =
        [arg_1, (ErlangCons head_6 ErlangEmptyList)])
 erlps__edges__1 [arg_17] = (EXC.function_clause unit)
 erlps__edges__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__edges__2 :: ErlangFun
 erlps__edges__2 [g_0, v_1] =
@@ -549,7 +618,8 @@ erlps__edges__2 [g_0, v_1] =
         (ErlangCons head_7 (ErlangCons head_18 ErlangEmptyList))])
 erlps__edges__2 [arg_29, arg_30] = (EXC.function_clause unit)
 erlps__edges__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__edge__2 :: ErlangFun
 erlps__edge__2 [g_0, e_1] =
@@ -559,7 +629,9 @@ erlps__edge__2 [g_0, e_1] =
         (ErlangTuple arr_6) | (DM.Just field_5) <- ((arr_6 DA.!! 2)) ->
           field_5
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let case_2 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, e_1])
+  in let
+    case_2 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, e_1])
   in
     case case_2 of
       (ErlangEmptyList) -> (ErlangAtom "false")
@@ -567,7 +639,8 @@ erlps__edge__2 [g_0, e_1] =
       something_else -> (EXC.case_clause something_else)
 erlps__edge__2 [arg_9, arg_10] = (EXC.function_clause unit)
 erlps__edge__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__new_edge_id__1 :: ErlangFun
 erlps__new_edge_id__1 [g_0] =
@@ -579,14 +652,16 @@ erlps__new_edge_id__1 [g_0] =
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let
     match_expr_8 =
-      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [nt_4, (ErlangAtom "$eid")])
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2"
+         [nt_4, (ErlangAtom "$eid")])
   in
     case match_expr_8 of
       (ErlangCons (ErlangTuple [(ErlangAtom "$eid"),
                                 k_7]) (ErlangEmptyList)) ->
         let
           match_expr_11 =
-            (BIF.do_remote_fun_call "Ets" "erlps__delete__2" [nt_4, (ErlangAtom "$eid")])
+            (BIF.do_remote_fun_call "Ets" "erlps__delete__2"
+               [nt_4, (ErlangAtom "$eid")])
         in
           case match_expr_11 of
             (ErlangAtom "true") ->
@@ -595,7 +670,9 @@ erlps__new_edge_id__1 [g_0] =
                   (BIF.erlang__op_plus [k_7, (ErlangInt (DBI.fromInt 1))])
               in let arg_13 = (ErlangTuple [(ErlangAtom "$eid"), tup_el_15])
               in let
-                match_expr_18 = (BIF.do_remote_fun_call "Ets" "erlps__insert__2" [nt_4, arg_13])
+                match_expr_18 =
+                  (BIF.do_remote_fun_call "Ets" "erlps__insert__2"
+                     [nt_4, arg_13])
               in
                 case match_expr_18 of
                   (ErlangAtom "true") -> (ErlangCons (ErlangAtom "$e") k_7)
@@ -604,7 +681,8 @@ erlps__new_edge_id__1 [g_0] =
       _ -> (EXC.badmatch match_expr_8)
 erlps__new_edge_id__1 [arg_21] = (EXC.function_clause unit)
 erlps__new_edge_id__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__new_vertex_id__1 :: ErlangFun
 erlps__new_vertex_id__1 [g_0] =
@@ -616,14 +694,16 @@ erlps__new_vertex_id__1 [g_0] =
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let
     match_expr_8 =
-      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [nt_4, (ErlangAtom "$vid")])
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2"
+         [nt_4, (ErlangAtom "$vid")])
   in
     case match_expr_8 of
       (ErlangCons (ErlangTuple [(ErlangAtom "$vid"),
                                 k_7]) (ErlangEmptyList)) ->
         let
           match_expr_11 =
-            (BIF.do_remote_fun_call "Ets" "erlps__delete__2" [nt_4, (ErlangAtom "$vid")])
+            (BIF.do_remote_fun_call "Ets" "erlps__delete__2"
+               [nt_4, (ErlangAtom "$vid")])
         in
           case match_expr_11 of
             (ErlangAtom "true") ->
@@ -632,7 +712,9 @@ erlps__new_vertex_id__1 [g_0] =
                   (BIF.erlang__op_plus [k_7, (ErlangInt (DBI.fromInt 1))])
               in let arg_13 = (ErlangTuple [(ErlangAtom "$vid"), tup_el_15])
               in let
-                match_expr_18 = (BIF.do_remote_fun_call "Ets" "erlps__insert__2" [nt_4, arg_13])
+                match_expr_18 =
+                  (BIF.do_remote_fun_call "Ets" "erlps__insert__2"
+                     [nt_4, arg_13])
               in
                 case match_expr_18 of
                   (ErlangAtom "true") -> (ErlangCons (ErlangAtom "$v") k_7)
@@ -641,7 +723,8 @@ erlps__new_vertex_id__1 [g_0] =
       _ -> (EXC.badmatch match_expr_8)
 erlps__new_vertex_id__1 [arg_21] = (EXC.function_clause unit)
 erlps__new_vertex_id__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__collect_elems__3 :: ErlangFun
 erlps__collect_elems__3 [keys_0, table_1, index_2] =
@@ -650,7 +733,8 @@ erlps__collect_elems__3 [keys_0, table_1, index_2] =
 erlps__collect_elems__3 [arg_7, arg_8, arg_9] =
   (EXC.function_clause unit)
 erlps__collect_elems__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__collect_elems__4 :: ErlangFun
 erlps__collect_elems__4 [(ErlangCons (ErlangTuple [_,
@@ -658,7 +742,9 @@ erlps__collect_elems__4 [(ErlangCons (ErlangTuple [_,
                          table_2, index_3, acc_4]
   =
   let
-    head_9 = (BIF.do_remote_fun_call "Ets" "erlps__lookup_element__3" [table_2, key_0, index_3])
+    head_9 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup_element__3"
+         [table_2, key_0, index_3])
   in
     (erlps__collect_elems__4
        [keys_1, table_2, index_3, (ErlangCons head_9 acc_4)])
@@ -666,7 +752,8 @@ erlps__collect_elems__4 [(ErlangEmptyList), _, _, acc_0] = acc_0
 erlps__collect_elems__4 [arg_1, arg_2, arg_3, arg_4] =
   (EXC.function_clause unit)
 erlps__collect_elems__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_add_vertex__2 :: ErlangFun
 erlps__do_add_vertex__2 [vl_2@(ErlangTuple [v_0, _label_1]), g_3]
@@ -677,12 +764,15 @@ erlps__do_add_vertex__2 [vl_2@(ErlangTuple [v_0, _label_1]), g_3]
         (ErlangTuple arr_7) | (DM.Just field_6) <- ((arr_7 DA.!! 1)) ->
           field_6
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let _ = (BIF.do_remote_fun_call "Ets" "erlps__insert__2" [arg_4, vl_2])
+  in let
+    _ =
+      (BIF.do_remote_fun_call "Ets" "erlps__insert__2" [arg_4, vl_2])
   in v_0
 erlps__do_add_vertex__2 [arg_9, arg_10] =
   (EXC.function_clause unit)
 erlps__do_add_vertex__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__collect_vertices__2 :: ErlangFun
 erlps__collect_vertices__2 [g_0, type_1] =
@@ -700,7 +790,10 @@ erlps__collect_vertices__2 [g_0, type_1] =
                      field_13
                    _ -> (EXC.badrecord (ErlangAtom "digraph"))
              in let arg_15 = (ErlangTuple [type_1, v_8])
-             in let case_10 = (BIF.do_remote_fun_call "Ets" "erlps__member__2" [arg_11, arg_15])
+             in let
+               case_10 =
+                 (BIF.do_remote_fun_call "Ets" "erlps__member__2"
+                    [arg_11, arg_15])
              in
                case case_10 of
                  (ErlangAtom "true") -> a_9
@@ -709,11 +802,14 @@ erlps__collect_vertices__2 [g_0, type_1] =
            lambda_5 [arg_6, arg_7] = (EXC.function_clause unit)
            lambda_5 args = (EXC.badarity (ErlangFun 2 lambda_5) args)
          in lambda_5)
-  in (BIF.do_remote_fun_call "Lists" "erlps__foldl__3" [arg_4, ErlangEmptyList, vs_3])
+  in
+    (BIF.do_remote_fun_call "Lists" "erlps__foldl__3"
+       [arg_4, ErlangEmptyList, vs_3])
 erlps__collect_vertices__2 [arg_22, arg_23] =
   (EXC.function_clause unit)
 erlps__collect_vertices__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_del_vertices__2 :: ErlangFun
 erlps__do_del_vertices__2 [(ErlangCons v_0 vs_1), g_2] =
@@ -726,7 +822,8 @@ erlps__do_del_vertices__2 [(ErlangEmptyList),
 erlps__do_del_vertices__2 [arg_0, arg_1] =
   (EXC.function_clause unit)
 erlps__do_del_vertices__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_del_vertex__2 :: ErlangFun
 erlps__do_del_vertex__2 [v_0, g_1] =
@@ -737,7 +834,9 @@ erlps__do_del_vertex__2 [v_0, g_1] =
           field_5
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_7 = (ErlangTuple [(ErlangAtom "in"), v_0])
-  in let arg_2 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
+  in let
+    arg_2 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
   in let _ = (erlps__do_del_nedges__2 [arg_2, g_1])
   in let
     arg_12 =
@@ -747,7 +846,10 @@ erlps__do_del_vertex__2 [v_0, g_1] =
           field_14
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
   in let arg_16 = (ErlangTuple [(ErlangAtom "out"), v_0])
-  in let arg_11 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_12, arg_16])
+  in let
+    arg_11 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2"
+         [arg_12, arg_16])
   in let _ = (erlps__do_del_nedges__2 [arg_11, g_1])
   in let
     arg_20 =
@@ -756,11 +858,13 @@ erlps__do_del_vertex__2 [v_0, g_1] =
                                  ((arr_23 DA.!! 1)) ->
           field_22
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in (BIF.do_remote_fun_call "Ets" "erlps__delete__2" [arg_20, v_0])
+  in
+    (BIF.do_remote_fun_call "Ets" "erlps__delete__2" [arg_20, v_0])
 erlps__do_del_vertex__2 [arg_25, arg_26] =
   (EXC.function_clause unit)
 erlps__do_del_vertex__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_del_nedges__2 :: ErlangFun
 erlps__do_del_nedges__2 [(ErlangCons (ErlangTuple [_,
@@ -773,7 +877,9 @@ erlps__do_del_nedges__2 [(ErlangCons (ErlangTuple [_,
         (ErlangTuple arr_7) | (DM.Just field_6) <- ((arr_7 DA.!! 2)) ->
           field_6
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let case_3 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_4, e_0])
+  in let
+    case_3 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_4, e_0])
   in
     case case_3 of
       (ErlangCons (ErlangTuple [e_9, v1_10, v2_11,
@@ -789,7 +895,8 @@ erlps__do_del_nedges__2 [(ErlangEmptyList),
 erlps__do_del_nedges__2 [arg_0, arg_1] =
   (EXC.function_clause unit)
 erlps__do_del_nedges__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_del_edges__2 :: ErlangFun
 erlps__do_del_edges__2 [(ErlangCons e_0 es_1), g_2] =
@@ -799,7 +906,9 @@ erlps__do_del_edges__2 [(ErlangCons e_0 es_1), g_2] =
         (ErlangTuple arr_7) | (DM.Just field_6) <- ((arr_7 DA.!! 2)) ->
           field_6
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let case_3 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_4, e_0])
+  in let
+    case_3 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_4, e_0])
   in
     case case_3 of
       (ErlangCons (ErlangTuple [e_9, v1_10, v2_11,
@@ -815,7 +924,8 @@ erlps__do_del_edges__2 [(ErlangEmptyList),
 erlps__do_del_edges__2 [arg_0, arg_1] =
   (EXC.function_clause unit)
 erlps__do_del_edges__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_del_edge__4 :: ErlangFun
 erlps__do_del_edge__4 [e_0, v1_1, v2_2, g_3] =
@@ -851,11 +961,13 @@ erlps__do_del_edge__4 [e_0, v1_1, v2_2, g_3] =
                                  ((arr_34 DA.!! 2)) ->
           field_33
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in (BIF.do_remote_fun_call "Ets" "erlps__delete__2" [arg_31, e_0])
+  in
+    (BIF.do_remote_fun_call "Ets" "erlps__delete__2" [arg_31, e_0])
 erlps__do_del_edge__4 [arg_36, arg_37, arg_38, arg_39] =
   (EXC.function_clause unit)
 erlps__do_del_edge__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rm_edges__2 :: ErlangFun
 erlps__rm_edges__2 [(ErlangCons v1_0 (ErlangCons v2_1 vs_2)),
@@ -866,7 +978,8 @@ erlps__rm_edges__2 [(ErlangCons v1_0 (ErlangCons v2_1 vs_2)),
 erlps__rm_edges__2 [_, _] = (ErlangAtom "true")
 erlps__rm_edges__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__rm_edges__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rm_edge__3 :: ErlangFun
 erlps__rm_edge__3 [v1_0, v2_1, g_2] =
@@ -875,7 +988,8 @@ erlps__rm_edge__3 [v1_0, v2_1, g_2] =
 erlps__rm_edge__3 [arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
 erlps__rm_edge__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__rm_edge_0__4 :: ErlangFun
 erlps__rm_edge_0__4 [(ErlangCons e_0 es_1), v1_2, v2_3, g_4] =
@@ -885,7 +999,9 @@ erlps__rm_edge_0__4 [(ErlangCons e_0 es_1), v1_2, v2_3, g_4] =
         (ErlangTuple arr_9) | (DM.Just field_8) <- ((arr_9 DA.!! 2)) ->
           field_8
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let case_5 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_6, e_0])
+  in let
+    case_5 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_6, e_0])
   in
     case case_5 of
       (ErlangCons (ErlangTuple [e_11, v1_12, v2_13,
@@ -903,7 +1019,8 @@ erlps__rm_edge_0__4 [(ErlangEmptyList), _, _,
 erlps__rm_edge_0__4 [arg_0, arg_1, arg_2, arg_3] =
   (EXC.function_clause unit)
 erlps__rm_edge_0__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_add_edge__2 :: ErlangFun
 erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
@@ -915,7 +1032,9 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
         (ErlangTuple arr_9) | (DM.Just field_8) <- ((arr_9 DA.!! 1)) ->
           field_8
         _ -> (EXC.badrecord (ErlangAtom "digraph"))
-  in let case_5 = (BIF.do_remote_fun_call "Ets" "erlps__member__2" [arg_6, v1_1])
+  in let
+    case_5 =
+      (BIF.do_remote_fun_call "Ets" "erlps__member__2" [arg_6, v1_1])
   in
     case case_5 of
       (ErlangAtom "false") ->
@@ -929,7 +1048,9 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
                                        ((arr_19 DA.!! 1)) ->
                 field_18
               _ -> (EXC.badrecord (ErlangAtom "digraph"))
-        in let case_15 = (BIF.do_remote_fun_call "Ets" "erlps__member__2" [arg_16, v2_2])
+        in let
+          case_15 =
+            (BIF.do_remote_fun_call "Ets" "erlps__member__2" [arg_16, v2_2])
         in
           case case_15 of
             (ErlangAtom "false") ->
@@ -948,8 +1069,8 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
                             (ErlangCons v1_1
                                (ErlangCons v2_2 ErlangEmptyList))])
                     in (ErlangTuple [(ErlangAtom "error"), tup_el_31])
-                  (ErlangAtom "false") | (ErlangAtom "true") <-
-                                     ((falsifyErrors
+                  (ErlangAtom "false") | ((ErlangAtom "true") ==
+                                      (falsifyErrors
                                          (\ _ ->
                                             let
                                               lop_38 =
@@ -963,7 +1084,8 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
                                                        (ErlangAtom "digraph"))
                                             in
                                               (BIF.erlang__op_exactEq
-                                                 [lop_38, (ErlangAtom "false")])))) ->
+                                                 [lop_38,
+                                                  (ErlangAtom "false")])))) ->
                     (erlps__acyclic_add_edge__5 [e_0, v1_1, v2_2, label_3, g_4])
                   (ErlangAtom "false") ->
                     (erlps__do_insert_edge__5 [e_0, v1_1, v2_2, label_3, g_4])
@@ -973,20 +1095,23 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
 erlps__do_add_edge__2 [arg_53, arg_54] =
   (EXC.function_clause unit)
 erlps__do_add_edge__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__other_edge_exists__4 :: ErlangFun
 erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"), _,
                                            et_0, _, _]),
                              e_1, v1_2, v2_3]
   =
-  let case_4 = (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [et_0, e_1])
+  let
+    case_4 =
+      (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [et_0, e_1])
   in
     case case_4 of
       (ErlangCons (ErlangTuple [e_7, vert1_8, vert2_9,
                                 _]) (ErlangEmptyList)) | (e_7 == e_1)
-                                                       , (ErlangAtom "true") <-
-                                                           ((falsifyErrors
+                                                       , ((ErlangAtom "true") ==
+                                                            (falsifyErrors
                                                                (\ _ ->
                                                                   let
                                                                     lop_10 =
@@ -1011,7 +1136,8 @@ erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"), _,
 erlps__other_edge_exists__4 [arg_15, arg_16, arg_17, arg_18] =
   (EXC.function_clause unit)
 erlps__other_edge_exists__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__do_insert_edge__5 :: ErlangFun
 erlps__do_insert_edge__5 [e_0, v1_1, v2_2, label_3,
@@ -1026,17 +1152,20 @@ erlps__do_insert_edge__5 [e_0, v1_1, v2_2, label_3,
       (BIF.do_remote_fun_call "Ets" "erlps__insert__2"
          [nt_5, (ErlangCons head_8 (ErlangCons head_14 ErlangEmptyList))])
   in let arg_21 = (ErlangTuple [e_0, v1_1, v2_2, label_3])
-  in let _ = (BIF.do_remote_fun_call "Ets" "erlps__insert__2" [et_4, arg_21])
+  in let
+    _ =
+      (BIF.do_remote_fun_call "Ets" "erlps__insert__2" [et_4, arg_21])
   in e_0
 erlps__do_insert_edge__5 [arg_26, arg_27, arg_28, arg_29, arg_30]
   =
   (EXC.function_clause unit)
 erlps__do_insert_edge__5 args =
-  (EXC.badarity (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__acyclic_add_edge__5 :: ErlangFun
 erlps__acyclic_add_edge__5 [_e_0, v1_1, v2_2, _l_3, _g_4]
-  | (v1_1 == v2_2) =
+  | ((==) v1_1 v2_2) =
   let
     tup_el_6 =
       (ErlangTuple
@@ -1058,7 +1187,8 @@ erlps__acyclic_add_edge__5 [arg_19, arg_20, arg_21, arg_22,
   =
   (EXC.function_clause unit)
 erlps__acyclic_add_edge__5 args =
-  (EXC.badarity (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__del_path__3 :: ErlangFun
 erlps__del_path__3 [g_0, v1_1, v2_2] =
@@ -1073,7 +1203,8 @@ erlps__del_path__3 [g_0, v1_1, v2_2] =
 erlps__del_path__3 [arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__del_path__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_cycle__2 :: ErlangFun
 erlps__get_cycle__2 [g_0, v_1] =
@@ -1098,7 +1229,8 @@ erlps__get_cycle__2 [g_0, v_1] =
       something_else -> (EXC.case_clause something_else)
 erlps__get_cycle__2 [arg_25, arg_26] = (EXC.function_clause unit)
 erlps__get_cycle__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_path__3 :: ErlangFun
 erlps__get_path__3 [g_0, v1_1, v2_2] =
@@ -1111,19 +1243,20 @@ erlps__get_path__3 [g_0, v1_1, v2_2] =
 erlps__get_path__3 [arg_17, arg_18, arg_19] =
   (EXC.function_clause unit)
 erlps__get_path__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__prune_short_path__2 :: ErlangFun
 erlps__prune_short_path__2 [counter_0, min_1]
-  | (ErlangAtom "true") <-
-      ((falsifyErrors
-          (\ _ -> (BIF.erlang__op_lesser [counter_0, min_1])))) =
+  | (weakLt counter_0 min_1) =
   (ErlangAtom "short")
-erlps__prune_short_path__2 [_counter_0, _min_1] = (ErlangAtom "ok")
+erlps__prune_short_path__2 [_counter_0, _min_1] =
+  (ErlangAtom "ok")
 erlps__prune_short_path__2 [arg_2, arg_3] =
   (EXC.function_clause unit)
 erlps__prune_short_path__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__one_path__8 :: ErlangFun
 erlps__one_path__8 [(ErlangCons w_0 ws_1), w_2, cont_3, xs_4,
@@ -1136,7 +1269,8 @@ erlps__one_path__8 [(ErlangCons w_0 ws_1), w_2, cont_3, xs_4,
         (erlps__one_path__8
            [ws_1, w_0, cont_3, xs_4, ps_5, prune_6, g_7, counter_8])
       (ErlangAtom "ok") ->
-        (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [(ErlangCons w_0 ps_5)])
+        (BIF.do_remote_fun_call "Lists" "erlps__reverse__1"
+           [(ErlangCons w_0 ps_5)])
       something_else -> (EXC.case_clause something_else)
 erlps__one_path__8 [(ErlangCons v_0 vs_1), w_2, cont_3, xs_4,
                     ps_5, prune_6, g_7, counter_8]
@@ -1177,7 +1311,8 @@ erlps__one_path__8 [arg_1, arg_2, arg_3, arg_4, arg_5, arg_6,
   =
   (EXC.function_clause unit)
 erlps__one_path__8 args =
-  (EXC.badarity (ErlangFun 8 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 8 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_short_cycle__2 :: ErlangFun
 erlps__get_short_cycle__2 [g_0, v_1] =
@@ -1185,7 +1320,8 @@ erlps__get_short_cycle__2 [g_0, v_1] =
 erlps__get_short_cycle__2 [arg_5, arg_6] =
   (EXC.function_clause unit)
 erlps__get_short_cycle__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_short_path__3 :: ErlangFun
 erlps__get_short_path__3 [g_0, v1_1, v2_2] =
@@ -1199,11 +1335,13 @@ erlps__get_short_path__3 [g_0, v1_1, v2_2] =
 erlps__get_short_path__3 [arg_17, arg_18, arg_19] =
   (EXC.function_clause unit)
 erlps__get_short_path__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__spath__4 :: ErlangFun
 erlps__spath__4 [q_0, g_1, sink_2, t_3] =
-  let case_4 = (BIF.do_remote_fun_call "Queue" "erlps__out__1" [q_0])
+  let
+    case_4 = (BIF.do_remote_fun_call "Queue" "erlps__out__1" [q_0])
   in
     case case_4 of
       (ErlangTuple [(ErlangTuple [(ErlangAtom "value"), e_6]), q1_7]) ->
@@ -1212,7 +1350,7 @@ erlps__spath__4 [q_0, g_1, sink_2, t_3] =
           case match_expr_14 of
             (ErlangTuple [_e_10, v1_11, v2_12, _label_13]) ->
               case (ErlangAtom "true") of
-                _ | (sink_2 == v2_12) ->
+                _ | ((==) sink_2 v2_12) ->
                   (erlps__follow_path__3
                      [v1_11, t_3, (ErlangCons v2_12 ErlangEmptyList)])
                 _ ->
@@ -1235,7 +1373,8 @@ erlps__spath__4 [q_0, g_1, sink_2, t_3] =
 erlps__spath__4 [arg_42, arg_43, arg_44, arg_45] =
   (EXC.function_clause unit)
 erlps__spath__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__follow_path__3 :: ErlangFun
 erlps__follow_path__3 [v_0, t_1, p_2] =
@@ -1249,7 +1388,8 @@ erlps__follow_path__3 [v_0, t_1, p_2] =
 erlps__follow_path__3 [arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__follow_path__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__queue_out_neighbours__3 :: ErlangFun
 erlps__queue_out_neighbours__3 [v_0, g_1, q0_2] =
@@ -1257,13 +1397,17 @@ erlps__queue_out_neighbours__3 [v_0, g_1, q0_2] =
     arg_3 =
       (ErlangFun 2
          let
-           lambda_4 [e_7, q_8] = (BIF.do_remote_fun_call "Queue" "erlps__in__2" [e_7, q_8])
+           lambda_4 [e_7, q_8] =
+             (BIF.do_remote_fun_call "Queue" "erlps__in__2" [e_7, q_8])
            lambda_4 [arg_5, arg_6] = (EXC.function_clause unit)
            lambda_4 args = (EXC.badarity (ErlangFun 2 lambda_4) args)
          in lambda_4)
   in let arg_12 = (erlps__out_edges__2 [g_1, v_0])
-  in (BIF.do_remote_fun_call "Lists" "erlps__foldl__3" [arg_3, q0_2, arg_12])
+  in
+    (BIF.do_remote_fun_call "Lists" "erlps__foldl__3"
+       [arg_3, q0_2, arg_12])
 erlps__queue_out_neighbours__3 [arg_15, arg_16, arg_17] =
   (EXC.function_clause unit)
 erlps__queue_out_neighbours__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)

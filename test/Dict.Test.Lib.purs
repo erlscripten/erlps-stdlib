@@ -17,7 +17,8 @@ import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
 import Erlang.Helpers
 import Erlang.Exception as EXC
-import Erlang.Type (ErlangFun, ErlangTerm(..))
+import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
+                    weakNEq, weakLt, weakLeq, weakGeq, weakGt)
 import Effect (Effect)
 import Effect.Unsafe (unsafePerformEffect)
 import Effect.Exception (throw)
@@ -43,10 +44,12 @@ erlps__new__2 [mod_0, eq_1] =
             [mod_0, (ErlangAtom "size"), (ErlangCons d_21 ErlangEmptyList)])
        lambda_2 [(ErlangAtom "is_empty"), d_27] =
          (BIF.erlang__apply__3
-            [mod_0, (ErlangAtom "is_empty"), (ErlangCons d_27 ErlangEmptyList)])
+            [mod_0, (ErlangAtom "is_empty"),
+             (ErlangCons d_27 ErlangEmptyList)])
        lambda_2 [(ErlangAtom "iterator"), s_33] =
          (BIF.erlang__apply__3
-            [mod_0, (ErlangAtom "iterator"), (ErlangCons s_33 ErlangEmptyList)])
+            [mod_0, (ErlangAtom "iterator"),
+             (ErlangCons s_33 ErlangEmptyList)])
        lambda_2 [(ErlangAtom "iterator_from"), (ErlangTuple [start_39, s_40])] =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "iterator_from"),
@@ -65,7 +68,8 @@ erlps__new__2 [mod_0, eq_1] =
      in lambda_2)
 erlps__new__2 [arg_67, arg_68] = (EXC.function_clause unit)
 erlps__new__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__empty__1 :: ErlangFun
 erlps__empty__1 [mod_0] =
@@ -80,22 +84,27 @@ erlps__empty__1 [mod_0] =
         in
           case case_4 of
             (ErlangAtom "false") ->
-              (BIF.erlang__apply__3 [mod_0, (ErlangAtom "empty"), ErlangEmptyList])
+              (BIF.erlang__apply__3
+                 [mod_0, (ErlangAtom "empty"), ErlangEmptyList])
             (ErlangAtom "true") ->
-              (BIF.erlang__apply__3 [mod_0, (ErlangAtom "new"), ErlangEmptyList])
+              (BIF.erlang__apply__3
+                 [mod_0, (ErlangAtom "new"), ErlangEmptyList])
             something_else -> (EXC.case_clause something_else)
       _ -> (EXC.badmatch match_expr_3)
 erlps__empty__1 [arg_14] = (EXC.function_clause unit)
 erlps__empty__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__to_list__2 :: ErlangFun
 erlps__to_list__2 [mod_0, d_1] =
   (BIF.erlang__apply__3
-     [mod_0, (ErlangAtom "to_list"), (ErlangCons d_1 ErlangEmptyList)])
+     [mod_0, (ErlangAtom "to_list"),
+      (ErlangCons d_1 ErlangEmptyList)])
 erlps__to_list__2 [arg_7, arg_8] = (EXC.function_clause unit)
 erlps__to_list__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__from_list__2 :: ErlangFun
 erlps__from_list__2 [mod_0, l_1] =
@@ -106,14 +115,18 @@ erlps__from_list__2 [mod_0, l_1] =
         let
           case_5 =
             (BIF.erlang__function_exported__3
-               [mod_0, (ErlangAtom "from_orddict"), (ErlangInt (DBI.fromInt 1))])
+               [mod_0, (ErlangAtom "from_orddict"),
+                (ErlangInt (DBI.fromInt 1))])
         in
           case case_5 of
             (ErlangAtom "false") ->
               (BIF.erlang__apply__3
-                 [mod_0, (ErlangAtom "from_list"), (ErlangCons l_1 ErlangEmptyList)])
+                 [mod_0, (ErlangAtom "from_list"),
+                  (ErlangCons l_1 ErlangEmptyList)])
             (ErlangAtom "true") ->
-              let orddict_15 = (BIF.do_remote_fun_call "Orddict" "erlps__from_list__1" [l_1])
+              let
+                orddict_15 =
+                  (BIF.do_remote_fun_call "Orddict" "erlps__from_list__1" [l_1])
               in
                 (BIF.erlang__apply__3
                    [mod_0, (ErlangAtom "from_orddict"),
@@ -122,7 +135,8 @@ erlps__from_list__2 [mod_0, l_1] =
       _ -> (EXC.badmatch match_expr_4)
 erlps__from_list__2 [arg_21, arg_22] = (EXC.function_clause unit)
 erlps__from_list__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__enter__4 :: ErlangFun
 erlps__enter__4 [mod_0, key_1, val_2, dict_3] =
@@ -151,14 +165,16 @@ erlps__enter__4 [mod_0, key_1, val_2, dict_3] =
 erlps__enter__4 [arg_29, arg_30, arg_31, arg_32] =
   (EXC.function_clause unit)
 erlps__enter__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__erase__3 :: ErlangFun
 erlps__erase__3 [mod_0, key_1, val_2]
-  | (ErlangAtom "true") <-
-      ((falsifyErrors
+  | ((ErlangAtom "true") ==
+       (falsifyErrors
           (\ _ ->
-             let lop_10 = (BIF.erlang__op_exactEq [mod_0, (ErlangAtom "dict")])
+             let
+               lop_10 = (BIF.erlang__op_exactEq [mod_0, (ErlangAtom "dict")])
              in
                case lop_10 of
                  (ErlangAtom "true") -> (ErlangAtom "true")
@@ -169,24 +185,30 @@ erlps__erase__3 [mod_0, key_1, val_2]
      [mod_0, (ErlangAtom "erase"),
       (ErlangCons key_1 (ErlangCons val_2 ErlangEmptyList))])
 erlps__erase__3 [(ErlangAtom "gb_trees"), key_0, val_1] =
-  (BIF.do_remote_fun_call "Gb.Trees" "erlps__delete_any__2" [key_0, val_1])
+  (BIF.do_remote_fun_call "Gb.Trees" "erlps__delete_any__2"
+     [key_0, val_1])
 erlps__erase__3 [arg_4, arg_5, arg_6] =
   (EXC.function_clause unit)
 erlps__erase__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__take__3 :: ErlangFun
 erlps__take__3 [(ErlangAtom "gb_trees"), key_0, val_1] =
   let   
     res_6 =
       (EXC.tryCatch
-         (\ _ -> (BIF.do_remote_fun_call "Gb.Trees" "erlps__take__2" [key_0, val_1]))
+         (\ _ ->
+            (BIF.do_remote_fun_call "Gb.Trees" "erlps__take__2"
+               [key_0, val_1]))
          (\ ex_5 ->
             case ex_5 of
               (ErlangTuple [(ErlangAtom "error"), _, _]) -> (ErlangAtom "error")
               ex_5 -> (EXC.raise ex_5)))
   in let
-    match_final_7_10 = (BIF.do_remote_fun_call "Gb.Trees" "erlps__take_any__2" [key_0, val_1])
+    match_final_7_10 =
+      (BIF.do_remote_fun_call "Gb.Trees" "erlps__take_any__2"
+         [key_0, val_1])
   in
     case match_final_7_10 of
       res_11 | (res_11 == res_6) -> match_final_7_10
@@ -198,4 +220,5 @@ erlps__take__3 [mod_0, key_1, val_2] =
 erlps__take__3 [arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
 erlps__take__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)

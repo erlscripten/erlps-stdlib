@@ -24,7 +24,8 @@ import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
 import Erlang.Helpers
 import Erlang.Exception as EXC
-import Erlang.Type (ErlangFun, ErlangTerm(..))
+import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
+                    weakNEq, weakLt, weakLeq, weakGeq, weakGt)
 import Effect (Effect)
 import Effect.Unsafe (unsafePerformEffect)
 import Effect.Exception (throw)
@@ -38,7 +39,8 @@ erlps__property__1 [(ErlangTuple [key_0, (ErlangAtom "true")])]
 erlps__property__1 [property_0] = property_0
 erlps__property__1 [arg_1] = (EXC.function_clause unit)
 erlps__property__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__property__2 :: ErlangFun
 erlps__property__2 [key_0, (ErlangAtom "true")] | (isEAtom key_0) =
@@ -47,7 +49,8 @@ erlps__property__2 [key_0, value_1] =
   (ErlangTuple [key_0, value_1])
 erlps__property__2 [arg_4, arg_5] = (EXC.function_clause unit)
 erlps__property__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__unfold__1 :: ErlangFun
 erlps__unfold__1 [(ErlangCons p_0 ps_1)] =
@@ -63,7 +66,8 @@ erlps__unfold__1 [(ErlangCons p_0 ps_1)] =
 erlps__unfold__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__unfold__1 [arg_0] = (EXC.function_clause unit)
 erlps__unfold__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__compact__1 :: ErlangFun
 erlps__compact__1 [listin_0] =
@@ -77,15 +81,16 @@ erlps__compact__1 [listin_0] =
      listin_0)
 erlps__compact__1 [arg_6] = (EXC.function_clause unit)
 erlps__compact__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lookup__2 :: ErlangFun
 erlps__lookup__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) ->
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) ->
       (ErlangTuple [key_0, (ErlangAtom "true")])
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_6 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -105,20 +110,22 @@ erlps__lookup__2 [key_0, (ErlangCons p_1 ps_2)] =
       p_1
     _ -> (erlps__lookup__2 [key_0, ps_2])
     _ -> (EXC.if_clause unit)
-erlps__lookup__2 [_key_0, (ErlangEmptyList)] = (ErlangAtom "none")
+erlps__lookup__2 [_key_0, (ErlangEmptyList)] =
+  (ErlangAtom "none")
 erlps__lookup__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__lookup__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lookup_all__2 :: ErlangFun
 erlps__lookup_all__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) ->
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) ->
       let    head_3 = (ErlangTuple [key_0, (ErlangAtom "true")])
       in let tail_6 = (erlps__lookup_all__2 [key_0, ps_2])
       in (ErlangCons head_3 tail_6)
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_10 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -143,14 +150,15 @@ erlps__lookup_all__2 [_key_0, (ErlangEmptyList)] =
   ErlangEmptyList
 erlps__lookup_all__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__lookup_all__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__is_defined__2 :: ErlangFun
 erlps__is_defined__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) -> (ErlangAtom "true")
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) -> (ErlangAtom "true")
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_4 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -170,24 +178,27 @@ erlps__is_defined__2 [key_0, (ErlangCons p_1 ps_2)] =
       (ErlangAtom "true")
     _ -> (erlps__is_defined__2 [key_0, ps_2])
     _ -> (EXC.if_clause unit)
-erlps__is_defined__2 [_key_0, (ErlangEmptyList)] = (ErlangAtom "false")
+erlps__is_defined__2 [_key_0, (ErlangEmptyList)] =
+  (ErlangAtom "false")
 erlps__is_defined__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__is_defined__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_value__2 :: ErlangFun
 erlps__get_value__2 [key_0, list_1] =
   (erlps__get_value__3 [key_0, list_1, (ErlangAtom "undefined")])
 erlps__get_value__2 [arg_5, arg_6] = (EXC.function_clause unit)
 erlps__get_value__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_value__3 :: ErlangFun
 erlps__get_value__3 [key_0, (ErlangCons p_1 ps_2), default_3] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) -> (ErlangAtom "true")
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) -> (ErlangAtom "true")
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_5 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -215,16 +226,17 @@ erlps__get_value__3 [_key_0, (ErlangEmptyList), default_1] =
 erlps__get_value__3 [arg_2, arg_3, arg_4] =
   (EXC.function_clause unit)
 erlps__get_value__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_all_values__2 :: ErlangFun
 erlps__get_all_values__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) ->
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) ->
       let tail_4 = (erlps__get_all_values__2 [key_0, ps_2])
       in (ErlangCons (ErlangAtom "true") tail_4)
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_8 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -254,16 +266,17 @@ erlps__get_all_values__2 [_key_0, (ErlangEmptyList)] =
 erlps__get_all_values__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__get_all_values__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__append_values__2 :: ErlangFun
 erlps__append_values__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) ->
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) ->
       let tail_4 = (erlps__append_values__2 [key_0, ps_2])
       in (ErlangCons (ErlangAtom "true") tail_4)
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_8 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -296,14 +309,15 @@ erlps__append_values__2 [_key_0, (ErlangEmptyList)] =
 erlps__append_values__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__append_values__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_bool__2 :: ErlangFun
 erlps__get_bool__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) -> (ErlangAtom "true")
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) -> (ErlangAtom "true")
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_4 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -326,10 +340,12 @@ erlps__get_bool__2 [key_0, (ErlangCons p_1 ps_2)] =
         something_else -> (EXC.case_clause something_else)
     _ -> (erlps__get_bool__2 [key_0, ps_2])
     _ -> (EXC.if_clause unit)
-erlps__get_bool__2 [_key_0, (ErlangEmptyList)] = (ErlangAtom "false")
+erlps__get_bool__2 [_key_0, (ErlangEmptyList)] =
+  (ErlangAtom "false")
 erlps__get_bool__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__get_bool__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_keys__1 :: ErlangFun
 erlps__get_keys__1 [ps_0] =
@@ -338,16 +354,20 @@ erlps__get_keys__1 [ps_0] =
   in (BIF.do_remote_fun_call "Sets" "erlps__to_list__1" [arg_1])
 erlps__get_keys__1 [arg_4] = (EXC.function_clause unit)
 erlps__get_keys__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get_keys__2 :: ErlangFun
 erlps__get_keys__2 [(ErlangCons p_0 ps_1), keys_2] =
   case (ErlangAtom "true") of
     _ | (isEAtom p_0) ->
-      let arg_4 = (BIF.do_remote_fun_call "Sets" "erlps__add_element__2" [p_0, keys_2])
+      let
+        arg_4 =
+          (BIF.do_remote_fun_call "Sets" "erlps__add_element__2"
+             [p_0, keys_2])
       in (erlps__get_keys__2 [ps_1, arg_4])
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let lop_7 = (BIF.erlang__tuple_size__1 [p_0])
                  in
@@ -356,22 +376,26 @@ erlps__get_keys__2 [(ErlangCons p_0 ps_1), keys_2] =
       let   
         arg_12 =
           (BIF.erlang__element__2 [(ErlangInt (DBI.fromInt 1)), p_0])
-      in let arg_11 = (BIF.do_remote_fun_call "Sets" "erlps__add_element__2" [arg_12, keys_2])
+      in let
+        arg_11 =
+          (BIF.do_remote_fun_call "Sets" "erlps__add_element__2"
+             [arg_12, keys_2])
       in (erlps__get_keys__2 [ps_1, arg_11])
     _ -> (erlps__get_keys__2 [ps_1, keys_2])
     _ -> (EXC.if_clause unit)
 erlps__get_keys__2 [(ErlangEmptyList), keys_0] = keys_0
 erlps__get_keys__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__get_keys__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__delete__2 :: ErlangFun
 erlps__delete__2 [key_0, (ErlangCons p_1 ps_2)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_1) && (p_1 == key_0)) ->
+    _ | ((isEAtom p_1) && ((==) p_1 key_0)) ->
       (erlps__delete__2 [key_0, ps_2])
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_6 = (BIF.erlang__tuple_size__1 [p_1])
                  in let
@@ -396,7 +420,8 @@ erlps__delete__2 [key_0, (ErlangCons p_1 ps_2)] =
 erlps__delete__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__delete__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__delete__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__substitute_aliases__2 :: ErlangFun
 erlps__substitute_aliases__2 [as_0, props_1] =
@@ -411,7 +436,8 @@ erlps__substitute_aliases__2 [as_0, props_1] =
 erlps__substitute_aliases__2 [arg_8, arg_9] =
   (EXC.function_clause unit)
 erlps__substitute_aliases__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__substitute_aliases_1__2 :: ErlangFun
 erlps__substitute_aliases_1__2 [(ErlangCons (ErlangTuple [key_0,
@@ -419,10 +445,10 @@ erlps__substitute_aliases_1__2 [(ErlangCons (ErlangTuple [key_0,
                                 p_3]
   =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_3) && (p_3 == key_0)) ->
+    _ | ((isEAtom p_3) && ((==) p_3 key_0)) ->
       (erlps__property__2 [key1_1, (ErlangAtom "true")])
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_7 = (BIF.erlang__tuple_size__1 [p_3])
                  in let
@@ -450,7 +476,8 @@ erlps__substitute_aliases_1__2 [(ErlangEmptyList), p_0] = p_0
 erlps__substitute_aliases_1__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__substitute_aliases_1__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__substitute_negations__2 :: ErlangFun
 erlps__substitute_negations__2 [as_0, props_1] =
@@ -465,7 +492,8 @@ erlps__substitute_negations__2 [as_0, props_1] =
 erlps__substitute_negations__2 [arg_8, arg_9] =
   (EXC.function_clause unit)
 erlps__substitute_negations__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__substitute_negations_1__2 :: ErlangFun
 erlps__substitute_negations_1__2 [(ErlangCons (ErlangTuple [key_0,
@@ -473,10 +501,10 @@ erlps__substitute_negations_1__2 [(ErlangCons (ErlangTuple [key_0,
                                   p_3]
   =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_3) && (p_3 == key_0)) ->
+    _ | ((isEAtom p_3) && ((==) p_3 key_0)) ->
       (erlps__property__2 [key1_1, (ErlangAtom "false")])
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_7 = (BIF.erlang__tuple_size__1 [p_3])
                  in let
@@ -506,7 +534,8 @@ erlps__substitute_negations_1__2 [(ErlangEmptyList), p_0] = p_0
 erlps__substitute_negations_1__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
 erlps__substitute_negations_1__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__expand__2 :: ErlangFun
 erlps__expand__2 [es_0, ps_1] | (isEList ps_1) =
@@ -526,7 +555,8 @@ erlps__expand__2 [es_0, ps_1] | (isEList ps_1) =
   in (erlps__flatten__1 [arg_11])
 erlps__expand__2 [arg_15, arg_16] = (EXC.function_clause unit)
 erlps__expand__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__expand_0__2 :: ErlangFun
 erlps__expand_0__2 [(ErlangCons (ErlangTuple [p_0, l_1]) es_2),
@@ -537,14 +567,15 @@ erlps__expand_0__2 [(ErlangCons (ErlangTuple [p_0, l_1]) es_2),
 erlps__expand_0__2 [(ErlangEmptyList), ps_0] = ps_0
 erlps__expand_0__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__expand_0__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__expand_1__3 :: ErlangFun
 erlps__expand_1__3 [p_0, l_1, ps_2] =
   case (ErlangAtom "true") of
     _ | (isEAtom p_0) -> (erlps__expand_2__4 [p_0, p_0, l_1, ps_2])
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let lop_7 = (BIF.erlang__tuple_size__1 [p_0])
                  in
@@ -559,15 +590,16 @@ erlps__expand_1__3 [p_0, l_1, ps_2] =
 erlps__expand_1__3 [arg_16, arg_17, arg_18] =
   (EXC.function_clause unit)
 erlps__expand_1__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__expand_2__4 :: ErlangFun
 erlps__expand_2__4 [key_0, p1_1, l_2, (ErlangCons p_3 ps_4)] =
   case (ErlangAtom "true") of
-    _ | ((isEAtom p_3) && (p_3 == key_0)) ->
+    _ | ((isEAtom p_3) && ((==) p_3 key_0)) ->
       (erlps__expand_3__5 [key_0, p1_1, p_3, l_2, ps_4])
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let    lop_11 = (BIF.erlang__tuple_size__1 [p_3])
                  in let
@@ -594,12 +626,13 @@ erlps__expand_2__4 [_, _, _, (ErlangEmptyList)] = ErlangEmptyList
 erlps__expand_2__4 [arg_0, arg_1, arg_2, arg_3] =
   (EXC.function_clause unit)
 erlps__expand_2__4 args =
-  (EXC.badarity (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__expand_3__5 :: ErlangFun
 erlps__expand_3__5 [key_0, p1_1, p_2, l_3, ps_4] =
   case (ErlangAtom "true") of
-    _ | (p1_1 == p_2) ->
+    _ | ((==) p1_1 p_2) ->
       let tail_6 = (erlps__delete__2 [key_0, ps_4])
       in (ErlangCons l_3 tail_6)
     _ -> (ErlangCons p_2 ps_4)
@@ -607,7 +640,8 @@ erlps__expand_3__5 [key_0, p1_1, p_2, l_3, ps_4] =
 erlps__expand_3__5 [arg_11, arg_12, arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__expand_3__5 args =
-  (EXC.badarity (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__key_uniq__1 :: ErlangFun
 erlps__key_uniq__1 [(ErlangCons (ErlangTuple [k_0, v_1]) ps_2)] =
@@ -617,14 +651,15 @@ erlps__key_uniq__1 [(ErlangCons (ErlangTuple [k_0, v_1]) ps_2)] =
 erlps__key_uniq__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__key_uniq__1 [arg_0] = (EXC.function_clause unit)
 erlps__key_uniq__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__key_uniq_1__2 :: ErlangFun
 erlps__key_uniq_1__2 [k_0,
                       (ErlangCons (ErlangTuple [k1_1, v_2]) ps_3)]
   =
   case (ErlangAtom "true") of
-    _ | (k_0 == k1_1) -> (erlps__key_uniq_1__2 [k_0, ps_3])
+    _ | ((==) k_0 k1_1) -> (erlps__key_uniq_1__2 [k_0, ps_3])
     _ ->
       let    head_6 = (ErlangTuple [k1_1, v_2])
       in let tail_9 = (erlps__key_uniq_1__2 [k1_1, ps_3])
@@ -633,7 +668,8 @@ erlps__key_uniq_1__2 [k_0,
 erlps__key_uniq_1__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__key_uniq_1__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__key_uniq_1__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__flatten__1 :: ErlangFun
 erlps__flatten__1 [(ErlangCons e_0 es_1)] | (isEList e_0) =
@@ -645,7 +681,8 @@ erlps__flatten__1 [(ErlangCons e_0 es_1)] =
 erlps__flatten__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__flatten__1 [arg_0] = (EXC.function_clause unit)
 erlps__flatten__1 args =
-  (EXC.badarity (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__normalize__2 :: ErlangFun
 erlps__normalize__2 [l_0,
@@ -667,7 +704,8 @@ erlps__normalize__2 [l_0, (ErlangEmptyList)] =
   (erlps__compact__1 [l_0])
 erlps__normalize__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__normalize__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__split__2 :: ErlangFun
 erlps__split__2 [list_0, keys_1] =
@@ -695,16 +733,22 @@ erlps__split__2 [list_0, keys_1] =
                   case lc_18 of
                     k_17 ->
                       let    arg_20 = (BIF.erlang__map_get__2 [k_17, store_12])
-                      in let lc_ret_19 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [arg_20])
+                      in let
+                        lc_ret_19 =
+                          (BIF.do_remote_fun_call "Lists" "erlps__reverse__1"
+                             [arg_20])
                       in (ErlangCons lc_ret_19 ErlangEmptyList)
                     _ -> ErlangEmptyList)
                keys_1)
-        in let tup_el_23 = (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [rest_13])
+        in let
+          tup_el_23 =
+            (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [rest_13])
         in (ErlangTuple [tup_el_15, tup_el_23])
       _ -> (EXC.badmatch match_expr_14)
 erlps__split__2 [arg_25, arg_26] = (EXC.function_clause unit)
 erlps__split__2 args =
-  (EXC.badarity (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__split__3 :: ErlangFun
 erlps__split__3 [(ErlangCons p_0 ps_1), store_2, rest_3] =
@@ -719,8 +763,8 @@ erlps__split__3 [(ErlangCons p_0 ps_1), store_2, rest_3] =
           (ErlangAtom "false") ->
             (erlps__split__3 [ps_1, store_2, (ErlangCons p_0 rest_3)])
           something_else -> (EXC.case_clause something_else)
-    _ | (ErlangAtom "true") <-
-          ((falsifyErrors
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
               (\ _ ->
                  let lop_18 = (BIF.erlang__tuple_size__1 [p_0])
                  in
@@ -745,7 +789,8 @@ erlps__split__3 [(ErlangEmptyList), store_0, rest_1] =
 erlps__split__3 [arg_4, arg_5, arg_6] =
   (EXC.function_clause unit)
 erlps__split__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__maps_prepend__3 :: ErlangFun
 erlps__maps_prepend__3 [key_0, val_1, dict_2] =
@@ -760,4 +805,5 @@ erlps__maps_prepend__3 [key_0, val_1, dict_2] =
 erlps__maps_prepend__3 [arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__maps_prepend__3 args =
-  (EXC.badarity (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
+  (EXC.badarity
+     (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
