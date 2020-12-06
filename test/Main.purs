@@ -43,6 +43,7 @@ import Sets.SUITE as SetsS
 import Math.SUITE as MathS
 import Sofs.SUITE as SofsS
 import Erl.Scan.SUITE as ESS
+import Erl.Anno.SUITE as EAS
 
 -- BEWARE - HERE BE DRAGONS - I've lost too many hours debugging alternative helpers
 -- If you think you can make a better wrapper which does not crash the testing infrastructure then please make a PR
@@ -860,4 +861,42 @@ main =
             make_ok (ErlangAtom "ok") `shouldEqual` r
         it "error_2" do
             r <- exec_may_throw ESS.erlps__error_2__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+
+    describe_ "Real Erlang Anno tests taken from OTP - erl_anno_SUITE.erl" do
+        it "new" do
+            r <- exec_may_throw EAS.erlps__new__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "is_anno" do
+            r <- exec_may_throw EAS.erlps__is_anno__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "generated" do
+            r <- exec_may_throw EAS.erlps__generated__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "end_location" do
+            r <- exec_may_throw EAS.erlps__end_location__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "file" do
+            r <- exec_may_throw EAS.erlps__file__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "line" do
+            r <- exec_may_throw EAS.erlps__line__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "location" do
+            r <- exec_may_throw EAS.erlps__location__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "record" do
+            r <- exec_may_throw EAS.erlps__record__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "text" do
+            r <- exec_may_throw EAS.erlps__text__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "bad" do
+            r <- exec_may_throw EAS.erlps__bad__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "parse_abstract" do
+            r <- exec_may_throw EAS.erlps__parse_abstract__1 [ErlangEmptyList]
+            make_ok (ErlangAtom "ok") `shouldEqual` r
+        it "mapfold_anno" do
+            r <- exec_may_throw EAS.erlps__mapfold_anno__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r

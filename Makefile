@@ -22,10 +22,19 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/sofs.beam -o src/Sofs.purs
 	./erlscripten -s $(BEAM_PATH)/erl_parse.beam -o src/Erl.Parse.purs
 	./erlscripten -s $(BEAM_PATH)/erl_anno.beam -o src/Erl.Anno.purs
+	#./erlscripten -s $(BEAM_PATH)/erl_eval.beam -o src/Erl.Eval.purs
 
 	erlc +debug_info erlang_src/erl_scan.erl
 	./erlscripten -s erl_scan.beam -o src/Erl.Scan.purs
 	rm erl_scan.beam
+
+	erlc +debug_info erlang_src/unicode_util_compat.erl
+	./erlscripten -s unicode_util_compat.beam -o src/Unicode.Util.Compat.purs
+	rm unicode_util_compat.beam
+
+	erlc +debug_info erlang_src/epp.erl
+	./erlscripten -s epp.beam -o src/Epp.purs
+	rm epp.beam
 
 build_tests:
 	erlc +debug_info erlang_tests/array_SUITE.erl
@@ -75,4 +84,12 @@ build_tests:
 	erlc +debug_info erlang_tests/erl_scan_SUITE.erl
 	./erlscripten -s erl_scan_SUITE.beam -o test/Erl.Scan.SUITE.purs
 	rm erl_scan_SUITE.beam
+
+	#erlc +debug_info erlang_tests/erl_eval_SUITE.erl
+	#./erlscripten -s erl_eval_SUITE.beam -o test/Erl.Eval.SUITE.purs
+	#rm erl_eval_SUITE.beam
+
+	erlc +debug_info erlang_tests/erl_anno_SUITE.erl
+	./erlscripten -s erl_anno_SUITE.beam -o test/Erl.Anno.SUITE.purs
+	rm erl_anno_SUITE.beam
 
