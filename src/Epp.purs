@@ -222,12 +222,12 @@ erlps__format_error__1 :: ErlangFun
 erlps__format_error__1 [(ErlangAtom "cannot_parse")] =
   let arg_0 = (make_string "cannot parse file, giving up")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_0, ErlangEmptyList])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "bad"), w_0])] =
   let arg_1 = (make_string "badly formed \'~s\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons w_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangAtom "missing_parenthesis")] =
   let
@@ -235,109 +235,109 @@ erlps__format_error__1 [(ErlangAtom "missing_parenthesis")] =
       (make_string
          "badly formed define: missing closing right parenthesis")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_0, ErlangEmptyList])
 erlps__format_error__1 [(ErlangAtom "premature_end")] =
   (make_string "premature end")
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "call"), what_0])] =
   let arg_1 = (make_string "illegal macro call \'~ts\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons what_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "undefined"), m_0,
                                       (ErlangAtom "none")])]
   =
   let arg_1 = (make_string "undefined macro \'~ts\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons m_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "undefined"), m_0, a_1])]
   =
   let arg_2 = (make_string "undefined macro \'~ts/~p\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_2, (ErlangCons m_0 (ErlangCons a_1 ErlangEmptyList))])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "depth"), what_0])] =
   let arg_1 = (make_string "~s too deep")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons what_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "mismatch"), m_0])] =
   let arg_1 = (make_string "argument mismatch for macro \'~ts\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons m_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "arg_error"), m_0])] =
   let
     arg_1 = (make_string "badly formed argument for macro \'~ts\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons m_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "redefine"), m_0])] =
   let arg_1 = (make_string "redefining macro \'~ts\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons m_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "redefine_predef"), m_0])] =
   let arg_1 = (make_string "redefining predefined macro \'~s\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons m_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "circular"), m_0,
                                       (ErlangAtom "none")])]
   =
   let arg_1 = (make_string "circular macro \'~ts\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons m_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "circular"), m_0, a_1])]
   =
   let arg_2 = (make_string "circular macro \'~ts/~p\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_2, (ErlangCons m_0 (ErlangCons a_1 ErlangEmptyList))])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "include"), w_0, f_1])]
   =
   let arg_2 = (make_string "can\'t find include ~s \"~ts\"")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_2, (ErlangCons w_0 (ErlangCons f_1 ErlangEmptyList))])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "illegal"), how_0,
                                       what_1])]
   =
   let arg_2 = (make_string "~s \'-~s\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_2, (ErlangCons how_0 (ErlangCons what_1 ErlangEmptyList))])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "illegal_function"), macro_0])]
   =
   let
     arg_1 = (make_string "?~s can only be used within a function")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons macro_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "illegal_function_usage"), macro_0])]
   =
   let arg_1 = (make_string "?~s must not begin a form")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons macro_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangAtom "elif_after_else")] =
   (make_string "\'elif\' following \'else\'")
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "NYI"), what_0])] =
   let arg_1 = (make_string "not yet implemented \'~s\'")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons what_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "error"), term_0])] =
   let arg_1 = (make_string "-error(~tp).")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons term_0 ErlangEmptyList)])
 erlps__format_error__1 [(ErlangTuple [(ErlangAtom "warning"), term_0])] =
   let arg_1 = (make_string "-warning(~tp).")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons term_0 ErlangEmptyList)])
 erlps__format_error__1 [e_0] =
   (BIF.do_remote_fun_call "File" "erlps__format_error__1" [e_0])
@@ -4333,7 +4333,7 @@ erlps__expand_macros__2 [(ErlangCons (ErlangTuple [(ErlangAtom "?"),
                      (BIN.from_int (ErlangInt (DBI.fromInt 112))
                         (ErlangInt (DBI.fromInt 8)) 1 BIN.Big)]))
           in
-            (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__fwrite__2"
+            (BIF.do_remote_fun_call "Io.Lib" "erlps__fwrite__2"
                [arg_9, (ErlangCons symbol_8 ErlangEmptyList)])
         something_else -> (EXC.case_clause something_else)
   in let tup_el_19 = (erlps__loc__1 [token_1])
@@ -4929,15 +4929,13 @@ erlps__token_src__1 [(ErlangTuple [x_0, _])] | (isEAtom x_0) =
 erlps__token_src__1 [(ErlangTuple [(ErlangAtom "var"), _, x_0])] =
   (BIF.erlang__atom_to_list__1 [x_0])
 erlps__token_src__1 [(ErlangTuple [(ErlangAtom "char"), _, c_0])] =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_char__1"
-     [c_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_char__1" [c_0])
 erlps__token_src__1 [(ErlangTuple [(ErlangAtom "string"), _, x_0])] =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_string__1"
-     [x_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_string__1" [x_0])
 erlps__token_src__1 [(ErlangTuple [_, _, x_0])] =
   let arg_1 = (make_string "~w")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons x_0 ErlangEmptyList)])
 erlps__token_src__1 [arg_5] = (EXC.function_clause unit)
 erlps__token_src__1 args =
@@ -4951,7 +4949,7 @@ erlps__stringify1__1 [(ErlangCons t_0 tokens_1)] =
   in let head_5 = (erlps__token_src__1 [t_0])
   in let
     head_2 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
          [arg_3, (ErlangCons head_5 ErlangEmptyList)])
   in let tail_8 = (erlps__stringify1__1 [tokens_1])
   in (ErlangCons head_2 tail_8)

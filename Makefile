@@ -23,14 +23,20 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/erl_parse.beam -o src/Erl.Parse.purs
 	./erlscripten -s $(BEAM_PATH)/erl_anno.beam -o src/Erl.Anno.purs
 	#./erlscripten -s $(BEAM_PATH)/erl_eval.beam -o src/Erl.Eval.purs
+	./erlscripten -s $(BEAM_PATH)/erl_pp.beam -o src/Erl.Pp.purs
+	./erlscripten -s $(BEAM_PATH)/erl_internal.beam -o src/Erl.Internal.purs
+
+	./erlscripten -s $(BEAM_PATH)/io_lib.beam -o src/IO.Lib.purs
+	./erlscripten -s $(BEAM_PATH)/io_lib_format.beam -o src/IO.Lib.Format.purs
+	./erlscripten -s $(BEAM_PATH)/io_lib_pretty.beam -o src/IO.Lib.Pretty.purs
 
 	erlc +debug_info erlang_src/erl_scan.erl
 	./erlscripten -s erl_scan.beam -o src/Erl.Scan.purs
 	rm erl_scan.beam
 
-	erlc +debug_info erlang_src/unicode_util_compat.erl
-	./erlscripten -s unicode_util_compat.beam -o src/Unicode.Util.Compat.purs
-	rm unicode_util_compat.beam
+	erlc +debug_info erlang_src/unicode_util.erl
+	./erlscripten -s unicode_util.beam -o src/Unicode.Util.purs
+	rm unicode_util.beam
 
 	erlc +debug_info erlang_src/epp.erl
 	./erlscripten -s epp.beam -o src/Epp.purs

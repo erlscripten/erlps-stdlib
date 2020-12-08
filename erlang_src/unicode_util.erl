@@ -1,6 +1,6 @@
 %% THIS IS VERY VERY VERY SIMPLIFIED BUT SHOULD WORK FINE FOR ASCII
 
--module(unicode_util_compat).
+-module(unicode_util).
 -export([cp/1, gc/1]).
 -export([whitespace/0, is_whitespace/1]).
 -export([uppercase/1, lowercase/1, titlecase/1, casefold/1]).
