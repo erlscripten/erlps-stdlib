@@ -50,7 +50,9 @@ erlps__new__2 [mod_0, eq_1] =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "iterator"),
              (ErlangCons s_33 ErlangEmptyList)])
-       lambda_2 [(ErlangAtom "iterator_from"), (ErlangTuple [start_39, s_40])] =
+       lambda_2 [(ErlangAtom "iterator_from"),
+                 (ErlangTuple [start_39, s_40])]
+         =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "iterator_from"),
              (ErlangCons start_39 (ErlangCons s_40 ErlangEmptyList))])
@@ -76,7 +78,8 @@ erlps__empty__1 [mod_0] =
   let match_expr_3 = (BIF.code__ensure_loaded__1 [mod_0])
   in
     case match_expr_3 of
-      (ErlangTuple [(ErlangAtom "module"), mod_2]) | (mod_2 == mod_0) ->
+      (ErlangTuple [(ErlangAtom "module"), mod_2]) | (mod_2 ==
+                                                        mod_0) ->
         let
           case_4 =
             (BIF.erlang__function_exported__3
@@ -111,7 +114,8 @@ erlps__from_list__2 [mod_0, l_1] =
   let match_expr_4 = (BIF.code__ensure_loaded__1 [mod_0])
   in
     case match_expr_4 of
-      (ErlangTuple [(ErlangAtom "module"), mod_3]) | (mod_3 == mod_0) ->
+      (ErlangTuple [(ErlangAtom "module"), mod_3]) | (mod_3 ==
+                                                        mod_0) ->
         let
           case_5 =
             (BIF.erlang__function_exported__3
@@ -143,7 +147,8 @@ erlps__enter__4 [mod_0, key_1, val_2, dict_3] =
   let match_expr_6 = (BIF.code__ensure_loaded__1 [mod_0])
   in
     case match_expr_6 of
-      (ErlangTuple [(ErlangAtom "module"), mod_5]) | (mod_5 == mod_0) ->
+      (ErlangTuple [(ErlangAtom "module"), mod_5]) | (mod_5 ==
+                                                        mod_0) ->
         let
           case_7 =
             (BIF.erlang__function_exported__3
@@ -203,7 +208,8 @@ erlps__take__3 [(ErlangAtom "gb_trees"), key_0, val_1] =
                [key_0, val_1]))
          (\ ex_5 ->
             case ex_5 of
-              (ErlangTuple [(ErlangAtom "error"), _, _]) -> (ErlangAtom "error")
+              (ErlangTuple [(ErlangAtom "error"), _, _]) ->
+                (ErlangAtom "error")
               ex_5 -> (EXC.raise ex_5)))
   in let
     match_final_7_10 =

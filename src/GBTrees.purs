@@ -106,7 +106,8 @@ erlps__is_defined_1__2 [key_0,
   (erlps__is_defined_1__2 [key_0, bigger_2])
 erlps__is_defined_1__2 [_, (ErlangTuple [_, _, _, _])] =
   (ErlangAtom "true")
-erlps__is_defined_1__2 [_, (ErlangAtom "nil")] = (ErlangAtom "false")
+erlps__is_defined_1__2 [_, (ErlangAtom "nil")] =
+  (ErlangAtom "false")
 erlps__is_defined_1__2 [arg_0, arg_1] =
   (EXC.function_clause unit)
 erlps__is_defined_1__2 args =
@@ -732,7 +733,8 @@ erlps__iterator_1__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__iterator__2 :: ErlangFun
-erlps__iterator__2 [t_0@(ErlangTuple [_, _, (ErlangAtom "nil"), _]),
+erlps__iterator__2 [t_0@(ErlangTuple [_, _, (ErlangAtom "nil"),
+                                      _]),
                     as_1]
   =
   (ErlangCons t_0 as_1)

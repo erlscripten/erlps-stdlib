@@ -43,7 +43,8 @@ erlps__property__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__property__2 :: ErlangFun
-erlps__property__2 [key_0, (ErlangAtom "true")] | (isEAtom key_0) =
+erlps__property__2 [key_0, (ErlangAtom "true")]
+  | (isEAtom key_0) =
   key_0
 erlps__property__2 [key_0, value_1] =
   (ErlangTuple [key_0, value_1])
@@ -686,17 +687,20 @@ erlps__flatten__1 args =
 
 erlps__normalize__2 :: ErlangFun
 erlps__normalize__2 [l_0,
-                     (ErlangCons (ErlangTuple [(ErlangAtom "aliases"), as_1]) xs_2)]
+                     (ErlangCons (ErlangTuple [(ErlangAtom "aliases"),
+                                               as_1]) xs_2)]
   =
   let arg_3 = (erlps__substitute_aliases__2 [as_1, l_0])
   in (erlps__normalize__2 [arg_3, xs_2])
 erlps__normalize__2 [l_0,
-                     (ErlangCons (ErlangTuple [(ErlangAtom "expand"), es_1]) xs_2)]
+                     (ErlangCons (ErlangTuple [(ErlangAtom "expand"),
+                                               es_1]) xs_2)]
   =
   let arg_3 = (erlps__expand__2 [es_1, l_0])
   in (erlps__normalize__2 [arg_3, xs_2])
 erlps__normalize__2 [l_0,
-                     (ErlangCons (ErlangTuple [(ErlangAtom "negations"), ns_1]) xs_2)]
+                     (ErlangCons (ErlangTuple [(ErlangAtom "negations"),
+                                               ns_1]) xs_2)]
   =
   let arg_3 = (erlps__substitute_negations__2 [ns_1, l_0])
   in (erlps__normalize__2 [arg_3, xs_2])

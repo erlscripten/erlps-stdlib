@@ -274,7 +274,7 @@ erlps__latin1_state__1 [quote_0] =
                lambda_13 [a_15] =
                  let arg_16 = (BIF.erlang__atom_to_list__1 [a_15])
                  in
-                   (BIF.do_remote_fun_call "Io.Lib"
+                   (BIF.do_remote_fun_call "Erlang.Iolib"
                       "erlps__write_string_as_latin1__2"
                       [arg_16, (ErlangInt (DBI.fromInt 39))])
                lambda_13 [arg_14] = (EXC.function_clause unit)
@@ -326,7 +326,8 @@ erlps__unicode_state__1 [quote_0] =
                lambda_13 [a_15] =
                  let arg_16 = (BIF.erlang__atom_to_list__1 [a_15])
                  in
-                   (BIF.do_remote_fun_call "Io.Lib" "erlps__write_string__2"
+                   (BIF.do_remote_fun_call "Erlang.Iolib"
+                      "erlps__write_string__2"
                       [arg_16, (ErlangInt (DBI.fromInt 39))])
                lambda_13 [arg_14] = (EXC.function_clause unit)
                lambda_13 args = (EXC.badarity (ErlangFun 1 lambda_13) args)
@@ -374,16 +375,16 @@ erlps__encoding__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lform__2 :: ErlangFun
-erlps__lform__2 [(ErlangTuple [(ErlangAtom "attribute"), line_0, name_1,
-                               arg_2]),
+erlps__lform__2 [(ErlangTuple [(ErlangAtom "attribute"), line_0,
+                               name_1, arg_2]),
                  opts_3]
   =
   let
     arg_4 =
       (ErlangTuple [(ErlangAtom "attribute"), line_0, name_1, arg_2])
   in (erlps__lattribute__2 [arg_4, opts_3])
-erlps__lform__2 [(ErlangTuple [(ErlangAtom "function"), line_0, name_1,
-                               arity_2, clauses_3]),
+erlps__lform__2 [(ErlangTuple [(ErlangAtom "function"), line_0,
+                               name_1, arity_2, clauses_3]),
                  opts_4]
   =
   let
@@ -391,9 +392,13 @@ erlps__lform__2 [(ErlangTuple [(ErlangAtom "function"), line_0, name_1,
       (ErlangTuple
          [(ErlangAtom "function"), line_0, name_1, arity_2, clauses_3])
   in (erlps__lfunction__2 [arg_5, opts_4])
-erlps__lform__2 [e_0@(ErlangTuple [(ErlangAtom "error"), _]), opts_1] =
+erlps__lform__2 [e_0@(ErlangTuple [(ErlangAtom "error"), _]),
+                 opts_1]
+  =
   (erlps__message__2 [e_0, opts_1])
-erlps__lform__2 [w_0@(ErlangTuple [(ErlangAtom "warning"), _]), opts_1] =
+erlps__lform__2 [w_0@(ErlangTuple [(ErlangAtom "warning"), _]),
+                 opts_1]
+  =
   (erlps__message__2 [w_0, opts_1])
 erlps__lform__2 [(ErlangTuple [(ErlangAtom "eof"), _line_0]),
                  _opts_1]
@@ -425,8 +430,8 @@ erlps__message__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lattribute__2 :: ErlangFun
-erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
-                                    (ErlangAtom "type"), type_1]),
+erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"),
+                                    _line_0, (ErlangAtom "type"), type_1]),
                       opts_2]
   =
   let   
@@ -435,8 +440,8 @@ erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
   in let arg_9 = (make_string ".\n")
   in let head_8 = (erlps__leaf__1 [arg_9])
   in (ErlangCons head_3 (ErlangCons head_8 ErlangEmptyList))
-erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
-                                    (ErlangAtom "opaque"), type_1]),
+erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"),
+                                    _line_0, (ErlangAtom "opaque"), type_1]),
                       opts_2]
   =
   let   
@@ -445,16 +450,16 @@ erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
   in let arg_9 = (make_string ".\n")
   in let head_8 = (erlps__leaf__1 [arg_9])
   in (ErlangCons head_3 (ErlangCons head_8 ErlangEmptyList))
-erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
-                                    (ErlangAtom "spec"), arg_1]),
+erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"),
+                                    _line_0, (ErlangAtom "spec"), arg_1]),
                       _opts_2]
   =
   let    head_3 = (erlps__specattr__2 [(ErlangAtom "spec"), arg_1])
   in let arg_8 = (make_string ".\n")
   in let head_7 = (erlps__leaf__1 [arg_8])
   in (ErlangCons head_3 (ErlangCons head_7 ErlangEmptyList))
-erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
-                                    (ErlangAtom "callback"), arg_1]),
+erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"),
+                                    _line_0, (ErlangAtom "callback"), arg_1]),
                       _opts_2]
   =
   let   
@@ -462,8 +467,8 @@ erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
   in let arg_8 = (make_string ".\n")
   in let head_7 = (erlps__leaf__1 [arg_8])
   in (ErlangCons head_3 (ErlangCons head_7 ErlangEmptyList))
-erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"), _line_0,
-                                    name_1, arg_2]),
+erlps__lattribute__2 [(ErlangTuple [(ErlangAtom "attribute"),
+                                    _line_0, name_1, arg_2]),
                       opts_3]
   =
   let    head_4 = (erlps__lattribute__3 [name_1, arg_2, opts_3])
@@ -477,8 +482,8 @@ erlps__lattribute__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lattribute__3 :: ErlangFun
-erlps__lattribute__3 [(ErlangAtom "module"), (ErlangTuple [m_0, vs_1]),
-                      _opts_2]
+erlps__lattribute__3 [(ErlangAtom "module"),
+                      (ErlangTuple [m_0, vs_1]), _opts_2]
   =
   let    a_3 = (erlps__a0__0 [])
   in let tup_el_9 = (erlps__pname__1 [m_0])
@@ -532,10 +537,14 @@ erlps__lattribute__3 [(ErlangAtom "import"),
     (erlps__attrib__2
        [(ErlangAtom "import"),
         (ErlangCons head_5 (ErlangCons head_9 ErlangEmptyList))])
-erlps__lattribute__3 [(ErlangAtom "export_type"), talist_0, _opts_1] =
+erlps__lattribute__3 [(ErlangAtom "export_type"), talist_0,
+                      _opts_1]
+  =
   let arg_3 = (erlps__falist__1 [talist_0])
   in (erlps__attrib__2 [(ErlangAtom "export_type"), arg_3])
-erlps__lattribute__3 [(ErlangAtom "optional_callbacks"), falist_0, opts_1] =
+erlps__lattribute__3 [(ErlangAtom "optional_callbacks"),
+                      falist_0, opts_1]
+  =
   (EXC.tryCatch
      (\ _ ->
         let arg_3 = (erlps__falist__1 [falist_0])
@@ -665,8 +674,8 @@ erlps__ltype__2 [(ErlangTuple [(ErlangAtom "ann_type"), _line_0,
                [(ErlangAtom "list"), (ErlangCons head_17 ErlangEmptyList)])
         in (erlps__maybe_paren__3 [p_6, prec_3, el_26])
       _ -> (EXC.badmatch match_expr_8)
-erlps__ltype__2 [(ErlangTuple [(ErlangAtom "paren_type"), _line_0,
-                               (ErlangCons t_1 (ErlangEmptyList))]),
+erlps__ltype__2 [(ErlangTuple [(ErlangAtom "paren_type"),
+                               _line_0, (ErlangCons t_1 (ErlangEmptyList))]),
                  p_2]
   =
   (erlps__ltype__2 [t_1, p_2])
@@ -828,8 +837,8 @@ erlps__ltype__2 [funtype_0@(ErlangTuple [(ErlangAtom "type"), _,
   in
     (ErlangCons head_1
        (ErlangCons (ErlangInt (DBI.fromInt 41)) ErlangEmptyList))
-erlps__ltype__2 [funtype_1@(ErlangTuple [(ErlangAtom "type"), _line_0,
-                                         (ErlangAtom "fun"),
+erlps__ltype__2 [funtype_1@(ErlangTuple [(ErlangAtom "type"),
+                                         _line_0, (ErlangAtom "fun"),
                                          (ErlangCons (ErlangTuple [(ErlangAtom "type"),
                                                                    _,
                                                                    (ErlangAtom "product"),
@@ -851,20 +860,22 @@ erlps__ltype__2 [(ErlangTuple [(ErlangAtom "type"), line_0, t_1,
   =
   let arg_3 = (ErlangTuple [(ErlangAtom "atom"), line_0, t_1])
   in (erlps__simple_type__2 [arg_3, ts_2])
-erlps__ltype__2 [(ErlangTuple [(ErlangAtom "user_type"), line_0, t_1,
-                               ts_2]),
+erlps__ltype__2 [(ErlangTuple [(ErlangAtom "user_type"), line_0,
+                               t_1, ts_2]),
                  _]
   =
   let arg_3 = (ErlangTuple [(ErlangAtom "atom"), line_0, t_1])
   in (erlps__simple_type__2 [arg_3, ts_2])
-erlps__ltype__2 [(ErlangTuple [(ErlangAtom "remote_type"), line_0,
+erlps__ltype__2 [(ErlangTuple [(ErlangAtom "remote_type"),
+                               line_0,
                                (ErlangCons m_1 (ErlangCons f_2 (ErlangCons ts_3 (ErlangEmptyList))))]),
                  _]
   =
   let
     arg_4 = (ErlangTuple [(ErlangAtom "remote"), line_0, m_1, f_2])
   in (erlps__simple_type__2 [arg_4, ts_3])
-erlps__ltype__2 [(ErlangTuple [(ErlangAtom "atom"), _, t_0]), _] =
+erlps__ltype__2 [(ErlangTuple [(ErlangAtom "atom"), _, t_0]), _]
+  =
   (ErlangTuple [(ErlangAtom "singleton_atom_type"), t_0])
 erlps__ltype__2 [e_0, p_1] =
   let arg_4 = (erlps__options__1 [(ErlangAtom "none")])
@@ -972,8 +983,8 @@ erlps__map_pair_types__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__map_pair_type__2 :: ErlangFun
-erlps__map_pair_type__2 [(ErlangTuple [(ErlangAtom "type"), _line_0,
-                                       (ErlangAtom "map_field_assoc"),
+erlps__map_pair_type__2 [(ErlangTuple [(ErlangAtom "type"),
+                                       _line_0, (ErlangAtom "map_field_assoc"),
                                        (ErlangCons ktype_1 (ErlangCons vtype_2 (ErlangEmptyList)))]),
                          prec_3]
   =
@@ -990,8 +1001,8 @@ erlps__map_pair_type__2 [(ErlangTuple [(ErlangAtom "type"), _line_0,
   in
     (ErlangTuple
        [(ErlangAtom "list"), (ErlangCons head_6 ErlangEmptyList)])
-erlps__map_pair_type__2 [(ErlangTuple [(ErlangAtom "type"), _line_0,
-                                       (ErlangAtom "map_field_exact"),
+erlps__map_pair_type__2 [(ErlangTuple [(ErlangAtom "type"),
+                                       _line_0, (ErlangAtom "map_field_exact"),
                                        (ErlangCons ktype_1 (ErlangCons vtype_2 (ErlangEmptyList)))]),
                          prec_3]
   =
@@ -1194,10 +1205,11 @@ erlps__guard_type__2 args =
 erlps__constraint__2 :: ErlangFun
 erlps__constraint__2 [(ErlangTuple [(ErlangAtom "type"), _line_0,
                                     (ErlangAtom "constraint"),
-                                    (ErlangCons (ErlangTuple [(ErlangAtom "atom"), _,
+                                    (ErlangCons (ErlangTuple [(ErlangAtom "atom"),
+                                                              _,
                                                               (ErlangAtom "is_subtype")]) (ErlangCons (ErlangCons v_1@(ErlangTuple [(ErlangAtom "var"),
-                                                                                                                         _,
-                                                                                                                         _]) (ErlangCons type_2 (ErlangEmptyList))) (ErlangEmptyList)))]),
+                                                                                                                                    _,
+                                                                                                                                    _]) (ErlangCons type_2 (ErlangEmptyList))) (ErlangEmptyList)))]),
                       _opts_3]
   =
   let    arg_6 = (erlps__options__1 [(ErlangAtom "none")])
@@ -1402,8 +1414,8 @@ erlps__falist__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lfunction__2 :: ErlangFun
-erlps__lfunction__2 [(ErlangTuple [(ErlangAtom "function"), _line_0,
-                                   name_1, _arity_2, cs_3]),
+erlps__lfunction__2 [(ErlangTuple [(ErlangAtom "function"),
+                                   _line_0, name_1, _arity_2, cs_3]),
                      opts_4]
   =
   let   
@@ -1429,8 +1441,8 @@ erlps__lfunction__2 args =
 
 erlps__func_clause__3 :: ErlangFun
 erlps__func_clause__3 [name_0,
-                       (ErlangTuple [(ErlangAtom "clause"), line_1, head_2, guard_3,
-                                     body_4]),
+                       (ErlangTuple [(ErlangAtom "clause"), line_1, head_2,
+                                     guard_3, body_4]),
                        opts_5]
   =
   let   
@@ -1536,7 +1548,8 @@ erlps__lexpr__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lexpr__3 :: ErlangFun
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "var"), _, v_0]), _, _]
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "var"), _, v_0]), _,
+                 _]
   | (isEInt v_0) =
   let    arg_2 = (make_string "_~w")
   in let
@@ -1544,31 +1557,44 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "var"), _, v_0]), _, _]
       (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
          [arg_2, (ErlangCons v_0 ErlangEmptyList)])
   in (erlps__leaf__1 [arg_1])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "var"), _, v_0]), _, _] =
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "var"), _, v_0]), _,
+                 _]
+  =
   let    arg_2 = (make_string "~ts")
   in let
     arg_1 =
       (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
          [arg_2, (ErlangCons v_0 ErlangEmptyList)])
   in (erlps__leaf__1 [arg_1])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "char"), _, c_0]), _, _] =
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "char"), _, c_0]), _,
+                 _]
+  =
   (ErlangTuple [(ErlangAtom "char"), c_0])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "integer"), _, n_0]), _, _] =
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "integer"), _, n_0]),
+                 _, _]
+  =
   let
     arg_1 = (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [n_0])
   in (erlps__leaf__1 [arg_1])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "float"), _, f_0]), _, _] =
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "float"), _, f_0]), _,
+                 _]
+  =
   let
     arg_1 = (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [f_0])
   in (erlps__leaf__1 [arg_1])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "atom"), _, a_0]), _, _] =
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "atom"), _, a_0]), _,
+                 _]
+  =
   (ErlangTuple [(ErlangAtom "atom"), a_0])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "string"), _, s_0]), _, _] =
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "string"), _, s_0]),
+                 _, _]
+  =
   (ErlangTuple [(ErlangAtom "string"), s_0])
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "nil"), _]), _, _] =
   (ErlangAtom "[]")
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "cons"), _, h_0, t_1]), _,
-                 opts_2]
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "cons"), _, h_0,
+                               t_1]),
+                 _, opts_2]
   =
   (erlps__list__3 [t_1, (ErlangCons h_0 ErlangEmptyList), opts_2])
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "lc"), _, e_0, qs_1]),
@@ -1647,11 +1673,12 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "bc"), _, e_0, qs_1]),
        [(ErlangAtom "list"),
         (ErlangCons head_25
            (ErlangCons (ErlangAtom ">>") ErlangEmptyList))])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "tuple"), _, elts_0]), _,
-                 opts_1]
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "tuple"), _, elts_0]),
+                 _, opts_1]
   =
   (erlps__tuple__2 [elts_0, opts_1])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_index"), _, name_0, f_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_index"), _,
+                               name_0, f_1]),
                  prec_2, opts_3]
   =
   let
@@ -1670,7 +1697,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_index"), _, name_0, f_1]),
                  (ErlangCons (ErlangInt (DBI.fromInt 46))
                     (ErlangCons head_14 ErlangEmptyList)))])
       _ -> (EXC.badmatch match_expr_7)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record"), _, name_0, fs_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record"), _, name_0,
+                               fs_1]),
                  prec_2, opts_3]
   =
   let
@@ -1686,8 +1714,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record"), _, name_0, fs_1]),
           el_15 = (ErlangTuple [(ErlangAtom "first"), nl_9, tup_el_12])
         in (erlps__maybe_paren__3 [p_5, prec_2, el_15])
       _ -> (EXC.badmatch match_expr_7)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_field"), _, rec_0, name_1,
-                               f_2]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_field"), _,
+                               rec_0, name_1, f_2]),
                  prec_3, opts_4]
   =
   let
@@ -1716,8 +1744,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_field"), _, rec_0, name_1,
                              ErlangEmptyList)))
                     (ErlangCons head_32 ErlangEmptyList)))])
       _ -> (EXC.badmatch match_expr_9)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record"), _, rec_0, name_1,
-                               fs_2]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record"), _, rec_0,
+                               name_1, fs_2]),
                  prec_3, opts_4]
   =
   let
@@ -1761,7 +1789,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_field"), _,
               (ErlangCons (ErlangInt (DBI.fromInt 46))
                  (ErlangCons head_10 ErlangEmptyList))])
       _ -> (EXC.badmatch match_expr_7)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_field"), _, rec_0, f_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_field"), _,
+                               rec_0, f_1]),
                  prec_2, opts_3]
   =
   let
@@ -1780,8 +1809,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "record_field"), _, rec_0, f_1]),
                  (ErlangCons (ErlangInt (DBI.fromInt 46))
                     (ErlangCons head_16 ErlangEmptyList)))])
       _ -> (EXC.badmatch match_expr_8)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "map"), _, fs_0]), prec_1,
-                 opts_2]
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "map"), _, fs_0]),
+                 prec_1, opts_2]
   =
   let
     match_expr_6 =
@@ -1797,7 +1826,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "map"), _, fs_0]), prec_1,
                [(ErlangAtom "first"), (ErlangInt (DBI.fromInt 35)), tup_el_9])
         in (erlps__maybe_paren__3 [p_4, prec_1, el_12])
       _ -> (EXC.badmatch match_expr_6)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "map"), _, map_0, fs_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "map"), _, map_0,
+                               fs_1]),
                  prec_2, opts_3]
   =
   let
@@ -1820,8 +1850,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "map"), _, map_0, fs_1]),
                [(ErlangAtom "first"), (ErlangCons rl_12 sep_17), tup_el_22])
         in (erlps__maybe_paren__3 [p_6, prec_2, el_25])
       _ -> (EXC.badmatch match_expr_8)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "block"), _, es_0]), _,
-                 opts_1]
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "block"), _, es_0]),
+                 _, opts_1]
   =
   let    tup_el_7 = (erlps__body__2 [es_0, opts_1])
   in let
@@ -1849,7 +1879,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "if"), _, cs_0]), _,
     (ErlangTuple
        [(ErlangAtom "list"),
         (ErlangCons head_4 (ErlangCons head_11 ErlangEmptyList))])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "case"), _, expr_0, cs_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "case"), _, expr_0,
+                               cs_1]),
                  _, opts_2]
   =
   let    tup_el_13 = (erlps__lexpr__2 [expr_0, opts_2])
@@ -1890,8 +1921,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "cond"), _, cs_0]), _,
     (ErlangTuple
        [(ErlangAtom "list"),
         (ErlangCons head_4 (ErlangCons head_12 ErlangEmptyList))])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "receive"), _, cs_0]), _,
-                 opts_1]
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "receive"), _, cs_0]),
+                 _, opts_1]
   =
   let    tup_el_7 = (erlps__cr_clauses__2 [cs_0, opts_1])
   in let
@@ -1905,8 +1936,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "receive"), _, cs_0]), _,
     (ErlangTuple
        [(ErlangAtom "list"),
         (ErlangCons head_4 (ErlangCons head_11 ErlangEmptyList))])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "receive"), _, cs_0, to_1,
-                               toopt_2]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "receive"), _, cs_0,
+                               to_1, toopt_2]),
                  _, opts_3]
   =
   let    head_9 = (erlps__lexpr__2 [to_1, opts_3])
@@ -1939,7 +1970,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "receive"), _, cs_0, to_1,
         (ErlangCons head_22
            (ErlangCons head_29 (ErlangCons head_34 ErlangEmptyList)))])
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), _,
-                               (ErlangTuple [(ErlangAtom "function"), f_0, a_1])]),
+                               (ErlangTuple [(ErlangAtom "function"), f_0,
+                                             a_1])]),
                  _prec_2, _opts_3]
   =
   let    arg_5 = (make_string "fun ")
@@ -1955,7 +1987,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), _,
     (ErlangCons head_4
        (ErlangCons head_7 (ErlangCons head_11 ErlangEmptyList)))
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), l_0,
-                               func_1@(ErlangTuple [(ErlangAtom "function"), _, _]),
+                               func_1@(ErlangTuple [(ErlangAtom "function"), _,
+                                                    _]),
                                extra_2]),
                  prec_3, opts_4]
   =
@@ -1964,7 +1997,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), l_0,
   in let tup_el_8 = (erlps__lexpr__3 [arg_9, prec_3, opts_4])
   in (ErlangTuple [(ErlangAtom "force_nl"), tup_el_6, tup_el_8])
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), l_0,
-                               (ErlangTuple [(ErlangAtom "function"), m_1, f_2, a_3])]),
+                               (ErlangTuple [(ErlangAtom "function"), m_1, f_2,
+                                             a_3])]),
                  prec_4, opts_5]
   | (((isEAtom m_1) && (isEAtom f_2)) && (isEInt a_3)) =
   let   
@@ -1983,7 +2017,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), l_0,
     arg_12 = (ErlangTuple [(ErlangAtom "fun"), l_0, tup_el_15])
   in (erlps__lexpr__3 [arg_12, prec_4, opts_5])
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), _,
-                               (ErlangTuple [(ErlangAtom "function"), m_0, f_1, a_2])]),
+                               (ErlangTuple [(ErlangAtom "function"), m_0, f_1,
+                                             a_2])]),
                  _prec_3, opts_4]
   =
   let    nameitem_7 = (erlps__lexpr__2 [m_0, opts_4])
@@ -2015,7 +2050,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), _,
     (ErlangTuple
        [(ErlangAtom "list"),
         (ErlangCons head_5 (ErlangCons head_13 ErlangEmptyList))])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "named_fun"), _, name_0, cs_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "named_fun"), _,
+                               name_0, cs_1]),
                  _prec_2, opts_3]
   =
   let    head_11 = (make_string " ")
@@ -2036,7 +2072,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "named_fun"), _, name_0, cs_1]),
        [(ErlangAtom "list"),
         (ErlangCons head_6 (ErlangCons head_20 ErlangEmptyList))])
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), _,
-                               (ErlangTuple [(ErlangAtom "clauses"), cs_0]), extra_1]),
+                               (ErlangTuple [(ErlangAtom "clauses"), cs_0]),
+                               extra_1]),
                  _prec_2, opts_3]
   =
   let    tup_el_5 = (erlps__fun_info__1 [extra_1])
@@ -2056,8 +2093,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "fun"), _,
          [(ErlangAtom "list"),
           (ErlangCons head_10 (ErlangCons head_18 ErlangEmptyList))])
   in (ErlangTuple [(ErlangAtom "force_nl"), tup_el_5, tup_el_7])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "named_fun"), _, name_0, cs_1,
-                               extra_2]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "named_fun"), _,
+                               name_0, cs_1, extra_2]),
                  _prec_3, opts_4]
   =
   let    tup_el_6 = (erlps__fun_info__1 [extra_2])
@@ -2109,8 +2146,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "call"), _, name_0,
                  prec_2, opts_3]
   =
   (erlps__call__4 [name_0, args_1, prec_2, opts_3])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "try"), _, es_0, scs_1,
-                               ccs_2, as_3]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "try"), _, es_0,
+                               scs_1, ccs_2, as_3]),
                  _, opts_4]
   =
   let   
@@ -2196,7 +2233,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "catch"), _, expr_0]),
                [(ErlangAtom "list"), (ErlangCons head_9 ErlangEmptyList)])
         in (erlps__maybe_paren__3 [p_4, prec_1, el_17])
       _ -> (EXC.badmatch match_expr_6)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "match"), _, lhs_0, rhs_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "match"), _, lhs_0,
+                               rhs_1]),
                  prec_2, opts_3]
   =
   let
@@ -2221,7 +2259,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "match"), _, lhs_0, rhs_1]),
                [(ErlangAtom "list"), (ErlangCons head_19 ErlangEmptyList)])
         in (erlps__maybe_paren__3 [p_6, prec_2, el_28])
       _ -> (EXC.badmatch match_expr_8)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0, arg_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0,
+                               arg_1]),
                  prec_2, opts_3]
   =
   let
@@ -2244,8 +2283,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0, arg_1]),
              [p_5, prec_2,
               (ErlangCons ol_15 (ErlangCons head_18 ErlangEmptyList))])
       _ -> (EXC.badmatch match_expr_7)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0, larg_1,
-                               rarg_2]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0,
+                               larg_1, rarg_2]),
                  prec_3, opts_4]
   | ((ErlangAtom "true") ==
        (falsifyErrors
@@ -2282,8 +2321,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0, larg_1,
                    (ErlangCons ol_21 (ErlangCons lr_25 ErlangEmptyList)))])
         in (erlps__maybe_paren__3 [p_7, prec_3, el_37])
       _ -> (EXC.badmatch match_expr_9)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0, larg_1,
-                               rarg_2]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0,
+                               larg_1, rarg_2]),
                  prec_3, opts_4]
   =
   let
@@ -2309,7 +2348,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0, larg_1,
                    (ErlangCons ol_21 (ErlangCons lr_25 ErlangEmptyList)))])
         in (erlps__maybe_paren__3 [p_7, prec_3, el_34])
       _ -> (EXC.badmatch match_expr_9)
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "remote"), _, m_0, f_1]),
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "remote"), _, m_0,
+                               f_1]),
                  prec_2, opts_3]
   =
   let
@@ -2332,11 +2372,13 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "bin"), _, fs_0]), _,
                  opts_1]
   =
   (erlps__bit_grp__2 [fs_0, opts_1])
-erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "value"), _, val_0]), _, _]
+erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "value"), _, val_0]),
+                 _, _]
   =
   (ErlangTuple [(ErlangAtom "value"), val_0])
 erlps__lexpr__3 [other_0, _precedence_1,
-                 (ErlangTuple [(ErlangAtom "options"), (ErlangAtom "none"), _, _])]
+                 (ErlangTuple [(ErlangAtom "options"), (ErlangAtom "none"), _,
+                               _])]
   =
   let    arg_3 = (make_string "INVALID-FORM:~w:")
   in let
@@ -2365,20 +2407,22 @@ erlps__lexpr__3 args =
      (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__hash_after_integer__2 :: ErlangFun
-erlps__hash_after_integer__2 [(ErlangTuple [(ErlangAtom "integer"), _,
-                                            _]),
+erlps__hash_after_integer__2 [(ErlangTuple [(ErlangAtom "integer"),
+                                            _, _]),
                               c_0]
   =
   (ErlangCons (ErlangInt (DBI.fromInt 32)) c_0)
-erlps__hash_after_integer__2 [(ErlangTuple [(ErlangAtom "fun"), _,
-                                            (ErlangTuple [(ErlangAtom "function"), _,
-                                                          _])]),
+erlps__hash_after_integer__2 [(ErlangTuple [(ErlangAtom "fun"),
+                                            _,
+                                            (ErlangTuple [(ErlangAtom "function"),
+                                                          _, _])]),
                               c_0]
   =
   (ErlangCons (ErlangInt (DBI.fromInt 32)) c_0)
-erlps__hash_after_integer__2 [(ErlangTuple [(ErlangAtom "fun"), _,
-                                            (ErlangTuple [(ErlangAtom "function"), _, _,
-                                                          _])]),
+erlps__hash_after_integer__2 [(ErlangTuple [(ErlangAtom "fun"),
+                                            _,
+                                            (ErlangTuple [(ErlangAtom "function"),
+                                                          _, _, _])]),
                               c_0]
   =
   (ErlangCons (ErlangInt (DBI.fromInt 32)) c_0)
@@ -2450,8 +2494,8 @@ erlps__bit_elems__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__bit_elem__2 :: ErlangFun
-erlps__bit_elem__2 [(ErlangTuple [(ErlangAtom "bin_element"), _, expr_0,
-                                  sz_1, types_2]),
+erlps__bit_elem__2 [(ErlangTuple [(ErlangAtom "bin_element"), _,
+                                  expr_0, sz_1, types_2]),
                     opts_3]
   =
   let   
@@ -2547,8 +2591,8 @@ erlps__record_fields__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__record_field__2 :: ErlangFun
-erlps__record_field__2 [(ErlangTuple [(ErlangAtom "record_field"), _, f_0,
-                                      val_1]),
+erlps__record_field__2 [(ErlangTuple [(ErlangAtom "record_field"),
+                                      _, f_0, val_1]),
                         opts_2]
   =
   let
@@ -2572,8 +2616,8 @@ erlps__record_field__2 [(ErlangTuple [(ErlangAtom "record_field"), _, f_0,
              [(ErlangAtom "list"), (ErlangCons head_18 ErlangEmptyList)])
       _ -> (EXC.badmatch match_expr_7)
 erlps__record_field__2 [(ErlangTuple [(ErlangAtom "typed_record_field"),
-                                      (ErlangTuple [(ErlangAtom "record_field"), _, f_0,
-                                                    val_1]),
+                                      (ErlangTuple [(ErlangAtom "record_field"),
+                                                    _, f_0, val_1]),
                                       type_2]),
                         opts_3]
   =
@@ -2598,13 +2642,14 @@ erlps__record_field__2 [(ErlangTuple [(ErlangAtom "typed_record_field"),
           (ErlangTuple
              [(ErlangAtom "list"), (ErlangCons head_21 ErlangEmptyList)])
       _ -> (EXC.badmatch match_expr_8)
-erlps__record_field__2 [(ErlangTuple [(ErlangAtom "typed_record_field"), field_0,
-                                      type_1]),
+erlps__record_field__2 [(ErlangTuple [(ErlangAtom "typed_record_field"),
+                                      field_0, type_1]),
                         opts_2]
   =
   let arg_3 = (erlps__record_field__2 [field_0, opts_2])
   in (erlps__typed__2 [arg_3, type_1])
-erlps__record_field__2 [(ErlangTuple [(ErlangAtom "record_field"), _, f_0]),
+erlps__record_field__2 [(ErlangTuple [(ErlangAtom "record_field"),
+                                      _, f_0]),
                         opts_1]
   =
   (erlps__lexpr__3 [f_0, (ErlangInt (DBI.fromInt 0)), opts_1])
@@ -2624,7 +2669,8 @@ erlps__map_fields__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__map_field__2 :: ErlangFun
-erlps__map_field__2 [(ErlangTuple [(ErlangAtom "map_field_assoc"), _, k_0, v_1]),
+erlps__map_field__2 [(ErlangTuple [(ErlangAtom "map_field_assoc"),
+                                   _, k_0, v_1]),
                      opts_2]
   =
   let   
@@ -2644,7 +2690,8 @@ erlps__map_field__2 [(ErlangTuple [(ErlangAtom "map_field_assoc"), _, k_0, v_1])
   in
     (ErlangTuple
        [(ErlangAtom "list"), (ErlangCons head_9 ErlangEmptyList)])
-erlps__map_field__2 [(ErlangTuple [(ErlangAtom "map_field_exact"), _, k_0, v_1]),
+erlps__map_field__2 [(ErlangTuple [(ErlangAtom "map_field_exact"),
+                                   _, k_0, v_1]),
                      opts_2]
   =
   let   
@@ -2674,7 +2721,8 @@ erlps__list__3 [(ErlangTuple [(ErlangAtom "cons"), _, h_0, t_1]),
                 es_2, opts_3]
   =
   (erlps__list__3 [t_1, (ErlangCons h_0 es_2), opts_3])
-erlps__list__3 [(ErlangTuple [(ErlangAtom "nil"), _]), es_0, opts_1]
+erlps__list__3 [(ErlangTuple [(ErlangAtom "nil"), _]), es_0,
+                opts_1]
   =
   let
     arg_2 =
@@ -2776,7 +2824,8 @@ erlps__try_clauses__2 args =
 
 erlps__try_clause__2 :: ErlangFun
 erlps__try_clause__2 [(ErlangTuple [(ErlangAtom "clause"), _,
-                                    (ErlangCons (ErlangTuple [(ErlangAtom "tuple"), _,
+                                    (ErlangCons (ErlangTuple [(ErlangAtom "tuple"),
+                                                              _,
                                                               (ErlangCons c_0 (ErlangCons v_1 (ErlangCons s_2 (ErlangEmptyList))))]) (ErlangEmptyList)),
                                     g_3, b_4]),
                       opts_5]
@@ -2868,8 +2917,8 @@ erlps__fun_clauses__3 args =
      (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__fun_clause__2 :: ErlangFun
-erlps__fun_clause__2 [(ErlangTuple [(ErlangAtom "clause"), _, a_0, g_1,
-                                    b_2]),
+erlps__fun_clause__2 [(ErlangTuple [(ErlangAtom "clause"), _,
+                                    a_0, g_1, b_2]),
                       opts_3]
   =
   let    el_6 = (erlps__args__2 [a_0, opts_3])
@@ -2952,7 +3001,8 @@ erlps__lc_quals__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__lc_qual__2 :: ErlangFun
-erlps__lc_qual__2 [(ErlangTuple [(ErlangAtom "b_generate"), _, pat_0, e_1]),
+erlps__lc_qual__2 [(ErlangTuple [(ErlangAtom "b_generate"), _,
+                                 pat_0, e_1]),
                    opts_2]
   =
   let   
@@ -2972,7 +3022,8 @@ erlps__lc_qual__2 [(ErlangTuple [(ErlangAtom "b_generate"), _, pat_0, e_1]),
   in
     (ErlangTuple
        [(ErlangAtom "list"), (ErlangCons head_9 ErlangEmptyList)])
-erlps__lc_qual__2 [(ErlangTuple [(ErlangAtom "generate"), _, pat_0, e_1]),
+erlps__lc_qual__2 [(ErlangTuple [(ErlangAtom "generate"), _,
+                                 pat_0, e_1]),
                    opts_2]
   =
   let   
@@ -3168,7 +3219,8 @@ erlps__f__5 [nil_0@(ErlangEmptyList), _i0_1, _st_2, _wt_3, _pp_4]
   (ErlangTuple [nil_0, (ErlangInt (DBI.fromInt 0))])
 erlps__f__5 [c_0, _i0_1, _st_2, _wt_3, _pp_4] | (isEInt c_0) =
   (ErlangTuple [c_0, (ErlangInt (DBI.fromInt 1))])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "leaf"), length_0, chars_1]),
+erlps__f__5 [(ErlangTuple [(ErlangAtom "leaf"), length_0,
+                           chars_1]),
              _i0_2, _st_3, _wt_4, _pp_5]
   =
   (ErlangTuple [chars_1, length_0])
@@ -3177,8 +3229,8 @@ erlps__f__5 [(ErlangCons item_0 items_1), i0_2, st_3, wt_4, pp_5]
   let arg_7 = (erlps__f__5 [item_0, i0_2, st_3, wt_4, pp_5])
   in
     (erlps__consecutive__6 [items_1, arg_7, i0_2, st_3, wt_4, pp_5])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "list"), items_0]), i0_1, st_2,
-             wt_3, pp_4]
+erlps__f__5 [(ErlangTuple [(ErlangAtom "list"), items_0]), i0_1,
+             st_2, wt_3, pp_4]
   =
   let
     arg_5 =
@@ -3186,8 +3238,8 @@ erlps__f__5 [(ErlangTuple [(ErlangAtom "list"), items_0]), i0_1, st_2,
          [(ErlangAtom "seq"), ErlangEmptyList, ErlangEmptyList,
           (ErlangCons ErlangEmptyList ErlangEmptyList), items_0])
   in (erlps__f__5 [arg_5, i0_1, st_2, wt_3, pp_4])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "first"), e_0, item_1]), i0_2,
-             st_3, wt_4, pp_5]
+erlps__f__5 [(ErlangTuple [(ErlangAtom "first"), e_0, item_1]),
+             i0_2, st_3, wt_4, pp_5]
   =
   let
     arg_6 =
@@ -3272,13 +3324,13 @@ erlps__f__5 [(ErlangTuple [(ErlangAtom "seq"), before_0, after_1,
                   something_else -> (EXC.case_clause something_else)
             _ -> (EXC.badmatch match_expr_34)
       _ -> (EXC.badmatch match_expr_28)
-erlps__f__5 [(ErlangTuple [(ErlangAtom "force_nl"), _extrainfoitem_0,
-                           item_1]),
+erlps__f__5 [(ErlangTuple [(ErlangAtom "force_nl"),
+                           _extrainfoitem_0, item_1]),
              i_2, st_3, wt_4, pp_5]
   | (weakLt i_2 (ErlangInt (DBI.fromInt 0))) =
   (erlps__f__5 [item_1, i_2, st_3, wt_4, pp_5])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "force_nl"), extrainfoitem_0,
-                           item_1]),
+erlps__f__5 [(ErlangTuple [(ErlangAtom "force_nl"),
+                           extrainfoitem_0, item_1]),
              i_2, st_3, wt_4, pp_5]
   =
   let
@@ -3288,7 +3340,8 @@ erlps__f__5 [(ErlangTuple [(ErlangAtom "force_nl"), extrainfoitem_0,
           (ErlangCons extrainfoitem_0
              (ErlangCons item_1 ErlangEmptyList))])
   in (erlps__f__5 [arg_6, i_2, st_3, wt_4, pp_5])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "prefer_nl"), sep_0, litems_1]),
+erlps__f__5 [(ErlangTuple [(ErlangAtom "prefer_nl"), sep_0,
+                           litems_1]),
              i_2, st_3, wt_4, pp_5]
   | (weakLt i_2 (ErlangInt (DBI.fromInt 0))) =
   let
@@ -3297,7 +3350,8 @@ erlps__f__5 [(ErlangTuple [(ErlangAtom "prefer_nl"), sep_0, litems_1]),
          [(ErlangAtom "seq"), ErlangEmptyList, ErlangEmptyList, sep_0,
           litems_1])
   in (erlps__f__5 [arg_6, i_2, st_3, wt_4, pp_5])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "prefer_nl"), sep_0, litems_1]),
+erlps__f__5 [(ErlangTuple [(ErlangAtom "prefer_nl"), sep_0,
+                           litems_1]),
              i0_2, st_3, wt_4, pp_5]
   =
   let   
@@ -3322,8 +3376,8 @@ erlps__f__5 [(ErlangTuple [(ErlangAtom "prefer_nl"), sep_0, litems_1]),
             in (ErlangTuple [tup_el_20, tup_el_25])
           _ -> (EXC.if_clause unit)
       _ -> (EXC.badmatch match_expr_17)
-erlps__f__5 [(ErlangTuple [(ErlangAtom "value"), v_0]), i_1, st_2,
-             wt_3, pp_4]
+erlps__f__5 [(ErlangTuple [(ErlangAtom "value"), v_0]), i_1,
+             st_2, wt_3, pp_4]
   =
   let arg_5 = (erlps__write_a_value__2 [v_0, pp_4])
   in (erlps__f__5 [arg_5, i_1, st_2, wt_3, pp_4])
@@ -3332,8 +3386,9 @@ erlps__f__5 [(ErlangTuple [(ErlangAtom "atom"), a_0]), i_1, st_2,
   =
   let arg_5 = (erlps__write_an_atom__2 [a_0, pp_4])
   in (erlps__f__5 [arg_5, i_1, st_2, wt_3, pp_4])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "singleton_atom_type"), a_0]), i_1, st_2,
-             wt_3, pp_4]
+erlps__f__5 [(ErlangTuple [(ErlangAtom "singleton_atom_type"),
+                           a_0]),
+             i_1, st_2, wt_3, pp_4]
   =
   let arg_5 = (erlps__write_a_singleton_atom_type__2 [a_0, pp_4])
   in (erlps__f__5 [arg_5, i_1, st_2, wt_3, pp_4])
@@ -3342,13 +3397,13 @@ erlps__f__5 [(ErlangTuple [(ErlangAtom "char"), c_0]), i_1, st_2,
   =
   let arg_5 = (erlps__write_a_char__2 [c_0, pp_4])
   in (erlps__f__5 [arg_5, i_1, st_2, wt_3, pp_4])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "string"), s_0]), i_1, st_2,
-             wt_3, pp_4]
+erlps__f__5 [(ErlangTuple [(ErlangAtom "string"), s_0]), i_1,
+             st_2, wt_3, pp_4]
   =
   let arg_5 = (erlps__write_a_string__3 [s_0, i_1, pp_4])
   in (erlps__f__5 [arg_5, i_1, st_2, wt_3, pp_4])
-erlps__f__5 [(ErlangTuple [(ErlangAtom "reserved"), r_0]), i_1, st_2,
-             wt_3, pp_4]
+erlps__f__5 [(ErlangTuple [(ErlangAtom "reserved"), r_0]), i_1,
+             st_2, wt_3, pp_4]
   =
   (erlps__f__5 [r_0, i_1, st_2, wt_3, pp_4])
 erlps__f__5 [(ErlangTuple [(ErlangAtom "hook"), hookexpr_0,
@@ -3406,7 +3461,8 @@ erlps__fl__7 [citems_0, sep0_1, i0_2, after_3, st_4, wt_5, pp_6]
     f_126 =
       (ErlangFun 2
          let
-           lambda_7 [(ErlangTuple [(ErlangAtom "step"), item1_10, item2_11]),
+           lambda_7 [(ErlangTuple [(ErlangAtom "step"), item1_10,
+                                   item2_11]),
                      s_12]
              =
              let    head_13 = (erlps__f__5 [item1_10, i0_2, st_4, wt_5, pp_6])
@@ -3424,7 +3480,8 @@ erlps__fl__7 [citems_0, sep0_1, i0_2, after_3, st_4, wt_5, pp_6]
                     [(ErlangCons item2_11 (ErlangCons s_12 ErlangEmptyList)),
                      arg_26, st_4, wt_5, pp_6])
              in (ErlangCons head_13 (ErlangCons head_20 ErlangEmptyList))
-           lambda_7 [(ErlangTuple [(ErlangAtom "cstep"), item1_36, item2_37]),
+           lambda_7 [(ErlangTuple [(ErlangAtom "cstep"), item1_36,
+                                   item2_37]),
                      s_38]
              =
              let
@@ -3441,7 +3498,8 @@ erlps__fl__7 [citems_0, sep0_1, i0_2, after_3, st_4, wt_5, pp_6]
                                       (BIF.erlang__is_integer__1 [sz1_45])
                                   in
                                     case lop_47 of
-                                      (ErlangAtom "false") -> (ErlangAtom "false")
+                                      (ErlangAtom "false") ->
+                                        (ErlangAtom "false")
                                       (ErlangAtom "true") ->
                                         let
                                           rop_50 =
@@ -3493,7 +3551,8 @@ erlps__fl__7 [citems_0, sep0_1, i0_2, after_3, st_4, wt_5, pp_6]
                             (ErlangCons head_76 ErlangEmptyList))
                      _ -> (EXC.if_clause unit)
                  _ -> (EXC.badmatch charsize1_44)
-           lambda_7 [(ErlangTuple [(ErlangAtom "reserved"), word_92]), s_93] =
+           lambda_7 [(ErlangTuple [(ErlangAtom "reserved"), word_92]), s_93]
+             =
              let   
                head_94 =
                  (erlps__f__5
@@ -3912,13 +3971,18 @@ erlps__nl_indent__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__classify_item__1 :: ErlangFun
-erlps__classify_item__1 [(ErlangTuple [(ErlangAtom "atom"), _])] =
+erlps__classify_item__1 [(ErlangTuple [(ErlangAtom "atom"), _])]
+  =
   (ErlangAtom "atomic")
-erlps__classify_item__1 [(ErlangTuple [(ErlangAtom "singleton_atom_type"), _])] =
+erlps__classify_item__1 [(ErlangTuple [(ErlangAtom "singleton_atom_type"),
+                                       _])]
+  =
   (ErlangAtom "atomic")
 erlps__classify_item__1 [atom_0] | (isEAtom atom_0) =
   (ErlangAtom "atomic")
-erlps__classify_item__1 [(ErlangTuple [(ErlangAtom "leaf"), _, _])] =
+erlps__classify_item__1 [(ErlangTuple [(ErlangAtom "leaf"), _,
+                                       _])]
+  =
   (ErlangAtom "atomic")
 erlps__classify_item__1 [_] = (ErlangAtom "complex")
 erlps__classify_item__1 [arg_0] = (EXC.function_clause unit)
@@ -3967,9 +4031,13 @@ erlps__line_size__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__line_size__3 :: ErlangFun
-erlps__line_size__3 [(ErlangEmptyList), size_0, (ErlangAtom "false")] =
+erlps__line_size__3 [(ErlangEmptyList), size_0,
+                     (ErlangAtom "false")]
+  =
   size_0
-erlps__line_size__3 [(ErlangEmptyList), size_0, (ErlangAtom "true")] =
+erlps__line_size__3 [(ErlangEmptyList), size_0,
+                     (ErlangAtom "true")]
+  =
   (ErlangTuple [(ErlangAtom "line"), size_0])
 erlps__line_size__3 [(ErlangCons (ErlangTuple [(ErlangAtom "line"),
                                                len_0]) sizel_1),
@@ -3988,7 +4056,8 @@ erlps__line_size__3 args =
      (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__nsz__2 :: ErlangFun
-erlps__nsz__2 [sz_1@(ErlangTuple [(ErlangAtom "line"), _len_0]), _i_2]
+erlps__nsz__2 [sz_1@(ErlangTuple [(ErlangAtom "line"), _len_0]),
+               _i_2]
   =
   sz_1
 erlps__nsz__2 [size_0, i_1]

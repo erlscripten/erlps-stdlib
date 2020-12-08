@@ -82,8 +82,8 @@ erlps__parse_exprs__1 [tokens_0] =
   in
     case case_3 of
       (ErlangTuple [(ErlangAtom "ok"),
-                    (ErlangTuple [(ErlangAtom "function"), _lf_22, (ErlangAtom "f"),
-                                  (ErlangInt num_23),
+                    (ErlangTuple [(ErlangAtom "function"), _lf_22,
+                                  (ErlangAtom "f"), (ErlangInt num_23),
                                   (ErlangCons (ErlangTuple [(ErlangAtom "clause"),
                                                             _lc_24,
                                                             (ErlangEmptyList),
@@ -122,8 +122,8 @@ erlps__parse_term__1 [tokens_0] =
   in
     case case_3 of
       (ErlangTuple [(ErlangAtom "ok"),
-                    (ErlangTuple [(ErlangAtom "function"), _af_22, (ErlangAtom "f"),
-                                  (ErlangInt num_23),
+                    (ErlangTuple [(ErlangAtom "function"), _af_22,
+                                  (ErlangAtom "f"), (ErlangInt num_23),
                                   (ErlangCons (ErlangTuple [(ErlangAtom "clause"),
                                                             _ac_24,
                                                             (ErlangEmptyList),
@@ -154,7 +154,8 @@ erlps__parse_term__1 [tokens_0] =
                   in (ErlangTuple [(ErlangAtom "error"), tup_el_34])
                 ex_28 -> (EXC.raise ex_28)))
       (ErlangTuple [(ErlangAtom "ok"),
-                    (ErlangTuple [(ErlangAtom "function"), _af_41, (ErlangAtom "f"), a_42,
+                    (ErlangTuple [(ErlangAtom "function"), _af_41,
+                                  (ErlangAtom "f"), a_42,
                                   (ErlangCons (ErlangTuple [(ErlangAtom "clause"),
                                                             _ac_43,
                                                             (ErlangEmptyList),
@@ -195,7 +196,8 @@ erlps__build_typed_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
 erlps__build_typed_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
                                                aa_0, attr_1]),
                                  (ErlangTuple [(ErlangAtom "type_def"),
-                                               (ErlangTuple [(ErlangAtom "call"), _,
+                                               (ErlangTuple [(ErlangAtom "call"),
+                                                             _,
                                                              (ErlangTuple [(ErlangAtom "atom"),
                                                                            _,
                                                                            typename_2]),
@@ -216,7 +218,9 @@ erlps__build_typed_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
     arg_5 =
       (ErlangFun 1
          let
-           lambda_6 [(ErlangTuple [(ErlangAtom "var"), a_8, (ErlangAtom "_")])] =
+           lambda_6 [(ErlangTuple [(ErlangAtom "var"), a_8,
+                                   (ErlangAtom "_")])]
+             =
              let arg_10 = (make_string "bad type variable")
              in (erlps__ret_err__2 [a_8, arg_10])
            lambda_6 [_] = (ErlangAtom "ok")
@@ -311,12 +315,15 @@ erlps__find_arity_from_specs__1 [(ErlangCons spec_0 _)] =
         (ErlangTuple [(ErlangAtom "type"), _, (ErlangAtom "bounded_fun"),
                       (ErlangCons f_2 (ErlangCons _ (ErlangEmptyList)))]) ->
           f_2
-        f_3@(ErlangTuple [(ErlangAtom "type"), _, (ErlangAtom "fun"), _]) -> f_3
+        f_3@(ErlangTuple [(ErlangAtom "type"), _, (ErlangAtom "fun"),
+                          _]) ->
+          f_3
         something_else -> (EXC.case_clause something_else)
   in
     case fun_4 of
       (ErlangTuple [(ErlangAtom "type"), _, (ErlangAtom "fun"),
-                    (ErlangCons (ErlangTuple [(ErlangAtom "type"), _, (ErlangAtom "product"),
+                    (ErlangCons (ErlangTuple [(ErlangAtom "type"), _,
+                                              (ErlangAtom "product"),
                                               args_5]) (ErlangCons _ (ErlangEmptyList)))]) ->
         (BIF.erlang__length__1 [args_5])
       _ -> (EXC.badmatch fun_4)
@@ -350,7 +357,7 @@ erlps__build_compat_constraint__2 [(ErlangTuple [(ErlangAtom "atom"),
   let    arg_5 = (make_string "unsupported constraint ~tw")
   in let
     arg_4 =
-      (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
+      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
          [arg_5, (ErlangCons atom_1 ErlangEmptyList)])
   in (erlps__ret_err__2 [a_0, arg_4])
 erlps__build_compat_constraint__2 [arg_9, arg_10] =
@@ -362,22 +369,23 @@ erlps__build_compat_constraint__2 args =
 erlps__build_constraint__2 :: ErlangFun
 erlps__build_constraint__2 [(ErlangTuple [(ErlangAtom "atom"), _,
                                           (ErlangAtom "is_subtype")]),
-                            (ErlangCons lhs_0@(ErlangTuple [(ErlangAtom "var"), _,
+                            (ErlangCons lhs_0@(ErlangTuple [(ErlangAtom "var"),
+                                                            _,
                                                             _]) (ErlangCons type_1 (ErlangEmptyList)))]
   =
   (erlps__build_constraint__2 [lhs_0, type_1])
-erlps__build_constraint__2 [(ErlangTuple [(ErlangAtom "atom"), a_0,
-                                          atom_1]),
+erlps__build_constraint__2 [(ErlangTuple [(ErlangAtom "atom"),
+                                          a_0, atom_1]),
                             _foo_2]
   =
   let    arg_5 = (make_string "unsupported constraint ~tw")
   in let
     arg_4 =
-      (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
+      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
          [arg_5, (ErlangCons atom_1 ErlangEmptyList)])
   in (erlps__ret_err__2 [a_0, arg_4])
-erlps__build_constraint__2 [(ErlangTuple [(ErlangAtom "var"), a_0,
-                                          (ErlangAtom "_")]),
+erlps__build_constraint__2 [(ErlangTuple [(ErlangAtom "var"),
+                                          a_0, (ErlangAtom "_")]),
                             _types_1]
   =
   let arg_3 = (make_string "bad type variable")
@@ -408,8 +416,8 @@ erlps__build_constraint__2 args =
 
 erlps__lift_unions__2 :: ErlangFun
 erlps__lift_unions__2 [t1_0,
-                       (ErlangTuple [(ErlangAtom "type"), _aa_1, (ErlangAtom "union"),
-                                     list_2])]
+                       (ErlangTuple [(ErlangAtom "type"), _aa_1,
+                                     (ErlangAtom "union"), list_2])]
   =
   let
     tup_el_4 =
@@ -433,20 +441,20 @@ erlps__lift_unions__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__build_gen_type__1 :: ErlangFun
-erlps__build_gen_type__1 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                        (ErlangAtom "tuple")])]
+erlps__build_gen_type__1 [(ErlangTuple [(ErlangAtom "atom"),
+                                        aa_0, (ErlangAtom "tuple")])]
   =
   (ErlangTuple
      [(ErlangAtom "type"), aa_0, (ErlangAtom "tuple"),
       (ErlangAtom "any")])
-erlps__build_gen_type__1 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                        (ErlangAtom "map")])]
+erlps__build_gen_type__1 [(ErlangTuple [(ErlangAtom "atom"),
+                                        aa_0, (ErlangAtom "map")])]
   =
   (ErlangTuple
      [(ErlangAtom "type"), aa_0, (ErlangAtom "map"),
       (ErlangAtom "any")])
-erlps__build_gen_type__1 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                        name_1])]
+erlps__build_gen_type__1 [(ErlangTuple [(ErlangAtom "atom"),
+                                        aa_0, name_1])]
   =
   let
     tag_4 =
@@ -459,7 +467,8 @@ erlps__build_gen_type__1 args =
 
 erlps__build_bin_type__2 :: ErlangFun
 erlps__build_bin_type__2 [(ErlangCons (ErlangTuple [(ErlangAtom "var"),
-                                                    _, (ErlangAtom "_")]) left_0),
+                                                    _,
+                                                    (ErlangAtom "_")]) left_0),
                           int_1]
   =
   (erlps__build_bin_type__2 [left_0, int_1])
@@ -518,8 +527,8 @@ erlps__abstract2__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__build_attribute__2 :: ErlangFun
-erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                         (ErlangAtom "module")]),
+erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
+                                         aa_0, (ErlangAtom "module")]),
                            val_1]
   =
   case val_1 of
@@ -539,8 +548,8 @@ erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
     _other_19 ->
       (erlps__error_bad_decl__2 [aa_0, (ErlangAtom "module")])
     something_else -> (EXC.case_clause something_else)
-erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                         (ErlangAtom "export")]),
+erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
+                                         aa_0, (ErlangAtom "export")]),
                            val_1]
   =
   case val_1 of
@@ -553,8 +562,8 @@ erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
     _other_9 ->
       (erlps__error_bad_decl__2 [aa_0, (ErlangAtom "export")])
     something_else -> (EXC.case_clause something_else)
-erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                         (ErlangAtom "import")]),
+erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
+                                         aa_0, (ErlangAtom "import")]),
                            val_1]
   =
   case val_1 of
@@ -569,8 +578,8 @@ erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
     _other_13 ->
       (erlps__error_bad_decl__2 [aa_0, (ErlangAtom "import")])
     something_else -> (EXC.case_clause something_else)
-erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                         (ErlangAtom "record")]),
+erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
+                                         aa_0, (ErlangAtom "record")]),
                            val_1]
   =
   case val_1 of
@@ -585,8 +594,8 @@ erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
     _other_13 ->
       (erlps__error_bad_decl__2 [aa_0, (ErlangAtom "record")])
     something_else -> (EXC.case_clause something_else)
-erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                         (ErlangAtom "file")]),
+erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
+                                         aa_0, (ErlangAtom "file")]),
                            val_1]
   =
   case val_1 of
@@ -601,8 +610,8 @@ erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
     _other_13 ->
       (erlps__error_bad_decl__2 [aa_0, (ErlangAtom "file")])
     something_else -> (EXC.case_clause something_else)
-erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"), aa_0,
-                                         attr_1]),
+erlps__build_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
+                                         aa_0, attr_1]),
                            val_2]
   =
   case val_2 of
@@ -642,19 +651,19 @@ erlps__var_list__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__attribute_farity__1 :: ErlangFun
-erlps__attribute_farity__1 [(ErlangTuple [(ErlangAtom "cons"), a_0,
-                                          h_1, t_2])]
+erlps__attribute_farity__1 [(ErlangTuple [(ErlangAtom "cons"),
+                                          a_0, h_1, t_2])]
   =
   let    tup_el_5 = (erlps__attribute_farity__1 [h_1])
   in let tup_el_7 = (erlps__attribute_farity__1 [t_2])
   in (ErlangTuple [(ErlangAtom "cons"), a_0, tup_el_5, tup_el_7])
-erlps__attribute_farity__1 [(ErlangTuple [(ErlangAtom "tuple"), a_0,
-                                          args0_1])]
+erlps__attribute_farity__1 [(ErlangTuple [(ErlangAtom "tuple"),
+                                          a_0, args0_1])]
   =
   let args_3 = (erlps__attribute_farity_list__1 [args0_1])
   in (ErlangTuple [(ErlangAtom "tuple"), a_0, args_3])
-erlps__attribute_farity__1 [(ErlangTuple [(ErlangAtom "map"), a_0,
-                                          args0_1])]
+erlps__attribute_farity__1 [(ErlangTuple [(ErlangAtom "map"),
+                                          a_0, args0_1])]
   =
   let args_3 = (erlps__attribute_farity_map__1 [args0_1])
   in (ErlangTuple [(ErlangAtom "map"), a_0, args_3])
@@ -712,7 +721,7 @@ erlps__error_bad_decl__2 [anno_0, s_1] =
   let    arg_4 = (make_string "bad ~tw declaration")
   in let
     arg_3 =
-      (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
+      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
          [arg_4, (ErlangCons s_1 ErlangEmptyList)])
   in (erlps__ret_err__2 [anno_0, arg_3])
 erlps__error_bad_decl__2 [arg_8, arg_9] =
@@ -734,7 +743,8 @@ erlps__farity_list__1 [(ErlangTuple [(ErlangAtom "cons"), _ac_0,
   let    head_7 = (ErlangTuple [a_3, i_5])
   in let tail_10 = (erlps__farity_list__1 [tail_6])
   in (ErlangCons head_7 tail_10)
-erlps__farity_list__1 [(ErlangTuple [(ErlangAtom "nil"), _an_0])] =
+erlps__farity_list__1 [(ErlangTuple [(ErlangAtom "nil"), _an_0])]
+  =
   ErlangEmptyList
 erlps__farity_list__1 [other_0] =
   let   
@@ -748,8 +758,8 @@ erlps__farity_list__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__record_tuple__1 :: ErlangFun
-erlps__record_tuple__1 [(ErlangTuple [(ErlangAtom "tuple"), _at_0,
-                                      fields_1])]
+erlps__record_tuple__1 [(ErlangTuple [(ErlangAtom "tuple"),
+                                      _at_0, fields_1])]
   =
   (erlps__record_fields__1 [fields_1])
 erlps__record_tuple__1 [other_0] =
@@ -919,8 +929,8 @@ erlps__check_clauses__3 [cs_0, name_1, arity_2] =
                                                            lop_13)))) ->
                     (ErlangTuple
                        [(ErlangAtom "clause"), a_8, as_10, g_11, b_12])
-                  (ErlangTuple [(ErlangAtom "clause"), a_24, _n_25, _as_26, _g_27,
-                                _b_28]) ->
+                  (ErlangTuple [(ErlangAtom "clause"), a_24, _n_25, _as_26,
+                                _g_27, _b_28]) ->
                     let arg_30 = (make_string "head mismatch")
                     in (erlps__ret_err__2 [a_24, arg_30])
                   something_else -> (EXC.case_clause something_else)
@@ -962,19 +972,28 @@ erlps__location__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__normalise__1 :: ErlangFun
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "char"), _, c_0])] =
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "char"), _, c_0])]
+  =
   c_0
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "integer"), _, i_0])] =
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "integer"), _,
+                                   i_0])]
+  =
   i_0
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "float"), _, f_0])] =
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "float"), _,
+                                   f_0])]
+  =
   f_0
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "atom"), _, a_0])] =
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "atom"), _, a_0])]
+  =
   a_0
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "string"), _, s_0])] =
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "string"), _,
+                                   s_0])]
+  =
   s_0
 erlps__normalise__1 [(ErlangTuple [(ErlangAtom "nil"), _])] =
   ErlangEmptyList
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "bin"), _, fs_0])] =
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "bin"), _, fs_0])]
+  =
   let   
     arg_3 =
       (ErlangFun 2
@@ -995,13 +1014,15 @@ erlps__normalise__1 [(ErlangTuple [(ErlangAtom "bin"), _, fs_0])] =
     case match_expr_15 of
       (ErlangTuple [(ErlangAtom "value"), b_14, _]) -> b_14
       _ -> (EXC.badmatch match_expr_15)
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "cons"), _, head_0,
-                                   tail_1])]
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "cons"), _,
+                                   head_0, tail_1])]
   =
   let    head_2 = (erlps__normalise__1 [head_0])
   in let tail_4 = (erlps__normalise__1 [tail_1])
   in (ErlangCons head_2 tail_4)
-erlps__normalise__1 [(ErlangTuple [(ErlangAtom "tuple"), _, args_0])] =
+erlps__normalise__1 [(ErlangTuple [(ErlangAtom "tuple"), _,
+                                   args_0])]
+  =
   let arg_1 = (erlps__normalise_list__1 [args_0])
   in (BIF.erlang__list_to_tuple__1 [arg_1])
 erlps__normalise__1 [m_1@(ErlangTuple [(ErlangAtom "map"), _,
@@ -1011,7 +1032,9 @@ erlps__normalise__1 [m_1@(ErlangTuple [(ErlangAtom "map"), _,
     arg_3 =
       (ErlangFun 1
          let
-           lambda_4 [(ErlangTuple [(ErlangAtom "map_field_assoc"), _, k_6, v_7])] =
+           lambda_4 [(ErlangTuple [(ErlangAtom "map_field_assoc"), _, k_6,
+                                   v_7])]
+             =
              let    tup_el_8 = (erlps__normalise__1 [k_6])
              in let tup_el_10 = (erlps__normalise__1 [v_7])
              in (ErlangTuple [tup_el_8, tup_el_10])
@@ -1037,32 +1060,38 @@ erlps__normalise__1 [(ErlangTuple [(ErlangAtom "fun"), _,
   (BIF.erlang__make_fun__3 [m_0, f_1, a_2])
 erlps__normalise__1 [(ErlangTuple [(ErlangAtom "op"), _,
                                    (ErlangAtom "+"),
-                                   (ErlangTuple [(ErlangAtom "char"), _, i_0])])]
+                                   (ErlangTuple [(ErlangAtom "char"), _,
+                                                 i_0])])]
   =
   i_0
 erlps__normalise__1 [(ErlangTuple [(ErlangAtom "op"), _,
                                    (ErlangAtom "+"),
-                                   (ErlangTuple [(ErlangAtom "integer"), _, i_0])])]
+                                   (ErlangTuple [(ErlangAtom "integer"), _,
+                                                 i_0])])]
   =
   i_0
 erlps__normalise__1 [(ErlangTuple [(ErlangAtom "op"), _,
                                    (ErlangAtom "+"),
-                                   (ErlangTuple [(ErlangAtom "float"), _, f_0])])]
+                                   (ErlangTuple [(ErlangAtom "float"), _,
+                                                 f_0])])]
   =
   f_0
 erlps__normalise__1 [(ErlangTuple [(ErlangAtom "op"), _,
                                    (ErlangAtom "-"),
-                                   (ErlangTuple [(ErlangAtom "char"), _, i_0])])]
+                                   (ErlangTuple [(ErlangAtom "char"), _,
+                                                 i_0])])]
   =
   (BIF.erlang__op_neg [i_0])
 erlps__normalise__1 [(ErlangTuple [(ErlangAtom "op"), _,
                                    (ErlangAtom "-"),
-                                   (ErlangTuple [(ErlangAtom "integer"), _, i_0])])]
+                                   (ErlangTuple [(ErlangAtom "integer"), _,
+                                                 i_0])])]
   =
   (BIF.erlang__op_neg [i_0])
 erlps__normalise__1 [(ErlangTuple [(ErlangAtom "op"), _,
                                    (ErlangAtom "-"),
-                                   (ErlangTuple [(ErlangAtom "float"), _, f_0])])]
+                                   (ErlangTuple [(ErlangAtom "float"), _,
+                                                 f_0])])]
   =
   (BIF.erlang__op_neg [f_0])
 erlps__normalise__1 [x_0] =
@@ -1477,7 +1506,8 @@ erlps__tokens__2 [(ErlangTuple [(ErlangAtom "char"), a_0, c_1]),
   =
   let head_3 = (ErlangTuple [(ErlangAtom "char"), a_0, c_1])
   in (ErlangCons head_3 more_2)
-erlps__tokens__2 [(ErlangTuple [(ErlangAtom "integer"), a_0, n_1]),
+erlps__tokens__2 [(ErlangTuple [(ErlangAtom "integer"), a_0,
+                                n_1]),
                   more_2]
   =
   let head_3 = (ErlangTuple [(ErlangAtom "integer"), a_0, n_1])
@@ -1497,12 +1527,15 @@ erlps__tokens__2 [(ErlangTuple [(ErlangAtom "var"), a_0, v_1]),
   =
   let head_3 = (ErlangTuple [(ErlangAtom "var"), a_0, v_1])
   in (ErlangCons head_3 more_2)
-erlps__tokens__2 [(ErlangTuple [(ErlangAtom "string"), a_0, s_1]),
+erlps__tokens__2 [(ErlangTuple [(ErlangAtom "string"), a_0,
+                                s_1]),
                   more_2]
   =
   let head_3 = (ErlangTuple [(ErlangAtom "string"), a_0, s_1])
   in (ErlangCons head_3 more_2)
-erlps__tokens__2 [(ErlangTuple [(ErlangAtom "nil"), a_0]), more_1] =
+erlps__tokens__2 [(ErlangTuple [(ErlangAtom "nil"), a_0]),
+                  more_1]
+  =
   let    head_2 = (ErlangTuple [(ErlangAtom "["), a_0])
   in let head_6 = (ErlangTuple [(ErlangAtom "]"), a_0])
   in (ErlangCons head_2 (ErlangCons head_6 more_1))
@@ -1538,8 +1571,8 @@ erlps__tokens__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__tokens_tail__2 :: ErlangFun
-erlps__tokens_tail__2 [(ErlangTuple [(ErlangAtom "cons"), a_0, head_1,
-                                     tail_2]),
+erlps__tokens_tail__2 [(ErlangTuple [(ErlangAtom "cons"), a_0,
+                                     head_1, tail_2]),
                        more_3]
   =
   let    head_4 = (ErlangTuple [(ErlangAtom ","), a_0])
@@ -1984,13 +2017,14 @@ erlps__anno_from_term__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__modify_anno1__3 :: ErlangFun
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "function"), f_0, a_1]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "function"),
+                                      f_0, a_1]),
                         ac_2, _mf_3]
   =
   let tup_el_4 = (ErlangTuple [(ErlangAtom "function"), f_0, a_1])
   in (ErlangTuple [tup_el_4, ac_2])
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "function"), m_0, f_1,
-                                      a_2]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "function"),
+                                      m_0, f_1, a_2]),
                         ac_3, mf_4]
   =
   let match_expr_10 = (erlps__modify_anno1__3 [m_0, ac_3, mf_4])
@@ -2013,8 +2047,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "function"), m_0, f_1,
                   _ -> (EXC.badmatch match_expr_22)
             _ -> (EXC.badmatch match_expr_16)
       _ -> (EXC.badmatch match_expr_10)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
-                                      (ErlangAtom "record"),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"),
+                                      a_0, (ErlangAtom "record"),
                                       (ErlangTuple [name_1, fields_2])]),
                         ac_3, mf_4]
   =
@@ -2039,8 +2073,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
               in (ErlangTuple [tup_el_17, ac2_15])
             _ -> (EXC.badmatch match_expr_16)
       _ -> (EXC.badmatch match_expr_10)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
-                                      (ErlangAtom "spec"),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"),
+                                      a_0, (ErlangAtom "spec"),
                                       (ErlangTuple [fun_1, types_2])]),
                         ac_3, mf_4]
   =
@@ -2065,8 +2099,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
               in (ErlangTuple [tup_el_17, ac2_15])
             _ -> (EXC.badmatch match_expr_16)
       _ -> (EXC.badmatch match_expr_10)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
-                                      (ErlangAtom "callback"),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"),
+                                      a_0, (ErlangAtom "callback"),
                                       (ErlangTuple [fun_1, types_2])]),
                         ac_3, mf_4]
   =
@@ -2091,8 +2125,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
               in (ErlangTuple [tup_el_17, ac2_15])
             _ -> (EXC.badmatch match_expr_16)
       _ -> (EXC.badmatch match_expr_10)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
-                                      (ErlangAtom "type"),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"),
+                                      a_0, (ErlangAtom "type"),
                                       (ErlangTuple [typename_1, typedef_2,
                                                     args_3])]),
                         ac_4, mf_5]
@@ -2127,8 +2161,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
                   _ -> (EXC.badmatch match_expr_23)
             _ -> (EXC.badmatch match_expr_17)
       _ -> (EXC.badmatch match_expr_11)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
-                                      (ErlangAtom "opaque"),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"),
+                                      a_0, (ErlangAtom "opaque"),
                                       (ErlangTuple [typename_1, typedef_2,
                                                     args_3])]),
                         ac_4, mf_5]
@@ -2163,8 +2197,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
                   _ -> (EXC.badmatch match_expr_23)
             _ -> (EXC.badmatch match_expr_17)
       _ -> (EXC.badmatch match_expr_11)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
-                                      attr_1, val_2]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"),
+                                      a_0, attr_1, val_2]),
                         ac_3, mf_4]
   =
   let
@@ -2179,12 +2213,14 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "attribute"), a_0,
             (ErlangTuple [(ErlangAtom "attribute"), a1_8, attr_1, val_2])
         in (ErlangTuple [tup_el_11, ac1_9])
       _ -> (EXC.badmatch match_expr_10)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "warning"), w_0]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "warning"),
+                                      w_0]),
                         ac_1, _mf_2]
   =
   let tup_el_3 = (ErlangTuple [(ErlangAtom "warning"), w_0])
   in (ErlangTuple [tup_el_3, ac_1])
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "error"), w_0]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "error"),
+                                      w_0]),
                         ac_1, _mf_2]
   =
   let tup_el_3 = (ErlangTuple [(ErlangAtom "error"), w_0])
@@ -2194,7 +2230,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "eof"), l_0]),
   =
   let tup_el_3 = (ErlangTuple [(ErlangAtom "eof"), l_0])
   in (ErlangTuple [tup_el_3, ac_1])
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "clauses"), cs_0]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "clauses"),
+                                      cs_0]),
                         ac_1, mf_2]
   =
   let match_expr_8 = (erlps__modify_anno1__3 [cs_0, ac_1, mf_2])
@@ -2204,8 +2241,8 @@ erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "clauses"), cs_0]),
         let tup_el_9 = (ErlangTuple [(ErlangAtom "clauses"), cs1_6])
         in (ErlangTuple [tup_el_9, ac1_7])
       _ -> (EXC.badmatch match_expr_8)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "typed_record_field"), field_0,
-                                      type_1]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "typed_record_field"),
+                                      field_0, type_1]),
                         ac_2, mf_3]
   =
   let match_expr_9 = (erlps__modify_anno1__3 [field_0, ac_2, mf_3])
@@ -2276,8 +2313,8 @@ erlps__modify_anno1__3 [(ErlangTuple [tag_0, a_1, e1_2, e2_3]),
                   _ -> (EXC.badmatch match_expr_23)
             _ -> (EXC.badmatch match_expr_17)
       _ -> (EXC.badmatch match_expr_11)
-erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "bin_element"), a_0, e1_1,
-                                      e2_2, tsl_3]),
+erlps__modify_anno1__3 [(ErlangTuple [(ErlangAtom "bin_element"),
+                                      a_0, e1_1, e2_2, tsl_3]),
                         ac_4, mf_5]
   =
   let
@@ -2454,13 +2491,14 @@ erlps__format_error__1 :: ErlangFun
 erlps__format_error__1 [message_0] =
   let
     case_1 =
-      (BIF.do_remote_fun_call "Io.Lib" "erlps__deep_char_list__1"
+      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__deep_char_list__1"
          [message_0])
   in
     case case_1 of
       (ErlangAtom "true") -> message_0
       _ ->
-        (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [message_0])
+        (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1"
+           [message_0])
       something_else -> (EXC.case_clause something_else)
 erlps__format_error__1 [arg_4] = (EXC.function_clause unit)
 erlps__format_error__1 args =
@@ -2527,8 +2565,8 @@ erlps__yeccpars0__5 args =
 
 erlps__yecc_error_type__2 :: ErlangFun
 erlps__yecc_error_type__2 [(ErlangAtom "function_clause"),
-                           (ErlangCons (ErlangTuple [(ErlangAtom "erl_parse"), f_0,
-                                                     arityorargs_1, _]) _)]
+                           (ErlangCons (ErlangTuple [(ErlangAtom "erl_parse"),
+                                                     f_0, arityorargs_1, _]) _)]
   =
   let case_2 = (BIF.erlang__atom_to_list__1 [f_0])
   in
@@ -2634,12 +2672,14 @@ erlps__yeccpars1__5 [(ErlangEmptyList),
         in
           (erlps__yeccpars1__5
              [ErlangEmptyList, arg_22, state_3, states_4, vstack_5])
-      (ErlangTuple [(ErlangAtom "error"), descriptor_28, _endline_29]) ->
+      (ErlangTuple [(ErlangAtom "error"), descriptor_28,
+                    _endline_29]) ->
         (ErlangTuple [(ErlangAtom "error"), descriptor_28])
       something_else -> (EXC.case_clause something_else)
 erlps__yeccpars1__5 [(ErlangEmptyList),
-                     (ErlangTuple [(ErlangAtom "no_func"), (ErlangAtom "no_line")]), state_0,
-                     states_1, vstack_2]
+                     (ErlangTuple [(ErlangAtom "no_func"),
+                                   (ErlangAtom "no_line")]),
+                     state_0, states_1, vstack_2]
   =
   let   
     arg_8 = (erlps__yecc_end__1 [(ErlangInt (DBI.fromInt 999999))])
@@ -2687,7 +2727,8 @@ erlps__yeccpars1__7 [state1_0, state_1, states_2, vstack_3,
       (ErlangCons token0_4 vstack_3)])
 erlps__yeccpars1__7 [state1_0, state_1, states_2, vstack_3,
                      token0_4, (ErlangEmptyList),
-                     (ErlangTuple [(ErlangAtom "no_func"), (ErlangAtom "no_line")])]
+                     (ErlangTuple [(ErlangAtom "no_func"),
+                                   (ErlangAtom "no_line")])]
   =
   let    line_6 = (erlps__yecctoken_end_location__1 [token0_4])
   in let arg_15 = (erlps__yecc_end__1 [line_6])
@@ -2736,7 +2777,8 @@ erlps__yecctoken_end_location__1 [token_0] =
              [arg_1]))
      (\ of_4 ->
         case of_4 of
-          (ErlangAtom "undefined") -> (erlps__yecctoken_location__1 [token_0])
+          (ErlangAtom "undefined") ->
+            (erlps__yecctoken_location__1 [token_0])
           loc_7 -> loc_7
           something_else -> (EXC.try_clause something_else))
      (\ ex_5 ->
@@ -2773,7 +2815,8 @@ erlps__yecctoken_to_string__1 [token_0] =
         (BIF.do_remote_fun_call "Erl.Scan" "erlps__text__1" [token_0]))
      (\ of_2 ->
         case of_2 of
-          (ErlangAtom "undefined") -> (erlps__yecctoken2string__1 [token_0])
+          (ErlangAtom "undefined") ->
+            (erlps__yecctoken2string__1 [token_0])
           txt_5 -> txt_5
           something_else -> (EXC.try_clause something_else))
      (\ ex_3 ->
@@ -2806,51 +2849,58 @@ erlps__yecctoken2string__1 :: ErlangFun
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "atom"), _,
                                           a_0])]
   =
-  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_atom__1" [a_0])
-erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "integer"), _,
-                                          n_0])]
+  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_atom__1"
+     [a_0])
+erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "integer"),
+                                          _, n_0])]
   =
-  (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [n_0])
-erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "float"), _,
-                                          f_0])]
+  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1" [n_0])
+erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "float"),
+                                          _, f_0])]
   =
-  (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [f_0])
+  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1" [f_0])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "char"), _,
                                           c_0])]
   =
-  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_char__1" [c_0])
+  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_char__1"
+     [c_0])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "var"), _,
                                           v_0])]
   =
   let arg_1 = (make_string "~s")
   in
-    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
        [arg_1, (ErlangCons v_0 ErlangEmptyList)])
-erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "string"), _,
-                                          s_0])]
+erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "string"),
+                                          _, s_0])]
   =
-  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_string__1" [s_0])
-erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "reserved_symbol"), _,
-                                          a_0])]
+  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_string__1"
+     [s_0])
+erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "reserved_symbol"),
+                                          _, a_0])]
   =
-  (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [a_0])
+  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1" [a_0])
 erlps__yecctoken2string__1 [(ErlangTuple [_cat_0, _, val_1])] =
   let arg_2 = (make_string "~tp")
   in
-    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
        [arg_2, (ErlangCons val_1 ErlangEmptyList)])
-erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "dot"), _])] =
+erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "dot"),
+                                          _])]
+  =
   (make_string "\'.\'")
-erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "$end"), _])] =
+erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "$end"),
+                                          _])]
+  =
   ErlangEmptyList
 erlps__yecctoken2string__1 [(ErlangTuple [other_0, _])]
   | (isEAtom other_0) =
-  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_atom__1"
+  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_atom__1"
      [other_0])
 erlps__yecctoken2string__1 [other_0] =
   let arg_1 = (make_string "~tp")
   in
-    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
        [arg_1, (ErlangCons other_0 ErlangEmptyList)])
 erlps__yecctoken2string__1 [arg_5] = (EXC.function_clause unit)
 erlps__yecctoken2string__1 args =
@@ -4198,8 +4248,8 @@ erlps__yeccpars2_0__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 6)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_0__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                       ts_4, tzr_5]
+erlps__yeccpars2_0__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                       t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 7)), ss_1, stack_2, t_3, ts_4,
@@ -4255,8 +4305,8 @@ erlps__yeccpars2_2__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_3__7 :: ErlangFun
-erlps__yeccpars2_3__7 [s_0, (ErlangAtom "dot"), ss_1, stack_2, t_3,
-                       ts_4, tzr_5]
+erlps__yeccpars2_3__7 [s_0, (ErlangAtom "dot"), ss_1, stack_2,
+                       t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 531)), ss_1, stack_2, t_3, ts_4,
@@ -4288,8 +4338,8 @@ erlps__yeccpars2_4__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_5__7 :: ErlangFun
-erlps__yeccpars2_5__7 [s_0, (ErlangAtom "dot"), ss_1, stack_2, t_3,
-                       ts_4, tzr_5]
+erlps__yeccpars2_5__7 [s_0, (ErlangAtom "dot"), ss_1, stack_2,
+                       t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 530)), ss_1, stack_2, t_3, ts_4,
@@ -4305,20 +4355,20 @@ erlps__yeccpars2_5__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_6__7 :: ErlangFun
-erlps__yeccpars2_6__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                       ts_4, tzr_5]
+erlps__yeccpars2_6__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                       t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 361)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_6__7 [s_0, (ErlangAtom "callback"), ss_1, stack_2, t_3,
-                       ts_4, tzr_5]
+erlps__yeccpars2_6__7 [s_0, (ErlangAtom "callback"), ss_1,
+                       stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 362)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_6__7 [s_0, (ErlangAtom "spec"), ss_1, stack_2, t_3,
-                       ts_4, tzr_5]
+erlps__yeccpars2_6__7 [s_0, (ErlangAtom "spec"), ss_1, stack_2,
+                       t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 363)), ss_1, stack_2, t_3, ts_4,
@@ -4368,8 +4418,8 @@ erlps__yeccpars2_8__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_9__7 :: ErlangFun
-erlps__yeccpars2_9__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                       ts_4, tzr_5]
+erlps__yeccpars2_9__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                       t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 100)), ss_1, stack_2, t_3, ts_4,
@@ -4392,74 +4442,74 @@ erlps__yeccpars2_9__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_10__7 :: ErlangFun
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 30)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 31)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 32)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 35)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "["), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "["), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 36)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 44)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_10__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_10__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -4478,26 +4528,26 @@ erlps__yeccpars2_10__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_cont_10__7 :: ErlangFun
-erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "char"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "float"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "float"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "integer"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "string"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_10__7 [s_0, (ErlangAtom "string"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
@@ -4561,68 +4611,68 @@ erlps__yeccpars2_13__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_14__7 :: ErlangFun
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 30)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 31)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 35)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "["), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "["), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 36)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 44)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_14__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_14__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -4641,8 +4691,8 @@ erlps__yeccpars2_14__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_15__7 :: ErlangFun
-erlps__yeccpars2_15__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_15__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 357)), ss_1, stack_2, t_3, ts_4,
@@ -4658,8 +4708,8 @@ erlps__yeccpars2_15__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_16__7 :: ErlangFun
-erlps__yeccpars2_16__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_16__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 355)), ss_1, stack_2, t_3, ts_4,
@@ -4744,38 +4794,38 @@ erlps__yeccpars2_20__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_21__7 :: ErlangFun
-erlps__yeccpars2_21__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_21__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 302)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_21__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_21__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 303)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_21__7 [s_0, (ErlangAtom "and"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_21__7 [s_0, (ErlangAtom "and"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 304)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_21__7 [s_0, (ErlangAtom "band"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_21__7 [s_0, (ErlangAtom "band"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 305)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_21__7 [s_0, (ErlangAtom "div"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_21__7 [s_0, (ErlangAtom "div"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 306)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_21__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_21__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 307)), ss_1, stack_2, t_3, ts_4,
@@ -4796,62 +4846,62 @@ erlps__yeccpars2_21__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_22__7 :: ErlangFun
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 290)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "++"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "++"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 291)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 292)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "--"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "--"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 293)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 294)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 295)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 296)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 297)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "or"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "or"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 298)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_22__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_22__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 299)), ss_1, stack_2, t_3, ts_4,
@@ -4872,50 +4922,50 @@ erlps__yeccpars2_22__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_23__7 :: ErlangFun
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom "/="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom "/="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 279)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom "<"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom "<"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 280)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=/="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=/="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 281)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=:="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=:="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 282)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=<"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=<"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 283)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom "=="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 284)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom ">"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom ">"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 285)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_23__7 [s_0, (ErlangAtom ">="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_23__7 [s_0, (ErlangAtom ">="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 286)), ss_1, stack_2, t_3, ts_4,
@@ -4936,8 +4986,8 @@ erlps__yeccpars2_23__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_24__7 :: ErlangFun
-erlps__yeccpars2_24__7 [s_0, (ErlangAtom "="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_24__7 [s_0, (ErlangAtom "="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 345)), ss_1, stack_2, t_3, ts_4,
@@ -4958,8 +5008,8 @@ erlps__yeccpars2_24__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_25__7 :: ErlangFun
-erlps__yeccpars2_25__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_25__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 343)), ss_1, stack_2, t_3, ts_4,
@@ -4981,8 +5031,8 @@ erlps__yeccpars2_25__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_26__7 :: ErlangFun
-erlps__yeccpars2_26__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_26__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 341)), ss_1, stack_2, t_3, ts_4,
@@ -5051,14 +5101,14 @@ erlps__yeccpars2_29__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_30__7 :: ErlangFun
-erlps__yeccpars2_30__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_30__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 337)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_30__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_30__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 237)), ss_1, stack_2, t_3, ts_4,
@@ -5126,74 +5176,74 @@ erlps__yeccpars2_34__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_35__7 :: ErlangFun
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 211)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "float"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "integer"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "string"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_35__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_35__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -5212,56 +5262,56 @@ erlps__yeccpars2_35__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_cont_35__7 :: ErlangFun
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "<<"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 77)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "["), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "["), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 78)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "begin"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "begin"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 79)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "case"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "case"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 80)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "fun"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "fun"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 82)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "if"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "if"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 83)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "receive"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "receive"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 84)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "try"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "try"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 85)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
-                             t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_35__7 [s_0, (ErlangAtom "var"), ss_1,
+                             stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 86)), ss_1, stack_2, t_3, ts_4,
@@ -5277,86 +5327,86 @@ erlps__yeccpars2_cont_35__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_36__7 :: ErlangFun
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "]"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "]"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 185)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "float"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "integer"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "string"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_36__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_36__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -5471,8 +5521,8 @@ erlps__yeccpars2_42__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_43__7 :: ErlangFun
-erlps__yeccpars2_43__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_43__7 [s_0, (ErlangAtom "string"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
@@ -5509,86 +5559,86 @@ erlps__yeccpars2_44__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_45__7 :: ErlangFun
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "float"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "integer"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "string"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_45__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_45__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 87)), ss_1, stack_2, t_3, ts_4,
@@ -5639,8 +5689,8 @@ erlps__yeccpars2_47__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_48__7 :: ErlangFun
-erlps__yeccpars2_48__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_48__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 327)), ss_1, stack_2, t_3, ts_4,
@@ -5677,74 +5727,74 @@ erlps__yeccpars2_49__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_50__7 :: ErlangFun
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "float"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "integer"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "string"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_50__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_50__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -5763,8 +5813,8 @@ erlps__yeccpars2_50__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_51__7 :: ErlangFun
-erlps__yeccpars2_51__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_51__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 324)), ss_1, stack_2, t_3, ts_4,
@@ -5865,8 +5915,8 @@ erlps__yeccpars2_56__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_57__7 :: ErlangFun
-erlps__yeccpars2_57__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_57__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 323)), ss_1, stack_2, t_3, ts_4,
@@ -5882,14 +5932,14 @@ erlps__yeccpars2_57__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_58__7 :: ErlangFun
-erlps__yeccpars2_58__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_58__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 315)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_58__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_58__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 316)), ss_1, stack_2, t_3, ts_4,
@@ -5910,8 +5960,8 @@ erlps__yeccpars2_58__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_59__7 :: ErlangFun
-erlps__yeccpars2_59__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_59__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 311)), ss_1, stack_2, t_3, ts_4,
@@ -5980,38 +6030,38 @@ erlps__yeccpars2_62__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_63__7 :: ErlangFun
-erlps__yeccpars2_63__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_63__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 302)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_63__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_63__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 303)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_63__7 [s_0, (ErlangAtom "and"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_63__7 [s_0, (ErlangAtom "and"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 304)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_63__7 [s_0, (ErlangAtom "band"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_63__7 [s_0, (ErlangAtom "band"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 305)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_63__7 [s_0, (ErlangAtom "div"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_63__7 [s_0, (ErlangAtom "div"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 306)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_63__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_63__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 307)), ss_1, stack_2, t_3, ts_4,
@@ -6032,62 +6082,62 @@ erlps__yeccpars2_63__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_64__7 :: ErlangFun
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 290)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "++"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "++"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 291)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 292)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "--"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "--"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 293)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 294)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 295)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 296)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 297)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "or"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "or"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 298)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_64__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_64__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 299)), ss_1, stack_2, t_3, ts_4,
@@ -6108,50 +6158,50 @@ erlps__yeccpars2_64__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_65__7 :: ErlangFun
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom "/="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom "/="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 279)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom "<"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom "<"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 280)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=/="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=/="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 281)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=:="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=:="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 282)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=<"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=<"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 283)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom "=="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 284)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom ">"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom ">"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 285)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_65__7 [s_0, (ErlangAtom ">="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_65__7 [s_0, (ErlangAtom ">="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 286)), ss_1, stack_2, t_3, ts_4,
@@ -6172,8 +6222,8 @@ erlps__yeccpars2_65__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_66__7 :: ErlangFun
-erlps__yeccpars2_66__7 [s_0, (ErlangAtom "andalso"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_66__7 [s_0, (ErlangAtom "andalso"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 276)), ss_1, stack_2, t_3, ts_4,
@@ -6194,8 +6244,8 @@ erlps__yeccpars2_66__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_67__7 :: ErlangFun
-erlps__yeccpars2_67__7 [s_0, (ErlangAtom "orelse"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_67__7 [s_0, (ErlangAtom "orelse"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 274)), ss_1, stack_2, t_3, ts_4,
@@ -6216,14 +6266,14 @@ erlps__yeccpars2_67__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_68__7 :: ErlangFun
-erlps__yeccpars2_68__7 [s_0, (ErlangAtom "!"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_68__7 [s_0, (ErlangAtom "!"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 270)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_68__7 [s_0, (ErlangAtom "="), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_68__7 [s_0, (ErlangAtom "="), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 271)), ss_1, stack_2, t_3, ts_4,
@@ -6260,8 +6310,8 @@ erlps__yeccpars2_69__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_70__7 :: ErlangFun
-erlps__yeccpars2_70__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_70__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 268)), ss_1, stack_2, t_3, ts_4,
@@ -6347,14 +6397,14 @@ erlps__yeccpars2_74__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_75__7 :: ErlangFun
-erlps__yeccpars2_75__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_75__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 236)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_75__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_75__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 237)), ss_1, stack_2, t_3, ts_4,
@@ -6370,80 +6420,80 @@ erlps__yeccpars2_75__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_76__7 :: ErlangFun
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "float"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "integer"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "string"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_76__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_76__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -6462,20 +6512,20 @@ erlps__yeccpars2_76__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_82__7 :: ErlangFun
-erlps__yeccpars2_82__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_82__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 10)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_82__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_82__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 156)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_82__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_82__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 157)), ss_1, stack_2, t_3, ts_4,
@@ -6491,86 +6541,86 @@ erlps__yeccpars2_82__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_84__7 :: ErlangFun
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "after"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "after"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 136)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "float"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "integer"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "string"), ss_1,
+                        stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_84__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_84__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -6625,8 +6675,8 @@ erlps__yeccpars2_87__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_88__7 :: ErlangFun
-erlps__yeccpars2_88__7 [s_0, (ErlangAtom "of"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_88__7 [s_0, (ErlangAtom "of"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 92)), ss_1, stack_2, t_3, ts_4,
@@ -6665,68 +6715,68 @@ erlps__yeccpars2_89__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_91__7 :: ErlangFun
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 30)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 31)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 35)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "["), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "["), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 36)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 111)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 112)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_91__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_91__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -6745,8 +6795,8 @@ erlps__yeccpars2_91__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_93__7 :: ErlangFun
-erlps__yeccpars2_93__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_93__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 100)), ss_1, stack_2, t_3, ts_4,
@@ -6769,14 +6819,14 @@ erlps__yeccpars2_93__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_94__7 :: ErlangFun
-erlps__yeccpars2_94__7 [s_0, (ErlangAtom "after"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_94__7 [s_0, (ErlangAtom "after"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 90)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_94__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_94__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 91)), ss_1, stack_2, t_3, ts_4,
@@ -6792,8 +6842,8 @@ erlps__yeccpars2_94__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_95__7 :: ErlangFun
-erlps__yeccpars2_95__7 [s_0, (ErlangAtom ";"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_95__7 [s_0, (ErlangAtom ";"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 96)), ss_1, stack_2, t_3, ts_4,
@@ -6855,8 +6905,8 @@ erlps__yeccpars2_98__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_99__7 :: ErlangFun
-erlps__yeccpars2_99__7 [s_0, (ErlangAtom "->"), ss_1, stack_2, t_3,
-                        ts_4, tzr_5]
+erlps__yeccpars2_99__7 [s_0, (ErlangAtom "->"), ss_1, stack_2,
+                        t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 106)), ss_1, stack_2, t_3, ts_4,
@@ -6892,8 +6942,8 @@ erlps__yeccpars2_101__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_102__7 :: ErlangFun
-erlps__yeccpars2_102__7 [s_0, (ErlangAtom ";"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_102__7 [s_0, (ErlangAtom ";"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 103)), ss_1, stack_2, t_3, ts_4,
@@ -6975,14 +7025,14 @@ erlps__yeccpars2_107__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_108__7 :: ErlangFun
-erlps__yeccpars2_108__7 [s_0, (ErlangAtom "after"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_108__7 [s_0, (ErlangAtom "after"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 129)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_108__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_108__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 130)), ss_1, stack_2, t_3, ts_4,
@@ -6998,8 +7048,8 @@ erlps__yeccpars2_108__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_109__7 :: ErlangFun
-erlps__yeccpars2_109__7 [s_0, (ErlangAtom ";"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_109__7 [s_0, (ErlangAtom ";"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 127)), ss_1, stack_2, t_3, ts_4,
@@ -7021,8 +7071,8 @@ erlps__yeccpars2_109__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_110__7 :: ErlangFun
-erlps__yeccpars2_110__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_110__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 100)), ss_1, stack_2, t_3, ts_4,
@@ -7045,8 +7095,8 @@ erlps__yeccpars2_110__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_111__7 :: ErlangFun
-erlps__yeccpars2_111__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_111__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 120)), ss_1, stack_2, t_3, ts_4,
@@ -7067,8 +7117,8 @@ erlps__yeccpars2_111__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_112__7 :: ErlangFun
-erlps__yeccpars2_112__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_112__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 113)), ss_1, stack_2, t_3, ts_4,
@@ -7089,8 +7139,8 @@ erlps__yeccpars2_112__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_114__7 :: ErlangFun
-erlps__yeccpars2_114__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_114__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 116)), ss_1, stack_2, t_3, ts_4,
@@ -7113,8 +7163,8 @@ erlps__yeccpars2_114__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_115__7 :: ErlangFun
-erlps__yeccpars2_115__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_115__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 100)), ss_1, stack_2, t_3, ts_4,
@@ -7137,8 +7187,8 @@ erlps__yeccpars2_115__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_116__7 :: ErlangFun
-erlps__yeccpars2_116__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_116__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 117)), ss_1, stack_2, t_3, ts_4,
@@ -7194,8 +7244,8 @@ erlps__yeccpars2_119__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_121__7 :: ErlangFun
-erlps__yeccpars2_121__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_121__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 116)), ss_1, stack_2, t_3, ts_4,
@@ -7218,8 +7268,8 @@ erlps__yeccpars2_121__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_122__7 :: ErlangFun
-erlps__yeccpars2_122__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_122__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 100)), ss_1, stack_2, t_3, ts_4,
@@ -7322,8 +7372,8 @@ erlps__yeccpars2_130__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_131__7 :: ErlangFun
-erlps__yeccpars2_131__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_131__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 132)), ss_1, stack_2, t_3, ts_4,
@@ -7359,8 +7409,8 @@ erlps__yeccpars2_132__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_133__7 :: ErlangFun
-erlps__yeccpars2_133__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_133__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 134)), ss_1, stack_2, t_3, ts_4,
@@ -7396,14 +7446,14 @@ erlps__yeccpars2_134__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_135__7 :: ErlangFun
-erlps__yeccpars2_135__7 [s_0, (ErlangAtom "after"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_135__7 [s_0, (ErlangAtom "after"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 140)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_135__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_135__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 141)), ss_1, stack_2, t_3, ts_4,
@@ -7419,8 +7469,8 @@ erlps__yeccpars2_135__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_138__7 :: ErlangFun
-erlps__yeccpars2_138__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_138__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 139)), ss_1, stack_2, t_3, ts_4,
@@ -7476,8 +7526,8 @@ erlps__yeccpars2_141__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_143__7 :: ErlangFun
-erlps__yeccpars2_143__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_143__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 144)), ss_1, stack_2, t_3, ts_4,
@@ -7513,8 +7563,8 @@ erlps__yeccpars2_144__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_145__7 :: ErlangFun
-erlps__yeccpars2_145__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_145__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 151)), ss_1, stack_2, t_3, ts_4,
@@ -7530,8 +7580,8 @@ erlps__yeccpars2_145__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_146__7 :: ErlangFun
-erlps__yeccpars2_146__7 [s_0, (ErlangAtom ";"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_146__7 [s_0, (ErlangAtom ";"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 149)), ss_1, stack_2, t_3, ts_4,
@@ -7613,8 +7663,8 @@ erlps__yeccpars2_151__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_152__7 :: ErlangFun
-erlps__yeccpars2_152__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_152__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 100)), ss_1, stack_2, t_3, ts_4,
@@ -7637,8 +7687,8 @@ erlps__yeccpars2_152__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_153__7 :: ErlangFun
-erlps__yeccpars2_153__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_153__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 174)), ss_1, stack_2, t_3, ts_4,
@@ -7654,8 +7704,8 @@ erlps__yeccpars2_153__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_154__7 :: ErlangFun
-erlps__yeccpars2_154__7 [s_0, (ErlangAtom ";"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_154__7 [s_0, (ErlangAtom ";"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 171)), ss_1, stack_2, t_3, ts_4,
@@ -7677,8 +7727,8 @@ erlps__yeccpars2_154__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_155__7 :: ErlangFun
-erlps__yeccpars2_155__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_155__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 163)), ss_1, stack_2, t_3, ts_4,
@@ -7694,8 +7744,8 @@ erlps__yeccpars2_155__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_156__7 :: ErlangFun
-erlps__yeccpars2_156__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_156__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 161)), ss_1, stack_2, t_3, ts_4,
@@ -7716,8 +7766,8 @@ erlps__yeccpars2_156__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_157__7 :: ErlangFun
-erlps__yeccpars2_157__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_157__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 10)), ss_1, stack_2, t_3, ts_4,
@@ -7738,8 +7788,8 @@ erlps__yeccpars2_157__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_158__7 :: ErlangFun
-erlps__yeccpars2_158__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_158__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 100)), ss_1, stack_2, t_3, ts_4,
@@ -7782,8 +7832,8 @@ erlps__yeccpars2_160__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_161__7 :: ErlangFun
-erlps__yeccpars2_161__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_161__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 162)), ss_1, stack_2, t_3, ts_4,
@@ -7819,14 +7869,14 @@ erlps__yeccpars2_162__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_163__7 :: ErlangFun
-erlps__yeccpars2_163__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_163__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 165)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_163__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_163__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 166)), ss_1, stack_2, t_3, ts_4,
@@ -7842,8 +7892,8 @@ erlps__yeccpars2_163__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_164__7 :: ErlangFun
-erlps__yeccpars2_164__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_164__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 167)), ss_1, stack_2, t_3, ts_4,
@@ -7891,14 +7941,14 @@ erlps__yeccpars2_166__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_167__7 :: ErlangFun
-erlps__yeccpars2_167__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_167__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 169)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_167__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_167__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 170)), ss_1, stack_2, t_3, ts_4,
@@ -7966,14 +8016,14 @@ erlps__yeccpars2_170__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_171__7 :: ErlangFun
-erlps__yeccpars2_171__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_171__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 10)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_171__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_171__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 173)), ss_1, stack_2, t_3, ts_4,
@@ -8069,8 +8119,8 @@ erlps__yeccpars2_177__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_178__7 :: ErlangFun
-erlps__yeccpars2_178__7 [s_0, (ErlangAtom "of"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_178__7 [s_0, (ErlangAtom "of"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 179)), ss_1, stack_2, t_3, ts_4,
@@ -8086,8 +8136,8 @@ erlps__yeccpars2_178__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_180__7 :: ErlangFun
-erlps__yeccpars2_180__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_180__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 181)), ss_1, stack_2, t_3, ts_4,
@@ -8123,8 +8173,8 @@ erlps__yeccpars2_181__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_182__7 :: ErlangFun
-erlps__yeccpars2_182__7 [s_0, (ErlangAtom "end"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_182__7 [s_0, (ErlangAtom "end"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 183)), ss_1, stack_2, t_3, ts_4,
@@ -8160,8 +8210,8 @@ erlps__yeccpars2_183__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_184__7 :: ErlangFun
-erlps__yeccpars2_184__7 [s_0, (ErlangAtom "||"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_184__7 [s_0, (ErlangAtom "||"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 190)), ss_1, stack_2, t_3, ts_4,
@@ -8237,8 +8287,8 @@ erlps__yeccpars2_188__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_191__7 :: ErlangFun
-erlps__yeccpars2_191__7 [s_0, (ErlangAtom "]"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_191__7 [s_0, (ErlangAtom "]"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 201)), ss_1, stack_2, t_3, ts_4,
@@ -8254,8 +8304,8 @@ erlps__yeccpars2_191__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_192__7 :: ErlangFun
-erlps__yeccpars2_192__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_192__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 199)), ss_1, stack_2, t_3, ts_4,
@@ -8277,8 +8327,8 @@ erlps__yeccpars2_192__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_193__7 :: ErlangFun
-erlps__yeccpars2_193__7 [s_0, (ErlangAtom "<-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_193__7 [s_0, (ErlangAtom "<-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 197)), ss_1, stack_2, t_3, ts_4,
@@ -8299,8 +8349,8 @@ erlps__yeccpars2_193__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_194__7 :: ErlangFun
-erlps__yeccpars2_194__7 [s_0, (ErlangAtom "<="), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_194__7 [s_0, (ErlangAtom "<="), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 195)), ss_1, stack_2, t_3, ts_4,
@@ -8401,8 +8451,8 @@ erlps__yeccpars2_201__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_202__7 :: ErlangFun
-erlps__yeccpars2_202__7 [s_0, (ErlangAtom "]"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_202__7 [s_0, (ErlangAtom "]"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 203)), ss_1, stack_2, t_3, ts_4,
@@ -8438,20 +8488,20 @@ erlps__yeccpars2_203__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_204__7 :: ErlangFun
-erlps__yeccpars2_204__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_204__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 187)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_204__7 [s_0, (ErlangAtom "]"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_204__7 [s_0, (ErlangAtom "]"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 188)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_204__7 [s_0, (ErlangAtom "|"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_204__7 [s_0, (ErlangAtom "|"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 189)), ss_1, stack_2, t_3, ts_4,
@@ -8487,44 +8537,44 @@ erlps__yeccpars2_205__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_206__7 :: ErlangFun
-erlps__yeccpars2_206__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_206__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_206__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_206__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_206__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_206__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_206__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_206__7 [s_0, (ErlangAtom "float"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_206__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_206__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_206__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_206__7 [s_0, (ErlangAtom "string"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_206__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_206__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -8543,8 +8593,8 @@ erlps__yeccpars2_206__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_207__7 :: ErlangFun
-erlps__yeccpars2_207__7 [s_0, (ErlangAtom "||"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_207__7 [s_0, (ErlangAtom "||"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 229)), ss_1, stack_2, t_3, ts_4,
@@ -8565,8 +8615,8 @@ erlps__yeccpars2_207__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_208__7 :: ErlangFun
-erlps__yeccpars2_208__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_208__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 217)), ss_1, stack_2, t_3, ts_4,
@@ -8589,8 +8639,8 @@ erlps__yeccpars2_208__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_209__7 :: ErlangFun
-erlps__yeccpars2_209__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_209__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 215)), ss_1, stack_2, t_3, ts_4,
@@ -8606,8 +8656,8 @@ erlps__yeccpars2_209__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_210__7 :: ErlangFun
-erlps__yeccpars2_210__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_210__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 212)), ss_1, stack_2, t_3, ts_4,
@@ -8649,68 +8699,68 @@ erlps__yeccpars2_211__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_212__7 :: ErlangFun
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "float"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "string"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_212__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_212__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -8785,8 +8835,8 @@ erlps__yeccpars2_215__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_216__7 :: ErlangFun
-erlps__yeccpars2_216__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_216__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 221)), ss_1, stack_2, t_3, ts_4,
@@ -8864,8 +8914,8 @@ erlps__yeccpars2_220__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_221__7 :: ErlangFun
-erlps__yeccpars2_221__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_221__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 224)), ss_1, stack_2, t_3, ts_4,
@@ -8901,8 +8951,8 @@ erlps__yeccpars2_222__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_223__7 :: ErlangFun
-erlps__yeccpars2_223__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_223__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 227)), ss_1, stack_2, t_3, ts_4,
@@ -8924,8 +8974,8 @@ erlps__yeccpars2_223__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_224__7 :: ErlangFun
-erlps__yeccpars2_224__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_224__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 225)), ss_1, stack_2, t_3, ts_4,
@@ -8947,8 +8997,8 @@ erlps__yeccpars2_224__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_225__7 :: ErlangFun
-erlps__yeccpars2_225__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_225__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 226)), ss_1, stack_2, t_3, ts_4,
@@ -9004,8 +9054,8 @@ erlps__yeccpars2_228__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_230__7 :: ErlangFun
-erlps__yeccpars2_230__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_230__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 231)), ss_1, stack_2, t_3, ts_4,
@@ -9061,8 +9111,8 @@ erlps__yeccpars2_232__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_233__7 :: ErlangFun
-erlps__yeccpars2_233__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_233__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 234)), ss_1, stack_2, t_3, ts_4,
@@ -9118,14 +9168,14 @@ erlps__yeccpars2_235__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_236__7 :: ErlangFun
-erlps__yeccpars2_236__7 [s_0, (ErlangAtom "."), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_236__7 [s_0, (ErlangAtom "."), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 253)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_236__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_236__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 254)), ss_1, stack_2, t_3, ts_4,
@@ -9141,86 +9191,86 @@ erlps__yeccpars2_236__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_237__7 :: ErlangFun
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "catch"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "float"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "string"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_237__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_237__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 244)), ss_1, stack_2, t_3, ts_4,
@@ -9239,14 +9289,14 @@ erlps__yeccpars2_237__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_238__7 :: ErlangFun
-erlps__yeccpars2_238__7 [s_0, (ErlangAtom ":="), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_238__7 [s_0, (ErlangAtom ":="), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 248)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_238__7 [s_0, (ErlangAtom "=>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_238__7 [s_0, (ErlangAtom "=>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 249)), ss_1, stack_2, t_3, ts_4,
@@ -9262,8 +9312,8 @@ erlps__yeccpars2_238__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_239__7 :: ErlangFun
-erlps__yeccpars2_239__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_239__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 247)), ss_1, stack_2, t_3, ts_4,
@@ -9311,8 +9361,8 @@ erlps__yeccpars2_241__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_242__7 :: ErlangFun
-erlps__yeccpars2_242__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_242__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 245)), ss_1, stack_2, t_3, ts_4,
@@ -9470,8 +9520,8 @@ erlps__yeccpars2_252__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_253__7 :: ErlangFun
-erlps__yeccpars2_253__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_253__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 267)), ss_1, stack_2, t_3, ts_4,
@@ -9487,8 +9537,8 @@ erlps__yeccpars2_253__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_254__7 :: ErlangFun
-erlps__yeccpars2_254__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_254__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 259)), ss_1, stack_2, t_3, ts_4,
@@ -9507,8 +9557,8 @@ erlps__yeccpars2_254__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_255__7 :: ErlangFun
-erlps__yeccpars2_255__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_255__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 266)), ss_1, stack_2, t_3, ts_4,
@@ -9524,8 +9574,8 @@ erlps__yeccpars2_255__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_256__7 :: ErlangFun
-erlps__yeccpars2_256__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_256__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 264)), ss_1, stack_2, t_3, ts_4,
@@ -9547,8 +9597,8 @@ erlps__yeccpars2_256__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_257__7 :: ErlangFun
-erlps__yeccpars2_257__7 [s_0, (ErlangAtom "="), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_257__7 [s_0, (ErlangAtom "="), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 262)), ss_1, stack_2, t_3, ts_4,
@@ -9564,8 +9614,8 @@ erlps__yeccpars2_257__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_258__7 :: ErlangFun
-erlps__yeccpars2_258__7 [s_0, (ErlangAtom "="), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_258__7 [s_0, (ErlangAtom "="), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 260)), ss_1, stack_2, t_3, ts_4,
@@ -9641,14 +9691,14 @@ erlps__yeccpars2_263__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_264__7 :: ErlangFun
-erlps__yeccpars2_264__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_264__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 257)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_264__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_264__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 258)), ss_1, stack_2, t_3, ts_4,
@@ -10132,38 +10182,38 @@ erlps__yeccpars2_299__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_300__7 :: ErlangFun
-erlps__yeccpars2_300__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_300__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 302)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_300__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_300__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 303)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_300__7 [s_0, (ErlangAtom "and"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_300__7 [s_0, (ErlangAtom "and"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 304)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_300__7 [s_0, (ErlangAtom "band"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_300__7 [s_0, (ErlangAtom "band"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 305)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_300__7 [s_0, (ErlangAtom "div"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_300__7 [s_0, (ErlangAtom "div"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 306)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_300__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_300__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 307)), ss_1, stack_2, t_3, ts_4,
@@ -10344,86 +10394,86 @@ erlps__yeccpars2_310__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_311__7 :: ErlangFun
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 313)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "catch"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "float"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "string"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_311__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_311__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -10442,8 +10492,8 @@ erlps__yeccpars2_311__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_312__7 :: ErlangFun
-erlps__yeccpars2_312__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_312__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 314)), ss_1, stack_2, t_3, ts_4,
@@ -10499,14 +10549,14 @@ erlps__yeccpars2_314__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_315__7 :: ErlangFun
-erlps__yeccpars2_315__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_315__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 319)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_315__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_315__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 237)), ss_1, stack_2, t_3, ts_4,
@@ -10562,14 +10612,14 @@ erlps__yeccpars2_318__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_319__7 :: ErlangFun
-erlps__yeccpars2_319__7 [s_0, (ErlangAtom "."), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_319__7 [s_0, (ErlangAtom "."), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 321)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_319__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_319__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 254)), ss_1, stack_2, t_3, ts_4,
@@ -10605,8 +10655,8 @@ erlps__yeccpars2_320__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_321__7 :: ErlangFun
-erlps__yeccpars2_321__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_321__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 322)), ss_1, stack_2, t_3, ts_4,
@@ -10662,8 +10712,8 @@ erlps__yeccpars2_323__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_324__7 :: ErlangFun
-erlps__yeccpars2_324__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_324__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 237)), ss_1, stack_2, t_3, ts_4,
@@ -10719,8 +10769,8 @@ erlps__yeccpars2_326__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_327__7 :: ErlangFun
-erlps__yeccpars2_327__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_327__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 328)), ss_1, stack_2, t_3, ts_4,
@@ -10736,14 +10786,14 @@ erlps__yeccpars2_327__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_328__7 :: ErlangFun
-erlps__yeccpars2_328__7 [s_0, (ErlangAtom "."), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_328__7 [s_0, (ErlangAtom "."), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 330)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_328__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_328__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 254)), ss_1, stack_2, t_3, ts_4,
@@ -10779,8 +10829,8 @@ erlps__yeccpars2_329__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_330__7 :: ErlangFun
-erlps__yeccpars2_330__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_330__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 331)), ss_1, stack_2, t_3, ts_4,
@@ -10836,8 +10886,8 @@ erlps__yeccpars2_332__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_334__7 :: ErlangFun
-erlps__yeccpars2_334__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_334__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 335)), ss_1, stack_2, t_3, ts_4,
@@ -10893,14 +10943,14 @@ erlps__yeccpars2_336__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_337__7 :: ErlangFun
-erlps__yeccpars2_337__7 [s_0, (ErlangAtom "."), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_337__7 [s_0, (ErlangAtom "."), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 339)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_337__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_337__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 254)), ss_1, stack_2, t_3, ts_4,
@@ -10936,8 +10986,8 @@ erlps__yeccpars2_338__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_339__7 :: ErlangFun
-erlps__yeccpars2_339__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_339__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 340)), ss_1, stack_2, t_3, ts_4,
@@ -11053,38 +11103,38 @@ erlps__yeccpars2_348__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_351__7 :: ErlangFun
-erlps__yeccpars2_351__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_351__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 302)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_351__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_351__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 303)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_351__7 [s_0, (ErlangAtom "and"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_351__7 [s_0, (ErlangAtom "and"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 304)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_351__7 [s_0, (ErlangAtom "band"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_351__7 [s_0, (ErlangAtom "band"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 305)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_351__7 [s_0, (ErlangAtom "div"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_351__7 [s_0, (ErlangAtom "div"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 306)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_351__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_351__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 307)), ss_1, stack_2, t_3, ts_4,
@@ -11229,80 +11279,80 @@ erlps__yeccpars2_360__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_361__7 :: ErlangFun
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 506)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "catch"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "float"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "string"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_361__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_361__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 45)), ss_1, stack_2, t_3, ts_4,
@@ -11321,14 +11371,14 @@ erlps__yeccpars2_361__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_362__7 :: ErlangFun
-erlps__yeccpars2_362__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_362__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 366)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_362__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_362__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 367)), ss_1, stack_2, t_3, ts_4,
@@ -11364,8 +11414,8 @@ erlps__yeccpars2_364__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_365__7 :: ErlangFun
-erlps__yeccpars2_365__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_365__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 374)), ss_1, stack_2, t_3, ts_4,
@@ -11381,8 +11431,8 @@ erlps__yeccpars2_365__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_366__7 :: ErlangFun
-erlps__yeccpars2_366__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_366__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 367)), ss_1, stack_2, t_3, ts_4,
@@ -11398,8 +11448,8 @@ erlps__yeccpars2_366__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_367__7 :: ErlangFun
-erlps__yeccpars2_367__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_367__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 368)), ss_1, stack_2, t_3, ts_4,
@@ -11420,8 +11470,8 @@ erlps__yeccpars2_367__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_368__7 :: ErlangFun
-erlps__yeccpars2_368__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_368__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 369)), ss_1, stack_2, t_3, ts_4,
@@ -11457,8 +11507,8 @@ erlps__yeccpars2_369__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_371__7 :: ErlangFun
-erlps__yeccpars2_371__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_371__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 500)), ss_1, stack_2, t_3, ts_4,
@@ -11474,8 +11524,8 @@ erlps__yeccpars2_371__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_372__7 :: ErlangFun
-erlps__yeccpars2_372__7 [s_0, (ErlangAtom ";"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_372__7 [s_0, (ErlangAtom ";"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 498)), ss_1, stack_2, t_3, ts_4,
@@ -11497,8 +11547,8 @@ erlps__yeccpars2_372__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_373__7 :: ErlangFun
-erlps__yeccpars2_373__7 [s_0, (ErlangAtom "when"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_373__7 [s_0, (ErlangAtom "when"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 486)), ss_1, stack_2, t_3, ts_4,
@@ -11519,38 +11569,38 @@ erlps__yeccpars2_373__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_374__7 :: ErlangFun
-erlps__yeccpars2_374__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_374__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 387)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_374__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_374__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_374__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_374__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_374__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_374__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_374__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_374__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_374__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_374__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
@@ -11569,56 +11619,56 @@ erlps__yeccpars2_374__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_cont_374__7 :: ErlangFun
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "#"), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 385)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "("), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 386)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "<<"), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "<<"), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 388)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "["), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "["), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 389)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "atom"), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 390)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "char"), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 391)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "fun"), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "fun"), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 392)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "integer"), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 393)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
-                              t_3, ts_4, tzr_5]
+erlps__yeccpars2_cont_374__7 [s_0, (ErlangAtom "{"), ss_1,
+                              stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 395)), ss_1, stack_2, t_3, ts_4,
@@ -11650,38 +11700,38 @@ erlps__yeccpars2_375__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_376__7 :: ErlangFun
-erlps__yeccpars2_376__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_376__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 302)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_376__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_376__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 303)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_376__7 [s_0, (ErlangAtom "and"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_376__7 [s_0, (ErlangAtom "and"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 304)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_376__7 [s_0, (ErlangAtom "band"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_376__7 [s_0, (ErlangAtom "band"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 305)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_376__7 [s_0, (ErlangAtom "div"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_376__7 [s_0, (ErlangAtom "div"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 306)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_376__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_376__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 307)), ss_1, stack_2, t_3, ts_4,
@@ -11702,56 +11752,56 @@ erlps__yeccpars2_376__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_377__7 :: ErlangFun
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 290)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 292)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom ".."), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom ".."), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 481)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 294)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 295)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 296)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 297)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "or"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "or"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 298)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_377__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_377__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 299)), ss_1, stack_2, t_3, ts_4,
@@ -11772,8 +11822,8 @@ erlps__yeccpars2_377__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_378__7 :: ErlangFun
-erlps__yeccpars2_378__7 [s_0, (ErlangAtom "|"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_378__7 [s_0, (ErlangAtom "|"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 478)), ss_1, stack_2, t_3, ts_4,
@@ -11810,8 +11860,8 @@ erlps__yeccpars2_379__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_380__7 :: ErlangFun
-erlps__yeccpars2_380__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_380__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 475)), ss_1, stack_2, t_3, ts_4,
@@ -11843,8 +11893,8 @@ erlps__yeccpars2_381__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_382__7 :: ErlangFun
-erlps__yeccpars2_382__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_382__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 473)), ss_1, stack_2, t_3, ts_4,
@@ -11866,8 +11916,8 @@ erlps__yeccpars2_382__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_383__7 :: ErlangFun
-erlps__yeccpars2_383__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_383__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 401)), ss_1, stack_2, t_3, ts_4,
@@ -11902,14 +11952,14 @@ erlps__yeccpars2_384__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_385__7 :: ErlangFun
-erlps__yeccpars2_385__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_385__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 449)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_385__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_385__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 450)), ss_1, stack_2, t_3, ts_4,
@@ -11925,32 +11975,32 @@ erlps__yeccpars2_385__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_386__7 :: ErlangFun
-erlps__yeccpars2_386__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_386__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_386__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_386__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_386__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_386__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_386__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_386__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_386__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_386__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
@@ -11969,8 +12019,8 @@ erlps__yeccpars2_386__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_387__7 :: ErlangFun
-erlps__yeccpars2_387__7 [s_0, (ErlangAtom "->"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_387__7 [s_0, (ErlangAtom "->"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 445)), ss_1, stack_2, t_3, ts_4,
@@ -11986,14 +12036,14 @@ erlps__yeccpars2_387__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_388__7 :: ErlangFun
-erlps__yeccpars2_388__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_388__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 430)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_388__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_388__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 431)), ss_1, stack_2, t_3, ts_4,
@@ -12009,38 +12059,38 @@ erlps__yeccpars2_388__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_389__7 :: ErlangFun
-erlps__yeccpars2_389__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_389__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_389__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_389__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_389__7 [s_0, (ErlangAtom "]"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_389__7 [s_0, (ErlangAtom "]"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 423)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_389__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_389__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_389__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_389__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_389__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_389__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
@@ -12059,14 +12109,14 @@ erlps__yeccpars2_389__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_390__7 :: ErlangFun
-erlps__yeccpars2_390__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_390__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 412)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_390__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_390__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 413)), ss_1, stack_2, t_3, ts_4,
@@ -12103,8 +12153,8 @@ erlps__yeccpars2_391__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_392__7 :: ErlangFun
-erlps__yeccpars2_392__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_392__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 402)), ss_1, stack_2, t_3, ts_4,
@@ -12136,8 +12186,8 @@ erlps__yeccpars2_393__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_394__7 :: ErlangFun
-erlps__yeccpars2_394__7 [s_0, (ErlangAtom "::"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_394__7 [s_0, (ErlangAtom "::"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 399)), ss_1, stack_2, t_3, ts_4,
@@ -12158,38 +12208,38 @@ erlps__yeccpars2_394__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_395__7 :: ErlangFun
-erlps__yeccpars2_395__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_395__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_395__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_395__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_395__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_395__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_395__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_395__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_395__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_395__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_395__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_395__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 397)), ss_1, stack_2, t_3, ts_4,
@@ -12208,8 +12258,8 @@ erlps__yeccpars2_395__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_396__7 :: ErlangFun
-erlps__yeccpars2_396__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_396__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 398)), ss_1, stack_2, t_3, ts_4,
@@ -12265,32 +12315,32 @@ erlps__yeccpars2_398__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_399__7 :: ErlangFun
-erlps__yeccpars2_399__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_399__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_399__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_399__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_399__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_399__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_399__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_399__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_399__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_399__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 401)), ss_1, stack_2, t_3, ts_4,
@@ -12345,14 +12395,14 @@ erlps__yeccpars2_401__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_402__7 :: ErlangFun
-erlps__yeccpars2_402__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_402__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 405)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_402__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_402__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 406)), ss_1, stack_2, t_3, ts_4,
@@ -12368,8 +12418,8 @@ erlps__yeccpars2_402__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_403__7 :: ErlangFun
-erlps__yeccpars2_403__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_403__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 411)), ss_1, stack_2, t_3, ts_4,
@@ -12401,44 +12451,44 @@ erlps__yeccpars2_404__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_405__7 :: ErlangFun
-erlps__yeccpars2_405__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_405__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 387)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_405__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_405__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_405__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_405__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_405__7 [s_0, (ErlangAtom "..."), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_405__7 [s_0, (ErlangAtom "..."), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 407)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_405__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_405__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_405__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_405__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_405__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_405__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
@@ -12477,8 +12527,8 @@ erlps__yeccpars2_406__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_407__7 :: ErlangFun
-erlps__yeccpars2_407__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_407__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 408)), ss_1, stack_2, t_3, ts_4,
@@ -12494,8 +12544,8 @@ erlps__yeccpars2_407__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_408__7 :: ErlangFun
-erlps__yeccpars2_408__7 [s_0, (ErlangAtom "->"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_408__7 [s_0, (ErlangAtom "->"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 409)), ss_1, stack_2, t_3, ts_4,
@@ -12551,38 +12601,38 @@ erlps__yeccpars2_411__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_412__7 :: ErlangFun
-erlps__yeccpars2_412__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_412__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 420)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_412__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_412__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_412__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_412__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_412__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_412__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_412__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_412__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_412__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_412__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
@@ -12601,8 +12651,8 @@ erlps__yeccpars2_412__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_413__7 :: ErlangFun
-erlps__yeccpars2_413__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_413__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 414)), ss_1, stack_2, t_3, ts_4,
@@ -12618,8 +12668,8 @@ erlps__yeccpars2_413__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_414__7 :: ErlangFun
-erlps__yeccpars2_414__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_414__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 415)), ss_1, stack_2, t_3, ts_4,
@@ -12635,38 +12685,38 @@ erlps__yeccpars2_414__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_415__7 :: ErlangFun
-erlps__yeccpars2_415__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_415__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 417)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_415__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_415__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_415__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_415__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_415__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_415__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_415__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_415__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_415__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_415__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
@@ -12685,8 +12735,8 @@ erlps__yeccpars2_415__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_416__7 :: ErlangFun
-erlps__yeccpars2_416__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_416__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 418)), ss_1, stack_2, t_3, ts_4,
@@ -12742,8 +12792,8 @@ erlps__yeccpars2_418__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_419__7 :: ErlangFun
-erlps__yeccpars2_419__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_419__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 421)), ss_1, stack_2, t_3, ts_4,
@@ -12799,14 +12849,14 @@ erlps__yeccpars2_421__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_422__7 :: ErlangFun
-erlps__yeccpars2_422__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_422__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 424)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_422__7 [s_0, (ErlangAtom "]"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_422__7 [s_0, (ErlangAtom "]"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 425)), ss_1, stack_2, t_3, ts_4,
@@ -12842,8 +12892,8 @@ erlps__yeccpars2_423__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_424__7 :: ErlangFun
-erlps__yeccpars2_424__7 [s_0, (ErlangAtom "..."), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_424__7 [s_0, (ErlangAtom "..."), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 426)), ss_1, stack_2, t_3, ts_4,
@@ -12879,8 +12929,8 @@ erlps__yeccpars2_425__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_426__7 :: ErlangFun
-erlps__yeccpars2_426__7 [s_0, (ErlangAtom "]"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_426__7 [s_0, (ErlangAtom "]"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 427)), ss_1, stack_2, t_3, ts_4,
@@ -12916,8 +12966,8 @@ erlps__yeccpars2_427__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_428__7 :: ErlangFun
-erlps__yeccpars2_428__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_428__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 444)), ss_1, stack_2, t_3, ts_4,
@@ -12933,14 +12983,14 @@ erlps__yeccpars2_428__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_429__7 :: ErlangFun
-erlps__yeccpars2_429__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_429__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 437)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_429__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_429__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 438)), ss_1, stack_2, t_3, ts_4,
@@ -12976,8 +13026,8 @@ erlps__yeccpars2_430__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_431__7 :: ErlangFun
-erlps__yeccpars2_431__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_431__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 432)), ss_1, stack_2, t_3, ts_4,
@@ -12993,8 +13043,8 @@ erlps__yeccpars2_431__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_432__7 :: ErlangFun
-erlps__yeccpars2_432__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_432__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 434)), ss_1, stack_2, t_3, ts_4,
@@ -13033,8 +13083,8 @@ erlps__yeccpars2_433__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_434__7 :: ErlangFun
-erlps__yeccpars2_434__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_434__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 435)), ss_1, stack_2, t_3, ts_4,
@@ -13075,8 +13125,8 @@ erlps__yeccpars2_436__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_437__7 :: ErlangFun
-erlps__yeccpars2_437__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_437__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 440)), ss_1, stack_2, t_3, ts_4,
@@ -13112,8 +13162,8 @@ erlps__yeccpars2_438__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_439__7 :: ErlangFun
-erlps__yeccpars2_439__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_439__7 [s_0, (ErlangAtom ">>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 443)), ss_1, stack_2, t_3, ts_4,
@@ -13129,8 +13179,8 @@ erlps__yeccpars2_439__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_440__7 :: ErlangFun
-erlps__yeccpars2_440__7 [s_0, (ErlangAtom ":"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_440__7 [s_0, (ErlangAtom ":"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 441)), ss_1, stack_2, t_3, ts_4,
@@ -13146,8 +13196,8 @@ erlps__yeccpars2_440__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_441__7 :: ErlangFun
-erlps__yeccpars2_441__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_441__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 442)), ss_1, stack_2, t_3, ts_4,
@@ -13163,8 +13213,8 @@ erlps__yeccpars2_441__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_442__7 :: ErlangFun
-erlps__yeccpars2_442__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_442__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 435)), ss_1, stack_2, t_3, ts_4,
@@ -13240,8 +13290,8 @@ erlps__yeccpars2_446__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_447__7 :: ErlangFun
-erlps__yeccpars2_447__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_447__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 448)), ss_1, stack_2, t_3, ts_4,
@@ -13277,8 +13327,8 @@ erlps__yeccpars2_448__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_449__7 :: ErlangFun
-erlps__yeccpars2_449__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_449__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 462)), ss_1, stack_2, t_3, ts_4,
@@ -13294,38 +13344,38 @@ erlps__yeccpars2_449__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_450__7 :: ErlangFun
-erlps__yeccpars2_450__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_450__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_450__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_450__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_450__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_450__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_450__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_450__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_450__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_450__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 394)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_450__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_450__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 454)), ss_1, stack_2, t_3, ts_4,
@@ -13344,14 +13394,14 @@ erlps__yeccpars2_450__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_451__7 :: ErlangFun
-erlps__yeccpars2_451__7 [s_0, (ErlangAtom ":="), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_451__7 [s_0, (ErlangAtom ":="), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 458)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_451__7 [s_0, (ErlangAtom "=>"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_451__7 [s_0, (ErlangAtom "=>"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 459)), ss_1, stack_2, t_3, ts_4,
@@ -13367,8 +13417,8 @@ erlps__yeccpars2_451__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_452__7 :: ErlangFun
-erlps__yeccpars2_452__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_452__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 457)), ss_1, stack_2, t_3, ts_4,
@@ -13384,8 +13434,8 @@ erlps__yeccpars2_452__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_453__7 :: ErlangFun
-erlps__yeccpars2_453__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_453__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 455)), ss_1, stack_2, t_3, ts_4,
@@ -13507,14 +13557,14 @@ erlps__yeccpars2_461__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_462__7 :: ErlangFun
-erlps__yeccpars2_462__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_462__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 465)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_462__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_462__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 466)), ss_1, stack_2, t_3, ts_4,
@@ -13530,8 +13580,8 @@ erlps__yeccpars2_462__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_463__7 :: ErlangFun
-erlps__yeccpars2_463__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_463__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 471)), ss_1, stack_2, t_3, ts_4,
@@ -13547,8 +13597,8 @@ erlps__yeccpars2_463__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_464__7 :: ErlangFun
-erlps__yeccpars2_464__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_464__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 469)), ss_1, stack_2, t_3, ts_4,
@@ -13570,8 +13620,8 @@ erlps__yeccpars2_464__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_465__7 :: ErlangFun
-erlps__yeccpars2_465__7 [s_0, (ErlangAtom "::"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_465__7 [s_0, (ErlangAtom "::"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 467)), ss_1, stack_2, t_3, ts_4,
@@ -13627,8 +13677,8 @@ erlps__yeccpars2_468__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_469__7 :: ErlangFun
-erlps__yeccpars2_469__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_469__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 465)), ss_1, stack_2, t_3, ts_4,
@@ -13724,8 +13774,8 @@ erlps__yeccpars2_474__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_475__7 :: ErlangFun
-erlps__yeccpars2_475__7 [s_0, (ErlangAtom "->"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_475__7 [s_0, (ErlangAtom "->"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 476)), ss_1, stack_2, t_3, ts_4,
@@ -13781,50 +13831,50 @@ erlps__yeccpars2_479__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_482__7 :: ErlangFun
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 290)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 292)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bor"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 294)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bsl"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 295)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bsr"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 296)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "bxor"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 297)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "or"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "or"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 298)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_482__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_482__7 [s_0, (ErlangAtom "xor"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 299)), ss_1, stack_2, t_3, ts_4,
@@ -13849,38 +13899,38 @@ erlps__yeccpars2_482__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_483__7 :: ErlangFun
-erlps__yeccpars2_483__7 [s_0, (ErlangAtom "*"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_483__7 [s_0, (ErlangAtom "*"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 302)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_483__7 [s_0, (ErlangAtom "/"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_483__7 [s_0, (ErlangAtom "/"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 303)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_483__7 [s_0, (ErlangAtom "and"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_483__7 [s_0, (ErlangAtom "and"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 304)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_483__7 [s_0, (ErlangAtom "band"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_483__7 [s_0, (ErlangAtom "band"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 305)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_483__7 [s_0, (ErlangAtom "div"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_483__7 [s_0, (ErlangAtom "div"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 306)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_483__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_483__7 [s_0, (ErlangAtom "rem"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 307)), ss_1, stack_2, t_3, ts_4,
@@ -13925,14 +13975,14 @@ erlps__yeccpars2_485__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_486__7 :: ErlangFun
-erlps__yeccpars2_486__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_486__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 489)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_486__7 [s_0, (ErlangAtom "var"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_486__7 [s_0, (ErlangAtom "var"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 490)), ss_1, stack_2, t_3, ts_4,
@@ -13968,8 +14018,8 @@ erlps__yeccpars2_487__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_488__7 :: ErlangFun
-erlps__yeccpars2_488__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_488__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 496)), ss_1, stack_2, t_3, ts_4,
@@ -13991,8 +14041,8 @@ erlps__yeccpars2_488__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_489__7 :: ErlangFun
-erlps__yeccpars2_489__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_489__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 493)), ss_1, stack_2, t_3, ts_4,
@@ -14008,8 +14058,8 @@ erlps__yeccpars2_489__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_490__7 :: ErlangFun
-erlps__yeccpars2_490__7 [s_0, (ErlangAtom "::"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_490__7 [s_0, (ErlangAtom "::"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 491)), ss_1, stack_2, t_3, ts_4,
@@ -14045,8 +14095,8 @@ erlps__yeccpars2_492__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_494__7 :: ErlangFun
-erlps__yeccpars2_494__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_494__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 495)), ss_1, stack_2, t_3, ts_4,
@@ -14202,14 +14252,14 @@ erlps__yeccpars2_503__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_504__7 :: ErlangFun
-erlps__yeccpars2_504__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_504__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 528)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_504__7 [s_0, (ErlangAtom "::"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_504__7 [s_0, (ErlangAtom "::"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 510)), ss_1, stack_2, t_3, ts_4,
@@ -14251,8 +14301,8 @@ erlps__yeccpars2_505__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_507__7 :: ErlangFun
-erlps__yeccpars2_507__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_507__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 527)), ss_1, stack_2, t_3, ts_4,
@@ -14268,20 +14318,20 @@ erlps__yeccpars2_507__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_508__7 :: ErlangFun
-erlps__yeccpars2_508__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_508__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 234)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_508__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_508__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 509)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_508__7 [s_0, (ErlangAtom "::"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_508__7 [s_0, (ErlangAtom "::"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 510)), ss_1, stack_2, t_3, ts_4,
@@ -14297,80 +14347,80 @@ erlps__yeccpars2_508__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_509__7 :: ErlangFun
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "#"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "#"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 75)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "("), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "("), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 76)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "+"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "+"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 33)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "-"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "-"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 34)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 37)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "bnot"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 38)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "catch"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "catch"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 81)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "char"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "char"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 39)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "float"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "float"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 40)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "integer"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "integer"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 41)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "not"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "not"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 42)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "string"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "string"), ss_1,
+                         stack_2, t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 43)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_509__7 [s_0, (ErlangAtom "{"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_509__7 [s_0, (ErlangAtom "{"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 514)), ss_1, stack_2, t_3, ts_4,
@@ -14429,8 +14479,8 @@ erlps__yeccpars2_512__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_513__7 :: ErlangFun
-erlps__yeccpars2_513__7 [s_0, (ErlangAtom ")"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_513__7 [s_0, (ErlangAtom ")"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 526)), ss_1, stack_2, t_3, ts_4,
@@ -14446,8 +14496,8 @@ erlps__yeccpars2_513__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_515__7 :: ErlangFun
-erlps__yeccpars2_515__7 [s_0, (ErlangAtom "}"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_515__7 [s_0, (ErlangAtom "}"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 525)), ss_1, stack_2, t_3, ts_4,
@@ -14463,8 +14513,8 @@ erlps__yeccpars2_515__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_516__7 :: ErlangFun
-erlps__yeccpars2_516__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_516__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 522)), ss_1, stack_2, t_3, ts_4,
@@ -14486,14 +14536,14 @@ erlps__yeccpars2_516__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_517__7 :: ErlangFun
-erlps__yeccpars2_517__7 [s_0, (ErlangAtom ","), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_517__7 [s_0, (ErlangAtom ","), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 518)), ss_1, stack_2, t_3, ts_4,
       tzr_5])
-erlps__yeccpars2_517__7 [s_0, (ErlangAtom "::"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_517__7 [s_0, (ErlangAtom "::"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 519)), ss_1, stack_2, t_3, ts_4,
@@ -14715,8 +14765,8 @@ erlps__yeccpars2_531__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__yeccpars2_532__7 :: ErlangFun
-erlps__yeccpars2_532__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2, t_3,
-                         ts_4, tzr_5]
+erlps__yeccpars2_532__7 [s_0, (ErlangAtom "atom"), ss_1, stack_2,
+                         t_3, ts_4, tzr_5]
   =
   (erlps__yeccpars1__7
      [s_0, (ErlangInt (DBI.fromInt 7)), ss_1, stack_2, t_3, ts_4,

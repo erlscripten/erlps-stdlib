@@ -58,8 +58,8 @@ erlps__new__0 args =
      (ErlangFun 0 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__is_set__1 :: ErlangFun
-erlps__is_set__1 [(ErlangTuple [(ErlangAtom "set"), _, _, _, _, _, _,
-                                _, _])]
+erlps__is_set__1 [(ErlangTuple [(ErlangAtom "set"), _, _, _, _,
+                                _, _, _, _])]
   =
   (ErlangAtom "true")
 erlps__is_set__1 [_] = (ErlangAtom "false")

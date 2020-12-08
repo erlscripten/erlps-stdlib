@@ -253,8 +253,8 @@ erlps__format_prompt__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__format_prompt__2 :: ErlangFun
-erlps__format_prompt__2 [(ErlangTuple [(ErlangAtom "format"), format_0,
-                                       args_1]),
+erlps__format_prompt__2 [(ErlangTuple [(ErlangAtom "format"),
+                                       format_0, args_1]),
                          _encoding_2]
   =
   (erlps__do_format_prompt__2 [format_0, args_1])
@@ -1035,14 +1035,17 @@ erlps__string_char__4 [(ErlangAtom "latin1"), c_0, _, tail_1]
   | ((weakGeq c_0 (ErlangInt (DBI.fromInt 160))) &&
        (weakLeq c_0 (ErlangInt (DBI.fromInt 255)))) =
   (ErlangCons c_0 tail_1)
-erlps__string_char__4 [(ErlangAtom "unicode_as_unicode"), c_0, _, tail_1]
+erlps__string_char__4 [(ErlangAtom "unicode_as_unicode"), c_0, _,
+                       tail_1]
   | (weakGeq c_0 (ErlangInt (DBI.fromInt 160))) =
   (ErlangCons c_0 tail_1)
-erlps__string_char__4 [(ErlangAtom "unicode_as_latin1"), c_0, _, tail_1]
+erlps__string_char__4 [(ErlangAtom "unicode_as_latin1"), c_0, _,
+                       tail_1]
   | ((weakGeq c_0 (ErlangInt (DBI.fromInt 160))) &&
        (weakLeq c_0 (ErlangInt (DBI.fromInt 255)))) =
   (ErlangCons c_0 tail_1)
-erlps__string_char__4 [(ErlangAtom "unicode_as_latin1"), c_0, _, tail_1]
+erlps__string_char__4 [(ErlangAtom "unicode_as_latin1"), c_0, _,
+                       tail_1]
   | (weakGeq c_0 (ErlangInt (DBI.fromInt 255))) =
   let    lop_2 = (make_string "\\x{")
   in let
@@ -1439,7 +1442,8 @@ erlps__printable_list__1 [l_0] =
   in
     case case_1 of
       (ErlangAtom "latin1") -> (erlps__printable_latin1_list__1 [l_0])
-      (ErlangAtom "unicode") -> (erlps__printable_unicode_list__1 [l_0])
+      (ErlangAtom "unicode") ->
+        (erlps__printable_unicode_list__1 [l_0])
       something_else -> (EXC.case_clause something_else)
 erlps__printable_list__1 [arg_4] = (EXC.function_clause unit)
 erlps__printable_list__1 args =
@@ -1643,8 +1647,8 @@ erlps__collect_chars__3 args =
      (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__collect_chars__4 :: ErlangFun
-erlps__collect_chars__4 [(ErlangAtom "start"), data_0, (ErlangAtom "unicode"),
-                         n_1]
+erlps__collect_chars__4 [(ErlangAtom "start"), data_0,
+                         (ErlangAtom "unicode"), n_1]
   | ((ErlangAtom "true") ==
        (falsifyErrors (\ _ -> (BIF.erlang__is_binary__1 [data_0])))) =
   let match_expr_6 = (erlps__count_and_find_utf8__2 [data_0, n_1])
@@ -1670,8 +1674,8 @@ erlps__collect_chars__4 [(ErlangAtom "start"), data_0, (ErlangAtom "unicode"),
             (ErlangTuple [(ErlangAtom "stop"), data_0, (ErlangAtom "eof")])
           _ -> (EXC.if_clause unit)
       _ -> (EXC.badmatch match_expr_6)
-erlps__collect_chars__4 [(ErlangAtom "start"), data_0, (ErlangAtom "latin1"),
-                         n_1]
+erlps__collect_chars__4 [(ErlangAtom "start"), data_0,
+                         (ErlangAtom "latin1"), n_1]
   | ((ErlangAtom "true") ==
        (falsifyErrors (\ _ -> (BIF.erlang__is_binary__1 [data_0])))) =
   let size_3 = (BIF.erlang__byte_size__1 [data_0])
@@ -1696,18 +1700,20 @@ erlps__collect_chars__4 [(ErlangAtom "start"), data_0, (ErlangAtom "latin1"),
 erlps__collect_chars__4 [(ErlangAtom "start"), data_0, _, n_1]
   | (isEList data_0) =
   (erlps__collect_chars_list__3 [ErlangEmptyList, n_1, data_0])
-erlps__collect_chars__4 [(ErlangAtom "start"), (ErlangAtom "eof"), _, _] =
+erlps__collect_chars__4 [(ErlangAtom "start"),
+                         (ErlangAtom "eof"), _, _]
+  =
   (ErlangTuple
      [(ErlangAtom "stop"), (ErlangAtom "eof"), (ErlangAtom "eof")])
-erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"), stack_0,
-                                       _n_1]),
+erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"),
+                                       stack_0, _n_1]),
                          (ErlangAtom "eof"), _, _]
   =
   let tup_el_3 = (erlps__binrev__1 [stack_0])
   in
     (ErlangTuple [(ErlangAtom "stop"), tup_el_3, (ErlangAtom "eof")])
-erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"), stack_0,
-                                       n_1]),
+erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"),
+                                       stack_0, n_1]),
                          data_2, (ErlangAtom "unicode"), _]
   =
   let match_expr_7 = (erlps__count_and_find_utf8__2 [data_2, n_1])
@@ -1743,8 +1749,8 @@ erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"), stack_0,
                  [(ErlangAtom "stop"), tup_el_28, (ErlangAtom "eof")])
           _ -> (EXC.if_clause unit)
       _ -> (EXC.badmatch match_expr_7)
-erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"), stack_0,
-                                       n_1]),
+erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"),
+                                       stack_0, n_1]),
                          data_2, (ErlangAtom "latin1"), _]
   =
   let size_4 = (BIF.erlang__byte_size__1 [data_2])
@@ -1774,8 +1780,8 @@ erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "binary"), stack_0,
           (ErlangTuple
              [(ErlangAtom "stop"), tup_el_25, (ErlangAtom "eof")])
       _ -> (EXC.if_clause unit)
-erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "list"), stack_0,
-                                       n_1]),
+erlps__collect_chars__4 [(ErlangTuple [(ErlangAtom "list"),
+                                       stack_0, n_1]),
                          data_2, _, _]
   =
   (erlps__collect_chars_list__3 [stack_0, n_1, data_2])
@@ -1825,7 +1831,8 @@ erlps__collect_chars_list__3 [stack_0, (ErlangInt num_1), data_2]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0))) =
   let tup_el_4 = (BIF.lists__reverse__2 [stack_0, ErlangEmptyList])
   in (ErlangTuple [(ErlangAtom "stop"), tup_el_4, data_2])
-erlps__collect_chars_list__3 [stack_0, _n_1, (ErlangAtom "eof")] =
+erlps__collect_chars_list__3 [stack_0, _n_1, (ErlangAtom "eof")]
+  =
   let tup_el_3 = (BIF.lists__reverse__2 [stack_0, ErlangEmptyList])
   in
     (ErlangTuple [(ErlangAtom "stop"), tup_el_3, (ErlangAtom "eof")])
@@ -1855,7 +1862,8 @@ erlps__collect_line__3 args =
      (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__collect_line__4 :: ErlangFun
-erlps__collect_line__4 [(ErlangAtom "start"), data_0, encoding_1, _]
+erlps__collect_line__4 [(ErlangAtom "start"), data_0, encoding_1,
+                        _]
   | ((ErlangAtom "true") ==
        (falsifyErrors (\ _ -> (BIF.erlang__is_binary__1 [data_0])))) =
   (erlps__collect_line_bin__4
@@ -1863,7 +1871,9 @@ erlps__collect_line__4 [(ErlangAtom "start"), data_0, encoding_1, _]
 erlps__collect_line__4 [(ErlangAtom "start"), data_0, _, _]
   | (isEList data_0) =
   (erlps__collect_line_list__2 [data_0, ErlangEmptyList])
-erlps__collect_line__4 [(ErlangAtom "start"), (ErlangAtom "eof"), _, _] =
+erlps__collect_line__4 [(ErlangAtom "start"), (ErlangAtom "eof"),
+                        _, _]
+  =
   (ErlangTuple
      [(ErlangAtom "stop"), (ErlangAtom "eof"), (ErlangAtom "eof")])
 erlps__collect_line__4 [stack_0, data_1, encoding_2, _]

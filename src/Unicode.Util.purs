@@ -739,8 +739,8 @@ erlps__gc_extend__3 [(ErlangCons cp_0 t_1), t0_2, cp0_3] =
     something_else -> (EXC.case_clause something_else)
 erlps__gc_extend__3 [(ErlangEmptyList), _, cp_0] =
   (ErlangCons cp_0 ErlangEmptyList)
-erlps__gc_extend__3 [(ErlangTuple [(ErlangAtom "error"), r_0]), _,
-                     cp_1]
+erlps__gc_extend__3 [(ErlangTuple [(ErlangAtom "error"), r_0]),
+                     _, cp_1]
   =
   (ErlangCons cp_1 r_0)
 erlps__gc_extend__3 [arg_4, arg_5, arg_6] =
@@ -766,8 +766,8 @@ erlps__gc_extend2__3 [(ErlangEmptyList), _, acc_0] =
     head_1 =
       (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [acc_0])
   in (ErlangCons head_1 ErlangEmptyList)
-erlps__gc_extend2__3 [(ErlangTuple [(ErlangAtom "error"), r_0]), _,
-                      acc_1]
+erlps__gc_extend2__3 [(ErlangTuple [(ErlangAtom "error"), r_0]),
+                      _, acc_1]
   =
   let
     head_3 =
@@ -821,8 +821,8 @@ erlps__gc_ext_pict__3 [(ErlangEmptyList), _t0_0, acc_1] =
           (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [acc_1])
       in (ErlangCons head_6 ErlangEmptyList)
     something_else -> (EXC.case_clause something_else)
-erlps__gc_ext_pict__3 [(ErlangTuple [(ErlangAtom "error"), r_0]), t_1,
-                       acc_2]
+erlps__gc_ext_pict__3 [(ErlangTuple [(ErlangAtom "error"), r_0]),
+                       t_1, acc_2]
   =
   let lop_3 = (erlps__gc_ext_pict__3 [ErlangEmptyList, t_1, acc_2])
   in
@@ -860,7 +860,8 @@ erlps__gc_ext_pict_zwj__3 [(ErlangEmptyList), _, acc_0] =
           (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [acc_0])
       in (ErlangCons head_5 ErlangEmptyList)
     something_else -> (EXC.case_clause something_else)
-erlps__gc_ext_pict_zwj__3 [(ErlangTuple [(ErlangAtom "error"), r_0]),
+erlps__gc_ext_pict_zwj__3 [(ErlangTuple [(ErlangAtom "error"),
+                                         r_0]),
                            t_1, acc_2]
   =
   let

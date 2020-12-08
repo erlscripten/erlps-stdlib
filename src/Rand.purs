@@ -1049,12 +1049,14 @@ erlps__normal_s__1 [state0_0] =
               in let case_23 = (BIF.erlang__op_lesser [r_3, ki_17])
               in
                 case case_23 of
-                  (ErlangAtom "true") | ((==) sign_2 (ErlangInt (DBI.fromInt 0))) ->
+                  (ErlangAtom "true") | ((==) sign_2
+                                           (ErlangInt (DBI.fromInt 0))) ->
                     (ErlangTuple [x_22, state_4])
                   (ErlangAtom "true") ->
                     let tup_el_28 = (BIF.erlang__op_neg [x_22])
                     in (ErlangTuple [tup_el_28, state_4])
-                  (ErlangAtom "false") | ((==) sign_2 (ErlangInt (DBI.fromInt 0))) ->
+                  (ErlangAtom "false") | ((==) sign_2
+                                            (ErlangInt (DBI.fromInt 0))) ->
                     (erlps__normal_s__4 [idx_12, sign_2, x_22, state_4])
                   (ErlangAtom "false") ->
                     let arg_37 = (BIF.erlang__op_neg [x_22])
@@ -1099,7 +1101,8 @@ erlps__seed_get__0 [] =
   let case_0 = (BIF.erlang__get__1 [(ErlangAtom "rand_seed")])
   in
     case case_0 of
-      (ErlangAtom "undefined") -> (erlps__seed__1 [(ErlangAtom "exsss")])
+      (ErlangAtom "undefined") ->
+        (erlps__seed__1 [(ErlangAtom "exsss")])
       old_3 -> old_3
       something_else -> (EXC.case_clause something_else)
 erlps__seed_get__0 args =
@@ -3358,7 +3361,8 @@ erlps__seed64_nz__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__seed_nz__4 :: ErlangFun
-erlps__seed_nz__4 [_n_0, (ErlangEmptyList), _m_1, (ErlangAtom "false")]
+erlps__seed_nz__4 [_n_0, (ErlangEmptyList), _m_1,
+                   (ErlangAtom "false")]
   =
   (BIF.erlang__error__1 [(ErlangAtom "zero_seed")])
 erlps__seed_nz__4 [(ErlangInt num_0), (ErlangCons _ _), _m_1,
@@ -3369,7 +3373,9 @@ erlps__seed_nz__4 [(ErlangInt num_0), (ErlangEmptyList), _m_1,
                    _nz_2]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 0))) =
   ErlangEmptyList
-erlps__seed_nz__4 [n_0, (ErlangEmptyList), m_1, (ErlangAtom "true")] =
+erlps__seed_nz__4 [n_0, (ErlangEmptyList), m_1,
+                   (ErlangAtom "true")]
+  =
   let   
     arg_4 = (BIF.erlang__op_minus [n_0, (ErlangInt (DBI.fromInt 1))])
   in let
@@ -3828,7 +3834,8 @@ erlps__normal_s__4 [(ErlangInt num_0), sign_1, x0_2, state0_3]
                   (ErlangAtom "false") ->
                     (erlps__normal_s__4
                        [(ErlangInt (DBI.fromInt 0)), sign_1, x0_2, s2_17])
-                  (ErlangAtom "true") | ((==) sign_1 (ErlangInt (DBI.fromInt 0))) ->
+                  (ErlangAtom "true") | ((==) sign_1
+                                           (ErlangInt (DBI.fromInt 0))) ->
                     let    lop_34 = (ErlangFloat 3.65415288536100879568e+0)
                     in let tup_el_33 = (BIF.erlang__op_plus [lop_34, x_14])
                     in (ErlangTuple [tup_el_33, s2_17])
@@ -6388,7 +6395,7 @@ erlps__float2str__1 [n_0] =
             (BIF.erlang__op_minus [e_9, (ErlangInt (DBI.fromInt 1023))])
         in let
           arg_14 =
-            (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
+            (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
                [arg_15,
                 (ErlangCons head_17
                    (ErlangCons head_22

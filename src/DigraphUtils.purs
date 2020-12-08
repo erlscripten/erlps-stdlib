@@ -450,12 +450,14 @@ erlps__forest__4 args =
      (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__pretraverse__6 :: ErlangFun
-erlps__pretraverse__6 [(ErlangAtom "first"), v_0, sf_1, g_2, t_3, ll_4]
+erlps__pretraverse__6 [(ErlangAtom "first"), v_0, sf_1, g_2, t_3,
+                       ll_4]
   =
   (erlps__ptraverse__6
      [(ErlangCons v_0 ErlangEmptyList), sf_1, g_2, t_3,
       ErlangEmptyList, ll_4])
-erlps__pretraverse__6 [(ErlangAtom "not_first"), v_0, sf_1, g_2, t_3, ll_4]
+erlps__pretraverse__6 [(ErlangAtom "not_first"), v_0, sf_1, g_2,
+                       t_3, ll_4]
   =
   let
     case_5 =
@@ -624,7 +626,8 @@ erlps__remove_singletons__3 [(ErlangCons c_1@(ErlangCons v_0 (ErlangEmptyList)) 
     case case_5 of
       (ErlangAtom "true") ->
         (erlps__remove_singletons__3 [cs_2, g_3, (ErlangCons c_1 l_4)])
-      (ErlangAtom "false") -> (erlps__remove_singletons__3 [cs_2, g_3, l_4])
+      (ErlangAtom "false") ->
+        (erlps__remove_singletons__3 [cs_2, g_3, l_4])
       something_else -> (EXC.case_clause something_else)
 erlps__remove_singletons__3 [(ErlangCons c_0 cs_1), g_2, l_3] =
   (erlps__remove_singletons__3 [cs_1, g_2, (ErlangCons c_0 l_3)])
@@ -680,8 +683,8 @@ erlps__subgraph_opts__5 [(ErlangCons (ErlangTuple [(ErlangAtom "keep_labels"),
   | ((ErlangAtom "true") ==
        (falsifyErrors (\ _ -> (BIF.erlang__is_boolean__1 [keep_0])))) =
   (erlps__subgraph_opts__5 [opts_1, type_2, keep_0, g_4, vs_5])
-erlps__subgraph_opts__5 [(ErlangEmptyList), (ErlangAtom "inherit"),
-                         keep_0, g_1, vs_2]
+erlps__subgraph_opts__5 [(ErlangEmptyList),
+                         (ErlangAtom "inherit"), keep_0, g_1, vs_2]
   =
   let   
     info_4 =
@@ -901,8 +904,8 @@ erlps__condense__5 args =
      (ErlangFun 5 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__condense__6 :: ErlangFun
-erlps__condense__6 [(ErlangAtom "$end_of_table"), _t_0, _sc_1, _g_2, _scg_3,
-                    _i2c_4]
+erlps__condense__6 [(ErlangAtom "$end_of_table"), _t_0, _sc_1,
+                    _g_2, _scg_3, _i2c_4]
   =
   (ErlangAtom "ok")
 erlps__condense__6 [i_0, t_1, sc_2, g_3, scg_4, i2c_5] =

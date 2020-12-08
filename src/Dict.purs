@@ -118,8 +118,8 @@ erlps__from_list__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__size__1 :: ErlangFun
-erlps__size__1 [(ErlangTuple [(ErlangAtom "dict"), n_0, _, _, _, _, _,
-                              _, _])]
+erlps__size__1 [(ErlangTuple [(ErlangAtom "dict"), n_0, _, _, _,
+                              _, _, _, _])]
   | ((isEInt n_0) && (weakGeq n_0 (ErlangInt (DBI.fromInt 0)))) =
   n_0
 erlps__size__1 [arg_1] = (EXC.function_clause unit)
@@ -128,8 +128,8 @@ erlps__size__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__is_empty__1 :: ErlangFun
-erlps__is_empty__1 [(ErlangTuple [(ErlangAtom "dict"), n_0, _, _, _,
-                                  _, _, _, _])]
+erlps__is_empty__1 [(ErlangTuple [(ErlangAtom "dict"), n_0, _, _,
+                                  _, _, _, _, _])]
   =
   (BIF.erlang__op_exactEq [n_0, (ErlangInt (DBI.fromInt 0))])
 erlps__is_empty__1 [arg_3] = (EXC.function_clause unit)
@@ -808,8 +808,9 @@ erlps__on_bucket__3 [f_0, t_1, slot_2] =
         in let
           tup_el_32 =
             case t_1 of
-              (ErlangTuple [(ErlangAtom "dict"), size_41, n_42, maxn_43, bso_44,
-                            exp_size_45, con_size_46, empty_47, segs_48]) ->
+              (ErlangTuple [(ErlangAtom "dict"), size_41, n_42, maxn_43,
+                            bso_44, exp_size_45, con_size_46, empty_47,
+                            segs_48]) ->
                 (ErlangTuple
                    [(ErlangAtom "dict"), size_41, n_42, maxn_43, bso_44,
                     exp_size_45, con_size_46, empty_47, record_updt_34])
@@ -824,8 +825,8 @@ erlps__on_bucket__3 args =
 
 erlps__fold_dict__3 :: ErlangFun
 erlps__fold_dict__3 [f_0, acc_1,
-                     (ErlangTuple [(ErlangAtom "dict"), (ErlangInt num_2), _, _, _,
-                                   _, _, _, _])]
+                     (ErlangTuple [(ErlangAtom "dict"), (ErlangInt num_2), _, _,
+                                   _, _, _, _, _])]
   | ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 0)))
   , (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
@@ -905,8 +906,8 @@ erlps__fold_bucket__3 args =
 
 erlps__map_dict__2 :: ErlangFun
 erlps__map_dict__2 [f_0,
-                    dict_2@(ErlangTuple [(ErlangAtom "dict"), (ErlangInt num_1), _,
-                                         _, _, _, _, _, _])]
+                    dict_2@(ErlangTuple [(ErlangAtom "dict"), (ErlangInt num_1),
+                                         _, _, _, _, _, _, _])]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0)))
   , (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   dict_2
@@ -922,8 +923,8 @@ erlps__map_dict__2 [f_0, d_1] =
   in let record_updt_11 = (BIF.erlang__list_to_tuple__1 [segs1_9])
   in
     case d_1 of
-      (ErlangTuple [(ErlangAtom "dict"), size_13, n_14, maxn_15, bso_16,
-                    exp_size_17, con_size_18, empty_19, segs_20]) ->
+      (ErlangTuple [(ErlangAtom "dict"), size_13, n_14, maxn_15,
+                    bso_16, exp_size_17, con_size_18, empty_19, segs_20]) ->
         (ErlangTuple
            [(ErlangAtom "dict"), size_13, n_14, maxn_15, bso_16,
             exp_size_17, con_size_18, empty_19, record_updt_11])
@@ -983,8 +984,9 @@ erlps__map_bucket__2 args =
 
 erlps__filter_dict__2 :: ErlangFun
 erlps__filter_dict__2 [f_0,
-                       dict_2@(ErlangTuple [(ErlangAtom "dict"), (ErlangInt num_1),
-                                            _, _, _, _, _, _, _])]
+                       dict_2@(ErlangTuple [(ErlangAtom "dict"),
+                                            (ErlangInt num_1), _, _, _, _, _, _,
+                                            _])]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0)))
   , (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   dict_2
@@ -1007,8 +1009,9 @@ erlps__filter_dict__2 [f_0, d_1] =
         in let
           arg_14 =
             case d_1 of
-              (ErlangTuple [(ErlangAtom "dict"), size_18, n_19, maxn_20, bso_21,
-                            exp_size_22, con_size_23, empty_24, segs_25]) ->
+              (ErlangTuple [(ErlangAtom "dict"), size_18, n_19, maxn_20,
+                            bso_21, exp_size_22, con_size_23, empty_24,
+                            segs_25]) ->
                 (ErlangTuple
                    [(ErlangAtom "dict"), size_18, n_19, maxn_20, bso_21,
                     exp_size_22, con_size_23, empty_24, record_updt_16])
@@ -1255,8 +1258,9 @@ erlps__maybe_expand_aux__2 [t0_0, ic_1]
             (BIF.erlang__op_mult [n_9, (ErlangInt (DBI.fromInt 3))])
         in
           case t_3 of
-            (ErlangTuple [(ErlangAtom "dict"), size_57, n_58, maxn_59, bso_60,
-                          exp_size_61, con_size_62, empty_63, segs_64]) ->
+            (ErlangTuple [(ErlangAtom "dict"), size_57, n_58, maxn_59,
+                          bso_60, exp_size_61, con_size_62, empty_63,
+                          segs_64]) ->
               (ErlangTuple
                  [(ErlangAtom "dict"), record_updt_43, n_9, maxn_59, bso_60,
                   record_updt_50, record_updt_53, empty_63, segs2_41])
@@ -1340,8 +1344,8 @@ erlps__maybe_expand_segs__1 [t_0]
   in let record_updt_14 = (erlps__expand_segs__2 [arg_15, arg_19])
   in
     case t_0 of
-      (ErlangTuple [(ErlangAtom "dict"), size_23, n_24, maxn_25, bso_26,
-                    exp_size_27, con_size_28, empty_29, segs_30]) ->
+      (ErlangTuple [(ErlangAtom "dict"), size_23, n_24, maxn_25,
+                    bso_26, exp_size_27, con_size_28, empty_29, segs_30]) ->
         (ErlangTuple
            [(ErlangAtom "dict"), size_23, n_24, record_updt_2,
             record_updt_8, exp_size_27, con_size_28, empty_29,
@@ -1436,8 +1440,8 @@ erlps__maybe_contract__2 [t_0, dc_1]
   in let
     arg_36 =
       case t_0 of
-        (ErlangTuple [(ErlangAtom "dict"), size_52, n_53, maxn_54, bso_55,
-                      exp_size_56, con_size_57, empty_58, segs_59]) ->
+        (ErlangTuple [(ErlangAtom "dict"), size_52, n_53, maxn_54,
+                      bso_55, exp_size_56, con_size_57, empty_58, segs_59]) ->
           (ErlangTuple
              [(ErlangAtom "dict"), record_updt_38, n1_35, maxn_54, bso_55,
               record_updt_45, record_updt_48, empty_58, segs2_32])
@@ -1514,8 +1518,8 @@ erlps__maybe_contract_segs__1 [t_0]
   in let record_updt_14 = (erlps__contract_segs__1 [arg_15])
   in
     case t_0 of
-      (ErlangTuple [(ErlangAtom "dict"), size_19, n_20, maxn_21, bso_22,
-                    exp_size_23, con_size_24, empty_25, segs_26]) ->
+      (ErlangTuple [(ErlangAtom "dict"), size_19, n_20, maxn_21,
+                    bso_22, exp_size_23, con_size_24, empty_25, segs_26]) ->
         (ErlangTuple
            [(ErlangAtom "dict"), size_19, n_20, record_updt_2,
             record_updt_8, exp_size_23, con_size_24, empty_25,

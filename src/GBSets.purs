@@ -106,7 +106,8 @@ erlps__is_member_1__2 [key_0,
   (erlps__is_member_1__2 [key_0, bigger_2])
 erlps__is_member_1__2 [_, (ErlangTuple [_, _, _])] =
   (ErlangAtom "true")
-erlps__is_member_1__2 [_, (ErlangAtom "nil")] = (ErlangAtom "false")
+erlps__is_member_1__2 [_, (ErlangAtom "nil")] =
+  (ErlangAtom "false")
 erlps__is_member_1__2 [arg_0, arg_1] = (EXC.function_clause unit)
 erlps__is_member_1__2 args =
   (EXC.badarity
@@ -434,8 +435,8 @@ erlps__take_smallest__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__take_smallest1__1 :: ErlangFun
-erlps__take_smallest1__1 [(ErlangTuple [key_0, (ErlangAtom "nil"),
-                                        larger_1])]
+erlps__take_smallest1__1 [(ErlangTuple [key_0,
+                                        (ErlangAtom "nil"), larger_1])]
   =
   (ErlangTuple [key_0, larger_1])
 erlps__take_smallest1__1 [(ErlangTuple [key_0, smaller_1,
@@ -960,7 +961,8 @@ erlps__is_disjoint_1__2 [(ErlangTuple [k1_0, smaller1_1,
         in
           case lop_10 of
             (ErlangAtom "false") -> (ErlangAtom "false")
-            (ErlangAtom "true") -> (erlps__is_disjoint_1__2 [bigger_2, tree_5])
+            (ErlangAtom "true") ->
+              (erlps__is_disjoint_1__2 [bigger_2, tree_5])
             _ -> (EXC.badarg1 lop_10)
       _ -> (EXC.badarg1 lop_6)
 erlps__is_disjoint_1__2 [(ErlangTuple [k1_0, smaller_1,
@@ -977,15 +979,18 @@ erlps__is_disjoint_1__2 [(ErlangTuple [k1_0, smaller_1,
         in
           case lop_10 of
             (ErlangAtom "false") -> (ErlangAtom "false")
-            (ErlangAtom "true") -> (erlps__is_disjoint_1__2 [smaller_1, tree_5])
+            (ErlangAtom "true") ->
+              (erlps__is_disjoint_1__2 [smaller_1, tree_5])
             _ -> (EXC.badarg1 lop_10)
       _ -> (EXC.badarg1 lop_6)
 erlps__is_disjoint_1__2 [(ErlangTuple [_k1_0, _, _]),
                          (ErlangTuple [_k2_1, _, _])]
   =
   (ErlangAtom "false")
-erlps__is_disjoint_1__2 [(ErlangAtom "nil"), _] = (ErlangAtom "true")
-erlps__is_disjoint_1__2 [_, (ErlangAtom "nil")] = (ErlangAtom "true")
+erlps__is_disjoint_1__2 [(ErlangAtom "nil"), _] =
+  (ErlangAtom "true")
+erlps__is_disjoint_1__2 [_, (ErlangAtom "nil")] =
+  (ErlangAtom "true")
 erlps__is_disjoint_1__2 [arg_0, arg_1] =
   (EXC.function_clause unit)
 erlps__is_disjoint_1__2 args =
@@ -1050,7 +1055,8 @@ erlps__difference_1__4 [(ErlangCons x_0 xs_1), t_2, as_3, n_4] =
   let case_5 = (erlps__is_member_1__2 [x_0, t_2])
   in
     case case_5 of
-      (ErlangAtom "true") -> (erlps__difference_1__4 [xs_1, t_2, as_3, n_4])
+      (ErlangAtom "true") ->
+        (erlps__difference_1__4 [xs_1, t_2, as_3, n_4])
       (ErlangAtom "false") ->
         let
           arg_17 = (BIF.erlang__op_plus [n_4, (ErlangInt (DBI.fromInt 1))])

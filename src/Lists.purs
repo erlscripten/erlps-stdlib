@@ -5221,7 +5221,8 @@ erlps__ufsplit_2__4 [y_0, (ErlangCons z_1 l_2), fun_3, r_4] =
                [fun_3, (ErlangCons z_1 (ErlangCons y_0 ErlangEmptyList))])
         in
           case case_9 of
-            (ErlangAtom "true") -> (erlps__ufsplit_2__4 [y_0, l_2, fun_3, r_4])
+            (ErlangAtom "true") ->
+              (erlps__ufsplit_2__4 [y_0, l_2, fun_3, r_4])
             (ErlangAtom "false") ->
               let head_23 = (BIF.lists__reverse__2 [r_4, ErlangEmptyList])
               in

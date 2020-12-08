@@ -138,7 +138,9 @@ erlps__is_anno2__2 [(ErlangAtom "location"),
         (isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "true")
-erlps__is_anno2__2 [(ErlangAtom "generated"), (ErlangAtom "true")] =
+erlps__is_anno2__2 [(ErlangAtom "generated"),
+                    (ErlangAtom "true")]
+  =
   (ErlangAtom "true")
 erlps__is_anno2__2 [(ErlangAtom "file"), filename_0] =
   (erlps__is_filename__1 [filename_0])
@@ -417,9 +419,10 @@ erlps__set__3 [item_0, value_1, anno_2] =
   in
     case case_3 of
       (ErlangTuple [(ErlangAtom "true"), line_8]) | ((isEInt line_8) &&
-                                                  (weakGeq line_8
-                                                     (ErlangInt
-                                                        (DBI.fromInt 0)))) ->
+                                                       (weakGeq line_8
+                                                          (ErlangInt
+                                                             (DBI.fromInt
+                                                                0)))) ->
         let head_12 = (ErlangTuple [(ErlangAtom "location"), line_8])
         in
           (erlps__set_anno__3
@@ -444,7 +447,8 @@ erlps__set__3 [item_0, value_1, anno_2] =
           (erlps__set_anno__3
              [item_0, value_1, (ErlangCons head_22 ErlangEmptyList)])
       (ErlangTuple [(ErlangAtom "true"), a_26]) | ((isEList a_26) &&
-                                                ((/=) a_26 ErlangEmptyList)) ->
+                                                     ((/=) a_26
+                                                        ErlangEmptyList)) ->
         (erlps__set_anno__3 [item_0, value_1, anno_2])
       _ ->
         (BIF.erlang__error__2
@@ -644,7 +648,9 @@ erlps__is_settable__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__default__2 :: ErlangFun
-erlps__default__2 [(ErlangAtom "generated"), (ErlangAtom "false")] =
+erlps__default__2 [(ErlangAtom "generated"),
+                   (ErlangAtom "false")]
+  =
   (ErlangAtom "true")
 erlps__default__2 [(ErlangAtom "record"), (ErlangAtom "false")] =
   (ErlangAtom "true")

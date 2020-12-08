@@ -86,7 +86,8 @@ erlps__new__1 [type_0] =
             (ErlangTuple
                [(ErlangAtom "digraph"), v_13, e_20, n_27, (ErlangAtom "true")])
         in (erlps__set_type__2 [ts_6, arg_39])
-      (ErlangAtom "error") -> (BIF.erlang__error__1 [(ErlangAtom "badarg")])
+      (ErlangAtom "error") ->
+        (BIF.erlang__error__1 [(ErlangAtom "badarg")])
       something_else -> (EXC.case_clause something_else)
 erlps__new__1 [arg_46] = (EXC.function_clause unit)
 erlps__new__1 args =
@@ -94,21 +95,27 @@ erlps__new__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__check_type__3 :: ErlangFun
-erlps__check_type__3 [(ErlangCons (ErlangAtom "acyclic") ts_0), a_1, l_2]
+erlps__check_type__3 [(ErlangCons (ErlangAtom "acyclic") ts_0),
+                      a_1, l_2]
   =
   let
     head_6 =
       (ErlangTuple [(ErlangAtom "cyclic"), (ErlangAtom "false")])
   in (erlps__check_type__3 [ts_0, a_1, (ErlangCons head_6 l_2)])
-erlps__check_type__3 [(ErlangCons (ErlangAtom "cyclic") ts_0), a_1, l_2]
+erlps__check_type__3 [(ErlangCons (ErlangAtom "cyclic") ts_0),
+                      a_1, l_2]
   =
   let
     head_6 =
       (ErlangTuple [(ErlangAtom "cyclic"), (ErlangAtom "true")])
   in (erlps__check_type__3 [ts_0, a_1, (ErlangCons head_6 l_2)])
-erlps__check_type__3 [(ErlangCons (ErlangAtom "protected") ts_0), _, l_1] =
+erlps__check_type__3 [(ErlangCons (ErlangAtom "protected") ts_0),
+                      _, l_1]
+  =
   (erlps__check_type__3 [ts_0, (ErlangAtom "protected"), l_1])
-erlps__check_type__3 [(ErlangCons (ErlangAtom "private") ts_0), _, l_1] =
+erlps__check_type__3 [(ErlangCons (ErlangAtom "private") ts_0),
+                      _, l_1]
+  =
   (erlps__check_type__3 [ts_0, (ErlangAtom "private"), l_1])
 erlps__check_type__3 [(ErlangEmptyList), a_0, l_1] =
   (ErlangTuple [a_0, l_1])
@@ -1070,22 +1077,24 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
                                (ErlangCons v2_2 ErlangEmptyList))])
                     in (ErlangTuple [(ErlangAtom "error"), tup_el_31])
                   (ErlangAtom "false") | ((ErlangAtom "true") ==
-                                      (falsifyErrors
-                                         (\ _ ->
-                                            let
-                                              lop_38 =
-                                                case g_4 of
-                                                  (ErlangTuple arr_41) | (DM.Just field_40) <-
-                                                                           ((arr_41 DA.!!
-                                                                               4)) ->
-                                                    field_40
-                                                  _ ->
-                                                    (EXC.badrecord
-                                                       (ErlangAtom "digraph"))
-                                            in
-                                              (BIF.erlang__op_exactEq
-                                                 [lop_38,
-                                                  (ErlangAtom "false")])))) ->
+                                            (falsifyErrors
+                                               (\ _ ->
+                                                  let
+                                                    lop_38 =
+                                                      case g_4 of
+                                                        (ErlangTuple arr_41) | (DM.Just field_40) <-
+                                                                                 ((arr_41 DA.!!
+                                                                                     4)) ->
+                                                          field_40
+                                                        _ ->
+                                                          (EXC.badrecord
+                                                             (ErlangAtom
+                                                                "digraph"))
+                                                  in
+                                                    (BIF.erlang__op_exactEq
+                                                       [lop_38,
+                                                        (ErlangAtom
+                                                           "false")])))) ->
                     (erlps__acyclic_add_edge__5 [e_0, v1_1, v2_2, label_3, g_4])
                   (ErlangAtom "false") ->
                     (erlps__do_insert_edge__5 [e_0, v1_1, v2_2, label_3, g_4])
@@ -1099,8 +1108,8 @@ erlps__do_add_edge__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__other_edge_exists__4 :: ErlangFun
-erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"), _,
-                                           et_0, _, _]),
+erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"),
+                                           _, et_0, _, _]),
                              e_1, v1_2, v2_3]
   =
   let
@@ -1141,7 +1150,8 @@ erlps__other_edge_exists__4 args =
 
 erlps__do_insert_edge__5 :: ErlangFun
 erlps__do_insert_edge__5 [e_0, v1_1, v2_2, label_3,
-                          (ErlangTuple [(ErlangAtom "digraph"), _, et_4, nt_5, _])]
+                          (ErlangTuple [(ErlangAtom "digraph"), _, et_4, nt_5,
+                                        _])]
   =
   let    tup_el_9 = (ErlangTuple [(ErlangAtom "out"), v1_1])
   in let head_8 = (ErlangTuple [tup_el_9, e_0])
@@ -1344,7 +1354,8 @@ erlps__spath__4 [q_0, g_1, sink_2, t_3] =
     case_4 = (BIF.do_remote_fun_call "Queue" "erlps__out__1" [q_0])
   in
     case case_4 of
-      (ErlangTuple [(ErlangTuple [(ErlangAtom "value"), e_6]), q1_7]) ->
+      (ErlangTuple [(ErlangTuple [(ErlangAtom "value"), e_6]),
+                    q1_7]) ->
         let match_expr_14 = (erlps__edge__2 [g_1, e_6])
         in
           case match_expr_14 of
@@ -1368,7 +1379,8 @@ erlps__spath__4 [q_0, g_1, sink_2, t_3] =
                       something_else -> (EXC.case_clause something_else)
                 _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_14)
-      (ErlangTuple [(ErlangAtom "empty"), _q1_41]) -> (ErlangAtom "false")
+      (ErlangTuple [(ErlangAtom "empty"), _q1_41]) ->
+        (ErlangAtom "false")
       something_else -> (EXC.case_clause something_else)
 erlps__spath__4 [arg_42, arg_43, arg_44, arg_45] =
   (EXC.function_clause unit)

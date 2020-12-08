@@ -29,9 +29,12 @@ erlps__new__2 :: ErlangFun
 erlps__new__2 [mod_0, eq_1] =
   (ErlangFun 2
      let
-       lambda_2 [(ErlangAtom "add_element"), (ErlangTuple [el_5, s_6])] =
+       lambda_2 [(ErlangAtom "add_element"), (ErlangTuple [el_5, s_6])]
+         =
          (erlps__add_element__3 [mod_0, el_5, s_6])
-       lambda_2 [(ErlangAtom "del_element"), (ErlangTuple [el_10, s_11])] =
+       lambda_2 [(ErlangAtom "del_element"),
+                 (ErlangTuple [el_10, s_11])]
+         =
          (erlps__del_element__3 [mod_0, el_10, s_11])
        lambda_2 [(ErlangAtom "empty"), (ErlangEmptyList)] =
          (BIF.erlang__apply__3
@@ -41,13 +44,16 @@ erlps__new__2 [mod_0, eq_1] =
             [eq_1, (ErlangCons s1_18 (ErlangCons s2_19 ErlangEmptyList))])
        lambda_2 [(ErlangAtom "filter"), (ErlangTuple [f_23, s_24])] =
          (erlps__filter__3 [mod_0, f_23, s_24])
-       lambda_2 [(ErlangAtom "fold"), (ErlangTuple [f_28, a_29, s_30])] =
+       lambda_2 [(ErlangAtom "fold"), (ErlangTuple [f_28, a_29, s_30])]
+         =
          (erlps__fold__4 [mod_0, f_28, a_29, s_30])
        lambda_2 [(ErlangAtom "from_list"), l_35] =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "from_list"),
              (ErlangCons l_35 ErlangEmptyList)])
-       lambda_2 [(ErlangAtom "intersection"), (ErlangTuple [s1_41, s2_42])] =
+       lambda_2 [(ErlangAtom "intersection"),
+                 (ErlangTuple [s1_41, s2_42])]
+         =
          (erlps__intersection__4 [mod_0, eq_1, s1_41, s2_42])
        lambda_2 [(ErlangAtom "intersection"), ss_47] =
          (erlps__intersection__3 [mod_0, eq_1, ss_47])
@@ -59,13 +65,16 @@ erlps__new__2 [mod_0, eq_1] =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "is_set"),
              (ErlangCons s_57 ErlangEmptyList)])
-       lambda_2 [(ErlangAtom "is_subset"), (ErlangTuple [s_63, set_64])] =
+       lambda_2 [(ErlangAtom "is_subset"), (ErlangTuple [s_63, set_64])]
+         =
          (erlps__is_subset__4 [mod_0, eq_1, s_63, set_64])
        lambda_2 [(ErlangAtom "iterator"), s_69] =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "iterator"),
              (ErlangCons s_69 ErlangEmptyList)])
-       lambda_2 [(ErlangAtom "iterator_from"), (ErlangTuple [start_75, s_76])] =
+       lambda_2 [(ErlangAtom "iterator_from"),
+                 (ErlangTuple [start_75, s_76])]
+         =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "iterator_from"),
              (ErlangCons start_75 (ErlangCons s_76 ErlangEmptyList))])
@@ -78,7 +87,8 @@ erlps__new__2 [mod_0, eq_1] =
        lambda_2 [(ErlangAtom "size"), s_93] =
          (BIF.erlang__apply__3
             [mod_0, (ErlangAtom "size"), (ErlangCons s_93 ErlangEmptyList)])
-       lambda_2 [(ErlangAtom "subtract"), (ErlangTuple [s1_99, s2_100])] =
+       lambda_2 [(ErlangAtom "subtract"), (ErlangTuple [s1_99, s2_100])]
+         =
          (erlps__subtract__3 [mod_0, s1_99, s2_100])
        lambda_2 [(ErlangAtom "to_list"), s_104] =
          (BIF.erlang__apply__3
