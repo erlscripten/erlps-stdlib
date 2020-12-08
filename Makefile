@@ -85,9 +85,9 @@ build_tests:
 	./erlscripten -s erl_scan_SUITE.beam -o test/Erl.Scan.SUITE.purs
 	rm erl_scan_SUITE.beam
 
-	#erlc +debug_info erlang_tests/erl_eval_SUITE.erl
-	#./erlscripten -s erl_eval_SUITE.beam -o test/Erl.Eval.SUITE.purs
-	#rm erl_eval_SUITE.beam
+	erlc +debug_info erlang_tests/erl_eval_SUITE.erl
+	./erlscripten -s erl_eval_SUITE.beam -o test/Erl.Eval.SUITE.purs
+	rm erl_eval_SUITE.beam
 
 	erlc +debug_info erlang_tests/erl_anno_SUITE.erl
 	./erlscripten -s erl_anno_SUITE.beam -o test/Erl.Anno.SUITE.purs

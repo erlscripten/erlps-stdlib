@@ -44,6 +44,7 @@ import Math.SUITE as MathS
 import Sofs.SUITE as SofsS
 import Erl.Scan.SUITE as ESS
 import Erl.Anno.SUITE as EAS
+import Erl.Eval.SUITE as EES
 
 -- BEWARE - HERE BE DRAGONS - I've lost too many hours debugging alternative helpers
 -- If you think you can make a better wrapper which does not crash the testing infrastructure then please make a PR
@@ -900,3 +901,125 @@ main =
         it "mapfold_anno" do
             r <- exec_may_throw EAS.erlps__mapfold_anno__1 [ErlangEmptyList]
             make_ok (ErlangAtom "ok") `shouldEqual` r
+
+
+    describe_ "Real Erlang Eval tests taken from OTP - erl_eval_SUITE.erl" do
+        it "guard_1" do
+          r <- exec_may_throw EES.erlps__guard_1__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "guard_2" do
+          r <- exec_may_throw EES.erlps__guard_2__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "match_pattern" do
+          r <- exec_may_throw EES.erlps__match_pattern__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "string_plusplus" do
+          r <- exec_may_throw EES.erlps__string_plusplus__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "pattern_expr" do
+          r <- exec_may_throw EES.erlps__pattern_expr__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "match_bin" do
+          r <- exec_may_throw EES.erlps__match_bin__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "guard_3" do
+          r <- exec_may_throw EES.erlps__guard_3__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "guard_4" do
+          r <- exec_may_throw EES.erlps__guard_4__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "guard_5" do
+          r <- exec_may_throw EES.erlps__guard_5__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "lc" do
+          r <- exec_may_throw EES.erlps__lc__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "simple_cases" do
+          r <- exec_may_throw EES.erlps__simple_cases__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "unary_plus" do
+          r <- exec_may_throw EES.erlps__unary_plus__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "apply_atom" do
+          r <- exec_may_throw EES.erlps__apply_atom__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_5269" do
+          r <- exec_may_throw EES.erlps__otp_5269__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_6539" do
+          r <- exec_may_throw EES.erlps__otp_6539__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_6543" do
+          r <- exec_may_throw EES.erlps__otp_6543__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_6787" do
+          r <- exec_may_throw EES.erlps__otp_6787__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_6977" do
+          r <- exec_may_throw EES.erlps__otp_6977__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_7550" do
+          r <- exec_may_throw EES.erlps__otp_7550__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_8133" do
+          r <- exec_may_throw EES.erlps__otp_8133__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_10622" do
+          r <- exec_may_throw EES.erlps__otp_10622__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_13228" do
+          r <- exec_may_throw EES.erlps__otp_13228__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_14826" do
+          r <- exec_may_throw EES.erlps__otp_14826__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "funs" do
+          r <- exec_may_throw EES.erlps__funs__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "try_catch" do
+          r <- exec_may_throw EES.erlps__try_catch__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "eval_expr_5" do
+          r <- exec_may_throw EES.erlps__eval_expr_5__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "zero_width" do
+          r <- exec_may_throw EES.erlps__zero_width__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "eep37" do
+          r <- exec_may_throw EES.erlps__eep37__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "eep43" do
+          r <- exec_may_throw EES.erlps__eep43__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
+
+        it "otp_15035" do
+          r <- exec_may_throw EES.erlps__otp_15035__1 [ErlangEmptyList]
+          make_ok (ErlangAtom "ok") `shouldEqual` r
