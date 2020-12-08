@@ -39,7 +39,7 @@ erlps__format_error__1 [(ErlangTuple [(ErlangAtom "string"),
   in let lop_9 = (make_string " starting with ")
   in let
     rop_10 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_string__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__write_string__2"
          [head_1, quote_0])
   in let rop_8 = (BIF.erlang__op_append [lop_9, rop_10])
   in let rop_5 = (BIF.erlang__op_append [lop_6, rop_8])
@@ -53,7 +53,7 @@ erlps__format_error__1 [(ErlangTuple [(ErlangAtom "illegal"),
   let    arg_2 = (make_string "illegal ~w")
   in let
     arg_1 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__fwrite__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__fwrite__2"
          [arg_2, (ErlangCons type_0 ErlangEmptyList)])
   in (BIF.do_remote_fun_call "Lists" "erlps__flatten__1" [arg_1])
 erlps__format_error__1 [(ErlangAtom "char")] =
@@ -64,14 +64,13 @@ erlps__format_error__1 [(ErlangTuple [(ErlangAtom "base"),
   let    arg_2 = (make_string "illegal base \'~w\'")
   in let
     arg_1 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__fwrite__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__fwrite__2"
          [arg_2, (ErlangCons base_0 ErlangEmptyList)])
   in (BIF.do_remote_fun_call "Lists" "erlps__flatten__1" [arg_1])
 erlps__format_error__1 [other_0] =
   let
     arg_1 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1"
-         [other_0])
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [other_0])
   in (BIF.do_remote_fun_call "Lists" "erlps__flatten__1" [arg_1])
 erlps__format_error__1 [arg_3] = (EXC.function_clause unit)
 erlps__format_error__1 args =

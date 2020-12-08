@@ -684,8 +684,7 @@ erlps__count_small__2 [(ErlangCons s_0 cs_1),
                  _ -> (EXC.badarg1 lop_16)))) =
   let   
     rop_11 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__chars_length__1"
-         [s_0])
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [s_0])
   in let val_9 = (BIF.erlang__op_plus [other_3, rop_11])
   in let
     map_ext_13 =
@@ -793,8 +792,7 @@ erlps__build_limited__5 [(ErlangCons (ErlangMap map_0) cs_9),
         _ ->
           let
             len_35 =
-              (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__chars_length__1"
-                 [s_27])
+              (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [s_27])
           in (erlps__sub__2 [maxlen0_12, len_35])
         _ -> (EXC.if_clause unit)
   in
@@ -967,7 +965,7 @@ erlps__control_small__7 [(ErlangInt num_0),
   , (isEInt a_1) =
   let
     match_expr_9 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__deep_char_list__1"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__deep_char_list__1"
          [prefix_2])
   in
     case match_expr_9 of
@@ -994,7 +992,7 @@ erlps__control_small__7 [(ErlangInt num_0),
   , (isEInt a_1) =
   let
     match_expr_9 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__deep_char_list__1"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__deep_char_list__1"
          [prefix_2])
   in
     case match_expr_9 of
@@ -1102,7 +1100,7 @@ erlps__control_limited__10 [(ErlangInt num_0),
   in let head_21 = (ErlangTuple [(ErlangAtom "chars_limit"), cl_8])
   in let
     chars_25 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__write__2"
          [a_1,
           (ErlangCons head_12
              (ErlangCons head_17 (ErlangCons head_21 ErlangEmptyList)))])
@@ -1125,7 +1123,7 @@ erlps__control_limited__10 [(ErlangInt num_0),
   in let head_21 = (ErlangTuple [(ErlangAtom "chars_limit"), cl_9])
   in let
     chars_25 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__write__2"
          [a_1,
           (ErlangCons head_13
              (ErlangCons head_17 (ErlangCons head_21 ErlangEmptyList)))])
@@ -1171,8 +1169,7 @@ erlps__term__5 [t_0, (ErlangAtom "none"), adj_1, p_2, pad_3] =
 erlps__term__5 [t_0, f_1, adj_2, p0_3, pad_4] =
   let   
     l_6 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__chars_length__1"
-         [t_0])
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [t_0])
   in let
     arg_8 =
       case p0_3 of
@@ -2520,8 +2517,7 @@ erlps__string__6 [s_0, f_1, adj_2, (ErlangAtom "none"), pad_3,
   =
   let
     arg_8 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__chars_length__1"
-         [s_0])
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [s_0])
   in
     (erlps__string_field__6 [s_0, f_1, adj_2, arg_8, pad_3, enc_4])
 erlps__string__6 [s_0, (ErlangAtom "none"), _adj_1, p_2, pad_3,
@@ -2529,8 +2525,7 @@ erlps__string__6 [s_0, (ErlangAtom "none"), _adj_1, p_2, pad_3,
   =
   let
     arg_8 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__chars_length__1"
-         [s_0])
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [s_0])
   in
     (erlps__string_field__6
        [s_0, p_2, (ErlangAtom "left"), arg_8, pad_3, enc_4])
@@ -2538,8 +2533,7 @@ erlps__string__6 [s_0, f_1, adj_2, p_3, pad_4, enc_5]
   | (weakGeq f_1 p_3) =
   let
     n_7 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__chars_length__1"
-         [s_0])
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [s_0])
   in
     case (ErlangAtom "true") of
       _ | (weakGt f_1 p_3) ->

@@ -357,7 +357,7 @@ erlps__build_compat_constraint__2 [(ErlangTuple [(ErlangAtom "atom"),
   let    arg_5 = (make_string "unsupported constraint ~tw")
   in let
     arg_4 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
          [arg_5, (ErlangCons atom_1 ErlangEmptyList)])
   in (erlps__ret_err__2 [a_0, arg_4])
 erlps__build_compat_constraint__2 [arg_9, arg_10] =
@@ -381,7 +381,7 @@ erlps__build_constraint__2 [(ErlangTuple [(ErlangAtom "atom"),
   let    arg_5 = (make_string "unsupported constraint ~tw")
   in let
     arg_4 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
          [arg_5, (ErlangCons atom_1 ErlangEmptyList)])
   in (erlps__ret_err__2 [a_0, arg_4])
 erlps__build_constraint__2 [(ErlangTuple [(ErlangAtom "var"),
@@ -721,7 +721,7 @@ erlps__error_bad_decl__2 [anno_0, s_1] =
   let    arg_4 = (make_string "bad ~tw declaration")
   in let
     arg_3 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
          [arg_4, (ErlangCons s_1 ErlangEmptyList)])
   in (erlps__ret_err__2 [anno_0, arg_3])
 erlps__error_bad_decl__2 [arg_8, arg_9] =
@@ -2491,14 +2491,13 @@ erlps__format_error__1 :: ErlangFun
 erlps__format_error__1 [message_0] =
   let
     case_1 =
-      (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__deep_char_list__1"
+      (BIF.do_remote_fun_call "Io.Lib" "erlps__deep_char_list__1"
          [message_0])
   in
     case case_1 of
       (ErlangAtom "true") -> message_0
       _ ->
-        (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1"
-           [message_0])
+        (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [message_0])
       something_else -> (EXC.case_clause something_else)
 erlps__format_error__1 [arg_4] = (EXC.function_clause unit)
 erlps__format_error__1 args =
@@ -2849,41 +2848,38 @@ erlps__yecctoken2string__1 :: ErlangFun
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "atom"), _,
                                           a_0])]
   =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_atom__1"
-     [a_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_atom__1" [a_0])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "integer"),
                                           _, n_0])]
   =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1" [n_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [n_0])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "float"),
                                           _, f_0])]
   =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1" [f_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [f_0])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "char"), _,
                                           c_0])]
   =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_char__1"
-     [c_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_char__1" [c_0])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "var"), _,
                                           v_0])]
   =
   let arg_1 = (make_string "~s")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons v_0 ErlangEmptyList)])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "string"),
                                           _, s_0])]
   =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_string__1"
-     [s_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_string__1" [s_0])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "reserved_symbol"),
                                           _, a_0])]
   =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write__1" [a_0])
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [a_0])
 erlps__yecctoken2string__1 [(ErlangTuple [_cat_0, _, val_1])] =
   let arg_2 = (make_string "~tp")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_2, (ErlangCons val_1 ErlangEmptyList)])
 erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "dot"),
                                           _])]
@@ -2895,12 +2891,12 @@ erlps__yecctoken2string__1 [(ErlangTuple [(ErlangAtom "$end"),
   ErlangEmptyList
 erlps__yecctoken2string__1 [(ErlangTuple [other_0, _])]
   | (isEAtom other_0) =
-  (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__write_atom__1"
+  (BIF.do_remote_fun_call "Io.Lib" "erlps__write_atom__1"
      [other_0])
 erlps__yecctoken2string__1 [other_0] =
   let arg_1 = (make_string "~tp")
   in
-    (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+    (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
        [arg_1, (ErlangCons other_0 ErlangEmptyList)])
 erlps__yecctoken2string__1 [arg_5] = (EXC.function_clause unit)
 erlps__yecctoken2string__1 args =

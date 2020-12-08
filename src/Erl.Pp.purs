@@ -274,7 +274,7 @@ erlps__latin1_state__1 [quote_0] =
                lambda_13 [a_15] =
                  let arg_16 = (BIF.erlang__atom_to_list__1 [a_15])
                  in
-                   (BIF.do_remote_fun_call "Erlang.Iolib"
+                   (BIF.do_remote_fun_call "Io.Lib"
                       "erlps__write_string_as_latin1__2"
                       [arg_16, (ErlangInt (DBI.fromInt 39))])
                lambda_13 [arg_14] = (EXC.function_clause unit)
@@ -326,8 +326,7 @@ erlps__unicode_state__1 [quote_0] =
                lambda_13 [a_15] =
                  let arg_16 = (BIF.erlang__atom_to_list__1 [a_15])
                  in
-                   (BIF.do_remote_fun_call "Erlang.Iolib"
-                      "erlps__write_string__2"
+                   (BIF.do_remote_fun_call "Io.Lib" "erlps__write_string__2"
                       [arg_16, (ErlangInt (DBI.fromInt 39))])
                lambda_13 [arg_14] = (EXC.function_clause unit)
                lambda_13 args = (EXC.badarity (ErlangFun 1 lambda_13) args)

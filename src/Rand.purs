@@ -6395,7 +6395,7 @@ erlps__float2str__1 [n_0] =
             (BIF.erlang__op_minus [e_9, (ErlangInt (DBI.fromInt 1023))])
         in let
           arg_14 =
-            (BIF.do_remote_fun_call "Erlang.Iolib" "erlps__format__2"
+            (BIF.do_remote_fun_call "Io.Lib" "erlps__format__2"
                [arg_15,
                 (ErlangCons head_17
                    (ErlangCons head_22

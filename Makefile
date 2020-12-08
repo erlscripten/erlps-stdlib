@@ -22,7 +22,8 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/sofs.beam -o src/Sofs.purs
 	./erlscripten -s $(BEAM_PATH)/erl_parse.beam -o src/Erl.Parse.purs
 	./erlscripten -s $(BEAM_PATH)/erl_anno.beam -o src/Erl.Anno.purs
-	#./erlscripten -s $(BEAM_PATH)/erl_eval.beam -o src/Erl.Eval.purs
+	./erlscripten -s $(BEAM_PATH)/erl_eval.beam -o src/Erl.Eval.purs
+	./erlscripten -s $(BEAM_PATH)/erl_bits.beam -o src/Erl.Bits.purs
 	./erlscripten -s $(BEAM_PATH)/erl_pp.beam -o src/Erl.Pp.purs
 	./erlscripten -s $(BEAM_PATH)/erl_internal.beam -o src/Erl.Internal.purs
 
@@ -33,6 +34,10 @@ build_stdlib:
 	erlc +debug_info erlang_src/erl_scan.erl
 	./erlscripten -s erl_scan.beam -o src/Erl.Scan.purs
 	rm erl_scan.beam
+
+	erlc +debug_info erlang_src/erl_lint.erl
+	./erlscripten -s erl_lint.beam -o src/Erl.Lint.purs
+	rm erl_lint.beam
 
 	erlc +debug_info erlang_src/unicode_util.erl
 	./erlscripten -s unicode_util.beam -o src/Unicode.Util.purs
