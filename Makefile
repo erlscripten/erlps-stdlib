@@ -4,6 +4,8 @@ test: build_tests
 
 BEAM_PATH = /usr/lib/erlang/lib/stdlib-3.13.2/ebin
 build_stdlib:
+	ln -f manually_transpiled/* src/
+
 	./erlscripten -s $(BEAM_PATH)/array.beam -o src/Array.purs
 	./erlscripten -s $(BEAM_PATH)/queue.beam -o src/Queue.purs
 	./erlscripten -s $(BEAM_PATH)/dict.beam -o src/Dict.purs
@@ -46,6 +48,14 @@ build_stdlib:
 	erlc +debug_info erlang_src/epp.erl
 	./erlscripten -s epp.beam -o src/Epp.purs
 	rm epp.beam
+
+#	erlc +debug_info erlang_src/crypto.erl
+#	./erlscripten -s crypto.beam -o src/Crypto.purs
+#	rm crypto.beam
+
+#	erlc +debug_info erlang_src/crypto_ec_curves.erl
+#	./erlscripten -s crypto_ec_curves.beam -o src/CryptoEcCurves.purs
+#	rm crypto_ec_curves.beam
 
 build_tests:
 	erlc +debug_info erlang_tests/array_SUITE.erl

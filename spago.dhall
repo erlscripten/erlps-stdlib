@@ -17,6 +17,8 @@ You can edit this file as you like.
   , "psci-support"
   , "rationals"
   , "spec"
+  , "b64"
+  , "arraybuffer-types"
   , "purescript-erlps-core"
   ]
 , packages = ./packages.dhall

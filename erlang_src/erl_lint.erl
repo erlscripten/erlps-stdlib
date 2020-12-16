@@ -162,293 +162,6 @@ value_option(Flag, Default, On, OnVal, Off, OffVal, Opts) ->
 
 -spec format_error(ErrorDescriptor) -> io_lib:chars() when
       ErrorDescriptor :: error_description().
-
-format_error(undefined_module) ->
-    "no module definition";
-format_error(redefine_module) ->
-    "redefining module";
-format_error(pmod_unsupported) ->
-    "parameterized modules are no longer supported";
-%% format_error({redefine_mod_import, M, P}) ->
-%%     io_lib:format("module '~s' already imported from package '~s'", [M, P]);
-format_error(non_latin1_module_unsupported) ->
-    "module names with non-latin1 characters are not supported";
-
-format_error(invalid_call) ->
-    "invalid function call";
-format_error(invalid_record) ->
-    "invalid record expression";
-
-format_error({attribute,A}) ->
-    io_lib:format("attribute ~tw after function definitions", [A]);
-format_error({missing_qlc_hrl,A}) ->
-    io_lib:format("qlc:q/~w called, but \"qlc.hrl\" not included", [A]);
-format_error({redefine_import,{{F,A},M}}) ->
-    io_lib:format("function ~tw/~w already imported from ~w", [F,A,M]);
-format_error({bad_inline,{F,A}}) ->
-    io_lib:format("inlined function ~tw/~w undefined", [F,A]);
-format_error({invalid_deprecated,D}) ->
-    io_lib:format("badly formed deprecated attribute ~tw", [D]);
-format_error({bad_deprecated,{F,A}}) ->
-    io_lib:format("deprecated function ~tw/~w undefined or not exported",
-                  [F,A]);
-format_error({invalid_removed,D}) ->
-    io_lib:format("badly formed removed attribute ~tw", [D]);
-format_error({bad_removed,{F,A}}) when F =:= '_'; A =:= '_' ->
-    io_lib:format("at least one function matching ~tw/~w is still exported",
-                  [F,A]);
-format_error({bad_removed,{F,A}}) ->
-    io_lib:format("removed function ~tw/~w is still exported",
-                  [F,A]);
-format_error({bad_nowarn_unused_function,{F,A}}) ->
-    io_lib:format("function ~tw/~w undefined", [F,A]);
-format_error({bad_nowarn_bif_clash,{F,A}}) ->
-    io_lib:format("function ~tw/~w undefined", [F,A]);
-format_error(disallowed_nowarn_bif_clash) ->
-    io_lib:format("compile directive nowarn_bif_clash is no longer allowed,~n"
-		  " - use explicit module names or -compile({no_auto_import, [F/A]})", []);
-format_error({bad_on_load,Term}) ->
-    io_lib:format("badly formed on_load attribute: ~tw", [Term]);
-format_error(multiple_on_loads) ->
-    "more than one on_load attribute";
-format_error({bad_on_load_arity,{F,A}}) ->
-    io_lib:format("function ~tw/~w has wrong arity (must be 0)", [F,A]);
-format_error({undefined_on_load,{F,A}}) ->
-    io_lib:format("function ~tw/~w undefined", [F,A]);
-format_error(nif_inline) ->
-    "inlining is enabled - local calls to NIFs may call their Erlang "
-    "implementation instead";
-
-format_error(export_all) ->
-    "export_all flag enabled - all functions will be exported";
-format_error({duplicated_export, {F,A}}) ->
-    io_lib:format("function ~tw/~w already exported", [F,A]);
-format_error({unused_import,{{F,A},M}}) ->
-    io_lib:format("import ~w:~tw/~w is unused", [M,F,A]);
-format_error({undefined_function,{F,A}}) ->
-    io_lib:format("function ~tw/~w undefined", [F,A]);
-format_error({redefine_function,{F,A}}) ->
-    io_lib:format("function ~tw/~w already defined", [F,A]);
-format_error({define_import,{F,A}}) ->
-    io_lib:format("defining imported function ~tw/~w", [F,A]);
-format_error({unused_function,{F,A}}) ->
-    io_lib:format("function ~tw/~w is unused", [F,A]);
-format_error({call_to_redefined_bif,{F,A}}) ->
-    io_lib:format("ambiguous call of overridden auto-imported BIF ~w/~w~n"
-		  " - use erlang:~w/~w or \"-compile({no_auto_import,[~w/~w]}).\" "
-		  "to resolve name clash", [F,A,F,A,F,A]);
-format_error({call_to_redefined_old_bif,{F,A}}) ->
-    io_lib:format("ambiguous call of overridden pre R14 auto-imported BIF ~w/~w~n"
-		  " - use erlang:~w/~w or \"-compile({no_auto_import,[~w/~w]}).\" "
-		  "to resolve name clash", [F,A,F,A,F,A]);
-format_error({redefine_old_bif_import,{F,A}}) ->
-    io_lib:format("import directive overrides pre R14 auto-imported BIF ~w/~w~n"
-		  " - use \"-compile({no_auto_import,[~w/~w]}).\" "
-		  "to resolve name clash", [F,A,F,A]);
-format_error({redefine_bif_import,{F,A}}) ->
-    io_lib:format("import directive overrides auto-imported BIF ~w/~w~n"
-		  " - use \"-compile({no_auto_import,[~w/~w]}).\" to resolve name clash", [F,A,F,A]);
-format_error({deprecated, MFA, String, Rel}) ->
-    io_lib:format("~s is deprecated and will be removed in ~s; ~s",
-		  [format_mfa(MFA), Rel, String]);
-format_error({deprecated, MFA, String}) when is_list(String) ->
-    io_lib:format("~s is deprecated; ~s", [format_mfa(MFA), String]);
-format_error({deprecated_type, {M1, F1, A1}, String}) when is_list(String) ->
-    io_lib:format("the type ~p:~p~s is deprecated; ~s",
-                  [M1, F1, gen_type_paren(A1), String]);
-format_error({removed, MFA, ReplacementMFA, Rel}) ->
-    io_lib:format("call to ~s will fail, since it was removed in ~s; "
-		  "use ~s", [format_mfa(MFA), Rel, format_mfa(ReplacementMFA)]);
-format_error({removed, MFA, String}) when is_list(String) ->
-    io_lib:format("~s is removed; ~s", [format_mfa(MFA), String]);
-format_error({removed_type, MNA, String}) ->
-    io_lib:format("the type ~s is removed; ~s", [format_mna(MNA), String]);
-format_error({obsolete_guard, {F, A}}) ->
-    io_lib:format("~p/~p obsolete (use is_~p/~p)", [F, A, F, A]);
-format_error({obsolete_guard_overridden,Test}) ->
-    io_lib:format("obsolete ~s/1 (meaning is_~s/1) is illegal when "
-		  "there is a local/imported function named is_~p/1 ",
-		  [Test,Test,Test]);
-format_error({too_many_arguments,Arity}) ->
-    io_lib:format("too many arguments (~w) - "
-		  "maximum allowed is ~w", [Arity,?MAX_ARGUMENTS]);
-%% --- patterns and guards ---
-format_error(illegal_pattern) -> "illegal pattern";
-format_error(illegal_map_key) -> "illegal map key in pattern";
-format_error(illegal_bin_pattern) ->
-    "binary patterns cannot be matched in parallel using '='";
-format_error(illegal_expr) -> "illegal expression";
-format_error({illegal_guard_local_call, {F,A}}) -> 
-    io_lib:format("call to local/imported function ~tw/~w is illegal in guard",
-		  [F,A]);
-format_error(illegal_guard_expr) -> "illegal guard expression";
-%% --- maps ---
-format_error(illegal_map_construction) ->
-    "only association operators '=>' are allowed in map construction";
-%% --- records ---
-format_error({undefined_record,T}) ->
-    io_lib:format("record ~tw undefined", [T]);
-format_error({redefine_record,T}) ->
-    io_lib:format("record ~tw already defined", [T]);
-format_error({redefine_field,T,F}) ->
-    io_lib:format("field ~tw already defined in record ~tw", [F,T]);
-format_error(bad_multi_field_init) ->
-    io_lib:format("'_' initializes no omitted fields", []);
-format_error({undefined_field,T,F}) ->
-    io_lib:format("field ~tw undefined in record ~tw", [F,T]);
-format_error(illegal_record_info) ->
-    "illegal record info";
-format_error({field_name_is_variable,T,F}) ->
-    io_lib:format("field ~tw is not an atom or _ in record ~tw", [F,T]);
-format_error({wildcard_in_update,T}) ->
-    io_lib:format("meaningless use of _ in update of record ~tw", [T]);
-format_error({unused_record,T}) ->
-    io_lib:format("record ~tw is unused", [T]);
-format_error({untyped_record,T}) ->
-    io_lib:format("record ~tw has field(s) without type information", [T]);
-%% --- variables ----
-format_error({unbound_var,V}) ->
-    io_lib:format("variable ~w is unbound", [V]);
-format_error({unsafe_var,V,{What,Where}}) ->
-    io_lib:format("variable ~w unsafe in ~w ~s",
-                  [V,What,format_where(Where)]);
-format_error({exported_var,V,{What,Where}}) ->
-    io_lib:format("variable ~w exported from ~w ~s",
-                  [V,What,format_where(Where)]);
-format_error({shadowed_var,V,In}) ->
-    io_lib:format("variable ~w shadowed in ~w", [V,In]);
-format_error({unused_var, V}) ->
-    io_lib:format("variable ~w is unused", [V]);
-format_error({variable_in_record_def,V}) ->
-    io_lib:format("variable ~w in record definition", [V]);
-format_error({stacktrace_guard,V}) ->
-    io_lib:format("stacktrace variable ~w must not be used in a guard", [V]);
-format_error({stacktrace_bound,V}) ->
-    io_lib:format("stacktrace variable ~w must not be previously bound", [V]);
-%% --- binaries ---
-format_error({undefined_bittype,Type}) ->
-    io_lib:format("bit type ~tw undefined", [Type]);
-format_error({bittype_mismatch,Val1,Val2,What}) ->
-    io_lib:format("conflict in ~s specification for bit field: '~p' and '~p'",
-		  [What,Val1,Val2]);
-format_error(bittype_unit) ->
-    "a bit unit size must not be specified unless a size is specified too";
-format_error(illegal_bitsize) ->
-    "illegal bit size";
-format_error({illegal_bitsize_local_call, {F,A}}) ->
-    io_lib:format("call to local/imported function ~tw/~w is illegal in a size "
-                  "expression for a binary segment",
-		  [F,A]);
-format_error(non_integer_bitsize) ->
-    "a size expression in a pattern evaluates to a non-integer value; "
-        "this pattern cannot possibly match";
-format_error(unsized_binary_not_at_end) ->
-    "a binary field without size is only allowed at the end of a binary pattern";
-format_error(typed_literal_string) ->
-    "a literal string in a binary pattern must not have a type or a size";
-format_error(utf_bittype_size_or_unit) ->
-    "neither size nor unit must be given for segments of type utf8/utf16/utf32";
-format_error({bad_bitsize,Type}) ->
-    io_lib:format("bad ~s bit size", [Type]);
-format_error(unsized_binary_in_bin_gen_pattern) ->
-    "binary fields without size are not allowed in patterns of bit string generators";
-%% --- behaviours ---
-format_error({conflicting_behaviours,{Name,Arity},B,FirstL,FirstB}) ->
-    io_lib:format("conflicting behaviours - callback ~tw/~w required by both '~p' "
-		  "and '~p' ~s", [Name,Arity,B,FirstB,format_where(FirstL)]);
-format_error({undefined_behaviour_func, {Func,Arity}, Behaviour}) ->
-    io_lib:format("undefined callback function ~tw/~w (behaviour '~w')",
-		  [Func,Arity,Behaviour]);
-format_error({undefined_behaviour,Behaviour}) ->
-    io_lib:format("behaviour ~tw undefined", [Behaviour]);
-format_error({undefined_behaviour_callbacks,Behaviour}) ->
-    io_lib:format("behaviour ~w callback functions are undefined",
-		  [Behaviour]);
-format_error({ill_defined_behaviour_callbacks,Behaviour}) ->
-    io_lib:format("behaviour ~w callback functions erroneously defined",
-		  [Behaviour]);
-format_error({ill_defined_optional_callbacks,Behaviour}) ->
-    io_lib:format("behaviour ~w optional callback functions erroneously defined",
-		  [Behaviour]);
-format_error({behaviour_info, {_M,F,A}}) ->
-    io_lib:format("cannot define callback attibute for ~tw/~w when "
-                  "behaviour_info is defined",[F,A]);
-format_error({redefine_optional_callback, {F, A}}) ->
-    io_lib:format("optional callback ~tw/~w duplicated", [F, A]);
-format_error({undefined_callback, {_M, F, A}}) ->
-    io_lib:format("callback ~tw/~w is undefined", [F, A]);
-%% --- types and specs ---
-format_error({singleton_typevar, Name}) ->
-    io_lib:format("type variable ~w is only used once (is unbound)", [Name]);
-format_error({bad_export_type, _ETs}) ->
-    io_lib:format("bad export_type declaration", []);
-format_error({duplicated_export_type, {T, A}}) ->
-    io_lib:format("type ~tw/~w already exported", [T, A]);
-format_error({undefined_type, {TypeName, Arity}}) ->
-    io_lib:format("type ~tw~s undefined", [TypeName, gen_type_paren(Arity)]);
-format_error({unused_type, {TypeName, Arity}}) ->
-    io_lib:format("type ~tw~s is unused", [TypeName, gen_type_paren(Arity)]);
-format_error({new_builtin_type, {TypeName, Arity}}) ->
-    io_lib:format("type ~w~s is a new builtin type; "
-		  "its (re)definition is allowed only until the next release",
-		  [TypeName, gen_type_paren(Arity)]);
-format_error({builtin_type, {TypeName, Arity}}) ->
-    io_lib:format("type ~w~s is a builtin type; it cannot be redefined",
-		  [TypeName, gen_type_paren(Arity)]);
-format_error({renamed_type, OldName, NewName}) ->
-    io_lib:format("type ~w() is now called ~w(); "
-		  "please use the new name instead", [OldName, NewName]);
-format_error({redefine_type, {TypeName, Arity}}) ->
-    io_lib:format("type ~tw~s already defined",
-		  [TypeName, gen_type_paren(Arity)]);
-format_error({type_syntax, Constr}) ->
-    io_lib:format("bad ~tw type", [Constr]);
-format_error(old_abstract_code) ->
-    io_lib:format("abstract code generated before Erlang/OTP 19.0 and "
-                  "having typed record fields cannot be compiled", []);
-format_error({redefine_spec, {M, F, A}}) ->
-    io_lib:format("spec for ~tw:~tw/~w already defined", [M, F, A]);
-format_error({redefine_spec, {F, A}}) ->
-    io_lib:format("spec for ~tw/~w already defined", [F, A]);
-format_error({redefine_callback, {F, A}}) ->
-    io_lib:format("callback ~tw/~w already defined", [F, A]);
-format_error({bad_callback, {M, F, A}}) ->
-    io_lib:format("explicit module not allowed for callback ~tw:~tw/~w",
-                  [M, F, A]);
-format_error({bad_module, {M, F, A}}) ->
-    io_lib:format("spec for function ~w:~tw/~w from other module", [M, F, A]);
-format_error({spec_fun_undefined, {F, A}}) ->
-    io_lib:format("spec for undefined function ~tw/~w", [F, A]);
-format_error({missing_spec, {F,A}}) ->
-    io_lib:format("missing specification for function ~tw/~w", [F, A]);
-format_error(spec_wrong_arity) ->
-    "spec has wrong arity";
-format_error(callback_wrong_arity) ->
-    "callback has wrong arity";
-format_error({deprecated_builtin_type, {Name, Arity},
-              Replacement, Rel}) ->
-    UseS = case Replacement of
-               {Mod, NewName} ->
-                   io_lib:format("use ~w:~w/~w", [Mod, NewName, Arity]);
-               {Mod, NewName, NewArity} ->
-                   io_lib:format("use ~w:~w/~w or preferably ~w:~w/~w",
-                                 [Mod, NewName, Arity,
-                                  Mod, NewName, NewArity])
-           end,
-    io_lib:format("type ~w/~w is deprecated and will be "
-                  "removed in ~s; use ~s",
-                  [Name, Arity, Rel, UseS]);
-format_error({not_exported_opaque, {TypeName, Arity}}) ->
-    io_lib:format("opaque type ~tw~s is not exported",
-                  [TypeName, gen_type_paren(Arity)]);
-format_error({underspecified_opaque, {TypeName, Arity}}) ->
-    io_lib:format("opaque type ~tw~s is underspecified and therefore meaningless",
-                  [TypeName, gen_type_paren(Arity)]);
-format_error({bad_dialyzer_attribute,Term}) ->
-    io_lib:format("badly formed dialyzer attribute: ~tw", [Term]);
-format_error({bad_dialyzer_option,Term}) ->
-    io_lib:format("unknown dialyzer warning option: ~tw", [Term]);
-%% --- obsolete? unused? ---
 format_error({format_error, {Fmt, Args}}) ->
     io_lib:format(Fmt, Args).
 
@@ -2451,7 +2164,9 @@ expr({call,Line,{remote,_Lr,{atom,_Lm,M},{atom,Lf,F}},As}, Vt, St0) ->
     St2 = check_remote_function(Line, M, F, As, St1),
     St3 = check_module_name(M, Line, St2),
     expr_list(As, Vt, St3);
-expr({call,Line,{remote,_Lr,M,F},As}, Vt, St0) ->
+expr(A, B, C) ->
+    expr1(A, B, C).
+expr1({call,Line,{remote,_Lr,M,F},As}, Vt, St0) ->
     St1 = keyword_warning(Line, M, St0),
     St2 = keyword_warning(Line, F, St1),
     St3 = case M of
@@ -2461,7 +2176,7 @@ expr({call,Line,{remote,_Lr,M,F},As}, Vt, St0) ->
                   St2
           end,
     expr_list([M,F|As], Vt, St3);
-expr({call,Line,{atom,La,F},As}, Vt, St0) ->
+expr1({call,Line,{atom,La,F},As}, Vt, St0) ->
     St1 = keyword_warning(La, F, St0),
     {Asvt,St2} = expr_list(As, Vt, St1),
     A = length(As),
@@ -2516,10 +2231,10 @@ expr({call,Line,{atom,La,F},As}, Vt, St0) ->
                           end
                   end}
     end;
-expr({call,Line,F,As}, Vt, St0) ->
+expr1({call,Line,F,As}, Vt, St0) ->
     St = warn_invalid_call(Line,F,St0),
     expr_list([F|As], Vt, St);                  %They see the same variables
-expr({'try',Line,Es,Scs,Ccs,As}, Vt, St0) ->
+expr1({'try',Line,Es,Scs,Ccs,As}, Vt, St0) ->
     %% The only exports we allow are from the try expressions to the
     %% success clauses.
     {Evt0,St1} = exprs(Es, Vt, St0),
@@ -2535,28 +2250,28 @@ expr({'try',Line,Es,Scs,Ccs,As}, Vt, St0) ->
     Avt1 = vtupdate(vtunsafe(TryLine, Avt0, Vt), Avt0),
     Avt = vtmerge(Evt2, Avt1),
     {Avt,St};
-expr({'catch',Line,E}, Vt, St0) ->
+expr1({'catch',Line,E}, Vt, St0) ->
     %% No new variables added, flag new variables as unsafe.
     {Evt,St} = expr(E, Vt, St0),
     {vtupdate(vtunsafe({'catch',Line}, Evt, Vt), Evt),St};
-expr({match,_Line,P,E}, Vt, St0) ->
+expr1({match,_Line,P,E}, Vt, St0) ->
     {Evt,St1} = expr(E, Vt, St0),
     {Pvt,Pnew,St2} = pattern(P, vtupdate(Evt, Vt), St1),
     St = reject_invalid_alias_expr(P, E, Vt, St2),
     {vtupdate(Pnew, vtmerge(Evt, Pvt)),St};
 %% No comparison or boolean operators yet.
-expr({op,_Line,_Op,A}, Vt, St) ->
+expr1({op,_Line,_Op,A}, Vt, St) ->
     expr(A, Vt, St);
-expr({op,Line,Op,L,R}, Vt, St0) when Op =:= 'orelse'; Op =:= 'andalso' ->
+expr1({op,Line,Op,L,R}, Vt, St0) when Op =:= 'orelse'; Op =:= 'andalso' ->
     {Evt1,St1} = expr(L, Vt, St0),
     Vt1 = vtupdate(Evt1, Vt),
     {Evt2,St2} = expr(R, Vt1, St1),
     Evt3 = vtupdate(vtunsafe({Op,Line}, Evt2, Vt1), Evt2),
     {vtmerge(Evt1, Evt3),St2};
-expr({op,_Line,_Op,L,R}, Vt, St) ->
+expr1({op,_Line,_Op,L,R}, Vt, St) ->
     expr_list([L,R], Vt, St);                   %They see the same variables
 %% The following are not allowed to occur anywhere!
-expr({remote,Line,_M,_F}, _Vt, St) ->
+expr1({remote,Line,_M,_F}, _Vt, St) ->
     {[],add_error(Line, illegal_expr, St)}.
 
 %% expr_list(Expressions, Variables, State) ->
