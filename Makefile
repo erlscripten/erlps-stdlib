@@ -115,3 +115,7 @@ build_tests:
 	./erlscripten -s erl_anno_SUITE.beam -o test/Erl.Anno.SUITE.purs
 	rm erl_anno_SUITE.beam
 
+	erlc +debug_info erlang_src/ct.erl
+	./erlscripten -s ct.beam -o test/Ct.purs
+	rm ct.beam
+
