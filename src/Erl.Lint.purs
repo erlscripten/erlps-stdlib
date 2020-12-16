@@ -13480,20 +13480,24 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 4)), fmt_3,
       (ErlangCons (ErlangAtom "int") need_4)])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons _ fmt_2)),
-                            need_3]
+erlps__extract_sequence__3 args =
+  (erlps__extract_sequence__3__p1 args)
+
+erlps__extract_sequence__3__p1 :: ErlangFun
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons _ fmt_2)),
+                                need_3]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 3)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 46))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 4)), fmt_2, need_3])
-erlps__extract_sequence__3 [(ErlangInt num_0), fmt_1, need_2]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0), fmt_1, need_2]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 3))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 4)), fmt_1, need_2])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 108))) =
@@ -13502,63 +13506,63 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
       (ErlangCons (ErlangInt (DBI.fromInt 108))
          (ErlangCons (ErlangInt (DBI.fromInt 116)) fmt_3)),
       need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 99))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 99)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 115))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 115)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 112))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 112)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 80))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 80)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 119))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 119)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 87))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 87)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons c_2 _fmt_3)),
-                            _need_4]
+erlps__extract_sequence__3__p1 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons c_2 _fmt_3)),
+                                _need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 116))) =
   let    lop_7 = (make_string "invalid control ~t")
@@ -13566,18 +13570,22 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
     tup_el_6 =
       (BIF.erlang__op_append [lop_7, (ErlangCons c_2 ErlangEmptyList)])
   in (ErlangTuple [(ErlangAtom "error"), tup_el_6])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p1 args =
+  (erlps__extract_sequence__3__p2 args)
+
+erlps__extract_sequence__3__p2 :: ErlangFun
+erlps__extract_sequence__3__p2 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 108)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 112))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 112)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) (ErlangCons (ErlangInt num_3) fmt_4))),
-                            need_5]
+erlps__extract_sequence__3__p2 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) (ErlangCons (ErlangInt num_3) fmt_4))),
+                                need_5]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 108)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 116)))
@@ -13585,18 +13593,18 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 112)) fmt_4), need_5])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
-                            need_4]
+erlps__extract_sequence__3__p2 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) fmt_3)),
+                                need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 108)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 80))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 80)) fmt_3), need_4])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) (ErlangCons (ErlangInt num_3) fmt_4))),
-                            need_5]
+erlps__extract_sequence__3__p2 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) (ErlangCons (ErlangInt num_3) fmt_4))),
+                                need_5]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 108)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 116)))
@@ -13604,9 +13612,9 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)),
       (ErlangCons (ErlangInt (DBI.fromInt 80)) fmt_4), need_5])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) (ErlangCons c_3 _fmt_4))),
-                            _need_5]
+erlps__extract_sequence__3__p2 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons (ErlangInt num_2) (ErlangCons c_3 _fmt_4))),
+                                _need_5]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 108)))
   , ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 116))) =
@@ -13615,9 +13623,9 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
     tup_el_7 =
       (BIF.erlang__op_append [lop_8, (ErlangCons c_3 ErlangEmptyList)])
   in (ErlangTuple [(ErlangAtom "error"), tup_el_7])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons (ErlangInt num_1) (ErlangCons c_2 _fmt_3)),
-                            _need_4]
+erlps__extract_sequence__3__p2 [(ErlangInt num_0),
+                                (ErlangCons (ErlangInt num_1) (ErlangCons c_2 _fmt_3)),
+                                _need_4]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4)))
   , ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 108))) =
   let    lop_7 = (make_string "invalid control ~l")
@@ -13625,12 +13633,12 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
     tup_el_6 =
       (BIF.erlang__op_append [lop_7, (ErlangCons c_2 ErlangEmptyList)])
   in (ErlangTuple [(ErlangAtom "error"), tup_el_6])
-erlps__extract_sequence__3 [(ErlangInt num_0), fmt_1, need_2]
+erlps__extract_sequence__3__p2 [(ErlangInt num_0), fmt_1, need_2]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 4))) =
   (erlps__extract_sequence__3
      [(ErlangInt (DBI.fromInt 5)), fmt_1, need_2])
-erlps__extract_sequence__3 [(ErlangInt num_0),
-                            (ErlangCons c_1 fmt_2), need0_3]
+erlps__extract_sequence__3__p2 [(ErlangInt num_0),
+                                (ErlangCons c_1 fmt_2), need0_3]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 5))) =
   let case_4 = (erlps__control_type__2 [c_1, need0_3])
   in
@@ -13643,12 +13651,12 @@ erlps__extract_sequence__3 [(ErlangInt num_0),
         in (ErlangTuple [(ErlangAtom "error"), tup_el_8])
       need1_13 -> (ErlangTuple [(ErlangAtom "ok"), need1_13, fmt_2])
       something_else -> (EXC.case_clause something_else)
-erlps__extract_sequence__3 [_, (ErlangEmptyList), _need_0] =
+erlps__extract_sequence__3__p2 [_, (ErlangEmptyList), _need_0] =
   let tup_el_2 = (make_string "truncated")
   in (ErlangTuple [(ErlangAtom "error"), tup_el_2])
-erlps__extract_sequence__3 [arg_3, arg_4, arg_5] =
+erlps__extract_sequence__3__p2 [arg_3, arg_4, arg_5] =
   (EXC.function_clause unit)
-erlps__extract_sequence__3 args =
+erlps__extract_sequence__3__p2 args =
   (EXC.badarity
      (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
