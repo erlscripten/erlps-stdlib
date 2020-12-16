@@ -465,11 +465,11 @@ simple_cases(Config) when is_list(Config) ->
 
 %% OTP-4929. Unary plus rejects non-numbers.
 unary_plus(Config) when is_list(Config) ->
-    %%check(fun() -> F = fun(X) -> + X end,
-		%%   true = -1 == F(-1) end,
-	  %%"begin F = fun(X) -> + X end,"
-	  %%"      true = -1 == F(-1) end.", true, ['F'], none, none),
-    %%error_check("+a.", badarith),
+    check(fun() -> F = fun(X) -> + X end,
+		   true = -1 == F(-1) end,
+	  "begin F = fun(X) -> + X end,"
+	  "      true = -1 == F(-1) end.", true, ['F'], none, none),
+    error_check("+a.", badarith),
     ok.
 
 %% OTP-5064. Can no longer apply atoms.
