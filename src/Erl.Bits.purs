@@ -17,7 +17,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -95,9 +95,9 @@ erlps__set_bit_type__2 [size_0, typelist_1] =
             _ -> (EXC.badmatch match_expr_7))
      (\ ex_14 ->
         case ex_14 of
-          (ErlangTuple [(ErlangAtom "throw"), error_15, _]) -> error_15
-          ex_14 -> (EXC.raise ex_14)))
-erlps__set_bit_type__2 [arg_16, arg_17] =
+          (ErlangTuple [(ErlangAtom "throw"), error_16, _]) -> error_16
+          ex_15 -> (EXC.raise ex_15)))
+erlps__set_bit_type__2 [arg_17, arg_18] =
   (EXC.function_clause unit)
 erlps__set_bit_type__2 args =
   (EXC.badarity
@@ -183,7 +183,7 @@ erlps__type_to_record__1 [(ErlangTuple [(ErlangAtom "unit"),
       (ErlangAtom "undefined")])
 erlps__type_to_record__1 [(ErlangTuple [(ErlangAtom "unit"),
                                         sz_0])]
-  | (((isEInt sz_0) &&
+  | (((H.isEInt sz_0) &&
         (weakGt sz_0 (ErlangInt (DBI.fromInt 0)))) &&
        (weakLeq sz_0 (ErlangInt (DBI.fromInt 256)))) =
   (ErlangTuple
@@ -443,7 +443,6 @@ erlps__check_size_unit_1__2 [size_0, unit_1] =
                  [(ErlangAtom "error"),
                   (ErlangAtom "utf_bittype_size_or_unit")])
           in (BIF.erlang__throw__1 [arg_3])
-        something_else -> (EXC.case_clause something_else)
   in
     case unit_1 of
       (ErlangAtom "undefined") -> (ErlangAtom "ok")
@@ -453,7 +452,6 @@ erlps__check_size_unit_1__2 [size_0, unit_1] =
             (ErlangTuple
                [(ErlangAtom "error"), (ErlangAtom "utf_bittype_size_or_unit")])
         in (BIF.erlang__throw__1 [arg_7])
-      something_else -> (EXC.case_clause something_else)
 erlps__check_size_unit_1__2 [arg_10, arg_11] =
   (EXC.function_clause unit)
 erlps__check_size_unit_1__2 args =

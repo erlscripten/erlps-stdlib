@@ -27,7 +27,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -423,7 +423,7 @@ erlps__in_edges__2 [g_0, v_1] =
     lc_src_2 =
       (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
   in
-    (flmap
+    (H.flmap
        (\ lc_11 ->
           case lc_11 of
             (ErlangTuple [(ErlangTuple [(ErlangAtom "in"), _]), e_10]) ->
@@ -494,7 +494,7 @@ erlps__out_edges__2 [g_0, v_1] =
     lc_src_2 =
       (BIF.do_remote_fun_call "Ets" "erlps__lookup__2" [arg_3, arg_7])
   in
-    (flmap
+    (H.flmap
        (\ lc_11 ->
           case lc_11 of
             (ErlangTuple [(ErlangTuple [(ErlangAtom "out"), _]), e_10]) ->
@@ -1018,7 +1018,6 @@ erlps__rm_edge_0__4 [(ErlangCons e_0 es_1), v1_2, v2_3, g_4] =
         let _ = (erlps__do_del_edge__4 [e_0, v1_2, v2_3, g_4])
         in (erlps__rm_edge_0__4 [es_1, v1_2, v2_3, g_4])
       _ -> (erlps__rm_edge_0__4 [es_1, v1_2, v2_3, g_4])
-      something_else -> (EXC.case_clause something_else)
 erlps__rm_edge_0__4 [(ErlangEmptyList), _, _,
                      (ErlangTuple [(ErlangAtom "digraph"), _, _, _, _])]
   =
@@ -1077,7 +1076,7 @@ erlps__do_add_edge__2 [(ErlangTuple [e_0, v1_1, v2_2, label_3]),
                                (ErlangCons v2_2 ErlangEmptyList))])
                     in (ErlangTuple [(ErlangAtom "error"), tup_el_31])
                   (ErlangAtom "false") | ((ErlangAtom "true") ==
-                                            (falsifyErrors
+                                            (H.falsifyErrors
                                                (\ _ ->
                                                   let
                                                     lop_38 =
@@ -1120,7 +1119,7 @@ erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"),
       (ErlangCons (ErlangTuple [e_7, vert1_8, vert2_9,
                                 _]) (ErlangEmptyList)) | (e_7 == e_1)
                                                        , ((ErlangAtom "true") ==
-                                                            (falsifyErrors
+                                                            (H.falsifyErrors
                                                                (\ _ ->
                                                                   let
                                                                     lop_10 =
@@ -1141,7 +1140,6 @@ erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"),
                                                                            lop_10)))) ->
         (ErlangAtom "true")
       _ -> (ErlangAtom "false")
-      something_else -> (EXC.case_clause something_else)
 erlps__other_edge_exists__4 [arg_15, arg_16, arg_17, arg_18] =
   (EXC.function_clause unit)
 erlps__other_edge_exists__4 args =
@@ -1191,7 +1189,6 @@ erlps__acyclic_add_edge__5 [e_0, v1_1, v2_2, label_3, g_4] =
       path_14 ->
         let tup_el_16 = (ErlangTuple [(ErlangAtom "bad_edge"), path_14])
         in (ErlangTuple [(ErlangAtom "error"), tup_el_16])
-      something_else -> (EXC.case_clause something_else)
 erlps__acyclic_add_edge__5 [arg_19, arg_20, arg_21, arg_22,
                             arg_23]
   =
@@ -1209,7 +1206,6 @@ erlps__del_path__3 [g_0, v1_1, v2_2] =
       path_7 ->
         let _ = (erlps__rm_edges__2 [path_7, g_0])
         in (erlps__del_path__3 [g_0, v1_1, v2_2])
-      something_else -> (EXC.case_clause something_else)
 erlps__del_path__3 [arg_13, arg_14, arg_15] =
   (EXC.function_clause unit)
 erlps__del_path__3 args =
@@ -1236,7 +1232,6 @@ erlps__get_cycle__2 [g_0, v_1] =
             (ErlangAtom "false") -> (ErlangAtom "false")
             something_else -> (EXC.case_clause something_else)
       vs_24 -> vs_24
-      something_else -> (EXC.case_clause something_else)
 erlps__get_cycle__2 [arg_25, arg_26] = (EXC.function_clause unit)
 erlps__get_cycle__2 args =
   (EXC.badarity
@@ -1376,8 +1371,6 @@ erlps__spath__4 [q_0, g_1, sink_2, t_3] =
                             (erlps__queue_out_neighbours__3 [v2_12, g_1, q1_7])
                         in (erlps__spath__4 [nq_31, g_1, sink_2, t_3])
                       _v_36 -> (erlps__spath__4 [q1_7, g_1, sink_2, t_3])
-                      something_else -> (EXC.case_clause something_else)
-                _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_14)
       (ErlangTuple [(ErlangAtom "empty"), _q1_41]) ->
         (ErlangAtom "false")

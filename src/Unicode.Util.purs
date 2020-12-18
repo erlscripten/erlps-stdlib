@@ -18,7 +18,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -182,7 +182,7 @@ erlps__is_whitespace__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__cp__1 :: ErlangFun
-erlps__cp__1 [l_1@(ErlangCons c_0 _)] | (isEInt c_0) = l_1
+erlps__cp__1 [l_1@(ErlangCons c_0 _)] | (H.isEInt c_0) = l_1
 erlps__cp__1 [(ErlangCons list_0 (ErlangEmptyList))] =
   (erlps__cp__1 [list_0])
 erlps__cp__1 [(ErlangCons list_0 r_1)] =
@@ -210,10 +210,10 @@ erlps__cp__1 args =
 
 erlps__cpl__2 :: ErlangFun
 erlps__cpl__2 [(ErlangCons c_0 (ErlangEmptyList)), r_1]
-  | (isEInt c_0) =
+  | (H.isEInt c_0) =
   let tail_3 = (erlps__cpl_1_cont__1 [r_1])
   in (ErlangCons c_0 tail_3)
-erlps__cpl__2 [(ErlangCons c_0 t_1), r_2] | (isEInt c_0) =
+erlps__cpl__2 [(ErlangCons c_0 t_1), r_2] | (H.isEInt c_0) =
   let tail_4 = (erlps__cpl_cont__2 [t_1, r_2])
   in (ErlangCons c_0 tail_4)
 erlps__cpl__2 [(ErlangCons list_0 (ErlangEmptyList)), r_1] =
@@ -243,7 +243,7 @@ erlps__cpl__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__cpl_cont__2 :: ErlangFun
-erlps__cpl_cont__2 [(ErlangCons c_0 t_1), r_2] | (isEInt c_0) =
+erlps__cpl_cont__2 [(ErlangCons c_0 t_1), r_2] | (H.isEInt c_0) =
   let tail_4 = (erlps__cpl_cont2__2 [t_1, r_2])
   in (ErlangCons c_0 tail_4)
 erlps__cpl_cont__2 [(ErlangCons l_0 (ErlangEmptyList)), r_1] =
@@ -259,7 +259,8 @@ erlps__cpl_cont__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__cpl_cont2__2 :: ErlangFun
-erlps__cpl_cont2__2 [(ErlangCons c_0 t_1), r_2] | (isEInt c_0) =
+erlps__cpl_cont2__2 [(ErlangCons c_0 t_1), r_2]
+  | (H.isEInt c_0) =
   let tail_4 = (erlps__cpl_cont3__2 [t_1, r_2])
   in (ErlangCons c_0 tail_4)
 erlps__cpl_cont2__2 [(ErlangCons l_0 (ErlangEmptyList)), r_1] =
@@ -276,9 +277,10 @@ erlps__cpl_cont2__2 args =
 
 erlps__cpl_cont3__2 :: ErlangFun
 erlps__cpl_cont3__2 [(ErlangCons c_0 (ErlangEmptyList)), r_1]
-  | (isEInt c_0) =
+  | (H.isEInt c_0) =
   (ErlangCons c_0 r_1)
-erlps__cpl_cont3__2 [(ErlangCons c_0 t_1), r_2] | (isEInt c_0) =
+erlps__cpl_cont3__2 [(ErlangCons c_0 t_1), r_2]
+  | (H.isEInt c_0) =
   (ErlangCons c_0 (ErlangCons t_1 r_2))
 erlps__cpl_cont3__2 [(ErlangCons l_0 (ErlangEmptyList)), r_1] =
   (erlps__cpl_cont3__2 [l_0, r_1])
@@ -293,7 +295,7 @@ erlps__cpl_cont3__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__cpl_1_cont__1 :: ErlangFun
-erlps__cpl_1_cont__1 [(ErlangCons c_0 t_1)] | (isEInt c_0) =
+erlps__cpl_1_cont__1 [(ErlangCons c_0 t_1)] | (H.isEInt c_0) =
   let tail_3 = (erlps__cpl_1_cont2__1 [t_1])
   in (ErlangCons c_0 tail_3)
 erlps__cpl_1_cont__1 [(ErlangCons l_0 (ErlangEmptyList))] =
@@ -307,7 +309,7 @@ erlps__cpl_1_cont__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__cpl_1_cont2__1 :: ErlangFun
-erlps__cpl_1_cont2__1 [(ErlangCons c_0 t_1)] | (isEInt c_0) =
+erlps__cpl_1_cont2__1 [(ErlangCons c_0 t_1)] | (H.isEInt c_0) =
   let tail_3 = (erlps__cpl_1_cont3__1 [t_1])
   in (ErlangCons c_0 tail_3)
 erlps__cpl_1_cont2__1 [(ErlangCons l_0 (ErlangEmptyList))] =
@@ -321,7 +323,7 @@ erlps__cpl_1_cont2__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__cpl_1_cont3__1 :: ErlangFun
-erlps__cpl_1_cont3__1 [t_1@(ErlangCons c_0 _)] | (isEInt c_0) =
+erlps__cpl_1_cont3__1 [t_1@(ErlangCons c_0 _)] | (H.isEInt c_0) =
   t_1
 erlps__cpl_1_cont3__1 [(ErlangCons l_0 (ErlangEmptyList))] =
   (erlps__cpl_1_cont3__1 [l_0])
@@ -334,7 +336,8 @@ erlps__cpl_1_cont3__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__cp_no_bin__1 :: ErlangFun
-erlps__cp_no_bin__1 [l_1@(ErlangCons c_0 _)] | (isEInt c_0) = l_1
+erlps__cp_no_bin__1 [l_1@(ErlangCons c_0 _)] | (H.isEInt c_0) =
+  l_1
 erlps__cp_no_bin__1 [(ErlangCons list_0 (ErlangEmptyList))] =
   (erlps__cp_no_bin__1 [list_0])
 erlps__cp_no_bin__1 [(ErlangCons list_0 r_1)] =
@@ -348,10 +351,11 @@ erlps__cp_no_bin__1 args =
 
 erlps__cp_no_binl__2 :: ErlangFun
 erlps__cp_no_binl__2 [(ErlangCons c_0 (ErlangEmptyList)), r_1]
-  | (isEInt c_0) =
+  | (H.isEInt c_0) =
   let tail_3 = (erlps__cpl_1_cont__1 [r_1])
   in (ErlangCons c_0 tail_3)
-erlps__cp_no_binl__2 [(ErlangCons c_0 t_1), r_2] | (isEInt c_0) =
+erlps__cp_no_binl__2 [(ErlangCons c_0 t_1), r_2]
+  | (H.isEInt c_0) =
   let tail_4 = (erlps__cpl_cont__2 [t_1, r_2])
   in (ErlangCons c_0 tail_4)
 erlps__cp_no_binl__2 [(ErlangCons list_0 (ErlangEmptyList)), r_1]
@@ -370,7 +374,7 @@ erlps__cp_no_binl__2 args =
 erlps__gc__1 :: ErlangFun
 erlps__gc__1 [r_0@(ErlangEmptyList)] = r_0
 erlps__gc__1 [r_1@(ErlangCons cp_0 (ErlangEmptyList))]
-  | (isEInt cp_0) =
+  | (H.isEInt cp_0) =
   r_1
 erlps__gc__1 [(ErlangCons cp_1@(ErlangInt num_0) r0_2)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 13))) =
@@ -384,7 +388,6 @@ erlps__gc__1 [(ErlangCons cp_1@(ErlangInt num_0) r0_2)]
               (ErlangCons (ErlangInt (DBI.fromInt 10)) ErlangEmptyList))
            r1_6)
       t_13 -> (ErlangCons cp_1 t_13)
-      something_else -> (EXC.case_clause something_else)
 erlps__gc__1 [t_2@(ErlangCons cp1_0 t1_1)]
   | (weakLt cp1_0 (ErlangInt (DBI.fromInt 256))) =
   case t1_1 of
@@ -400,8 +403,6 @@ erlps__gc__1 [t_2@(ErlangCons cp1_0 t1_1)]
             (ErlangCons cp1_0 t3_8)
           (ErlangAtom "binary_found") -> (erlps__gc_1__1 [t_2])
           t4_12 -> (erlps__gc_1__1 [(ErlangCons cp1_0 t4_12)])
-          something_else -> (EXC.case_clause something_else)
-    something_else -> (EXC.case_clause something_else)
 erlps__gc__1 [(ErlangBinary bin_e_0)] | (BIN.empty bin_e_0) =
   ErlangEmptyList
 erlps__gc__1 [(ErlangBinary bin_c_0)]
@@ -427,10 +428,8 @@ erlps__gc__1 [(ErlangBinary bin_c_0)]
                                     (ErlangInt (DBI.fromInt 256))) ->
           (ErlangCons cp1_3 rest_6)
         _ -> (erlps__gc_1__1 [(ErlangCons cp1_3 rest_6)])
-        something_else -> (EXC.case_clause something_else)
     _ -> (erlps__gc_1__1 [(ErlangCons cp1_3 rest_6)])
-    _ -> (EXC.if_clause unit)
-erlps__gc__1 [t_1@(ErlangCons cp_0 _)] | (isEInt cp_0) =
+erlps__gc__1 [t_1@(ErlangCons cp_0 _)] | (H.isEInt cp_0) =
   (erlps__gc_1__1 [t_1])
 erlps__gc__1 [str_0] =
   let case_1 = (erlps__cp__1 [str_0])
@@ -438,7 +437,6 @@ erlps__gc__1 [str_0] =
     case case_1 of
       error_3@(ErlangTuple [(ErlangAtom "error"), _]) -> error_3
       cps_4 -> (erlps__gc__1 [cps_4])
-      something_else -> (EXC.case_clause something_else)
 erlps__gc__1 [arg_6] = (EXC.function_clause unit)
 erlps__gc__1 args =
   (EXC.badarity
@@ -457,7 +455,6 @@ erlps__gc_1__1 [r_2@(ErlangCons (ErlangInt num_0) r0_1)]
               (ErlangCons (ErlangInt (DBI.fromInt 10)) ErlangEmptyList))
            r1_6)
       _ -> r_2
-      something_else -> (EXC.case_clause something_else)
 erlps__gc_1__1 [r0_3@(ErlangCons cp_1@(ErlangInt num_0) r1_2)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 0))) =
   r0_3
@@ -668,7 +665,6 @@ erlps__gc_1__1 [r0_2@(ErlangCons cp_0 r_1)]
     _ ->
       let arg_5 = (erlps__cp__1 [r_1])
       in (erlps__gc_extend__3 [arg_5, r_1, cp_0])
-    something_else -> (EXC.case_clause something_else)
 erlps__gc_1__1 [r0_3@(ErlangCons cp_1@(ErlangInt num_0) r1_2)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1564))) =
   r0_3
@@ -736,7 +732,6 @@ erlps__gc_extend__3 [(ErlangCons cp_0 t_1), t0_2, cp0_3] =
         (erlps__gc_extend2__3
            [arg_8, t_1,
             (ErlangCons cp_0 (ErlangCons cp0_3 ErlangEmptyList))])
-    something_else -> (EXC.case_clause something_else)
 erlps__gc_extend__3 [(ErlangEmptyList), _, cp_0] =
   (ErlangCons cp_0 ErlangEmptyList)
 erlps__gc_extend__3 [(ErlangTuple [(ErlangAtom "error"), r_0]),
@@ -760,7 +755,6 @@ erlps__gc_extend2__3 [(ErlangCons cp_0 t_1), t0_2, acc_3] =
     _trueorzwj_8 ->
       let arg_9 = (erlps__cp__1 [t_1])
       in (erlps__gc_extend2__3 [arg_9, t_1, (ErlangCons cp_0 acc_3)])
-    something_else -> (EXC.case_clause something_else)
 erlps__gc_extend2__3 [(ErlangEmptyList), _, acc_0] =
   let
     head_1 =
@@ -809,7 +803,6 @@ erlps__gc_ext_pict__3 [(ErlangCons cp_0 r1_1), t0_2, acc_3] =
             head_19 =
               (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [acc_3])
           in (ErlangCons head_19 t0_2)
-        something_else -> (EXC.case_clause something_else)
     something_else -> (EXC.case_clause something_else)
 erlps__gc_ext_pict__3 [(ErlangEmptyList), _t0_0, acc_1] =
   case acc_1 of
@@ -820,7 +813,6 @@ erlps__gc_ext_pict__3 [(ErlangEmptyList), _t0_0, acc_1] =
         head_6 =
           (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [acc_1])
       in (ErlangCons head_6 ErlangEmptyList)
-    something_else -> (EXC.case_clause something_else)
 erlps__gc_ext_pict__3 [(ErlangTuple [(ErlangAtom "error"), r_0]),
                        t_1, acc_2]
   =
@@ -848,7 +840,6 @@ erlps__gc_ext_pict_zwj__3 [(ErlangCons cp_0 r1_1), t0_2, acc_3] =
               head_14 =
                 (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [acc_3])
             in (ErlangCons head_14 t0_2)
-          something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
 erlps__gc_ext_pict_zwj__3 [(ErlangEmptyList), _, acc_0] =
   case acc_0 of
@@ -859,7 +850,6 @@ erlps__gc_ext_pict_zwj__3 [(ErlangEmptyList), _, acc_0] =
         head_5 =
           (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [acc_0])
       in (ErlangCons head_5 ErlangEmptyList)
-    something_else -> (EXC.case_clause something_else)
 erlps__gc_ext_pict_zwj__3 [(ErlangTuple [(ErlangAtom "error"),
                                          r_0]),
                            t_1, acc_2]

@@ -24,7 +24,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -64,7 +64,7 @@ erlps__cyclic_strong_components__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__reachable__2 :: ErlangFun
-erlps__reachable__2 [vs_0, g_1] | (isEList vs_0) =
+erlps__reachable__2 [vs_0, g_1] | (H.isEList vs_0) =
   let    arg_4 = (ErlangFun 3 erlps__out__3)
   in let
     arg_2 =
@@ -76,7 +76,7 @@ erlps__reachable__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__reachable_neighbours__2 :: ErlangFun
-erlps__reachable_neighbours__2 [vs_0, g_1] | (isEList vs_0) =
+erlps__reachable_neighbours__2 [vs_0, g_1] | (H.isEList vs_0) =
   let    arg_4 = (ErlangFun 3 erlps__out__3)
   in let
     arg_2 =
@@ -89,7 +89,7 @@ erlps__reachable_neighbours__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__reaching__2 :: ErlangFun
-erlps__reaching__2 [vs_0, g_1] | (isEList vs_0) =
+erlps__reaching__2 [vs_0, g_1] | (H.isEList vs_0) =
   let    arg_4 = (ErlangFun 3 erlps__in__3)
   in let
     arg_2 =
@@ -101,7 +101,7 @@ erlps__reaching__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__reaching_neighbours__2 :: ErlangFun
-erlps__reaching_neighbours__2 [vs_0, g_1] | (isEList vs_0) =
+erlps__reaching_neighbours__2 [vs_0, g_1] | (H.isEList vs_0) =
   let    arg_4 = (ErlangFun 3 erlps__in__3)
   in let
     arg_2 =
@@ -207,10 +207,10 @@ erlps__arborescence_root__1 [g_0] =
            (\ ex_30 ->
               case ex_30 of
                 (ErlangTuple [_, _, _]) -> (ErlangAtom "no")
-                ex_30 -> (EXC.raise ex_30)))
+                ex_31 -> (EXC.raise ex_31)))
       (ErlangAtom "false") -> (ErlangAtom "no")
       something_else -> (EXC.case_clause something_else)
-erlps__arborescence_root__1 [arg_31] = (EXC.function_clause unit)
+erlps__arborescence_root__1 [arg_32] = (EXC.function_clause unit)
 erlps__arborescence_root__1 args =
   (EXC.badarity
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -255,16 +255,13 @@ erlps__loop_vertices__1 [g_0] =
     lc_src_1 =
       (BIF.do_remote_fun_call "Digraph" "erlps__vertices__1" [g_0])
   in
-    (flmap
+    (H.flmap
        (\ lc_4 ->
-          case lc_4 of
-            v_3 ->
-              let cond_5 = (erlps__is_reflexive_vertex__2 [v_3, g_0])
-              in
-                case cond_5 of
-                  (ErlangAtom "true") -> (ErlangCons v_3 ErlangEmptyList)
-                  _ -> ErlangEmptyList
-            _ -> ErlangEmptyList)
+          let cond_5 = (erlps__is_reflexive_vertex__2 [lc_4, g_0])
+          in
+            case cond_5 of
+              (ErlangAtom "true") -> (ErlangCons lc_4 ErlangEmptyList)
+              _ -> ErlangEmptyList)
        lc_src_1)
 erlps__loop_vertices__1 [arg_9] = (EXC.function_clause unit)
 erlps__loop_vertices__1 args =
@@ -279,8 +276,8 @@ erlps__subgraph__2 [g_0, vs_1] =
         case ex_6 of
           (ErlangTuple [(ErlangAtom "throw"), (ErlangAtom "badarg"), _]) ->
             (BIF.erlang__error__1 [(ErlangAtom "badarg")])
-          ex_6 -> (EXC.raise ex_6)))
-erlps__subgraph__2 [arg_8, arg_9] = (EXC.function_clause unit)
+          ex_7 -> (EXC.raise ex_7)))
+erlps__subgraph__2 [arg_9, arg_10] = (EXC.function_clause unit)
 erlps__subgraph__2 args =
   (EXC.badarity
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -293,8 +290,8 @@ erlps__subgraph__3 [g_0, vs_1, opts_2] =
         case ex_7 of
           (ErlangTuple [(ErlangAtom "throw"), (ErlangAtom "badarg"), _]) ->
             (BIF.erlang__error__1 [(ErlangAtom "badarg")])
-          ex_7 -> (EXC.raise ex_7)))
-erlps__subgraph__3 [arg_9, arg_10, arg_11] =
+          ex_8 -> (EXC.raise ex_8)))
+erlps__subgraph__3 [arg_10, arg_11, arg_12] =
   (EXC.function_clause unit)
 erlps__subgraph__3 args =
   (EXC.badarity
@@ -666,7 +663,7 @@ erlps__subgraph_opts__5 [(ErlangCons (ErlangTuple [(ErlangAtom "type"),
                                                    type_0]) opts_1),
                          _type0_2, keep_3, g_4, vs_5]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let
                lop_11 =
@@ -681,7 +678,8 @@ erlps__subgraph_opts__5 [(ErlangCons (ErlangTuple [(ErlangAtom "keep_labels"),
                                                    keep_0]) opts_1),
                          type_2, _keep0_3, g_4, vs_5]
   | ((ErlangAtom "true") ==
-       (falsifyErrors (\ _ -> (BIF.erlang__is_boolean__1 [keep_0])))) =
+       (H.falsifyErrors
+          (\ _ -> (BIF.erlang__is_boolean__1 [keep_0])))) =
   (erlps__subgraph_opts__5 [opts_1, type_2, keep_0, g_4, vs_5])
 erlps__subgraph_opts__5 [(ErlangEmptyList),
                          (ErlangAtom "inherit"), keep_0, g_1, vs_2]
@@ -728,63 +726,59 @@ erlps__subgraph__4 [g_0, vs_1, type_2, keep_3] =
      (\ _ ->
         (BIF.do_remote_fun_call "Digraph" "erlps__new__1" [type_2]))
      (\ of_5 ->
-        case of_5 of
-          sg_7 ->
-            let   
-              arg_8 =
-                (ErlangFun 1
-                   let
-                     lambda_9 [v_11] =
-                       (erlps__subgraph_vertex__4 [v_11, g_0, sg_7, keep_3])
-                     lambda_9 [arg_10] = (EXC.function_clause unit)
-                     lambda_9 args = (EXC.badarity (ErlangFun 1 lambda_9) args)
-                   in lambda_9)
-            in let
-              _ =
-                (BIF.do_remote_fun_call "Lists" "erlps__foreach__2"
-                   [arg_8, vs_1])
-            in let
-              efun_31 =
-                (ErlangFun 1
-                   let
-                     lambda_17 [v_19] =
-                       let   
-                         arg_20 =
-                           (ErlangFun 1
-                              let
-                                lambda_21 [e_23] =
-                                  (erlps__subgraph_edge__4
-                                     [e_23, g_0, sg_7, keep_3])
-                                lambda_21 [arg_22] = (EXC.function_clause unit)
-                                lambda_21 args =
-                                  (EXC.badarity (ErlangFun 1 lambda_21) args)
-                              in lambda_21)
-                       in let
-                         arg_28 =
-                           (BIF.do_remote_fun_call "Digraph"
-                              "erlps__out_edges__2" [g_0, v_19])
-                       in
-                         (BIF.do_remote_fun_call "Lists" "erlps__foreach__2"
-                            [arg_20, arg_28])
-                     lambda_17 [arg_18] = (EXC.function_clause unit)
-                     lambda_17 args =
-                       (EXC.badarity (ErlangFun 1 lambda_17) args)
-                   in lambda_17)
-            in let
-              arg_33 =
-                (BIF.do_remote_fun_call "Digraph" "erlps__vertices__1" [sg_7])
-            in let
-              _ =
-                (BIF.do_remote_fun_call "Lists" "erlps__foreach__2"
-                   [efun_31, arg_33])
-            in sg_7
-          something_else -> (EXC.try_clause something_else))
+        let   
+          arg_9 =
+            (ErlangFun 1
+               let
+                 lambda_10 [v_12] =
+                   (erlps__subgraph_vertex__4 [v_12, g_0, of_5, keep_3])
+                 lambda_10 [arg_11] = (EXC.function_clause unit)
+                 lambda_10 args = (EXC.badarity (ErlangFun 1 lambda_10) args)
+               in lambda_10)
+        in let
+          _ =
+            (BIF.do_remote_fun_call "Lists" "erlps__foreach__2"
+               [arg_9, vs_1])
+        in let
+          efun_32 =
+            (ErlangFun 1
+               let
+                 lambda_18 [v_20] =
+                   let   
+                     arg_21 =
+                       (ErlangFun 1
+                          let
+                            lambda_22 [e_24] =
+                              (erlps__subgraph_edge__4
+                                 [e_24, g_0, of_5, keep_3])
+                            lambda_22 [arg_23] = (EXC.function_clause unit)
+                            lambda_22 args =
+                              (EXC.badarity (ErlangFun 1 lambda_22) args)
+                          in lambda_22)
+                   in let
+                     arg_29 =
+                       (BIF.do_remote_fun_call "Digraph" "erlps__out_edges__2"
+                          [g_0, v_20])
+                   in
+                     (BIF.do_remote_fun_call "Lists" "erlps__foreach__2"
+                        [arg_21, arg_29])
+                 lambda_18 [arg_19] = (EXC.function_clause unit)
+                 lambda_18 args = (EXC.badarity (ErlangFun 1 lambda_18) args)
+               in lambda_18)
+        in let
+          arg_34 =
+            (BIF.do_remote_fun_call "Digraph" "erlps__vertices__1" [of_5])
+        in let
+          _ =
+            (BIF.do_remote_fun_call "Lists" "erlps__foreach__2"
+               [efun_32, arg_34])
+        in of_5)
      (\ ex_6 ->
         case ex_6 of
           (ErlangTuple [(ErlangAtom "error"), (ErlangAtom "badarg"), _]) ->
             (BIF.erlang__throw__1 [(ErlangAtom "badarg")])
-          ex_6 -> (EXC.raise ex_6)))
-erlps__subgraph__4 [arg_36, arg_37, arg_38, arg_39] =
+          ex_7 -> (EXC.raise ex_7)))
+erlps__subgraph__4 [arg_37, arg_38, arg_39, arg_40] =
   (EXC.function_clause unit)
 erlps__subgraph__4 args =
   (EXC.badarity
@@ -799,11 +793,11 @@ erlps__subgraph_vertex__4 [v_0, g_1, sg_2, keep_3] =
     case case_4 of
       (ErlangAtom "false") -> (ErlangAtom "ok")
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors (\ _ -> (BIF.erlang__not__1 [keep_3])))) ->
+             (H.falsifyErrors (\ _ -> (BIF.erlang__not__1 [keep_3])))) ->
         (BIF.do_remote_fun_call "Digraph" "erlps__add_vertex__2"
            [sg_2, v_0])
       (ErlangTuple [_v_10, label_11]) | ((ErlangAtom "true") ==
-                                           (falsifyErrors (\ _ -> keep_3))) ->
+                                           (H.falsifyErrors (\ _ -> keep_3))) ->
         (BIF.do_remote_fun_call "Digraph" "erlps__add_vertex__3"
            [sg_2, v_0, label_11])
       something_else -> (EXC.case_clause something_else)
@@ -829,10 +823,10 @@ erlps__subgraph_edge__4 [e_0, g_1, sg_2, keep_3] =
           case case_11 of
             (ErlangAtom "false") -> (ErlangAtom "ok")
             _ | ((ErlangAtom "true") ==
-                   (falsifyErrors (\ _ -> (BIF.erlang__not__1 [keep_3])))) ->
+                   (H.falsifyErrors (\ _ -> (BIF.erlang__not__1 [keep_3])))) ->
               (BIF.do_remote_fun_call "Digraph" "erlps__add_edge__5"
                  [sg_2, e_0, v1_7, v2_8, ErlangEmptyList])
-            _ | ((ErlangAtom "true") == (falsifyErrors (\ _ -> keep_3))) ->
+            _ | ((ErlangAtom "true") == (H.falsifyErrors (\ _ -> keep_3))) ->
               (BIF.do_remote_fun_call "Digraph" "erlps__add_edge__5"
                  [sg_2, e_0, v1_7, v2_8, label_9])
             something_else -> (EXC.case_clause something_else)

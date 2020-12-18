@@ -18,7 +18,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -41,7 +41,7 @@ erlps__print__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__print__2 :: ErlangFun
-erlps__print__2 [term_0, options_1] | (isEList options_1) =
+erlps__print__2 [term_0, options_1] | (H.isEList options_1) =
   let   
     col_5 =
       (erlps__get_option__3
@@ -150,11 +150,11 @@ erlps__print__9 :: ErlangFun
 erlps__print__9 [_, _, _, (ErlangInt num_0), _m_1, _t_2, _rf_3,
                  _enc_4, _str_5]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 0))) =
-  (make_string "...")
+  (H.make_string "...")
 erlps__print__9 [_, _, _, _d_0, _m_1, (ErlangInt num_2), _rf_3,
                  _enc_4, _str_5]
   | ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 0))) =
-  (make_string "...")
+  (H.make_string "...")
 erlps__print__9 [term_0, col_1, ll_2, d_3, m_4, t_5, recdeffun_6,
                  enc_7, str_8]
   | (weakLeq col_1 (ErlangInt (DBI.fromInt 0))) =
@@ -163,12 +163,12 @@ erlps__print__9 [term_0, col_1, ll_2, d_3, m_4, t_5, recdeffun_6,
       recdeffun_6, enc_7, str_8])
 erlps__print__9 [atom_0, _col_1, _ll_2, _d_3, _m_4, _t_5, _rf_6,
                  enc_7, _str_8]
-  | (isEAtom atom_0) =
+  | (H.isEAtom atom_0) =
   (erlps__write_atom__2 [atom_0, enc_7])
 erlps__print__9 [term_0, col_1, ll_2, d_3, m0_4, t_5,
                  recdeffun_6, enc_7, str_8]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_70 = (BIF.erlang__is_tuple__1 [term_0])
              in let
@@ -210,7 +210,7 @@ erlps__print__9 [term_0, col_1, ll_2, d_3, m0_4, t_5,
             _ | ((==) ll_2 (ErlangInt (DBI.fromInt 0))) ->
               (erlps__write__1 [if_24])
             _ | ((ErlangAtom "true") ==
-                   (falsifyErrors
+                   (H.falsifyErrors
                       (\ _ ->
                          let    rop_34 = (BIF.erlang__op_minus [ll_2, col_1])
                          in let
@@ -250,7 +250,6 @@ erlps__print__9 [term_0, col_1, ll_2, d_3, m0_4, t_5,
                 (erlps__pp__8
                    [if_24, col_1, ll_2, m_30, tind_58, arg_64,
                     (ErlangInt (DBI.fromInt 0)), (ErlangInt (DBI.fromInt 0))])
-            _ -> (EXC.if_clause unit)
       _ -> (EXC.badmatch if_24)
 erlps__print__9 [term_0, _col_1, _ll_2, _d_3, _m_4, _t_5, _rf_6,
                  _enc_7, _str_8]
@@ -278,7 +277,7 @@ erlps__pp__8 :: ErlangFun
 erlps__pp__8 [if_2@(ErlangTuple [_s_0, len_1, _, _]), col_3,
               ll_4, m_5, _tind_6, _ind_7, ld_8, w_9]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_14 = (BIF.erlang__op_minus [ll_4, col_3])
              in let rop_13 = (BIF.erlang__op_minus [lop_14, ld_8])
@@ -449,7 +448,6 @@ erlps__pp_tag_tuple__8 [(ErlangCons (ErlangTuple [tag_0, tlen_1,
         in
           (ErlangCons tag_0
              (ErlangCons (ErlangInt (DBI.fromInt 44)) tail_43))
-      _ -> (EXC.if_clause unit)
 erlps__pp_tag_tuple__8 [arg_57, arg_58, arg_59, arg_60, arg_61,
                         arg_62, arg_63, arg_64]
   =
@@ -462,11 +460,11 @@ erlps__pp_map__8 :: ErlangFun
 erlps__pp_map__8 [(ErlangEmptyList), _col_0, _ll_1, _m_2,
                   _tind_3, _ind_4, _ld_5, _w_6]
   =
-  (make_string "")
+  (H.make_string "")
 erlps__pp_map__8 [(ErlangTuple [(ErlangAtom "dots"), _, _, _]),
                   _col_0, _ll_1, _m_2, _tind_3, _ind_4, _ld_5, _w_6]
   =
-  (make_string "...")
+  (H.make_string "...")
 erlps__pp_map__8 [(ErlangCons p_0 ps_1), col_2, ll_3, m_4,
                   tind_5, ind_6, ld_7, w_8]
   =
@@ -497,13 +495,13 @@ erlps__pp_pairs_tail__9 :: ErlangFun
 erlps__pp_pairs_tail__9 [(ErlangEmptyList), _col0_0, _col_1,
                          _ll_2, _m_3, _tind_4, _ind_5, _ld_6, _w_7]
   =
-  (make_string "")
+  (H.make_string "")
 erlps__pp_pairs_tail__9 [(ErlangTuple [(ErlangAtom "dots"), _, _,
                                        _]),
                          _col0_0, _col_1, _m_2, _ll_3, _tind_4, _ind_5, _ld_6,
                          _w_7]
   =
-  (make_string ",...")
+  (H.make_string ",...")
 erlps__pp_pairs_tail__9 [(ErlangCons p_1@(ErlangTuple [_, len_0,
                                                        _, _]) ps_2),
                          col0_3, col_4, ll_5, m_6, tind_7, ind_8, ld_9, w_10]
@@ -515,7 +513,7 @@ erlps__pp_pairs_tail__9 [(ErlangCons p_1@(ErlangTuple [_, len_0,
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let   
                      lop_20 =
@@ -684,7 +682,6 @@ erlps__pp_pairs_tail__9 [(ErlangCons p_1@(ErlangTuple [_, len_0,
                    (ErlangCons (ErlangInt (DBI.fromInt 10))
                       (ErlangCons ind_8 (ErlangCons ps_108 tail_118))))
             _ -> (EXC.badmatch match_expr_110)
-      _ -> (EXC.if_clause unit)
 erlps__pp_pairs_tail__9 [arg_130, arg_131, arg_132, arg_133,
                          arg_134, arg_135, arg_136, arg_137, arg_138]
   =
@@ -697,7 +694,7 @@ erlps__pp_pair__8 :: ErlangFun
 erlps__pp_pair__8 [pair_1@(ErlangTuple [_, len_0, _, _]), col_2,
                    ll_3, m_4, _tind_5, _ind_6, ld_7, w_8]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_30 = (BIF.erlang__op_minus [ll_3, col_2])
              in let rop_29 = (BIF.erlang__op_minus [lop_30, ld_7])
@@ -715,7 +712,7 @@ erlps__pp_pair__8 [pair_1@(ErlangTuple [_, len_0, _, _]), col_2,
     tup_el_11 =
       case (ErlangAtom "true") of
         _ | ((ErlangAtom "true") ==
-               (falsifyErrors
+               (H.falsifyErrors
                   (\ _ ->
                      let   
                        arg_17 =
@@ -750,7 +747,6 @@ erlps__pp_pair__8 [pair_1@(ErlangTuple [_, len_0, _, _]), col_2,
                          _ -> (EXC.badarg1 lop_12)))) ->
           len_0
         _ -> ll_3
-        _ -> (EXC.if_clause unit)
   in (ErlangTuple [tup_el_9, tup_el_11])
 erlps__pp_pair__8 [(ErlangTuple [(ErlangTuple [(ErlangAtom "map_pair"),
                                                k_0, v_1]),
@@ -763,7 +759,7 @@ erlps__pp_pair__8 [(ErlangTuple [(ErlangTuple [(ErlangAtom "map_pair"),
     head_16 =
       (erlps__pp__8
          [k_0, col0_3, ll_4, m_5, tind_6, ind0_7, ld_8, w_9])
-  in let head_26 = (make_string " =>\n")
+  in let head_26 = (H.make_string " =>\n")
   in let arg_31 = (BIF.erlang__op_plus [col0_3, i_11])
   in let
     tail_29 =
@@ -787,12 +783,12 @@ erlps__pp_record__9 :: ErlangFun
 erlps__pp_record__9 [(ErlangEmptyList), _nlen_0, _col_1, _ll_2,
                      _m_3, _tind_4, _ind_5, _ld_6, _w_7]
   =
-  (make_string "")
+  (H.make_string "")
 erlps__pp_record__9 [(ErlangTuple [(ErlangAtom "dots"), _, _,
                                    _]),
                      _nlen_0, _col_1, _ll_2, _m_3, _tind_4, _ind_5, _ld_6, _w_7]
   =
-  (make_string "...")
+  (H.make_string "...")
 erlps__pp_record__9 [(ErlangCons f_0 fs_1), nlen_2, col0_3, ll_4,
                      m_5, tind_6, ind0_7, ld_8, w0_9]
   =
@@ -835,13 +831,13 @@ erlps__pp_fields_tail__9 :: ErlangFun
 erlps__pp_fields_tail__9 [(ErlangEmptyList), _col0_0, _col_1,
                           _ll_2, _m_3, _tind_4, _ind_5, _ld_6, _w_7]
   =
-  (make_string "")
+  (H.make_string "")
 erlps__pp_fields_tail__9 [(ErlangTuple [(ErlangAtom "dots"), _,
                                         _, _]),
                           _col0_0, _col_1, _m_2, _ll_3, _tind_4, _ind_5, _ld_6,
                           _w_7]
   =
-  (make_string ",...")
+  (H.make_string ",...")
 erlps__pp_fields_tail__9 [(ErlangCons f_1@(ErlangTuple [_, len_0,
                                                         _, _]) fs_2),
                           col0_3, col_4, ll_5, m_6, tind_7, ind_8, ld_9, w_10]
@@ -853,7 +849,7 @@ erlps__pp_fields_tail__9 [(ErlangCons f_1@(ErlangTuple [_, len_0,
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let   
                      lop_20 =
@@ -984,7 +980,6 @@ erlps__pp_fields_tail__9 [(ErlangCons f_1@(ErlangTuple [_, len_0,
                    (ErlangCons (ErlangInt (DBI.fromInt 10))
                       (ErlangCons ind_8 (ErlangCons fs_92 tail_102))))
             _ -> (EXC.badmatch match_expr_94)
-      _ -> (EXC.if_clause unit)
 erlps__pp_fields_tail__9 [arg_114, arg_115, arg_116, arg_117,
                           arg_118, arg_119, arg_120, arg_121, arg_122]
   =
@@ -997,7 +992,7 @@ erlps__pp_field__8 :: ErlangFun
 erlps__pp_field__8 [fl_1@(ErlangTuple [_, len_0, _, _]), col_2,
                     ll_3, m_4, _tind_5, _ind_6, ld_7, w_8]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_22 = (BIF.erlang__op_minus [ll_3, col_2])
              in let rop_21 = (BIF.erlang__op_minus [lop_22, ld_7])
@@ -1015,7 +1010,7 @@ erlps__pp_field__8 [fl_1@(ErlangTuple [_, len_0, _, _]), col_2,
     tup_el_11 =
       case (ErlangAtom "true") of
         _ | ((ErlangAtom "true") ==
-               (falsifyErrors
+               (H.falsifyErrors
                   (\ _ ->
                      let   
                        arg_16 =
@@ -1032,7 +1027,6 @@ erlps__pp_field__8 [fl_1@(ErlangTuple [_, len_0, _, _]), col_2,
                      in (BIF.erlang__is_list__1 [arg_12])))) ->
           len_0
         _ -> ll_3
-        _ -> (EXC.if_clause unit)
   in (ErlangTuple [tup_el_9, tup_el_11])
 erlps__pp_field__8 [(ErlangTuple [(ErlangTuple [(ErlangAtom "field"),
                                                 name_0, namel_1, f_2]),
@@ -1052,9 +1046,8 @@ erlps__pp_field__8 [(ErlangTuple [(ErlangTuple [(ErlangAtom "field"),
               (ErlangCons (ErlangInt num_23) _) | ((ErlangInt num_23) ==
                                                      (ErlangInt
                                                         (DBI.fromInt 10))) ->
-                (make_string " =")
-              _ -> (make_string " = ")
-              something_else -> (EXC.case_clause something_else)
+                (H.make_string " =")
+              _ -> (H.make_string " = ")
         in let
           tail_31 =
             (erlps__pp__8
@@ -1093,7 +1086,7 @@ erlps__rec_indent__5 [rind_0, tind_1, col0_2, ind0_3, w0_4] =
       case nl_11 of
         (ErlangAtom "true") ->
           (ErlangCons (ErlangInt (DBI.fromInt 10)) ind_19)
-        (ErlangAtom "false") -> (make_string "")
+        (ErlangAtom "false") -> (H.make_string "")
         something_else -> (EXC.case_clause something_else)
   in let
     w_25 =
@@ -1112,7 +1105,7 @@ erlps__pp_list__9 :: ErlangFun
 erlps__pp_list__9 [(ErlangTuple [(ErlangAtom "dots"), _, _, _]),
                    _col0_0, _ll_1, _m_2, _tind_3, _ind_4, _ld_5, _s_6, _w_7]
   =
-  (make_string "...")
+  (H.make_string "...")
 erlps__pp_list__9 [(ErlangCons e_0 es_1), col0_2, ll_3, m_4,
                    tind_5, ind_6, ld_7, s_8, w_9]
   =
@@ -1157,7 +1150,7 @@ erlps__pp_tail__10 [(ErlangCons e_1@(ErlangTuple [_, len_0, _,
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let   
                      lop_21 =
@@ -1273,17 +1266,16 @@ erlps__pp_tail__10 [(ErlangCons e_1@(ErlangTuple [_, len_0, _,
                    (ErlangCons (ErlangInt (DBI.fromInt 10))
                       (ErlangCons ind_8 (ErlangCons es_86 tail_96))))
             _ -> (EXC.badmatch match_expr_88)
-      _ -> (EXC.if_clause unit)
 erlps__pp_tail__10 [(ErlangTuple [(ErlangAtom "dots"), _, _, _]),
                     _col0_0, _col_1, _ll_2, _m_3, _tind_4, _ind_5, _ld_6, s_7,
                     _w_8]
   =
-  let tail_10 = (make_string "...")
+  let tail_10 = (H.make_string "...")
   in (ErlangCons s_7 tail_10)
 erlps__pp_tail__10 [e_1@(ErlangTuple [_, len_0, _, _]), _col0_2,
                     col_3, ll_4, m_5, _tind_6, _ind_7, ld_8, s_9, w_10]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_16 =
@@ -1350,7 +1342,7 @@ erlps__pp_element__8 :: ErlangFun
 erlps__pp_element__8 [e_1@(ErlangTuple [_, len_0, _, _]), col_2,
                       ll_3, m_4, _tind_5, _ind_6, ld_7, w_8]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_16 = (BIF.erlang__op_minus [ll_3, col_2])
              in let rop_15 = (BIF.erlang__op_minus [lop_16, ld_7])
@@ -1443,12 +1435,11 @@ erlps__pp_binary__4 [(ErlangCons bs_0 (ErlangCons (ErlangInt num_1) s_2)),
         in
           (ErlangCons bs_0
              (ErlangCons (ErlangInt (DBI.fromInt 44)) tail_32))
-      something_else -> (EXC.case_clause something_else)
 erlps__pp_binary__4 [s_3@(ErlangCons bs1_0 (ErlangCons (ErlangInt num_1) (ErlangCons bs2_2 (ErlangEmptyList)))),
                      n_4, _n0_5, ind_6]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 58)))
   , ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_15 = (BIF.erlang__length__1 [bs1_0])
              in let rop_17 = (BIF.erlang__length__1 [bs2_2])
@@ -1543,7 +1534,7 @@ erlps__write_pair__1 [(ErlangTuple [(ErlangTuple [(ErlangAtom "map_pair"),
                                     _, _, _])]
   =
   let    head_2 = (erlps__write__1 [k_0])
-  in let head_5 = (make_string " => ")
+  in let head_5 = (H.make_string " => ")
   in let head_7 = (erlps__write__1 [v_1])
   in
     (ErlangCons head_2
@@ -1554,11 +1545,11 @@ erlps__write_pair__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__write_fields__1 :: ErlangFun
-erlps__write_fields__1 [(ErlangEmptyList)] = (make_string "")
+erlps__write_fields__1 [(ErlangEmptyList)] = (H.make_string "")
 erlps__write_fields__1 [(ErlangTuple [(ErlangAtom "dots"), _, _,
                                       _])]
   =
-  (make_string "...")
+  (H.make_string "...")
 erlps__write_fields__1 [(ErlangCons f_0 fs_1)] =
   let    head_2 = (erlps__write_field__1 [f_0])
   in let tail_4 = (erlps__write_fields_tail__1 [fs_1])
@@ -1570,11 +1561,11 @@ erlps__write_fields__1 args =
 
 erlps__write_fields_tail__1 :: ErlangFun
 erlps__write_fields_tail__1 [(ErlangEmptyList)] =
-  (make_string "")
+  (H.make_string "")
 erlps__write_fields_tail__1 [(ErlangTuple [(ErlangAtom "dots"),
                                            _, _, _])]
   =
-  (make_string ",...")
+  (H.make_string ",...")
 erlps__write_fields_tail__1 [(ErlangCons f_0 fs_1)] =
   let    head_4 = (erlps__write_field__1 [f_0])
   in let tail_6 = (erlps__write_fields_tail__1 [fs_1])
@@ -1591,7 +1582,7 @@ erlps__write_field__1 [(ErlangTuple [(ErlangTuple [(ErlangAtom "field"),
                                                    name_0, _namel_1, f_2]),
                                      _, _, _])]
   =
-  let    head_5 = (make_string " = ")
+  let    head_5 = (H.make_string " = ")
   in let tail_6 = (erlps__write__1 [f_2])
   in (ErlangCons name_0 (ErlangCons head_5 tail_6))
 erlps__write_field__1 [arg_8] = (EXC.function_clause unit)
@@ -1604,7 +1595,7 @@ erlps__write_list__2 [(ErlangTuple [(ErlangAtom "dots"), _, _,
                                     _]),
                       _s_0]
   =
-  (make_string "...")
+  (H.make_string "...")
 erlps__write_list__2 [(ErlangCons e_0 es_1), s_2] =
   let    head_3 = (erlps__write__1 [e_0])
   in let tail_5 = (erlps__write_tail__2 [es_1, s_2])
@@ -1626,7 +1617,7 @@ erlps__write_tail__2 [(ErlangTuple [(ErlangAtom "dots"), _, _,
                                     _]),
                       s_0]
   =
-  let tail_2 = (make_string "...")
+  let tail_2 = (H.make_string "...")
   in (ErlangCons s_0 tail_2)
 erlps__write_tail__2 [e_0, s_1] =
   let tail_3 = (erlps__write__1 [e_0])
@@ -1646,7 +1637,7 @@ erlps__intermediate__6 [term_0, d_1, t_2, rf_3, enc_4, str_5]
   in
     case if_13 of
       (ErlangTuple [_, len_15, dots_16, _]) | ((ErlangAtom "true") ==
-                                                 (falsifyErrors
+                                                 (H.falsifyErrors
                                                     (\ _ ->
                                                        let   
                                                          lop_18 =
@@ -1685,7 +1676,6 @@ erlps__intermediate__6 [term_0, d_1, t_2, rf_3, enc_4, str_5]
         (erlps__find_upper__9
            [if_13, term_0, t_2, (ErlangInt (DBI.fromInt 1)),
             (ErlangInt (DBI.fromInt 2)), d_1, rf_3, enc_4, str_5])
-      something_else -> (EXC.case_clause something_else)
 erlps__intermediate__6 [arg_34, arg_35, arg_36, arg_37, arg_38,
                         arg_39]
   =
@@ -1721,7 +1711,7 @@ erlps__find_upper__9 [lower_0, term_1, t_2, dl_3, dd_4, d_5,
         if_27
       (ErlangTuple [_, _len_32@t_31, _, _]) | (t_31 == t_2) -> if_27
       (ErlangTuple [_, len_33, _, _]) | ((ErlangAtom "true") ==
-                                           (falsifyErrors
+                                           (H.falsifyErrors
                                               (\ _ ->
                                                  let
                                                    lop_34 =
@@ -1757,7 +1747,6 @@ erlps__find_upper__9 [lower_0, term_1, t_2, dl_3, dd_4, d_5,
       _ ->
         (erlps__search_depth__9
            [lower_0, if_27, term_1, t_2, dl_3, d1_21, rf_6, enc_7, str_8])
-      something_else -> (EXC.case_clause something_else)
 erlps__find_upper__9 [arg_60, arg_61, arg_62, arg_63, arg_64,
                       arg_65, arg_66, arg_67, arg_68]
   =
@@ -1770,7 +1759,7 @@ erlps__search_depth__9 :: ErlangFun
 erlps__search_depth__9 [lower_0, upper_1, _term_2, t_3, dl_4,
                         du_5, _rf_6, _enc_7, _str_8]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let lop_11 = (BIF.erlang__op_minus [du_5, dl_4])
              in
@@ -1779,7 +1768,6 @@ erlps__search_depth__9 [lower_0, upper_1, _term_2, t_3, dl_4,
   case lower_0 of
     (ErlangTuple [_, t_10, _, _]) | (t_10 == t_3) -> lower_0
     _ -> upper_1
-    something_else -> (EXC.case_clause something_else)
 erlps__search_depth__9 [lower_0, upper_1, term_2, t_3, dl_4,
                         du_5, rf_6, enc_7, str_8]
   =
@@ -1797,7 +1785,6 @@ erlps__search_depth__9 [lower_0, upper_1, term_2, t_3, dl_4,
       _ ->
         (erlps__search_depth__9
            [if_19, upper_1, term_2, t_3, d1_13, du_5, rf_6, enc_7, str_8])
-      something_else -> (EXC.case_clause something_else)
 erlps__search_depth__9 [arg_40, arg_41, arg_42, arg_43, arg_44,
                         arg_45, arg_46, arg_47, arg_48]
   =
@@ -1810,7 +1797,7 @@ erlps__print_length__6 :: ErlangFun
 erlps__print_length__6 [(ErlangEmptyList), _d_0, _t_1, _rf_2,
                         _enc_3, _str_4]
   =
-  let tup_el_5 = (make_string "[]")
+  let tup_el_5 = (H.make_string "[]")
   in
     (ErlangTuple
        [tup_el_5, (ErlangInt (DBI.fromInt 2)),
@@ -1818,7 +1805,7 @@ erlps__print_length__6 [(ErlangEmptyList), _d_0, _t_1, _rf_2,
 erlps__print_length__6 [(ErlangTuple []), _d_0, _t_1, _rf_2,
                         _enc_3, _str_4]
   =
-  let tup_el_5 = (make_string "{}")
+  let tup_el_5 = (H.make_string "{}")
   in
     (ErlangTuple
        [tup_el_5, (ErlangInt (DBI.fromInt 2)),
@@ -1826,19 +1813,19 @@ erlps__print_length__6 [(ErlangTuple []), _d_0, _t_1, _rf_2,
 erlps__print_length__6 [m_1@(ErlangMap map_0), _d_2, _t_3, _rf_4,
                         _enc_5, _str_6]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let lop_11 = (BIF.erlang__map_size__1 [m_1])
              in
                (BIF.erlang__op_exactEq
                   [lop_11, (ErlangInt (DBI.fromInt 0))])))) =
-  let tup_el_7 = (make_string "#{}")
+  let tup_el_7 = (H.make_string "#{}")
   in
     (ErlangTuple
        [tup_el_7, (ErlangInt (DBI.fromInt 3)),
         (ErlangInt (DBI.fromInt 0)), (ErlangAtom "no_more")])
 erlps__print_length__6 [atom_0, _d_1, _t_2, _rf_3, enc_4, _str_5]
-  | (isEAtom atom_0) =
+  | (H.isEAtom atom_0) =
   let    s_8 = (erlps__write_atom__2 [atom_0, enc_4])
   in let
     tup_el_10 =
@@ -1848,7 +1835,7 @@ erlps__print_length__6 [atom_0, _d_1, _t_2, _rf_3, enc_4, _str_5]
        [s_8, tup_el_10, (ErlangInt (DBI.fromInt 0)),
         (ErlangAtom "no_more")])
 erlps__print_length__6 [list_0, d_1, t_2, rf_3, enc_4, str_5]
-  | (isEList list_0) =
+  | (H.isEList list_0) =
   let
     case_6 =
       case str_5 of
@@ -1869,7 +1856,7 @@ erlps__print_length__6 [list_0, d_1, t_2, rf_3, enc_4, str_5]
               (ErlangAtom "no_more")])
       (ErlangTuple [(ErlangAtom "true"), prefix_20]) ->
         let    s_23 = (erlps__write_string__2 [prefix_20, enc_4])
-        in let tail_26 = (make_string "...")
+        in let tail_26 = (H.make_string "...")
         in let
           rop_29 =
             (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [s_23])
@@ -1907,10 +1894,9 @@ erlps__print_length__6 [list_0, d_1, t_2, rf_3, enc_4, str_5]
                      in lambda_44)
               in (ErlangTuple [what_40, len_41, dots_42, more_57])
             if_62 -> if_62
-            something_else -> (EXC.case_clause something_else)
       something_else -> (EXC.case_clause something_else)
 erlps__print_length__6 [fun_0, _d_1, _t_2, _rf_3, _enc_4, _str_5]
-  | (isEFun fun_0) =
+  | (H.isEFun fun_0) =
   let   
     s_7 = (BIF.do_remote_fun_call "Io.Lib" "erlps__write__1" [fun_0])
   in let tup_el_9 = (BIF.erlang__iolist_size__1 [s_7])
@@ -1920,7 +1906,7 @@ erlps__print_length__6 [fun_0, _d_1, _t_2, _rf_3, _enc_4, _str_5]
         (ErlangAtom "no_more")])
 erlps__print_length__6 [r_0, d_1, t_2, rf_3, enc_4, str_5]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                arg_30 =
@@ -1950,28 +1936,26 @@ erlps__print_length__6 [r_0, d_1, t_2, rf_3, enc_4, str_5]
       rdefs_21 ->
         (erlps__print_length_record__7
            [r_0, d_1, t_2, rf_3, rdefs_21, enc_4, str_5])
-      something_else -> (EXC.case_clause something_else)
 erlps__print_length__6 [tuple_0, d_1, t_2, rf_3, enc_4, str_5]
-  | (isETuple tuple_0) =
+  | (H.isETuple tuple_0) =
   (erlps__print_length_tuple__6
      [tuple_0, d_1, t_2, rf_3, enc_4, str_5])
 erlps__print_length__6 [map_0, d_1, t_2, rf_3, enc_4, str_5]
-  | (isEMap map_0) =
+  | (H.isEMap map_0) =
   (erlps__print_length_map__6
      [map_0, d_1, t_2, rf_3, enc_4, str_5])
 erlps__print_length__6 [(ErlangBinary bin_e_0), _d_1, _t_2,
                         _rf_3, _enc_4, _str_5]
   | (BIN.empty bin_e_0) =
-  let tup_el_6 = (make_string "<<>>")
+  let tup_el_6 = (H.make_string "<<>>")
   in
     (ErlangTuple
        [tup_el_6, (ErlangInt (DBI.fromInt 4)),
         (ErlangInt (DBI.fromInt 0)), (ErlangAtom "no_more")])
 erlps__print_length__6 [bin_3@(ErlangBinary bin_c_0),
                         (ErlangInt num_4), _t_5, rf_6, enc_7, str_8]
-  | size_1 <- ((DBI.fromInt 8))
-  , (BIN.Ok _ bin_2) <-
-      ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
+  | (ErlangInt size_1) <- ((BIN.size bin_c_0))
+  , (BIN.Ok _ bin_2) <- ((BIN.chop_bin bin_c_0 size_1 1))
   , (BIN.empty bin_2)
   , ((ErlangInt num_4) == (ErlangInt (DBI.fromInt 1))) =
   let   
@@ -1988,16 +1972,15 @@ erlps__print_length__6 [bin_3@(ErlangBinary bin_c_0),
            lambda_9 [arg_10, arg_11] = (EXC.function_clause unit)
            lambda_9 args = (EXC.badarity (ErlangFun 2 lambda_9) args)
          in lambda_9)
-  in let tup_el_23 = (make_string "<<...>>")
+  in let tup_el_23 = (H.make_string "<<...>>")
   in
     (ErlangTuple
        [tup_el_23, (ErlangInt (DBI.fromInt 7)),
         (ErlangInt (DBI.fromInt 3)), more_22])
 erlps__print_length__6 [bin_3@(ErlangBinary bin_c_0), d_4, t_5,
                         rf_6, enc_7, str_8]
-  | size_1 <- ((DBI.fromInt 8))
-  , (BIN.Ok _ bin_2) <-
-      ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
+  | (ErlangInt size_1) <- ((BIN.size bin_c_0))
+  , (BIN.Ok _ bin_2) <- ((BIN.chop_bin bin_c_0 size_1 1))
   , (BIN.empty bin_2) =
   let   
     d1_11 = (BIF.erlang__op_minus [d_4, (ErlangInt (DBI.fromInt 1))])
@@ -2023,7 +2006,7 @@ erlps__print_length__6 [bin_3@(ErlangBinary bin_c_0), d_4, t_5,
         _ -> (EXC.badarg1 str_8)
   in
     case case_12 of
-      (ErlangTuple [(ErlangAtom "true"), list_26]) | (isEList
+      (ErlangTuple [(ErlangAtom "true"), list_26]) | (H.isEList
                                                         list_26) ->
         let   
           s_29 =
@@ -2042,13 +2025,13 @@ erlps__print_length__6 [bin_3@(ErlangBinary bin_c_0), d_4, t_5,
                           (ErlangCons (ErlangInt (DBI.fromInt 62))
                              ErlangEmptyList))))),
               tup_el_41, (ErlangInt (DBI.fromInt 0)), (ErlangAtom "no_more")])
-      (ErlangTuple [(ErlangAtom "false"), list_47]) | (isEList
+      (ErlangTuple [(ErlangAtom "false"), list_47]) | (H.isEList
                                                          list_47) ->
         let   
           s_50 =
             (BIF.do_remote_fun_call "Io.Lib" "erlps__write_string__2"
                [list_47, (ErlangInt (DBI.fromInt 34))])
-        in let head_58 = (make_string "/utf8>>")
+        in let head_58 = (H.make_string "/utf8>>")
         in let
           rop_62 =
             (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1" [s_50])
@@ -2079,7 +2062,7 @@ erlps__print_length__6 [bin_3@(ErlangBinary bin_c_0), d_4, t_5,
                  lambda_70 [arg_71, arg_72] = (EXC.function_clause unit)
                  lambda_70 args = (EXC.badarity (ErlangFun 2 lambda_70) args)
                in lambda_70)
-        in let tail_90 = (make_string "...>>")
+        in let tail_90 = (H.make_string "...>>")
         in let rop_93 = (BIF.erlang__length__1 [s_69])
         in let
           tup_el_91 =
@@ -2108,7 +2091,7 @@ erlps__print_length__6 [bin_3@(ErlangBinary bin_c_0), d_4, t_5,
                  lambda_101 [arg_102, arg_103] = (EXC.function_clause unit)
                  lambda_101 args = (EXC.badarity (ErlangFun 2 lambda_101) args)
                in lambda_101)
-        in let tail_121 = (make_string "/utf8...>>")
+        in let tail_121 = (H.make_string "/utf8...>>")
         in let
           rop_124 =
             (BIF.do_remote_fun_call "Io.Lib" "erlps__chars_length__1"
@@ -2199,13 +2182,13 @@ erlps__print_length_map__6 [map_0, (ErlangInt num_1), _t_2, rf_3,
            lambda_6 [arg_7, arg_8] = (EXC.function_clause unit)
            lambda_6 args = (EXC.badarity (ErlangFun 2 lambda_6) args)
          in lambda_6)
-  in let tup_el_20 = (make_string "#{...}")
+  in let tup_el_20 = (H.make_string "#{...}")
   in
     (ErlangTuple
        [tup_el_20, (ErlangInt (DBI.fromInt 6)),
         (ErlangInt (DBI.fromInt 3)), more_19])
 erlps__print_length_map__6 [map_0, d_1, t_2, rf_3, enc_4, str_5]
-  | (isEMap map_0) =
+  | (H.isEMap map_0) =
   let   
     arg_6 =
       (BIF.do_remote_fun_call "Maps" "erlps__iterator__1" [map_0])
@@ -2249,7 +2232,7 @@ erlps__print_length_map_pairs__7 [(ErlangAtom "none"), _d_0,
 erlps__print_length_map_pairs__7 [term_0, d_1, d0_2, t_3, rf_4,
                                   enc_5, str_6]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let
                lop_26 =
@@ -2369,7 +2352,7 @@ erlps__print_length_tuple__6 [tuple_0, (ErlangInt num_1), _t_2,
            lambda_6 [arg_7, arg_8] = (EXC.function_clause unit)
            lambda_6 args = (EXC.badarity (ErlangFun 2 lambda_6) args)
          in lambda_6)
-  in let tup_el_20 = (make_string "{...}")
+  in let tup_el_20 = (H.make_string "{...}")
   in
     (ErlangTuple
        [tup_el_20, (ErlangInt (DBI.fromInt 5)),
@@ -2419,7 +2402,7 @@ erlps__print_length_tuple1__7 :: ErlangFun
 erlps__print_length_tuple1__7 [tuple_0, i_1, _d_2, _t_3, _rf_4,
                                _enc_5, _str_6]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let rop_8 = (BIF.erlang__tuple_size__1 [tuple_0])
              in (BIF.erlang__op_greater [i_1, rop_8])))) =
@@ -2427,7 +2410,7 @@ erlps__print_length_tuple1__7 [tuple_0, i_1, _d_2, _t_3, _rf_4,
 erlps__print_length_tuple1__7 [tuple_0, i_1, d_2, t_3, rf_4,
                                enc_5, str_6]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let
                lop_26 =
@@ -2507,7 +2490,7 @@ erlps__print_length_record__7 [tuple_0, (ErlangInt num_1), _t_2,
            lambda_7 [arg_8, arg_9] = (EXC.function_clause unit)
            lambda_7 args = (EXC.badarity (ErlangFun 2 lambda_7) args)
          in lambda_7)
-  in let tup_el_22 = (make_string "{...}")
+  in let tup_el_22 = (H.make_string "{...}")
   in
     (ErlangTuple
        [tup_el_22, (ErlangInt (DBI.fromInt 5)),
@@ -2568,7 +2551,7 @@ erlps__print_length_fields__8 :: ErlangFun
 erlps__print_length_fields__8 [(ErlangEmptyList), _d_0, _t_1,
                                tuple_2, i_3, _rf_4, _enc_5, _str_6]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let rop_8 = (BIF.erlang__tuple_size__1 [tuple_2])
              in (BIF.erlang__op_greater [i_3, rop_8])))) =
@@ -2576,7 +2559,7 @@ erlps__print_length_fields__8 [(ErlangEmptyList), _d_0, _t_1,
 erlps__print_length_fields__8 [term_0, d_1, t_2, tuple_3, i_4,
                                rf_5, enc_6, str_7]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let
                lop_28 =
@@ -2712,7 +2695,7 @@ erlps__print_length_list1__6 [(ErlangEmptyList), _d_0, _t_1,
 erlps__print_length_list1__6 [term_0, d_1, t_2, rf_3, enc_4,
                               str_5]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let
                lop_24 =
@@ -2855,7 +2838,6 @@ erlps__printable_list__4 [l_0, _d_1, t_2, (ErlangAtom "latin1")]
               (ErlangTuple [(ErlangAtom "true"), l1_12])
             _ -> (EXC.badmatch match_expr_13)
       _nc_16 -> (ErlangAtom "false")
-      something_else -> (EXC.case_clause something_else)
 erlps__printable_list__4 [l_0, _d_1, t_2, _unicode_3]
   | (weakGeq t_2 (ErlangInt (DBI.fromInt 0))) =
   let n_6 = (erlps__tsub__2 [t_2, (ErlangInt (DBI.fromInt 2))])
@@ -2867,43 +2849,42 @@ erlps__printable_list__4 [l_0, _d_1, t_2, _unicode_3]
        (\ of_10 ->
           case of_10 of
             (ErlangEmptyList) -> (ErlangAtom "false")
-            prefix_12 ->
+            prefix_13 ->
               let   
-                arg_15 =
+                arg_16 =
                   (BIF.do_remote_fun_call "Lists" "erlps__flatlength__1"
-                     [prefix_12])
-              in let case_13 = (erlps__is_flat__2 [l_0, arg_15])
+                     [prefix_13])
+              in let case_14 = (erlps__is_flat__2 [l_0, arg_16])
               in
-                case case_13 of
+                case case_14 of
                   (ErlangAtom "true") ->
                     let
-                      case_17 =
+                      case_18 =
                         (BIF.do_remote_fun_call "String" "erlps__equal__2"
-                           [prefix_12, l_0])
+                           [prefix_13, l_0])
                     in
-                      case case_17 of
+                      case case_18 of
                         (ErlangAtom "true") ->
                           (BIF.do_remote_fun_call "Io.Lib"
                              "erlps__printable_list__1" [l_0])
                         (ErlangAtom "false") ->
                           let
-                            lop_21 =
+                            lop_22 =
                               (BIF.do_remote_fun_call "Io.Lib"
-                                 "erlps__printable_list__1" [prefix_12])
+                                 "erlps__printable_list__1" [prefix_13])
                           in
-                            case lop_21 of
+                            case lop_22 of
                               (ErlangAtom "false") -> (ErlangAtom "false")
                               (ErlangAtom "true") ->
-                                (ErlangTuple [(ErlangAtom "true"), prefix_12])
-                              _ -> (EXC.badarg1 lop_21)
+                                (ErlangTuple [(ErlangAtom "true"), prefix_13])
+                              _ -> (EXC.badarg1 lop_22)
                         something_else -> (EXC.case_clause something_else)
                   (ErlangAtom "false") -> (ErlangAtom "false")
-                  something_else -> (EXC.case_clause something_else)
-            something_else -> (EXC.try_clause something_else))
+                  something_else -> (EXC.case_clause something_else))
        (\ ex_11 ->
           case ex_11 of
             (ErlangTuple [_, _, _]) -> (ErlangAtom "false")
-            ex_11 -> (EXC.raise ex_11)))
+            ex_12 -> (EXC.raise ex_12)))
 erlps__printable_list__4 [l_0, _d_1, t_2, _uni_3]
   | (weakLt t_2 (ErlangInt (DBI.fromInt 0))) =
   (BIF.do_remote_fun_call "Io.Lib" "erlps__printable_list__1"
@@ -2918,7 +2899,7 @@ erlps__is_flat__2 :: ErlangFun
 erlps__is_flat__2 [_l_0, (ErlangInt num_1)]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0))) =
   (ErlangAtom "true")
-erlps__is_flat__2 [(ErlangCons c_0 cs_1), n_2] | (isEInt c_0) =
+erlps__is_flat__2 [(ErlangCons c_0 cs_1), n_2] | (H.isEInt c_0) =
   let
     arg_4 = (BIF.erlang__op_minus [n_2, (ErlangInt (DBI.fromInt 1))])
   in (erlps__is_flat__2 [cs_1, arg_4])
@@ -2980,7 +2961,7 @@ erlps__printable_bin__4 [bin_0, len_1, d_2,
   in
     case case_10 of
       (ErlangAtom "all") | ((ErlangAtom "true") ==
-                              (falsifyErrors
+                              (H.falsifyErrors
                                  (\ _ ->
                                     let
                                       rop_14 =
@@ -3002,7 +2983,7 @@ erlps__printable_bin__4 [bin_0, len_1, d_2,
             (ErlangInt num_29) | ((ErlangInt num_29) ==
                                     (ErlangInt (DBI.fromInt 0)))
                                , ((ErlangAtom "true") ==
-                                    (falsifyErrors
+                                    (H.falsifyErrors
                                        (\ _ ->
                                           let
                                             lop_30 =
@@ -3013,7 +2994,7 @@ erlps__printable_bin__4 [bin_0, len_1, d_2,
               let tup_el_34 = (BIF.erlang__binary_to_list__1 [bin_0])
               in (ErlangTuple [(ErlangAtom "true"), tup_el_34])
             nc_36 | ((ErlangAtom "true") ==
-                       (falsifyErrors
+                       (H.falsifyErrors
                           (\ _ ->
                              let
                                lop_37 =
@@ -3036,10 +3017,10 @@ erlps__printable_bin__4 [bin_0, len_1, d_2,
               in
                 (ErlangTuple
                    [(ErlangAtom "true"), (ErlangAtom "true"), tup_el_46])
-            nc_52 | (isEInt nc_52) -> (ErlangAtom "false")
+            nc_52 | (H.isEInt nc_52) -> (ErlangAtom "false")
             something_else -> (EXC.case_clause something_else)
       nc_53 | ((ErlangAtom "true") ==
-                 (falsifyErrors
+                 (H.falsifyErrors
                     (\ _ ->
                        let    lop_55 = (BIF.erlang__is_integer__1 [nc_53])
                        in let
@@ -3065,7 +3046,7 @@ erlps__printable_bin__4 [bin_0, len_1, d_2,
         in
           (ErlangTuple
              [(ErlangAtom "true"), (ErlangAtom "true"), tup_el_65])
-      nc_71 | (isEInt nc_71) -> (ErlangAtom "false")
+      nc_71 | (H.isEInt nc_71) -> (ErlangAtom "false")
       something_else -> (EXC.case_clause something_else)
 erlps__printable_bin__4 [bin_0, len_1, d_2, _uni_3] =
   let case_4 = (erlps__valid_utf8__2 [bin_0, len_1])
@@ -3089,7 +3070,7 @@ erlps__printable_bin__4 [bin_0, len_1, d_2, _uni_3] =
               in let tup_el_14 = (BIF.erlang__op_exactEq [lop_15, rop_17])
               in (ErlangTuple [tup_el_14, l_13])
             (ErlangTuple [nc_20, bin1_21, l_22]) | ((ErlangAtom "true") ==
-                                                      (falsifyErrors
+                                                      (H.falsifyErrors
                                                          (\ _ ->
                                                             let
                                                               lop_23 =
@@ -3155,7 +3136,7 @@ erlps__printable_bin1__3 [bin_0, start_1, len_2] =
         let    arg_18 = (BIF.erlang__op_plus [start_1, n_5])
         in let arg_21 = (BIF.erlang__op_minus [len_2, n_5])
         in (erlps__printable_bin1__3 [bin_0, arg_18, arg_21])
-      nc_24 | (isEInt nc_24) ->
+      nc_24 | (H.isEInt nc_24) ->
         let rop_26 = (BIF.erlang__op_minus [n_5, nc_24])
         in (BIF.erlang__op_minus [len_2, rop_26])
       something_else -> (EXC.case_clause something_else)
@@ -3613,7 +3594,7 @@ erlps__cind__7 :: ErlangFun
 erlps__cind__7 [(ErlangTuple [_s_0, len_1, _, _]), col_2, ll_3,
                 m_4, ind_5, ld_6, w_7]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_11 = (BIF.erlang__op_minus [ll_3, col_2])
              in let rop_10 = (BIF.erlang__op_minus [lop_11, ld_6])
@@ -3724,7 +3705,7 @@ erlps__cind_tag_tuple__7 [(ErlangCons (ErlangTuple [_tag_0,
         in
           case (ErlangAtom "true") of
             _ | ((ErlangAtom "true") ==
-                   (falsifyErrors
+                   (H.falsifyErrors
                       (\ _ ->
                          let    lop_19 = (BIF.erlang__op_plus [m_5, col1_17])
                          in let
@@ -3744,9 +3725,8 @@ erlps__cind_tag_tuple__7 [(ErlangCons (ErlangTuple [_tag_0,
                 (erlps__cind_tail__8
                    [l_2, col1_17, tcol_14, ll_4, m_5, ind_6, ld_7, arg_34])
             _ -> (BIF.erlang__throw__1 [(ErlangAtom "no_good")])
-            _ -> (EXC.if_clause unit)
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let    lop_39 = (BIF.erlang__op_plus [m_5, tcol_14])
                    in let lop_38 = (BIF.erlang__op_lesser [lop_39, ll_4])
@@ -3768,7 +3748,6 @@ erlps__cind_tag_tuple__7 [(ErlangCons (ErlangTuple [_tag_0,
           (erlps__cind_list__7
              [l_2, tcol_14, ll_4, m_5, ind_6, ld_7, arg_53])
       _ -> (BIF.erlang__throw__1 [(ErlangAtom "no_good")])
-      _ -> (EXC.if_clause unit)
 erlps__cind_tag_tuple__7 [arg_59, arg_60, arg_61, arg_62, arg_63,
                           arg_64, arg_65]
   =
@@ -3812,7 +3791,7 @@ erlps__cind_pairs_tail__8 [(ErlangCons p_1@(ErlangTuple [_,
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let   
                      lop_19 =
@@ -3965,7 +3944,6 @@ erlps__cind_pairs_tail__8 [(ErlangCons p_1@(ErlangTuple [_,
         in
           (erlps__cind_pairs_tail__8
              [ps_2, col0_3, arg_103, ll_5, m_6, ind_7, ld_8, pw_100])
-      _ -> (EXC.if_clause unit)
 erlps__cind_pairs_tail__8 [_, _col0_0, _col_1, _ll_2, _m_3,
                            ind_4, _ld_5, _w_6]
   =
@@ -3984,7 +3962,7 @@ erlps__cind_pair__7 [pair_3@(ErlangTuple [(ErlangTuple [(ErlangAtom "map_pair"),
                                           len_2, _, _]),
                      col_4, ll_5, m_6, _ind_7, ld_8, w_9]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_28 = (BIF.erlang__op_minus [ll_5, col_4])
              in let rop_27 = (BIF.erlang__op_minus [lop_28, ld_8])
@@ -3999,7 +3977,7 @@ erlps__cind_pair__7 [pair_3@(ErlangTuple [(ErlangTuple [(ErlangAtom "map_pair"),
                  _ -> (EXC.badarg1 lop_25)))) =
   case (ErlangAtom "true") of
     _ | ((ErlangAtom "true") ==
-           (falsifyErrors
+           (H.falsifyErrors
               (\ _ ->
                  let   
                    arg_15 =
@@ -4034,7 +4012,6 @@ erlps__cind_pair__7 [pair_3@(ErlangTuple [(ErlangTuple [(ErlangAtom "map_pair"),
                      _ -> (EXC.badarg1 lop_10)))) ->
       len_2
     _ -> ll_5
-    _ -> (EXC.if_clause unit)
 erlps__cind_pair__7 [(ErlangTuple [(ErlangTuple [(ErlangAtom "map_pair"),
                                                  k_0, v_1]),
                                    _len_2, _, _]),
@@ -4121,7 +4098,7 @@ erlps__cind_fields_tail__8 [(ErlangCons f_1@(ErlangTuple [_,
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let   
                      lop_19 =
@@ -4236,7 +4213,6 @@ erlps__cind_fields_tail__8 [(ErlangCons f_1@(ErlangTuple [_,
         in
           (erlps__cind_fields_tail__8
              [fs_2, col0_3, arg_87, ll_5, m_6, ind_7, ld_8, fw_84])
-      _ -> (EXC.if_clause unit)
 erlps__cind_fields_tail__8 [_, _col0_0, _col_1, _ll_2, _m_3,
                             ind_4, _ld_5, _w_6]
   =
@@ -4255,7 +4231,7 @@ erlps__cind_field__7 [fl_4@(ErlangTuple [(ErlangTuple [(ErlangAtom "field"),
                                          len_3, _, _]),
                       col_5, ll_6, m_7, _ind_8, ld_9, w_10]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_21 = (BIF.erlang__op_minus [ll_6, col_5])
              in let rop_20 = (BIF.erlang__op_minus [lop_21, ld_9])
@@ -4270,7 +4246,7 @@ erlps__cind_field__7 [fl_4@(ErlangTuple [(ErlangTuple [(ErlangAtom "field"),
                  _ -> (EXC.badarg1 lop_18)))) =
   case (ErlangAtom "true") of
     _ | ((ErlangAtom "true") ==
-           (falsifyErrors
+           (H.falsifyErrors
               (\ _ ->
                  let   
                    arg_15 =
@@ -4287,7 +4263,6 @@ erlps__cind_field__7 [fl_4@(ErlangTuple [(ErlangTuple [(ErlangAtom "field"),
                  in (BIF.erlang__is_list__1 [arg_11])))) ->
       len_3
     _ -> ll_6
-    _ -> (EXC.if_clause unit)
 erlps__cind_field__7 [(ErlangTuple [(ErlangTuple [(ErlangAtom "field"),
                                                   _name_0, namel_1, f_2]),
                                     _len_3, _, _]),
@@ -4329,7 +4304,7 @@ erlps__cind_rec__6 [rind_0, col0_1, ll_2, m_3, ind_4, w0_5] =
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let    lop_19 = (BIF.erlang__op_plus [m_3, col_17])
                    in let lop_18 = (BIF.erlang__op_lesserEq [lop_19, ll_2])
@@ -4351,7 +4326,6 @@ erlps__cind_rec__6 [rind_0, col0_1, ll_2, m_3, ind_4, w0_5] =
               something_else -> (EXC.case_clause something_else)
         in (ErlangTuple [col_17, w_28])
       _ -> (BIF.erlang__throw__1 [(ErlangAtom "no_good")])
-      _ -> (EXC.if_clause unit)
 erlps__cind_rec__6 [arg_32, arg_33, arg_34, arg_35, arg_36,
                     arg_37]
   =
@@ -4403,7 +4377,7 @@ erlps__cind_tail__8 [(ErlangCons e_1@(ErlangTuple [_, len_0, _,
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let   
                      lop_19 =
@@ -4502,7 +4476,6 @@ erlps__cind_tail__8 [(ErlangCons e_1@(ErlangTuple [_, len_0, _,
         in
           (erlps__cind_tail__8
              [es_2, col0_3, arg_79, ll_5, m_6, ind_7, ld_8, we_76])
-      _ -> (EXC.if_clause unit)
 erlps__cind_tail__8 [(ErlangTuple [(ErlangAtom "dots"), _, _,
                                    _]),
                      _col0_0, _col_1, _ll_2, _m_3, ind_4, _ld_5, _w_6]
@@ -4511,7 +4484,7 @@ erlps__cind_tail__8 [(ErlangTuple [(ErlangAtom "dots"), _, _,
 erlps__cind_tail__8 [e_1@(ErlangTuple [_, len_0, _, _]), _col0_2,
                      col_3, ll_4, m_5, ind_6, ld_7, w_8]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_11 =
@@ -4572,7 +4545,7 @@ erlps__cind_element__7 :: ErlangFun
 erlps__cind_element__7 [e_1@(ErlangTuple [_, len_0, _, _]),
                         col_2, ll_3, m_4, _ind_5, ld_6, w_7]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_12 = (BIF.erlang__op_minus [ll_3, col_2])
              in let rop_11 = (BIF.erlang__op_minus [lop_12, ld_6])
@@ -4630,8 +4603,8 @@ erlps__while_fail__3 [(ErlangCons a_0 as_1), f_2, v_3] =
         case ex_7 of
           (ErlangTuple [(ErlangAtom "throw"), _, _]) ->
             (erlps__while_fail__3 [as_1, f_2, v_3])
-          ex_7 -> (EXC.raise ex_7)))
-erlps__while_fail__3 [arg_11, arg_12, arg_13] =
+          ex_8 -> (EXC.raise ex_8)))
+erlps__while_fail__3 [arg_12, arg_13, arg_14] =
   (EXC.function_clause unit)
 erlps__while_fail__3 args =
   (EXC.badarity
@@ -4639,7 +4612,7 @@ erlps__while_fail__3 args =
 
 erlps__indent__1 :: ErlangFun
 erlps__indent__1 [n_0]
-  | ((isEInt n_0) && (weakGt n_0 (ErlangInt (DBI.fromInt 0)))) =
+  | ((H.isEInt n_0) && (weakGt n_0 (ErlangInt (DBI.fromInt 0)))) =
   let
     arg_2 = (BIF.erlang__op_minus [n_0, (ErlangInt (DBI.fromInt 1))])
   in (erlps__chars__2 [(ErlangInt (DBI.fromInt 32)), arg_2])
@@ -4662,7 +4635,7 @@ erlps__indent__2 [(ErlangInt num_0), ind_1]
            (ErlangCons (ErlangInt (DBI.fromInt 32)) ErlangEmptyList))
         ind_1))
 erlps__indent__2 [n_0, ind_1]
-  | ((isEInt n_0) && (weakGt n_0 (ErlangInt (DBI.fromInt 0)))) =
+  | ((H.isEInt n_0) && (weakGt n_0 (ErlangInt (DBI.fromInt 0)))) =
   let
     head_2 = (erlps__chars__2 [(ErlangInt (DBI.fromInt 32)), n_0])
   in (ErlangCons head_2 ind_1)
@@ -4684,7 +4657,7 @@ erlps__chars__2 [c_0, (ErlangInt num_1)]
      (ErlangCons c_0 (ErlangCons c_0 ErlangEmptyList)))
 erlps__chars__2 [c_0, n_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let
                lop_9 = (BIF.erlang__band__2 [n_1, (ErlangInt (DBI.fromInt 1))])
@@ -4716,7 +4689,6 @@ erlps__get_option__3 [key_0, tuplelist_1, default_2] =
       (ErlangAtom "false") -> default_2
       (ErlangTuple [key_7, value_8]) | (key_7 == key_0) -> value_8
       _ -> default_2
-      something_else -> (EXC.case_clause something_else)
 erlps__get_option__3 [arg_9, arg_10, arg_11] =
   (EXC.function_clause unit)
 erlps__get_option__3 args =

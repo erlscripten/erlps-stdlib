@@ -24,7 +24,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -54,7 +54,7 @@ erlps__is_empty__1 args =
 
 erlps__size__1 :: ErlangFun
 erlps__size__1 [(ErlangTuple [size_0, _])]
-  | ((isEInt size_0) &&
+  | ((H.isEInt size_0) &&
        (weakGeq size_0 (ErlangInt (DBI.fromInt 0)))) =
   size_0
 erlps__size__1 [arg_1] = (EXC.function_clause unit)
@@ -168,7 +168,7 @@ erlps__update_1__3 args =
 
 erlps__insert__3 :: ErlangFun
 erlps__insert__3 [key_0, val_1, (ErlangTuple [s_2, t_3])]
-  | (isEInt s_2) =
+  | (H.isEInt s_2) =
   let   
     s1_6 = (BIF.erlang__op_plus [s_2, (ErlangInt (DBI.fromInt 1))])
   in let arg_12 = (BIF.erlang__op_mult [s1_6, s1_6])
@@ -210,10 +210,8 @@ erlps__insert_1__4 [key_0, value_1,
                 case (ErlangAtom "true") of
                   _ | (weakGt h_30 p_38) -> (erlps__balance__2 [t_21, ss_35])
                   _ -> (ErlangTuple [t_21, h_30, ss_35])
-                  _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_25)
       t1_44 -> (ErlangTuple [key1_2, v_3, t1_44, bigger_5])
-      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__4 [key_0, value_1,
                     (ErlangTuple [key1_2, v_3, smaller_4, bigger_5]), s_6]
   | (weakGt key_0 key1_2) =
@@ -242,10 +240,8 @@ erlps__insert_1__4 [key_0, value_1,
                 case (ErlangAtom "true") of
                   _ | (weakGt h_30 p_38) -> (erlps__balance__2 [t_21, ss_35])
                   _ -> (ErlangTuple [t_21, h_30, ss_35])
-                  _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_25)
       t1_44 -> (ErlangTuple [key1_2, v_3, smaller_4, t1_44])
-      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__4 [key_0, value_1, (ErlangAtom "nil"), s_2]
   | ((==) s_2 (ErlangInt (DBI.fromInt 0))) =
   let
@@ -412,7 +408,7 @@ erlps__delete_any__2 args =
 
 erlps__delete__2 :: ErlangFun
 erlps__delete__2 [key_0, (ErlangTuple [s_1, t_2])]
-  | ((isEInt s_1) && (weakGeq s_1 (ErlangInt (DBI.fromInt 0)))) =
+  | ((H.isEInt s_1) && (weakGeq s_1 (ErlangInt (DBI.fromInt 0)))) =
   let   
     tup_el_3 =
       (BIF.erlang__op_minus [s_1, (ErlangInt (DBI.fromInt 1))])
@@ -472,7 +468,7 @@ erlps__take_any__2 args =
 
 erlps__take__2 :: ErlangFun
 erlps__take__2 [key_0, (ErlangTuple [s_1, t_2])]
-  | ((isEInt s_1) && (weakGeq s_1 (ErlangInt (DBI.fromInt 0)))) =
+  | ((H.isEInt s_1) && (weakGeq s_1 (ErlangInt (DBI.fromInt 0)))) =
   let match_expr_7 = (erlps__take_1__2 [key_0, t_2])
   in
     case match_expr_7 of
@@ -523,7 +519,7 @@ erlps__take_1__2 args =
 
 erlps__take_smallest__1 :: ErlangFun
 erlps__take_smallest__1 [(ErlangTuple [size_0, tree_1])]
-  | ((isEInt size_0) &&
+  | ((H.isEInt size_0) &&
        (weakGeq size_0 (ErlangInt (DBI.fromInt 0)))) =
   let match_expr_6 = (erlps__take_smallest1__1 [tree_1])
   in
@@ -585,7 +581,7 @@ erlps__smallest_1__1 args =
 
 erlps__take_largest__1 :: ErlangFun
 erlps__take_largest__1 [(ErlangTuple [size_0, tree_1])]
-  | ((isEInt size_0) &&
+  | ((H.isEInt size_0) &&
        (weakGeq size_0 (ErlangInt (DBI.fromInt 0)))) =
   let match_expr_6 = (erlps__take_largest1__1 [tree_1])
   in
@@ -798,7 +794,7 @@ erlps__next__1 args =
 
 erlps__map__2 :: ErlangFun
 erlps__map__2 [f_0, (ErlangTuple [size_1, tree_2])]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   let tup_el_4 = (erlps__map_1__2 [f_0, tree_2])
   in (ErlangTuple [size_1, tup_el_4])
 erlps__map__2 [arg_7, arg_8] = (EXC.function_clause unit)

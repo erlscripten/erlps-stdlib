@@ -15,7 +15,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -176,7 +176,7 @@ erlps__enter__4 args =
 erlps__erase__3 :: ErlangFun
 erlps__erase__3 [mod_0, key_1, val_2]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let
                lop_10 = (BIF.erlang__op_exactEq [mod_0, (ErlangAtom "dict")])
@@ -201,7 +201,7 @@ erlps__erase__3 args =
 erlps__take__3 :: ErlangFun
 erlps__take__3 [(ErlangAtom "gb_trees"), key_0, val_1] =
   let   
-    res_6 =
+    res_7 =
       (EXC.tryCatch
          (\ _ ->
             (BIF.do_remote_fun_call "Gb.Trees" "erlps__take__2"
@@ -210,15 +210,15 @@ erlps__take__3 [(ErlangAtom "gb_trees"), key_0, val_1] =
             case ex_5 of
               (ErlangTuple [(ErlangAtom "error"), _, _]) ->
                 (ErlangAtom "error")
-              ex_5 -> (EXC.raise ex_5)))
+              ex_6 -> (EXC.raise ex_6)))
   in let
-    match_final_7_10 =
+    match_final_8_11 =
       (BIF.do_remote_fun_call "Gb.Trees" "erlps__take_any__2"
          [key_0, val_1])
   in
-    case match_final_7_10 of
-      res_11 | (res_11 == res_6) -> match_final_7_10
-      _ -> (EXC.badmatch match_final_7_10)
+    case match_final_8_11 of
+      res_12 | (res_12 == res_7) -> match_final_8_11
+      _ -> (EXC.badmatch match_final_8_11)
 erlps__take__3 [mod_0, key_1, val_2] =
   (BIF.erlang__apply__3
      [mod_0, (ErlangAtom "take"),

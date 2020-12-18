@@ -22,7 +22,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -41,7 +41,7 @@ erlps__to_term__1 args =
 
 erlps__from_term__1 :: ErlangFun
 erlps__from_term__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakLt line_0 (ErlangInt (DBI.fromInt 0)))) =
   let    arg_3 = (BIF.erlang__op_neg [line_0])
   in let arg_2 = (erlps__new__1 [arg_3])
@@ -54,13 +54,13 @@ erlps__from_term__1 args =
 
 erlps__new__1 :: ErlangFun
 erlps__new__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (erlps__new_location__1 [line_0])
 erlps__new__1 [loc_2@(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (erlps__new_location__1 [loc_2])
 erlps__new__1 [term_0] =
@@ -80,13 +80,13 @@ erlps__new_location__1 args =
 
 erlps__is_anno__1 :: ErlangFun
 erlps__is_anno__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "true")
 erlps__is_anno__1 [(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "true")
 erlps__is_anno__1 [anno_0] =
@@ -128,14 +128,14 @@ erlps__is_anno1__1 args =
 
 erlps__is_anno2__2 :: ErlangFun
 erlps__is_anno2__2 [(ErlangAtom "location"), line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "true")
 erlps__is_anno2__2 [(ErlangAtom "location"),
                     (ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "true")
 erlps__is_anno2__2 [(ErlangAtom "generated"),
@@ -176,13 +176,13 @@ erlps__is_string__1 args =
 
 erlps__column__1 :: ErlangFun
 erlps__column__1 [(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   column_1
 erlps__column__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "undefined")
 erlps__column__1 [anno_0] =
@@ -191,7 +191,6 @@ erlps__column__1 [anno_0] =
     case case_1 of
       (ErlangTuple [_line_3, column_4]) -> column_4
       _line_5 -> (ErlangAtom "undefined")
-      something_else -> (EXC.case_clause something_else)
 erlps__column__1 [arg_6] = (EXC.function_clause unit)
 erlps__column__1 args =
   (EXC.badarity
@@ -210,8 +209,6 @@ erlps__end_location__1 [anno_0] =
             (ErlangTuple [line_6, column_7]) ->
               (erlps__end_location__3 [text_3, line_6, column_7])
             line_11 -> (erlps__end_location__2 [text_3, line_11])
-            something_else -> (EXC.case_clause something_else)
-      something_else -> (EXC.case_clause something_else)
 erlps__end_location__1 [arg_14] = (EXC.function_clause unit)
 erlps__end_location__1 args =
   (EXC.badarity
@@ -219,13 +216,13 @@ erlps__end_location__1 args =
 
 erlps__file__1 :: ErlangFun
 erlps__file__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "undefined")
 erlps__file__1 [(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "undefined")
 erlps__file__1 [anno_0] =
@@ -237,13 +234,13 @@ erlps__file__1 args =
 
 erlps__generated__1 :: ErlangFun
 erlps__generated__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "false")
 erlps__generated__1 [(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "false")
 erlps__generated__1 [anno_0] =
@@ -261,7 +258,6 @@ erlps__line__1 [anno_0] =
     case case_1 of
       (ErlangTuple [line_3, _column_4]) -> line_3
       line_5 -> line_5
-      something_else -> (EXC.case_clause something_else)
 erlps__line__1 [arg_6] = (EXC.function_clause unit)
 erlps__line__1 args =
   (EXC.badarity
@@ -269,13 +265,13 @@ erlps__line__1 args =
 
 erlps__location__1 :: ErlangFun
 erlps__location__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   line_0
 erlps__location__1 [location_2@(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   location_2
 erlps__location__1 [anno_0] =
@@ -287,13 +283,13 @@ erlps__location__1 args =
 
 erlps__record__1 :: ErlangFun
 erlps__record__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "false")
 erlps__record__1 [(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "false")
 erlps__record__1 [anno_0] =
@@ -306,13 +302,13 @@ erlps__record__1 args =
 
 erlps__text__1 :: ErlangFun
 erlps__text__1 [line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "undefined")
 erlps__text__1 [(ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "undefined")
 erlps__text__1 [anno_0] =
@@ -348,7 +344,6 @@ erlps__set_line__2 [line_0, anno_1] =
         let arg_6 = (ErlangTuple [line_0, column_5])
         in (erlps__set_location__2 [arg_6, anno_1])
       _line_10 -> (erlps__set_location__2 [line_0, anno_1])
-      something_else -> (EXC.case_clause something_else)
 erlps__set_line__2 [arg_13, arg_14] = (EXC.function_clause unit)
 erlps__set_line__2 args =
   (EXC.badarity
@@ -356,36 +351,36 @@ erlps__set_line__2 args =
 
 erlps__set_location__2 :: ErlangFun
 erlps__set_location__2 [line_0, l_1]
-  | ((((isEInt l_1) &&
+  | ((((H.isEInt l_1) &&
          (weakGeq l_1 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt line_0)) &&
+        (H.isEInt line_0)) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (erlps__new_location__1 [line_0])
 erlps__set_location__2 [line_0, (ErlangTuple [l_1, column_2])]
-  | ((((((isEInt l_1) &&
+  | ((((((H.isEInt l_1) &&
            (weakGeq l_1 (ErlangInt (DBI.fromInt 0)))) &&
-          (isEInt column_2)) &&
+          (H.isEInt column_2)) &&
          (weakGeq column_2 (ErlangInt (DBI.fromInt 1)))) &&
-        (isEInt line_0)) &&
+        (H.isEInt line_0)) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (erlps__new_location__1 [line_0])
 erlps__set_location__2 [loc_2@(ErlangTuple [l_0, c_1]), line_3]
-  | ((((((isEInt line_3) &&
+  | ((((((H.isEInt line_3) &&
            (weakGeq line_3 (ErlangInt (DBI.fromInt 0)))) &&
-          (isEInt l_0)) &&
+          (H.isEInt l_0)) &&
          (weakGeq l_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt c_1)) &&
+        (H.isEInt c_1)) &&
        (weakGeq c_1 (ErlangInt (DBI.fromInt 1)))) =
   (erlps__new_location__1 [loc_2])
 erlps__set_location__2 [loc_2@(ErlangTuple [l_0, c_1]),
                         (ErlangTuple [line_3, column_4])]
-  | ((((((((isEInt line_3) &&
+  | ((((((((H.isEInt line_3) &&
              (weakGeq line_3 (ErlangInt (DBI.fromInt 0)))) &&
-            (isEInt column_4)) &&
+            (H.isEInt column_4)) &&
            (weakGeq column_4 (ErlangInt (DBI.fromInt 1)))) &&
-          (isEInt l_0)) &&
+          (H.isEInt l_0)) &&
          (weakGeq l_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt c_1)) &&
+        (H.isEInt c_1)) &&
        (weakGeq c_1 (ErlangInt (DBI.fromInt 1)))) =
   (erlps__new_location__1 [loc_2])
 erlps__set_location__2 [location_0, anno_1] =
@@ -418,7 +413,8 @@ erlps__set__3 [item_0, value_1, anno_2] =
   in let case_3 = (ErlangTuple [tup_el_4, anno_2])
   in
     case case_3 of
-      (ErlangTuple [(ErlangAtom "true"), line_8]) | ((isEInt line_8) &&
+      (ErlangTuple [(ErlangAtom "true"), line_8]) | ((H.isEInt
+                                                        line_8) &&
                                                        (weakGeq line_8
                                                           (ErlangInt
                                                              (DBI.fromInt
@@ -428,14 +424,14 @@ erlps__set__3 [item_0, value_1, anno_2] =
           (erlps__set_anno__3
              [item_0, value_1, (ErlangCons head_12 ErlangEmptyList)])
       (ErlangTuple [(ErlangAtom "true"),
-                    location_18@(ErlangTuple [l_16, c_17])]) | ((((isEInt
+                    location_18@(ErlangTuple [l_16, c_17])]) | ((((H.isEInt
                                                                      l_16) &&
                                                                     (weakGeq
                                                                        l_16
                                                                        (ErlangInt
                                                                           (DBI.fromInt
                                                                              0)))) &&
-                                                                   (isEInt
+                                                                   (H.isEInt
                                                                       c_17)) &&
                                                                   (weakGeq c_17
                                                                      (ErlangInt
@@ -446,7 +442,7 @@ erlps__set__3 [item_0, value_1, anno_2] =
         in
           (erlps__set_anno__3
              [item_0, value_1, (ErlangCons head_22 ErlangEmptyList)])
-      (ErlangTuple [(ErlangAtom "true"), a_26]) | ((isEList a_26) &&
+      (ErlangTuple [(ErlangAtom "true"), a_26]) | ((H.isEList a_26) &&
                                                      ((/=) a_26
                                                         ErlangEmptyList)) ->
         (erlps__set_anno__3 [item_0, value_1, anno_2])
@@ -455,7 +451,6 @@ erlps__set__3 [item_0, value_1, anno_2] =
            [(ErlangAtom "badarg"),
             (ErlangCons item_0
                (ErlangCons value_1 (ErlangCons anno_2 ErlangEmptyList)))])
-      something_else -> (EXC.case_clause something_else)
 erlps__set__3 [arg_38, arg_39, arg_40] =
   (EXC.function_clause unit)
 erlps__set__3 args =
@@ -481,7 +476,6 @@ erlps__set_anno__3 [item_0, value_1, anno_2] =
                 in
                   (BIF.do_remote_fun_call "Lists" "erlps__keyreplace__4"
                      [item_0, (ErlangInt (DBI.fromInt 1)), anno_2, arg_18])
-              something_else -> (EXC.case_clause something_else)
         in (erlps__reset_simplify__1 [r_21])
       something_else -> (EXC.case_clause something_else)
 erlps__set_anno__3 [arg_23, arg_24, arg_25] =
@@ -529,15 +523,15 @@ erlps__anno_info__3 [anno_0, item_1, default_2] =
      (\ of_6 ->
         case of_6 of
           (ErlangAtom "false") -> default_2
-          (ErlangTuple [item_8, value_9]) | (item_8 == item_1) -> value_9
+          (ErlangTuple [item_9, value_10]) | (item_9 == item_1) -> value_10
           something_else -> (EXC.try_clause something_else))
      (\ ex_7 ->
         case ex_7 of
           (ErlangTuple [_, _, _]) ->
             (BIF.erlang__error__2
                [(ErlangAtom "badarg"), (ErlangCons anno_0 ErlangEmptyList)])
-          ex_7 -> (EXC.raise ex_7)))
-erlps__anno_info__3 [arg_14, arg_15, arg_16] =
+          ex_8 -> (EXC.raise ex_8)))
+erlps__anno_info__3 [arg_15, arg_16, arg_17] =
   (EXC.function_clause unit)
 erlps__anno_info__3 args =
   (EXC.badarity
@@ -551,7 +545,7 @@ erlps__anno_info__2 [anno_0, item_1] =
            [item_1, (ErlangInt (DBI.fromInt 1)), anno_0]))
      (\ of_5 ->
         case of_5 of
-          (ErlangTuple [item_7, value_8]) | (item_7 == item_1) -> value_8
+          (ErlangTuple [item_8, value_9]) | (item_8 == item_1) -> value_9
           (ErlangAtom "false") -> (ErlangAtom "undefined")
           something_else -> (EXC.try_clause something_else))
      (\ ex_6 ->
@@ -559,8 +553,8 @@ erlps__anno_info__2 [anno_0, item_1] =
           (ErlangTuple [_, _, _]) ->
             (BIF.erlang__error__2
                [(ErlangAtom "badarg"), (ErlangCons anno_0 ErlangEmptyList)])
-          ex_6 -> (EXC.raise ex_6)))
-erlps__anno_info__2 [arg_13, arg_14] = (EXC.function_clause unit)
+          ex_7 -> (EXC.raise ex_7)))
+erlps__anno_info__2 [arg_14, arg_15] = (EXC.function_clause unit)
 erlps__anno_info__2 args =
   (EXC.badarity
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -612,7 +606,7 @@ erlps__is_settable__2 [(ErlangAtom "file"), file_0] =
   (erlps__is_filename__1 [file_0])
 erlps__is_settable__2 [(ErlangAtom "generated"), boolean_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              case boolean_0 of
                (ErlangAtom "true") -> (ErlangAtom "true")
@@ -620,19 +614,19 @@ erlps__is_settable__2 [(ErlangAtom "generated"), boolean_0]
                _ -> (EXC.badarg1 boolean_0)))) =
   (ErlangAtom "true")
 erlps__is_settable__2 [(ErlangAtom "location"), line_0]
-  | ((isEInt line_0) &&
+  | ((H.isEInt line_0) &&
        (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "true")
 erlps__is_settable__2 [(ErlangAtom "location"),
                        (ErlangTuple [line_0, column_1])]
-  | ((((isEInt line_0) &&
+  | ((((H.isEInt line_0) &&
          (weakGeq line_0 (ErlangInt (DBI.fromInt 0)))) &&
-        (isEInt column_1)) &&
+        (H.isEInt column_1)) &&
        (weakGeq column_1 (ErlangInt (DBI.fromInt 1)))) =
   (ErlangAtom "true")
 erlps__is_settable__2 [(ErlangAtom "record"), boolean_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              case boolean_0 of
                (ErlangAtom "true") -> (ErlangAtom "true")

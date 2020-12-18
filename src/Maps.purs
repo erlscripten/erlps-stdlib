@@ -22,7 +22,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -105,7 +105,7 @@ erlps__take__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__to_list__1 :: ErlangFun
-erlps__to_list__1 [map_0] | (isEMap map_0) =
+erlps__to_list__1 [map_0] | (H.isEMap map_0) =
   let
     arg_1 =
       (BIF.erts_internal__map_next__3
@@ -123,7 +123,7 @@ erlps__to_list__1 args =
 
 erlps__to_list_internal__1 :: ErlangFun
 erlps__to_list_internal__1 [(ErlangCons iter_0 (ErlangCons map_1 acc_2))]
-  | (isEInt iter_0) =
+  | (H.isEInt iter_0) =
   let
     arg_3 = (BIF.erts_internal__map_next__3 [iter_0, map_1, acc_2])
   in (erlps__to_list_internal__1 [arg_3])
@@ -158,8 +158,8 @@ erlps__new__0 args =
 
 erlps__update_with__3 :: ErlangFun
 erlps__update_with__3 [key_0, fun_1, map_2]
-  | ((isEFunA fun_1 (ErlangInt (DBI.fromInt 1))) &&
-       (isEMap map_2)) =
+  | ((H.isEFunA fun_1 (ErlangInt (DBI.fromInt 1))) &&
+       (H.isEMap map_2)) =
   case map_2 of
     (ErlangMap map_4) | (DM.Just value_5) <-
                           ((Map.lookup key_0 map_4)) ->
@@ -169,7 +169,7 @@ erlps__update_with__3 [key_0, fun_1, map_2]
              [fun_1, (ErlangCons value_5 ErlangEmptyList)])
       in let map_ext_11 = (ErlangMap (Map.singleton key_0 val_8))
       in
-        case (findMissingKey map_2 [key_0]) of
+        case (H.findMissingKey map_2 [key_0]) of
           (DM.Nothing) -> (BIF.maps__merge__2 [map_2, map_ext_11])
           (DM.Just missing_13) -> (EXC.badkey missing_13)
     (ErlangMap map_14) ->
@@ -195,8 +195,8 @@ erlps__update_with__3 args =
 
 erlps__update_with__4 :: ErlangFun
 erlps__update_with__4 [key_0, fun_1, init_2, map_3]
-  | ((isEFunA fun_1 (ErlangInt (DBI.fromInt 1))) &&
-       (isEMap map_3)) =
+  | ((H.isEFunA fun_1 (ErlangInt (DBI.fromInt 1))) &&
+       (H.isEMap map_3)) =
   case map_3 of
     (ErlangMap map_5) | (DM.Just value_6) <-
                           ((Map.lookup key_0 map_5)) ->
@@ -206,7 +206,7 @@ erlps__update_with__4 [key_0, fun_1, init_2, map_3]
              [fun_1, (ErlangCons value_6 ErlangEmptyList)])
       in let map_ext_12 = (ErlangMap (Map.singleton key_0 val_9))
       in
-        case (findMissingKey map_3 [key_0]) of
+        case (H.findMissingKey map_3 [key_0]) of
           (DM.Nothing) -> (BIF.maps__merge__2 [map_3, map_ext_12])
           (DM.Just missing_14) -> (EXC.badkey missing_14)
     (ErlangMap map_15) ->
@@ -228,7 +228,7 @@ erlps__update_with__4 args =
      (ErlangFun 4 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__get__3 :: ErlangFun
-erlps__get__3 [key_0, map_1, default_2] | (isEMap map_1) =
+erlps__get__3 [key_0, map_1, default_2] | (H.isEMap map_1) =
   case map_1 of
     (ErlangMap map_4) | (DM.Just value_5) <-
                           ((Map.lookup key_0 map_4)) ->
@@ -250,14 +250,14 @@ erlps__get__3 args =
 
 erlps__filter__2 :: ErlangFun
 erlps__filter__2 [pred_0, map_1]
-  | ((isEFunA pred_0 (ErlangInt (DBI.fromInt 2))) &&
-       (isEMap map_1)) =
+  | ((H.isEFunA pred_0 (ErlangInt (DBI.fromInt 2))) &&
+       (H.isEMap map_1)) =
   let    arg_4 = (erlps__iterator__1 [map_1])
   in let arg_2 = (erlps__filter_1__2 [pred_0, arg_4])
   in (BIF.maps__from_list__1 [arg_2])
 erlps__filter__2 [pred_0, iterator_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_7 =
@@ -339,13 +339,13 @@ erlps__filter_1__2 args =
 
 erlps__fold__3 :: ErlangFun
 erlps__fold__3 [fun_0, init_1, map_2]
-  | ((isEFunA fun_0 (ErlangInt (DBI.fromInt 3))) &&
-       (isEMap map_2)) =
+  | ((H.isEFunA fun_0 (ErlangInt (DBI.fromInt 3))) &&
+       (H.isEMap map_2)) =
   let arg_5 = (erlps__iterator__1 [map_2])
   in (erlps__fold_1__3 [fun_0, init_1, arg_5])
 erlps__fold__3 [fun_0, init_1, iterator_2]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_8 =
@@ -425,14 +425,14 @@ erlps__fold_1__3 args =
 
 erlps__map__2 :: ErlangFun
 erlps__map__2 [fun_0, map_1]
-  | ((isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) &&
-       (isEMap map_1)) =
+  | ((H.isEFunA fun_0 (ErlangInt (DBI.fromInt 2))) &&
+       (H.isEMap map_1)) =
   let    arg_4 = (erlps__iterator__1 [map_1])
   in let arg_2 = (erlps__map_1__2 [fun_0, arg_4])
   in (BIF.maps__from_list__1 [arg_2])
 erlps__map__2 [fun_0, iterator_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_7 =
@@ -508,7 +508,7 @@ erlps__map_1__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__size__1 :: ErlangFun
-erlps__size__1 [map_0] | (isEMap map_0) =
+erlps__size__1 [map_0] | (H.isEMap map_0) =
   (BIF.erlang__map_size__1 [map_0])
 erlps__size__1 [val_0] =
   let arg_1 = (ErlangTuple [(ErlangAtom "badmap"), val_0])
@@ -521,7 +521,7 @@ erlps__size__1 args =
      (ErlangFun 1 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__iterator__1 :: ErlangFun
-erlps__iterator__1 [m_0] | (isEMap m_0) =
+erlps__iterator__1 [m_0] | (H.isEMap m_0) =
   (ErlangCons (ErlangInt (DBI.fromInt 0)) m_0)
 erlps__iterator__1 [m_0] =
   let arg_1 = (ErlangTuple [(ErlangAtom "badmap"), m_0])
@@ -536,7 +536,7 @@ erlps__next__1 :: ErlangFun
 erlps__next__1 [(ErlangTuple [k_0, v_1, i_2])] =
   (ErlangTuple [k_0, v_1, i_2])
 erlps__next__1 [(ErlangCons path_0 map_1)]
-  | ((isEInt path_0) && (isEMap map_1)) =
+  | ((H.isEInt path_0) && (H.isEMap map_1)) =
   (BIF.erts_internal__map_next__3
      [path_0, map_1, (ErlangAtom "iterator")])
 erlps__next__1 [(ErlangAtom "none")] = (ErlangAtom "none")
@@ -550,7 +550,7 @@ erlps__next__1 args =
 
 erlps__without__2 :: ErlangFun
 erlps__without__2 [ks_0, m_1]
-  | ((isEList ks_0) && (isEMap m_1)) =
+  | ((H.isEList ks_0) && (H.isEMap m_1)) =
   let
     arg_2 =
       (BIF.erlang__make_fun__3
@@ -571,7 +571,7 @@ erlps__without__2 args =
 
 erlps__with__2 :: ErlangFun
 erlps__with__2 [ks_0, map1_1]
-  | ((isEList ks_0) && (isEMap map1_1)) =
+  | ((H.isEList ks_0) && (H.isEMap map1_1)) =
   let arg_2 = (erlps__with_1__2 [ks_0, map1_1])
   in (BIF.maps__from_list__1 [arg_2])
 erlps__with__2 [ks_0, m_1] =
@@ -600,7 +600,8 @@ erlps__with_1__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__error_type__1 :: ErlangFun
-erlps__error_type__1 [m_0] | (isEMap m_0) = (ErlangAtom "badarg")
+erlps__error_type__1 [m_0] | (H.isEMap m_0) =
+  (ErlangAtom "badarg")
 erlps__error_type__1 [v_0] =
   (ErlangTuple [(ErlangAtom "badmap"), v_0])
 erlps__error_type__1 [arg_3] = (EXC.function_clause unit)
@@ -611,7 +612,7 @@ erlps__error_type__1 args =
 erlps__error_type_iter__1 :: ErlangFun
 erlps__error_type_iter__1 [m_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let    lop_3 = (BIF.erlang__is_map__1 [m_0])
              in let

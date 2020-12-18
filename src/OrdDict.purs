@@ -22,7 +22,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -357,7 +357,7 @@ erlps__fold__3 [f_0, acc_1,
              (ErlangCons val_3 (ErlangCons acc_1 ErlangEmptyList)))])
   in (erlps__fold__3 [f_0, arg_6, d_4])
 erlps__fold__3 [f_0, acc_1, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
 erlps__fold__3 [arg_2, arg_3, arg_4] = (EXC.function_clause unit)
 erlps__fold__3 args =
@@ -376,7 +376,7 @@ erlps__map__2 [f_0,
   in let tail_10 = (erlps__map__2 [f_0, d_3])
   in (ErlangCons head_4 tail_10)
 erlps__map__2 [f_0, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__map__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__map__2 args =
@@ -399,7 +399,7 @@ erlps__filter__2 [f_0,
       (ErlangAtom "false") -> (erlps__filter__2 [f_0, d_4])
       something_else -> (EXC.case_clause something_else)
 erlps__filter__2 [f_0, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__filter__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__filter__2 args =
@@ -435,10 +435,10 @@ erlps__merge__3 [f_0,
   in let tail_14 = (erlps__merge__3 [f_0, d1_3, d2_6])
   in (ErlangCons head_7 tail_14)
 erlps__merge__3 [f_0, (ErlangEmptyList), d2_1]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   d2_1
 erlps__merge__3 [f_0, d1_1, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   d1_1
 erlps__merge__3 [arg_2, arg_3, arg_4] =
   (EXC.function_clause unit)

@@ -21,7 +21,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -233,7 +233,7 @@ erlps__update_bucket__3 args =
 erlps__union__2 :: ErlangFun
 erlps__union__2 [s1_0, s2_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_12 =
@@ -298,7 +298,7 @@ erlps__union1__2 args =
 erlps__intersection__2 :: ErlangFun
 erlps__intersection__2 [s1_0, s2_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_9 =
@@ -365,7 +365,7 @@ erlps__intersection1__2 args =
 erlps__is_disjoint__2 :: ErlangFun
 erlps__is_disjoint__2 [s1_0, s2_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_12 =
@@ -478,7 +478,7 @@ erlps__get_slot__2 [t_0, key_1] =
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let
                      rop_9 =
@@ -497,7 +497,6 @@ erlps__get_slot__2 [t_0, key_1] =
               _ -> (EXC.badrecord (ErlangAtom "set"))
         in (BIF.erlang__op_minus [h_7, rop_14])
       _ -> h_7
-      _ -> (EXC.if_clause unit)
 erlps__get_slot__2 [arg_18, arg_19] = (EXC.function_clause unit)
 erlps__get_slot__2 args =
   (EXC.badarity
@@ -519,7 +518,7 @@ erlps__get_bucket__2 args =
 
 erlps__fold_set__3 :: ErlangFun
 erlps__fold_set__3 [f_0, acc_1, d_2]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   let   
     segs_6 =
       case d_2 of
@@ -583,7 +582,7 @@ erlps__fold_bucket__3 args =
 
 erlps__filter_set__2 :: ErlangFun
 erlps__filter_set__2 [f_0, d_1]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 1))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 1))) =
   let   
     arg_2 =
       case d_1 of
@@ -754,7 +753,7 @@ erlps__put_bucket_s__3 args =
 erlps__maybe_expand__1 :: ErlangFun
 erlps__maybe_expand__1 [t0_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_65 =
@@ -865,7 +864,7 @@ erlps__maybe_expand__1 args =
 erlps__maybe_expand_segs__1 :: ErlangFun
 erlps__maybe_expand_segs__1 [t_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_31 =
@@ -933,7 +932,7 @@ erlps__maybe_expand_segs__1 args =
 erlps__maybe_contract__2 :: ErlangFun
 erlps__maybe_contract__2 [t_0, dc_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_62 =
@@ -1045,7 +1044,7 @@ erlps__maybe_contract__2 args =
 erlps__maybe_contract_segs__1 :: ErlangFun
 erlps__maybe_contract_segs__1 [t_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_27 =

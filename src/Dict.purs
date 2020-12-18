@@ -21,7 +21,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -120,7 +120,7 @@ erlps__from_list__1 args =
 erlps__size__1 :: ErlangFun
 erlps__size__1 [(ErlangTuple [(ErlangAtom "dict"), n_0, _, _, _,
                               _, _, _, _])]
-  | ((isEInt n_0) && (weakGeq n_0 (ErlangInt (DBI.fromInt 0)))) =
+  | ((H.isEInt n_0) && (weakGeq n_0 (ErlangInt (DBI.fromInt 0)))) =
   n_0
 erlps__size__1 [arg_1] = (EXC.function_clause unit)
 erlps__size__1 args =
@@ -149,8 +149,8 @@ erlps__fetch__2 [key_0, d_1] =
               (BIF.erlang__error__2
                  [(ErlangAtom "badarg"),
                   (ErlangCons key_0 (ErlangCons d_1 ErlangEmptyList))])
-            ex_11 -> (EXC.raise ex_11)))
-erlps__fetch__2 [arg_18, arg_19] = (EXC.function_clause unit)
+            ex_12 -> (EXC.raise ex_12)))
+erlps__fetch__2 [arg_19, arg_20] = (EXC.function_clause unit)
 erlps__fetch__2 args =
   (EXC.badarity
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
@@ -467,7 +467,7 @@ erlps__update__3 [key_0, f_1, d0_2] =
           in (erlps__on_bucket__3 [arg_6, d0_2, slot_5]))
        (\ of_15 ->
           case of_15 of
-            (ErlangTuple [d1_17, _uv_18]) -> d1_17
+            (ErlangTuple [d1_18, _uv_19]) -> d1_18
             something_else -> (EXC.try_clause something_else))
        (\ ex_16 ->
           case ex_16 of
@@ -476,8 +476,8 @@ erlps__update__3 [key_0, f_1, d0_2] =
                  [(ErlangAtom "badarg"),
                   (ErlangCons key_0
                      (ErlangCons f_1 (ErlangCons d0_2 ErlangEmptyList)))])
-            ex_16 -> (EXC.raise ex_16)))
-erlps__update__3 [arg_27, arg_28, arg_29] =
+            ex_17 -> (EXC.raise ex_17)))
+erlps__update__3 [arg_28, arg_29, arg_30] =
   (EXC.function_clause unit)
 erlps__update__3 args =
   (EXC.badarity
@@ -555,7 +555,7 @@ erlps__update_bkt__4 [key_0, f_1, i_2,
         (ErlangTuple [(ErlangCons other_3 bkt1_9), ic_10])
       _ -> (EXC.badmatch match_expr_11)
 erlps__update_bkt__4 [key_0, f_1, i_2, (ErlangEmptyList)]
-  | (isEFunA f_1 (ErlangInt (DBI.fromInt 1))) =
+  | (H.isEFunA f_1 (ErlangInt (DBI.fromInt 1))) =
   (ErlangTuple
      [(ErlangCons (ErlangCons key_0 i_2) ErlangEmptyList),
       (ErlangInt (DBI.fromInt 1))])
@@ -567,7 +567,7 @@ erlps__update_bkt__4 args =
 
 erlps__update_counter__3 :: ErlangFun
 erlps__update_counter__3 [key_0, incr_1, d0_2]
-  | (isENum incr_1) =
+  | (H.isENum incr_1) =
   let    slot_5 = (erlps__get_slot__2 [d0_2, key_0])
   in let
     arg_6 =
@@ -641,7 +641,7 @@ erlps__filter__2 args =
 erlps__merge__3 :: ErlangFun
 erlps__merge__3 [f_0, d1_1, d2_2]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_24 =
@@ -725,7 +725,7 @@ erlps__get_slot__2 [t_0, key_1] =
   in
     case (ErlangAtom "true") of
       _ | ((ErlangAtom "true") ==
-             (falsifyErrors
+             (H.falsifyErrors
                 (\ _ ->
                    let
                      rop_9 =
@@ -744,7 +744,6 @@ erlps__get_slot__2 [t_0, key_1] =
               _ -> (EXC.badrecord (ErlangAtom "dict"))
         in (BIF.erlang__op_minus [h_7, rop_14])
       _ -> h_7
-      _ -> (EXC.if_clause unit)
 erlps__get_slot__2 [arg_18, arg_19] = (EXC.function_clause unit)
 erlps__get_slot__2 args =
   (EXC.badarity
@@ -828,7 +827,7 @@ erlps__fold_dict__3 [f_0, acc_1,
                      (ErlangTuple [(ErlangAtom "dict"), (ErlangInt num_2), _, _,
                                    _, _, _, _, _])]
   | ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 0)))
-  , (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
+  , (H.isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
 erlps__fold_dict__3 [f_0, acc_1, d_2] =
   let   
@@ -857,7 +856,7 @@ erlps__fold_segs__4 [f_0, acc_1, segs_2, i_3]
   in (erlps__fold_segs__4 [f_0, arg_8, segs_2, arg_15])
 erlps__fold_segs__4 [f_0, acc_1, _, (ErlangInt num_2)]
   | ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 0)))
-  , (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
+  , (H.isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
 erlps__fold_segs__4 [arg_3, arg_4, arg_5, arg_6] =
   (EXC.function_clause unit)
@@ -876,7 +875,7 @@ erlps__fold_seg__4 [f_0, acc_1, seg_2, i_3]
   in (erlps__fold_seg__4 [f_0, arg_5, seg_2, arg_12])
 erlps__fold_seg__4 [f_0, acc_1, _, (ErlangInt num_2)]
   | ((ErlangInt num_2) == (ErlangInt (DBI.fromInt 0)))
-  , (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
+  , (H.isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
 erlps__fold_seg__4 [arg_3, arg_4, arg_5, arg_6] =
   (EXC.function_clause unit)
@@ -896,7 +895,7 @@ erlps__fold_bucket__3 [f_0, acc_1,
              (ErlangCons val_3 (ErlangCons acc_1 ErlangEmptyList)))])
   in (erlps__fold_bucket__3 [f_0, arg_6, bkt_4])
 erlps__fold_bucket__3 [f_0, acc_1, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 3))) =
   acc_1
 erlps__fold_bucket__3 [arg_2, arg_3, arg_4] =
   (EXC.function_clause unit)
@@ -909,7 +908,7 @@ erlps__map_dict__2 [f_0,
                     dict_2@(ErlangTuple [(ErlangAtom "dict"), (ErlangInt num_1),
                                          _, _, _, _, _, _, _])]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0)))
-  , (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  , (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   dict_2
 erlps__map_dict__2 [f_0, d_1] =
   let   
@@ -942,7 +941,7 @@ erlps__map_seg_list__2 [f_0, (ErlangCons seg_1 segs_2)] =
   in let tail_10 = (erlps__map_seg_list__2 [f_0, segs_2])
   in (ErlangCons head_8 tail_10)
 erlps__map_seg_list__2 [f_0, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__map_seg_list__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
@@ -956,7 +955,7 @@ erlps__map_bkt_list__2 [f_0, (ErlangCons bkt0_1 bkts_2)] =
   in let tail_6 = (erlps__map_bkt_list__2 [f_0, bkts_2])
   in (ErlangCons head_3 tail_6)
 erlps__map_bkt_list__2 [f_0, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__map_bkt_list__2 [arg_1, arg_2] =
   (EXC.function_clause unit)
@@ -975,7 +974,7 @@ erlps__map_bucket__2 [f_0,
   in let tail_10 = (erlps__map_bucket__2 [f_0, bkt_3])
   in (ErlangCons (ErlangCons key_1 tail_6) tail_10)
 erlps__map_bucket__2 [f_0, (ErlangEmptyList)]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   ErlangEmptyList
 erlps__map_bucket__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__map_bucket__2 args =
@@ -988,7 +987,7 @@ erlps__filter_dict__2 [f_0,
                                             (ErlangInt num_1), _, _, _, _, _, _,
                                             _])]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0)))
-  , (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  , (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   dict_2
 erlps__filter_dict__2 [f_0, d_1] =
   let   
@@ -1042,7 +1041,7 @@ erlps__filter_seg_list__4 [f_0, (ErlangCons seg_1 segs_2), fss_3,
              [f_0, segs_2, (ErlangCons head_17 fss_3), fc1_12])
       _ -> (EXC.badmatch match_expr_13)
 erlps__filter_seg_list__4 [f_0, (ErlangEmptyList), fss_1, fc_2]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   let tup_el_3 = (BIF.lists__reverse__2 [fss_1, ErlangEmptyList])
   in (ErlangTuple [tup_el_3, fc_2])
 erlps__filter_seg_list__4 [arg_7, arg_8, arg_9, arg_10] =
@@ -1065,7 +1064,7 @@ erlps__filter_bkt_list__4 [f_0, (ErlangCons bkt0_1 bkts_2),
            [f_0, bkts_2, (ErlangCons bkt1_9 fbs_3), fc1_10])
       _ -> (EXC.badmatch match_expr_11)
 erlps__filter_bkt_list__4 [f_0, (ErlangEmptyList), fbs_1, fc_2]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   let
     tup_el_3 =
       (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [fbs_1])
@@ -1097,7 +1096,7 @@ erlps__filter_bucket__4 [f_0,
         in (erlps__filter_bucket__4 [f_0, bkt_4, fb_5, arg_20])
       something_else -> (EXC.case_clause something_else)
 erlps__filter_bucket__4 [f_0, (ErlangEmptyList), fb_1, fc_2]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   let
     tup_el_3 =
       (BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [fb_1])
@@ -1184,7 +1183,7 @@ erlps__maybe_expand__2 args =
 erlps__maybe_expand_aux__2 :: ErlangFun
 erlps__maybe_expand_aux__2 [t0_0, ic_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_66 =
@@ -1291,7 +1290,7 @@ erlps__maybe_expand_aux__2 args =
 erlps__maybe_expand_segs__1 :: ErlangFun
 erlps__maybe_expand_segs__1 [t_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_31 =
@@ -1360,7 +1359,7 @@ erlps__maybe_expand_segs__1 args =
 erlps__maybe_contract__2 :: ErlangFun
 erlps__maybe_contract__2 [t_0, dc_1]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_62 =
@@ -1472,7 +1471,7 @@ erlps__maybe_contract__2 args =
 erlps__maybe_contract_segs__1 :: ErlangFun
 erlps__maybe_contract_segs__1 [t_0]
   | ((ErlangAtom "true") ==
-       (falsifyErrors
+       (H.falsifyErrors
           (\ _ ->
              let   
                lop_27 =

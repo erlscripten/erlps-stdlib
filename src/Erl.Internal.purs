@@ -21,7 +21,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -193,7 +193,7 @@ erlps__new_type_test__2 [(ErlangAtom "is_tuple"),
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "true")
 erlps__new_type_test__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+  | ((H.isEAtom name_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__new_type_test__2 [arg_2, arg_3] =
   (EXC.function_clause unit)
@@ -245,7 +245,7 @@ erlps__old_type_test__2 [(ErlangAtom "function"),
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "true")
 erlps__old_type_test__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+  | ((H.isEAtom name_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__old_type_test__2 [arg_2, arg_3] =
   (EXC.function_clause unit)
@@ -297,7 +297,7 @@ erlps__arith_op__2 [(ErlangAtom "bsr"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
   (ErlangAtom "true")
 erlps__arith_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+  | ((H.isEAtom op_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__arith_op__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__arith_op__2 args =
@@ -318,7 +318,7 @@ erlps__bool_op__2 [(ErlangAtom "xor"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
   (ErlangAtom "true")
 erlps__bool_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+  | ((H.isEAtom op_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__bool_op__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__bool_op__2 args =
@@ -351,7 +351,7 @@ erlps__comp_op__2 [(ErlangAtom "=/="), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
   (ErlangAtom "true")
 erlps__comp_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+  | ((H.isEAtom op_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__comp_op__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__comp_op__2 args =
@@ -366,7 +366,7 @@ erlps__list_op__2 [(ErlangAtom "--"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
   (ErlangAtom "true")
 erlps__list_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+  | ((H.isEAtom op_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__list_op__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__list_op__2 args =
@@ -378,7 +378,7 @@ erlps__send_op__2 [(ErlangAtom "!"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
   (ErlangAtom "true")
 erlps__send_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+  | ((H.isEAtom op_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__send_op__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__send_op__2 args =
@@ -482,7 +482,7 @@ erlps__bif__3 :: ErlangFun
 erlps__bif__3 [(ErlangAtom "erlang"), name_0, arity_1] =
   (erlps__bif__2 [name_0, arity_1])
 erlps__bif__3 [m_0, f_1, a_2]
-  | (((isEAtom m_0) && (isEAtom f_1)) && (isEInt a_2)) =
+  | (((H.isEAtom m_0) && (H.isEAtom f_1)) && (H.isEInt a_2)) =
   (ErlangAtom "false")
 erlps__bif__3 [arg_3, arg_4, arg_5] = (EXC.function_clause unit)
 erlps__bif__3 args =
@@ -1018,7 +1018,7 @@ erlps__bif__2 [(ErlangAtom "whereis"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "true")
 erlps__bif__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+  | ((H.isEAtom name_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__bif__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__bif__2 args =
@@ -1437,7 +1437,7 @@ erlps__old_bif__2 [(ErlangAtom "whereis"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
   (ErlangAtom "true")
 erlps__old_bif__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+  | ((H.isEAtom name_0) && (H.isEInt a_1)) =
   (ErlangAtom "false")
 erlps__old_bif__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__old_bif__2 args =
@@ -1603,7 +1603,7 @@ erlps__predefined_functions__1 :: ErlangFun
 erlps__predefined_functions__1 [forms_0] =
   let   
     attrs_8 =
-      (flmap
+      (H.flmap
          (\ lc_4 ->
             case lc_4 of
               (ErlangTuple [(ErlangAtom "attribute"), _, name_2, val_3]) ->
@@ -1620,7 +1620,7 @@ erlps__predefined_functions__1 [forms_0] =
       (ErlangTuple [(ErlangAtom "module"), mod_12]) ->
         let   
           callbacks_18 =
-            (flmap
+            (H.flmap
                (\ lc_16 ->
                   case lc_16 of
                     (ErlangTuple [(ErlangAtom "callback"), callback_15]) ->
@@ -1639,20 +1639,17 @@ erlps__predefined_functions__1 [forms_0] =
         in let lc_src_26 = (BIF.erlang__op_append [mpf1_23, mpf2_25])
         in let
           mpf_33 =
-            (flmap
+            (H.flmap
                (\ lc_30 ->
-                  case lc_30 of
-                    f_29 ->
-                      let
-                        lc_ret_31 =
-                          (BIF.do_remote_fun_call "Erl.Parse"
-                             "erlps__new_anno__1" [f_29])
-                      in (ErlangCons lc_ret_31 ErlangEmptyList)
-                    _ -> ErlangEmptyList)
+                  let
+                    lc_ret_31 =
+                      (BIF.do_remote_fun_call "Erl.Parse" "erlps__new_anno__1"
+                         [lc_30])
+                  in (ErlangCons lc_ret_31 ErlangEmptyList))
                lc_src_26)
         in let
           exp_41 =
-            (flmap
+            (H.flmap
                (\ lc_37 ->
                   case lc_37 of
                     (ErlangTuple [(ErlangAtom "function"), _, f_35, a_36, _]) ->
@@ -1677,7 +1674,7 @@ erlps__get_optional_callbacks__1 :: ErlangFun
 erlps__get_optional_callbacks__1 [attrs_0] =
   let
     l_7 =
-      (flmap
+      (H.flmap
          (\ lc_3 ->
             case lc_3 of
               (ErlangTuple [(ErlangAtom "optional_callbacks"), o_2]) ->
@@ -1698,7 +1695,7 @@ erlps__get_optional_callbacks__1 args =
 erlps__is_fa_list__1 :: ErlangFun
 erlps__is_fa_list__1 [(ErlangCons (ErlangTuple [funcname_0,
                                                 arity_1]) l_2)]
-  | (((isEAtom funcname_0) && (isEInt arity_1)) &&
+  | (((H.isEAtom funcname_0) && (H.isEInt arity_1)) &&
        (weakGeq arity_1 (ErlangInt (DBI.fromInt 0)))) =
   (erlps__is_fa_list__1 [l_2])
 erlps__is_fa_list__1 [(ErlangEmptyList)] = (ErlangAtom "true")
@@ -1716,7 +1713,7 @@ erlps__module_predef_func_beh_info__2 [callbacks0_0,
   =
   let   
     callbacks_6 =
-      (flmap
+      (H.flmap
          (\ lc_4 ->
             case lc_4 of
               (ErlangTuple [fa_3@(ErlangTuple [_, _]), _]) ->

@@ -27,7 +27,7 @@ import Data.Tuple as Tup
 import Data.BigInt as DBI
 import Erlang.Builtins as BIF
 import Erlang.Binary as BIN
-import Erlang.Helpers
+import Erlang.Helpers as H
 import Erlang.Exception as EXC
 import Erlang.Type (ErlangFun, ErlangTerm(..), weakCmp, weakEq,
                     weakNEq, weakLt, weakLeq, weakGeq, weakGt)
@@ -134,7 +134,7 @@ erlps__insert_1__3 [key_0,
   in let case_5 = (erlps__insert_1__3 [key_0, smaller_2, arg_8])
   in
     case case_5 of
-      (ErlangTuple [t1_11, h1_12, s1_13]) | (isEInt h1_12) ->
+      (ErlangTuple [t1_11, h1_12, s1_13]) | (H.isEInt h1_12) ->
         let    t_17 = (ErlangTuple [key1_1, t1_11, bigger_3])
         in let match_expr_21 = (erlps__count__1 [bigger_3])
         in
@@ -153,10 +153,8 @@ erlps__insert_1__3 [key_0,
                 case (ErlangAtom "true") of
                   _ | (weakGt h_26 p_34) -> (erlps__balance__2 [t_17, ss_31])
                   _ -> (ErlangTuple [t_17, h_26, ss_31])
-                  _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_21)
       t1_40 -> (ErlangTuple [key1_1, t1_40, bigger_3])
-      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__3 [key_0,
                     (ErlangTuple [key1_1, smaller_2, bigger_3]), s_4]
   | (weakGt key_0 key1_1) =
@@ -165,7 +163,7 @@ erlps__insert_1__3 [key_0,
   in let case_5 = (erlps__insert_1__3 [key_0, bigger_3, arg_8])
   in
     case case_5 of
-      (ErlangTuple [t1_11, h1_12, s1_13]) | (isEInt h1_12) ->
+      (ErlangTuple [t1_11, h1_12, s1_13]) | (H.isEInt h1_12) ->
         let    t_17 = (ErlangTuple [key1_1, smaller_2, t1_11])
         in let match_expr_21 = (erlps__count__1 [smaller_2])
         in
@@ -184,10 +182,8 @@ erlps__insert_1__3 [key_0,
                 case (ErlangAtom "true") of
                   _ | (weakGt h_26 p_34) -> (erlps__balance__2 [t_17, ss_31])
                   _ -> (ErlangTuple [t_17, h_26, ss_31])
-                  _ -> (EXC.if_clause unit)
             _ -> (EXC.badmatch match_expr_21)
       t1_40 -> (ErlangTuple [key1_1, smaller_2, t1_40])
-      something_else -> (EXC.case_clause something_else)
 erlps__insert_1__3 [key_0, (ErlangAtom "nil"), (ErlangInt num_1)]
   | ((ErlangInt num_1) == (ErlangInt (DBI.fromInt 0))) =
   let
@@ -657,7 +653,6 @@ erlps__union__4 [l_0, n1_1, t2_2, n2_3] =
       _ ->
         let arg_18 = (erlps__mk_set__2 [n2_3, t2_2])
         in (erlps__union_1__2 [l_0, arg_18])
-      _ -> (EXC.if_clause unit)
 erlps__union__4 [arg_21, arg_22, arg_23, arg_24] =
   (EXC.function_clause unit)
 erlps__union__4 args =
@@ -833,7 +828,6 @@ erlps__intersection__4 [l_0, n1_1, t2_2, n2_3] =
         let arg_12 = (erlps__to_list_1__1 [t2_2])
         in (erlps__intersection_2__2 [l_0, arg_12])
       _ -> (erlps__intersection_1__2 [l_0, t2_2])
-      _ -> (EXC.if_clause unit)
 erlps__intersection__4 [arg_16, arg_17, arg_18, arg_19] =
   (EXC.function_clause unit)
 erlps__intersection__4 args =
@@ -1033,7 +1027,6 @@ erlps__difference__4 [l_0, n1_1, t2_2, n2_3] =
         let arg_12 = (erlps__to_list_1__1 [t2_2])
         in (erlps__difference_2__3 [l_0, arg_12, n1_1])
       _ -> (erlps__difference_1__2 [l_0, t2_2])
-      _ -> (EXC.if_clause unit)
 erlps__difference__4 [arg_17, arg_18, arg_19, arg_20] =
   (EXC.function_clause unit)
 erlps__difference__4 args =
@@ -1139,7 +1132,6 @@ erlps__is_subset__4 [l_0, n1_1, t2_2, n2_3] =
         let arg_12 = (erlps__to_list_1__1 [t2_2])
         in (erlps__is_subset_2__2 [l_0, arg_12])
       _ -> (erlps__is_subset_1__2 [l_0, t2_2])
-      _ -> (EXC.if_clause unit)
 erlps__is_subset__4 [arg_16, arg_17, arg_18, arg_19] =
   (EXC.function_clause unit)
 erlps__is_subset__4 args =
@@ -1188,7 +1180,7 @@ erlps__is_set__1 [(ErlangTuple [(ErlangInt num_0),
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 0))) =
   (ErlangAtom "true")
 erlps__is_set__1 [(ErlangTuple [n_0, (ErlangTuple [_, _, _])])]
-  | ((isEInt n_0) && (weakGeq n_0 (ErlangInt (DBI.fromInt 0)))) =
+  | ((H.isEInt n_0) && (weakGeq n_0 (ErlangInt (DBI.fromInt 0)))) =
   (ErlangAtom "true")
 erlps__is_set__1 [_] = (ErlangAtom "false")
 erlps__is_set__1 [arg_0] = (EXC.function_clause unit)
@@ -1201,19 +1193,15 @@ erlps__filter__2 [f_0, s_1] =
   let    lc_src_3 = (erlps__to_list__1 [s_1])
   in let
     arg_2 =
-      (flmap
+      (H.flmap
          (\ lc_6 ->
-            case lc_6 of
-              x_5 ->
-                let
-                  cond_7 =
-                    (BIF.erlang__apply__2
-                       [f_0, (ErlangCons x_5 ErlangEmptyList)])
-                in
-                  case cond_7 of
-                    (ErlangAtom "true") -> (ErlangCons x_5 ErlangEmptyList)
-                    _ -> ErlangEmptyList
-              _ -> ErlangEmptyList)
+            let
+              cond_7 =
+                (BIF.erlang__apply__2 [f_0, (ErlangCons lc_6 ErlangEmptyList)])
+            in
+              case cond_7 of
+                (ErlangAtom "true") -> (ErlangCons lc_6 ErlangEmptyList)
+                _ -> ErlangEmptyList)
          lc_src_3)
   in (erlps__from_ordset__1 [arg_2])
 erlps__filter__2 [arg_11, arg_12] = (EXC.function_clause unit)
@@ -1223,7 +1211,7 @@ erlps__filter__2 args =
 
 erlps__fold__3 :: ErlangFun
 erlps__fold__3 [f_0, a_1, (ErlangTuple [_, t_2])]
-  | (isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
+  | (H.isEFunA f_0 (ErlangInt (DBI.fromInt 2))) =
   (erlps__fold_1__3 [f_0, a_1, t_2])
 erlps__fold__3 [arg_6, arg_7, arg_8] = (EXC.function_clause unit)
 erlps__fold__3 args =

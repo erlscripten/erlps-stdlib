@@ -1,6 +1,6 @@
 
 test: build_tests
-	spago test
+	spago test --purs-args "+RTS -I5 -w -A128M --"
 
 BEAM_PATH = /usr/lib/erlang/lib/stdlib-3.13.2/ebin
 build_stdlib:
