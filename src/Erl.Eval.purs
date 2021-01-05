@@ -3103,8 +3103,8 @@ erlps__eval_bc1__6 [e_0, (ErlangEmptyList), bs_1, lf_2, ef_3,
       (ErlangTuple [(ErlangAtom "value"), v_10, _]) ->
         (ErlangBinary
            (BIN.concat
-              [(BIN.format_bin acc_4 (BIN.packed_size acc_4) 1),
-               (BIN.format_bin v_10 (BIN.packed_size v_10) 1)]))
+              [(BIN.format_bin acc_4 (BIN.packed_size acc_4) 8),
+               (BIN.format_bin v_10 (BIN.packed_size v_10) 8)]))
       _ -> (EXC.badmatch match_expr_11)
 erlps__eval_bc1__6 [arg_14, arg_15, arg_16, arg_17, arg_18,
                     arg_19]
@@ -3163,42 +3163,40 @@ erlps__eval_generate__7 args =
      (ErlangFun 7 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__eval_b_generate__7 :: ErlangFun
-erlps__eval_b_generate__7 [bin_3@(ErlangBinary bin_c_0), p_4,
-                           bs0_5, lf_6, ef_7, compfun_8, acc_9]
-  | (ErlangInt size_1) <- ((BIN.size bin_c_0))
-  , (BIN.Ok _ bin_2) <- ((BIN.chop_bin bin_c_0 size_1 1))
-  , (BIN.empty bin_2) =
-  let    mfun_11 = (erlps__match_fun__1 [bs0_5])
+erlps__eval_b_generate__7 [bin_1@(ErlangBinary bin_c_0), p_2,
+                           bs0_3, lf_4, ef_5, compfun_6, acc_7]
+  =
+  let    mfun_9 = (erlps__match_fun__1 [bs0_3])
   in let
-    efun_22 =
+    efun_20 =
       (ErlangFun 2
          let
-           lambda_12 [exp_15, bs_16] =
-             (erlps__expr__5 [exp_15, bs_16, lf_6, ef_7, (ErlangAtom "none")])
-           lambda_12 [arg_13, arg_14] = (EXC.function_clause unit)
-           lambda_12 args = (EXC.badarity (ErlangFun 2 lambda_12) args)
-         in lambda_12)
-  in let arg_26 = (erlps__new_bindings__0 [])
+           lambda_10 [exp_13, bs_14] =
+             (erlps__expr__5 [exp_13, bs_14, lf_4, ef_5, (ErlangAtom "none")])
+           lambda_10 [arg_11, arg_12] = (EXC.function_clause unit)
+           lambda_10 args = (EXC.badarity (ErlangFun 2 lambda_10) args)
+         in lambda_10)
+  in let arg_24 = (erlps__new_bindings__0 [])
   in let
-    case_23 =
+    case_21 =
       (BIF.do_remote_fun_call "Eval.Bits" "erlps__bin_gen__6"
-         [p_4, bin_3, arg_26, bs0_5, mfun_11, efun_22])
+         [p_2, bin_1, arg_24, bs0_3, mfun_9, efun_20])
   in
-    case case_23 of
-      (ErlangTuple [(ErlangAtom "match"), rest_30, bs1_31]) ->
-        let    bs2_34 = (erlps__add_bindings__2 [bs1_31, bs0_5])
+    case case_21 of
+      (ErlangTuple [(ErlangAtom "match"), rest_28, bs1_29]) ->
+        let    bs2_32 = (erlps__add_bindings__2 [bs1_29, bs0_3])
         in let
-          newacc_38 =
+          newacc_36 =
             (BIF.erlang__apply__2
-               [compfun_8,
-                (ErlangCons bs2_34 (ErlangCons acc_9 ErlangEmptyList))])
+               [compfun_6,
+                (ErlangCons bs2_32 (ErlangCons acc_7 ErlangEmptyList))])
         in
           (erlps__eval_b_generate__7
-             [rest_30, p_4, bs0_5, lf_6, ef_7, compfun_8, newacc_38])
-      (ErlangTuple [(ErlangAtom "nomatch"), rest_46]) ->
+             [rest_28, p_2, bs0_3, lf_4, ef_5, compfun_6, newacc_36])
+      (ErlangTuple [(ErlangAtom "nomatch"), rest_44]) ->
         (erlps__eval_b_generate__7
-           [rest_46, p_4, bs0_5, lf_6, ef_7, compfun_8, acc_9])
-      (ErlangAtom "done") -> acc_9
+           [rest_44, p_2, bs0_3, lf_4, ef_5, compfun_6, acc_7])
+      (ErlangAtom "done") -> acc_7
       something_else -> (EXC.case_clause something_else)
 erlps__eval_b_generate__7 [term_0, _p_1, _bs0_2, _lf_3, _ef_4,
                            _compfun_5, _acc_6]
@@ -4186,22 +4184,20 @@ erlps__match1__4 [(ErlangTuple [(ErlangAtom "map"), _, _]), _,
   =
   (BIF.erlang__throw__1 [(ErlangAtom "nomatch")])
 erlps__match1__4 [(ErlangTuple [(ErlangAtom "bin"), _, fs_0]),
-                  b_4@(ErlangBinary bin_c_1), bs0_5, bbs_6]
-  | (ErlangInt size_2) <- ((BIN.size bin_c_1))
-  , (BIN.Ok _ bin_3) <- ((BIN.chop_bin bin_c_1 size_2 1))
-  , (BIN.empty bin_3) =
+                  b_2@(ErlangBinary bin_c_1), bs0_3, bbs_4]
+  =
   let   
-    evalfun_24 =
+    evalfun_22 =
       (ErlangFun 2
          let
-           lambda_7 [e_10, bs_11] =
+           lambda_5 [e_8, bs_9] =
              let   
-               case_12 =
+               case_10 =
                  (BIF.do_remote_fun_call "Erl.Lint" "erlps__is_guard_expr__1"
-                    [e_10])
+                    [e_8])
              in let
                _ =
-                 case case_12 of
+                 case case_10 of
                    (ErlangAtom "true") -> (ErlangAtom "ok")
                    (ErlangAtom "false") ->
                      (BIF.erlang__throw__1 [(ErlangAtom "invalid")])
@@ -4210,22 +4206,22 @@ erlps__match1__4 [(ErlangTuple [(ErlangAtom "bin"), _, fs_0]),
                (EXC.tryCatch
                   (\ _ ->
                      (erlps__expr__5
-                        [e_10, bs_11, (ErlangAtom "none"), (ErlangAtom "none"),
+                        [e_8, bs_9, (ErlangAtom "none"), (ErlangAtom "none"),
                          (ErlangAtom "none")]))
-                  (\ ex_21 ->
-                     case ex_21 of
+                  (\ ex_19 ->
+                     case ex_19 of
                        (ErlangTuple [(ErlangAtom "error"),
                                      (ErlangTuple [(ErlangAtom "unbound"), _]),
                                      _]) ->
                          (BIF.erlang__throw__1 [(ErlangAtom "invalid")])
-                       ex_22 -> (EXC.raise ex_22)))
-           lambda_7 [arg_8, arg_9] = (EXC.function_clause unit)
-           lambda_7 args = (EXC.badarity (ErlangFun 2 lambda_7) args)
-         in lambda_7)
-  in let arg_29 = (erlps__match_fun__1 [bbs_6])
+                       ex_20 -> (EXC.raise ex_20)))
+           lambda_5 [arg_6, arg_7] = (EXC.function_clause unit)
+           lambda_5 args = (EXC.badarity (ErlangFun 2 lambda_5) args)
+         in lambda_5)
+  in let arg_27 = (erlps__match_fun__1 [bbs_4])
   in
     (BIF.do_remote_fun_call "Eval.Bits" "erlps__match_bits__6"
-       [fs_0, b_4, bs0_5, bbs_6, arg_29, evalfun_24])
+       [fs_0, b_2, bs0_3, bbs_4, arg_27, evalfun_22])
 erlps__match1__4 [(ErlangTuple [(ErlangAtom "bin"), _, _]), _,
                   _bs_0, _bbs_1]
   =

@@ -101,7 +101,7 @@ erlps__absname_vr__3 [(ErlangCons (ErlangBinary bin_c_0) rest1_4),
   , (BIN.empty bin_2) =
   (erlps__join__1 [(ErlangCons volume_5 rest1_4)])
 erlps__absname_vr__3 [(ErlangCons (ErlangBinary bin_c_0) rest1_7),
-                      (ErlangCons (ErlangBinary bin_c_8) _), absbase_14]
+                      (ErlangCons (ErlangBinary bin_c_8) _), absbase_12]
   | size_1 <- ((DBI.fromInt 8))
   , (BIN.Ok x_3 bin_2) <-
       ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
@@ -113,12 +113,9 @@ erlps__absname_vr__3 [(ErlangCons (ErlangBinary bin_c_0) rest1_7),
   , size_9 <- ((DBI.fromInt 8))
   , (BIN.Ok x_11 bin_10) <-
       ((BIN.chop_int bin_c_8 size_9 1 BIN.Big BIN.Unsigned))
-  , (ErlangInt size_12) <- ((BIN.size bin_10))
-  , (BIN.Ok _ bin_13) <- ((BIN.chop_bin bin_10 size_12 8))
-  , (BIN.empty bin_13)
   , (x_11 == x_3) =
-  let arg_15 = (erlps__join__1 [rest1_7])
-  in (erlps__absname__2 [arg_15, absbase_14])
+  let arg_13 = (erlps__join__1 [rest1_7])
+  in (erlps__absname__2 [arg_13, absbase_12])
 erlps__absname_vr__3 [(ErlangCons (ErlangBinary bin_c_0) name_7),
                       _, _absbase_8]
   | size_1 <- ((DBI.fromInt 8))
@@ -1436,10 +1433,7 @@ erlps__unix_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_3) bin_2) <-
       ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_3) == (ErlangInt (DBI.fromInt 47)))
-  , (ErlangInt size_4) <- ((BIN.size bin_2))
-  , (BIN.Ok _ bin_5) <- ((BIN.chop_bin bin_2 size_4 8))
-  , (BIN.empty bin_5) =
+  , ((ErlangInt num_3) == (ErlangInt (DBI.fromInt 47))) =
   (ErlangAtom "absolute")
 erlps__unix_pathtype__1 [(ErlangCons (ErlangInt num_0) _)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 47))) =
@@ -1481,10 +1475,7 @@ erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   , size_4 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_6) bin_5) <-
       ((BIN.chop_int bin_2 size_4 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 47)))
-  , (ErlangInt size_7) <- ((BIN.size bin_5))
-  , (BIN.Ok _ bin_8) <- ((BIN.chop_bin bin_5 size_7 8))
-  , (BIN.empty bin_8) =
+  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 47))) =
   (ErlangAtom "absolute")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
@@ -1494,10 +1485,7 @@ erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   , size_4 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_6) bin_5) <-
       ((BIN.chop_int bin_2 size_4 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 47)))
-  , (ErlangInt size_7) <- ((BIN.size bin_5))
-  , (BIN.Ok _ bin_8) <- ((BIN.chop_bin bin_5 size_7 8))
-  , (BIN.empty bin_8) =
+  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 47))) =
   (ErlangAtom "absolute")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
@@ -1507,10 +1495,7 @@ erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   , size_4 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_6) bin_5) <-
       ((BIN.chop_int bin_2 size_4 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 92)))
-  , (ErlangInt size_7) <- ((BIN.size bin_5))
-  , (BIN.Ok _ bin_8) <- ((BIN.chop_bin bin_5 size_7 8))
-  , (BIN.empty bin_8) =
+  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 92))) =
   (ErlangAtom "absolute")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
@@ -1520,28 +1505,19 @@ erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   , size_4 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_6) bin_5) <-
       ((BIN.chop_int bin_2 size_4 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 92)))
-  , (ErlangInt size_7) <- ((BIN.size bin_5))
-  , (BIN.Ok _ bin_8) <- ((BIN.chop_bin bin_5 size_7 8))
-  , (BIN.empty bin_8) =
+  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 92))) =
   (ErlangAtom "absolute")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_3) bin_2) <-
       ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_3) == (ErlangInt (DBI.fromInt 47)))
-  , (ErlangInt size_4) <- ((BIN.size bin_2))
-  , (BIN.Ok _ bin_5) <- ((BIN.chop_bin bin_2 size_4 8))
-  , (BIN.empty bin_5) =
+  , ((ErlangInt num_3) == (ErlangInt (DBI.fromInt 47))) =
   (ErlangAtom "volumerelative")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_3) bin_2) <-
       ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_3) == (ErlangInt (DBI.fromInt 92)))
-  , (ErlangInt size_4) <- ((BIN.size bin_2))
-  , (BIN.Ok _ bin_5) <- ((BIN.chop_bin bin_2 size_4 8))
-  , (BIN.empty bin_5) =
+  , ((ErlangInt num_3) == (ErlangInt (DBI.fromInt 92))) =
   (ErlangAtom "volumerelative")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
@@ -1554,10 +1530,7 @@ erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   , size_7 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_9) bin_8) <-
       ((BIN.chop_int bin_5 size_7 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_9) == (ErlangInt (DBI.fromInt 47)))
-  , (ErlangInt size_10) <- ((BIN.size bin_8))
-  , (BIN.Ok _ bin_11) <- ((BIN.chop_bin bin_8 size_10 8))
-  , (BIN.empty bin_11) =
+  , ((ErlangInt num_9) == (ErlangInt (DBI.fromInt 47))) =
   (ErlangAtom "absolute")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
@@ -1570,10 +1543,7 @@ erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   , size_7 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_9) bin_8) <-
       ((BIN.chop_int bin_5 size_7 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_9) == (ErlangInt (DBI.fromInt 92)))
-  , (ErlangInt size_10) <- ((BIN.size bin_8))
-  , (BIN.Ok _ bin_11) <- ((BIN.chop_bin bin_8 size_10 8))
-  , (BIN.empty bin_11) =
+  , ((ErlangInt num_9) == (ErlangInt (DBI.fromInt 92))) =
   (ErlangAtom "absolute")
 erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   | size_1 <- ((DBI.fromInt 8))
@@ -1582,10 +1552,7 @@ erlps__win32_pathtype__1 [(ErlangBinary bin_c_0)]
   , size_4 <- ((DBI.fromInt 8))
   , (BIN.Ok (ErlangInt num_6) bin_5) <-
       ((BIN.chop_int bin_2 size_4 1 BIN.Big BIN.Unsigned))
-  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 58)))
-  , (ErlangInt size_7) <- ((BIN.size bin_5))
-  , (BIN.Ok _ bin_8) <- ((BIN.chop_bin bin_5 size_7 8))
-  , (BIN.empty bin_8) =
+  , ((ErlangInt num_6) == (ErlangInt (DBI.fromInt 58))) =
   (ErlangAtom "volumerelative")
 erlps__win32_pathtype__1 [(ErlangCons (ErlangInt num_0) (ErlangCons (ErlangInt num_1) _))]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 47)))

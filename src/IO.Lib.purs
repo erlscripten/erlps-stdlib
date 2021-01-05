@@ -446,11 +446,8 @@ erlps__write1__3 [term_0, _d_1, _e_2]
        (H.falsifyErrors
           (\ _ -> (BIF.erlang__is_reference__1 [term_0])))) =
   (erlps__write_ref__1 [term_0])
-erlps__write1__3 [term_3@(ErlangBinary bin_c_0), d_4, _e_5]
-  | (ErlangInt size_1) <- ((BIN.size bin_c_0))
-  , (BIN.Ok _ bin_2) <- ((BIN.chop_bin bin_c_0 size_1 1))
-  , (BIN.empty bin_2) =
-  (erlps__write_binary__2 [term_3, d_4])
+erlps__write1__3 [term_1@(ErlangBinary bin_c_0), d_2, _e_3] =
+  (erlps__write_binary__2 [term_1, d_2])
 erlps__write1__3 [(ErlangEmptyList), _d_0, _e_1] =
   (H.make_string "[]")
 erlps__write1__3 [(ErlangTuple []), _d_0, _e_1] =
@@ -735,7 +732,7 @@ erlps__write_binary_body__4 [(ErlangBinary bin_c_0), d_7, t_8,
   , (BIN.Ok x_3 bin_2) <-
       ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
   , (ErlangInt size_4) <- ((BIN.size bin_2))
-  , (BIN.Ok rest_6 bin_5) <- ((BIN.chop_bin bin_2 size_4 1))
+  , (BIN.Ok rest_6 bin_5) <- ((BIN.chop_bin bin_2 size_4 8))
   , (BIN.empty bin_5) =
   let    s_11 = (BIF.erlang__integer_to_list__1 [x_3])
   in let
@@ -1908,42 +1905,38 @@ erlps__collect_line_bin__4 [(ErlangBinary bin_c_0), data_7,
     case data_7 of
       (ErlangBinary bin_c_14) | (ErlangInt size_15) <- (n_13)
                               , (BIN.Ok line_17 bin_16) <-
-                                  ((BIN.chop_bin bin_c_14 size_15 8))
-                              , (ErlangInt size_18) <- ((BIN.size bin_16))
-                              , (BIN.Ok _ bin_19) <-
-                                  ((BIN.chop_bin bin_16 size_18 8))
-                              , (BIN.empty bin_19) ->
+                                  ((BIN.chop_bin bin_c_14 size_15 8)) ->
         case stack0_8 of
           (ErlangEmptyList) ->
             (ErlangTuple [(ErlangAtom "stop"), line_17, t_6])
-          (ErlangCons (ErlangBinary bin_c_25) stack_29) | size_26 <-
+          (ErlangCons (ErlangBinary bin_c_23) stack_27) | size_24 <-
                                                             ((DBI.fromInt 8))
-                                                        , (BIN.Ok (ErlangInt num_28) bin_27) <-
+                                                        , (BIN.Ok (ErlangInt num_26) bin_25) <-
                                                             ((BIN.chop_int
-                                                                bin_c_25 size_26
+                                                                bin_c_23 size_24
                                                                 1 BIN.Big
                                                                 BIN.Unsigned))
-                                                        , ((ErlangInt num_28) ==
+                                                        , ((ErlangInt num_26) ==
                                                              (ErlangInt
                                                                 (DBI.fromInt
                                                                    13)))
-                                                        , (BIN.empty bin_27)
+                                                        , (BIN.empty bin_25)
                                                         , ((==) n_13
                                                              (ErlangInt
                                                                 (DBI.fromInt
                                                                    1))) ->
             let
-              tup_el_31 =
+              tup_el_29 =
                 (erlps__binrev__2
-                   [stack_29,
+                   [stack_27,
                     (ErlangCons (ErlangInt (DBI.fromInt 10)) ErlangEmptyList)])
-            in (ErlangTuple [(ErlangAtom "stop"), tup_el_31, t_6])
+            in (ErlangTuple [(ErlangAtom "stop"), tup_el_29, t_6])
           _ ->
             let
-              tup_el_38 =
+              tup_el_36 =
                 (erlps__binrev__2
                    [stack0_8, (ErlangCons line_17 ErlangEmptyList)])
-            in (ErlangTuple [(ErlangAtom "stop"), tup_el_38, t_6])
+            in (ErlangTuple [(ErlangAtom "stop"), tup_el_36, t_6])
       _ -> (EXC.badmatch data_7)
 erlps__collect_line_bin__4 [(ErlangBinary bin_c_0), data_10,
                             stack_11, _]
@@ -1968,18 +1961,14 @@ erlps__collect_line_bin__4 [(ErlangBinary bin_c_0), data_10,
     case data_10 of
       (ErlangBinary bin_c_19) | (ErlangInt size_20) <- (n_18)
                               , (BIN.Ok line_22 bin_21) <-
-                                  ((BIN.chop_bin bin_c_19 size_20 8))
-                              , (ErlangInt size_23) <- ((BIN.size bin_21))
-                              , (BIN.Ok _ bin_24) <-
-                                  ((BIN.chop_bin bin_21 size_23 8))
-                              , (BIN.empty bin_24) ->
+                                  ((BIN.chop_bin bin_c_19 size_20 8)) ->
         let
-          tup_el_27 =
+          tup_el_25 =
             (erlps__binrev__2
                [stack_11,
                 (ErlangCons line_22
                    (ErlangCons (ErlangInt (DBI.fromInt 10)) ErlangEmptyList))])
-        in (ErlangTuple [(ErlangAtom "stop"), tup_el_27, t_9])
+        in (ErlangTuple [(ErlangAtom "stop"), tup_el_25, t_9])
       _ -> (EXC.badmatch data_10)
 erlps__collect_line_bin__4 [(ErlangBinary bin_c_0), data0_4,
                             stack_5, _]
@@ -1995,17 +1984,13 @@ erlps__collect_line_bin__4 [(ErlangBinary bin_c_0), data0_4,
     case data0_4 of
       (ErlangBinary bin_c_10) | (ErlangInt size_11) <- (n_9)
                               , (BIN.Ok data_13 bin_12) <-
-                                  ((BIN.chop_bin bin_c_10 size_11 8))
-                              , (ErlangInt size_14) <- ((BIN.size bin_12))
-                              , (BIN.Ok _ bin_15) <-
-                                  ((BIN.chop_bin bin_12 size_14 8))
-                              , (BIN.empty bin_15) ->
+                                  ((BIN.chop_bin bin_c_10 size_11 8)) ->
         let
-          head_17 =
+          head_15 =
             (ErlangBinary
                (BIN.from_int (ErlangInt (DBI.fromInt 13))
                   (ErlangInt (DBI.fromInt 8)) 1 BIN.Big))
-        in (ErlangCons head_17 (ErlangCons data_13 stack_5))
+        in (ErlangCons head_15 (ErlangCons data_13 stack_5))
       _ -> (EXC.badmatch data0_4)
 erlps__collect_line_bin__4 [(ErlangBinary bin_c_0), data_6,
                             stack_7, enc_8]
@@ -2230,11 +2215,8 @@ erlps__limit__2 [t_0, d_1] | (H.isETuple t_0) =
           (erlps__limit_tuple__3
              [t_0, (ErlangInt (DBI.fromInt 2)), arg_14])
       in (BIF.erlang__list_to_tuple__1 [(ErlangCons head_4 tail_11)])
-erlps__limit__2 [term_3@(ErlangBinary bin_c_0), d_4]
-  | (ErlangInt size_1) <- ((BIN.size bin_c_0))
-  , (BIN.Ok _ bin_2) <- ((BIN.chop_bin bin_c_0 size_1 1))
-  , (BIN.empty bin_2) =
-  (erlps__limit_bitstring__2 [term_3, d_4])
+erlps__limit__2 [term_1@(ErlangBinary bin_c_0), d_2] =
+  (erlps__limit_bitstring__2 [term_1, d_2])
 erlps__limit__2 [term_0, _d_1] = term_0
 erlps__limit__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__limit__2 args =
@@ -2383,11 +2365,8 @@ erlps__test_limit__2 [t_0, d_1] | (H.isETuple t_0) =
   in
     (erlps__test_limit_tuple__4
        [t_0, (ErlangInt (DBI.fromInt 1)), arg_4, d_1])
-erlps__test_limit__2 [term_3@(ErlangBinary bin_c_0), d_4]
-  | (ErlangInt size_1) <- ((BIN.size bin_c_0))
-  , (BIN.Ok _ bin_2) <- ((BIN.chop_bin bin_c_0 size_1 1))
-  , (BIN.empty bin_2) =
-  (erlps__test_limit_bitstring__2 [term_3, d_4])
+erlps__test_limit__2 [term_1@(ErlangBinary bin_c_0), d_2] =
+  (erlps__test_limit_bitstring__2 [term_1, d_2])
 erlps__test_limit__2 [_term_0, _d_1] = (ErlangAtom "ok")
 erlps__test_limit__2 [arg_2, arg_3] = (EXC.function_clause unit)
 erlps__test_limit__2 args =

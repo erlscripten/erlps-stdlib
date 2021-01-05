@@ -420,10 +420,6 @@ erlps__gc__1 [(ErlangBinary bin_c_0)]
                                , (BIN.Ok cp2_11 bin_10) <-
                                    ((BIN.chop_int bin_c_8 size_9 1 BIN.Big
                                        BIN.Unsigned))
-                               , (ErlangInt size_12) <- ((BIN.size bin_10))
-                               , (BIN.Ok _ bin_13) <-
-                                   ((BIN.chop_bin bin_10 size_12 8))
-                               , (BIN.empty bin_13)
                                , (weakLt cp2_11
                                     (ErlangInt (DBI.fromInt 256))) ->
           (ErlangCons cp1_3 rest_6)
