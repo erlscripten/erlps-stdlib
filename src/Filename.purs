@@ -199,7 +199,7 @@ erlps__basename__1 :: ErlangFun
 erlps__basename__1 [name_0]
   | ((ErlangAtom "true") ==
        (H.falsifyErrors (\ _ -> (BIF.erlang__is_binary__1 [name_0])))) =
-  let case_1 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  let case_1 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case case_1 of
       (ErlangTuple [(ErlangAtom "win32"), _]) ->
@@ -1419,7 +1419,7 @@ erlps__pathtype__1 [name_0]
              let    lop_4 = (BIF.erlang__is_list__1 [name_0])
              in let rop_6 = (BIF.erlang__is_binary__1 [name_0])
              in (BIF.erlang__op_or [lop_4, rop_6])))) =
-  let case_1 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  let case_1 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case case_1 of
       (ErlangTuple [(ErlangAtom "win32"), _]) ->
@@ -1756,7 +1756,7 @@ erlps__split__1 :: ErlangFun
 erlps__split__1 [name_0]
   | ((ErlangAtom "true") ==
        (H.falsifyErrors (\ _ -> (BIF.erlang__is_binary__1 [name_0])))) =
-  let case_1 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  let case_1 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case case_1 of
       (ErlangTuple [(ErlangAtom "win32"), _]) ->
@@ -1764,7 +1764,7 @@ erlps__split__1 [name_0]
       _ -> (erlps__unix_splitb__1 [name_0])
 erlps__split__1 [name0_0] =
   let    name_2 = (erlps__flatten__1 [name0_0])
-  in let case_3 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  in let case_3 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case case_3 of
       (ErlangTuple [(ErlangAtom "win32"), _]) ->
@@ -2326,7 +2326,7 @@ erlps__nativename__1 :: ErlangFun
 erlps__nativename__1 [name0_0] =
   let   
     name_4 = (erlps__join__1 [(ErlangCons name0_0 ErlangEmptyList)])
-  in let case_5 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  in let case_5 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case case_5 of
       (ErlangTuple [(ErlangAtom "win32"), _]) ->
@@ -2370,7 +2370,7 @@ erlps__win32_nativename__1 args =
 
 erlps__separators__0 :: ErlangFun
 erlps__separators__0 [] =
-  let case_0 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  let case_0 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case case_0 of
       (ErlangTuple [(ErlangAtom "win32"), _]) ->
@@ -2649,7 +2649,7 @@ erlps__make_abs_path__2 args =
 erlps__major_os_type__0 :: ErlangFun
 erlps__major_os_type__0 [] =
   let
-    match_expr_1 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+    match_expr_1 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case match_expr_1 of
       (ErlangTuple [ost_0, _]) -> ost_0
@@ -3087,7 +3087,7 @@ erlps__basedir_join_home__1 args =
 
 erlps__basedir_os_type__0 :: ErlangFun
 erlps__basedir_os_type__0 [] =
-  let case_0 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  let case_0 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in
     case case_0 of
       (ErlangTuple [(ErlangAtom "unix"), (ErlangAtom "darwin")]) ->
@@ -3118,7 +3118,7 @@ erlps__validate__1 [filename_0]
     arg_2 =
       (BIF.do_remote_fun_call "File" "erlps__native_name_encoding__0"
          [])
-  in let arg_3 = (BIF.do_remote_fun_call "Os" "erlps__type__0" [])
+  in let arg_3 = ErlangTuple [ErlangAtom "unix", ErlangAtom "linux"]
   in (erlps__validate_list__3 [filename_0, arg_2, arg_3])
 erlps__validate__1 [arg_7] = (EXC.function_clause unit)
 erlps__validate__1 args =

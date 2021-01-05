@@ -154,7 +154,7 @@ erlps__obsolete__3 [(ErlangAtom "crypto"),
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rand_uniform"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
-  let tup_el_2 = (H.make_string "use rand:rand_uniform/1 instead")
+  let tup_el_2 = (H.make_string "use rand:uniform/1 instead")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2])
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "stream_decrypt"), (ErlangInt num_0)]
@@ -168,6 +168,46 @@ erlps__obsolete__3 [(ErlangAtom "crypto"),
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
   let   
     tup_el_2 = (H.make_string "use crypto:crypto_update/2 instead")
+  in let tup_el_3 = (H.make_string "OTP 24")
+  in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
+erlps__obsolete__3 [(ErlangAtom "erl_tidy"), (ErlangAtom "dir"),
+                    (ErlangInt num_0)]
+  | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 0))) =
+  let   
+    tup_el_2 =
+      (H.make_string "use https://github.com/richcarl/erl_tidy")
+  in let tup_el_3 = (H.make_string "OTP 24")
+  in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
+erlps__obsolete__3 [(ErlangAtom "erl_tidy"), (ErlangAtom "dir"),
+                    (ErlangInt num_0)]
+  | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
+  let   
+    tup_el_2 =
+      (H.make_string "use https://github.com/richcarl/erl_tidy")
+  in let tup_el_3 = (H.make_string "OTP 24")
+  in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
+erlps__obsolete__3 [(ErlangAtom "erl_tidy"), (ErlangAtom "file"),
+                    (ErlangInt num_0)]
+  | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
+  let   
+    tup_el_2 =
+      (H.make_string "use https://github.com/richcarl/erl_tidy")
+  in let tup_el_3 = (H.make_string "OTP 24")
+  in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
+erlps__obsolete__3 [(ErlangAtom "erl_tidy"),
+                    (ErlangAtom "module"), (ErlangInt num_0)]
+  | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
+  let   
+    tup_el_2 =
+      (H.make_string "use https://github.com/richcarl/erl_tidy")
+  in let tup_el_3 = (H.make_string "OTP 24")
+  in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
+erlps__obsolete__3 [(ErlangAtom "erl_tidy"),
+                    (ErlangAtom "module"), (ErlangInt num_0)]
+  | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
+  let   
+    tup_el_2 =
+      (H.make_string "use https://github.com/richcarl/erl_tidy")
   in let tup_el_3 = (H.make_string "OTP 24")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
 erlps__obsolete__3 [(ErlangAtom "erlang"),
@@ -293,13 +333,13 @@ erlps__obsolete__3 [(ErlangAtom "snmp"),
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "c"),
                     (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
-  let    tup_el_2 = (H.make_string "use snmpa:c/1 instead.")
+  let    tup_el_2 = (H.make_string "use snmpc:compile/1 instead.")
   in let tup_el_3 = (H.make_string "OTP 24")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "c"),
                     (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 2))) =
-  let    tup_el_2 = (H.make_string "use snmpa:c/2 instead.")
+  let    tup_el_2 = (H.make_string "use snmpc:compile/2 instead.")
   in let tup_el_3 = (H.make_string "OTP 24")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
 erlps__obsolete__3 [(ErlangAtom "snmp"),
@@ -312,7 +352,7 @@ erlps__obsolete__3 [(ErlangAtom "snmp"),
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "compile"),
                     (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 3))) =
-  let    tup_el_2 = (H.make_string "use snmpa:compile/3 instead.")
+  let    tup_el_2 = (H.make_string "use snmpc:compile/3 instead.")
   in let tup_el_3 = (H.make_string "OTP 24")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
 erlps__obsolete__3 [(ErlangAtom "snmp"),
@@ -433,7 +473,7 @@ erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "is_consistent"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
   let   
-    tup_el_2 = (H.make_string "use snmpa:is_consistent/1 instead.")
+    tup_el_2 = (H.make_string "use snmpc:is_consistent/1 instead.")
   in let tup_el_3 = (H.make_string "OTP 24")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
 erlps__obsolete__3 [(ErlangAtom "snmp"),
@@ -468,7 +508,7 @@ erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "mib_to_hrl"), (ErlangInt num_0)]
   | ((ErlangInt num_0) == (ErlangInt (DBI.fromInt 1))) =
   let   
-    tup_el_2 = (H.make_string "use snmpa:mib_to_hrl/1 instead.")
+    tup_el_2 = (H.make_string "use snmpc:mib_to_hrl/1 instead.")
   in let tup_el_3 = (H.make_string "OTP 24")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_2, tup_el_3])
 erlps__obsolete__3 [(ErlangAtom "snmp"),
@@ -1531,6 +1571,11 @@ erlps__obsolete__3 [(ErlangAtom "gen_fsm"), _, _] =
     tup_el_1 =
       (H.make_string "use the \'gen_statem\' module instead")
   in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_1])
+erlps__obsolete__3 [(ErlangAtom "igor"), _, _] =
+  let   
+    tup_el_1 = (H.make_string "use https://github.com/richcarl/igor")
+  in let tup_el_2 = (H.make_string "OTP 24")
+  in (ErlangTuple [(ErlangAtom "deprecated"), tup_el_1, tup_el_2])
 erlps__obsolete__3 [(ErlangAtom "pg2"), _, _] =
   let    tup_el_1 = (H.make_string "use \'pg\' instead")
   in let tup_el_2 = (H.make_string "OTP 24")
