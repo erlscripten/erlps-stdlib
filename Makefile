@@ -2,7 +2,7 @@
 test: build_tests
 	spago test --purs-args "+RTS -I5 -w -A128M --"
 
-BEAM_PATH = /usr/lib/erlang/lib/stdlib-3.13.2/ebin
+BEAM_PATH = /usr/lib/erlang/lib/stdlib-3.14/ebin
 build_stdlib:
 	ln -f manually_transpiled/* src/
 
@@ -29,10 +29,10 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/erl_pp.beam -o src/Erl.Pp.purs
 	./erlscripten -s $(BEAM_PATH)/erl_internal.beam -o src/Erl.Internal.purs
 	./erlscripten -s $(BEAM_PATH)/otp_internal.beam -o src/Otp.Internal.purs
-
 	./erlscripten -s $(BEAM_PATH)/io_lib.beam -o src/IO.Lib.purs
 	./erlscripten -s $(BEAM_PATH)/io_lib_format.beam -o src/IO.Lib.Format.purs
 	./erlscripten -s $(BEAM_PATH)/io_lib_pretty.beam -o src/IO.Lib.Pretty.purs
+	./erlscripten -s $(BEAM_PATH)/filename.beam -o src/Filename.purs
 
 	erlc +debug_info erlang_src/erl_scan.erl
 	./erlscripten -s erl_scan.beam -o src/Erl.Scan.purs
