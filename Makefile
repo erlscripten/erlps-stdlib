@@ -52,6 +52,10 @@ build_stdlib:
 	./erlscripten -s epp.beam -o src/Epp.purs
 	rm epp.beam
 
+	erlc +debug_info erlang_src/prettypr.erl
+	./erlscripten -s prettypr.beam -o src/Prettypr.purs
+	rm prettypr.beam
+
 #	erlc +debug_info erlang_src/crypto.erl
 #	./erlscripten -s crypto.beam -o src/Crypto.purs
 #	rm crypto.beam
