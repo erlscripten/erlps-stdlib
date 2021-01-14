@@ -251,7 +251,7 @@ erlps__pad__3 args =
 erlps__pad__4 :: ErlangFun
 erlps__pad__4 [cd_0, length_1, (ErlangAtom "leading"), char_2]
   | (H.isEInt length_1) =
-  let    len_4 = (BIF.erlang__length__1 [cd_0])
+  let    len_4 = (erlps__length__1 [cd_0])
   in let arg_8 = (BIF.erlang__op_minus [length_1, len_4])
   in let
     arg_6 = (BIF.erlang__max__2 [(ErlangInt (DBI.fromInt 0)), arg_8])
@@ -262,7 +262,7 @@ erlps__pad__4 [cd_0, length_1, (ErlangAtom "leading"), char_2]
   in (ErlangCons head_5 (ErlangCons cd_0 ErlangEmptyList))
 erlps__pad__4 [cd_0, length_1, (ErlangAtom "trailing"), char_2]
   | (H.isEInt length_1) =
-  let    len_4 = (BIF.erlang__length__1 [cd_0])
+  let    len_4 = (erlps__length__1 [cd_0])
   in let arg_9 = (BIF.erlang__op_minus [length_1, len_4])
   in let
     arg_7 = (BIF.erlang__max__2 [(ErlangInt (DBI.fromInt 0)), arg_9])
@@ -273,7 +273,7 @@ erlps__pad__4 [cd_0, length_1, (ErlangAtom "trailing"), char_2]
   in (ErlangCons cd_0 tail_6)
 erlps__pad__4 [cd_0, length_1, (ErlangAtom "both"), char_2]
   | (H.isEInt length_1) =
-  let    len_4 = (BIF.erlang__length__1 [cd_0])
+  let    len_4 = (erlps__length__1 [cd_0])
   in let arg_6 = (BIF.erlang__op_minus [length_1, len_4])
   in let
     size_9 =

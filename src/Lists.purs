@@ -443,8 +443,7 @@ erlps__duplicate__3 args =
      (ErlangFun 3 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__min__1 :: ErlangFun
-erlps__min__1 [(ErlangCons h_0 t_1)] =
-  (BIF.erlang__min__2 [t_1, h_0])
+erlps__min__1 [(ErlangCons h_0 t_1)] = (erlps__min__2 [t_1, h_0])
 erlps__min__1 [arg_4] = (EXC.function_clause unit)
 erlps__min__1 args =
   (EXC.badarity
@@ -453,9 +452,9 @@ erlps__min__1 args =
 erlps__min__2 :: ErlangFun
 erlps__min__2 [(ErlangCons h_0 t_1), min_2]
   | (weakLt h_0 min_2) =
-  (BIF.erlang__min__2 [t_1, h_0])
+  (erlps__min__2 [t_1, h_0])
 erlps__min__2 [(ErlangCons _ t_0), min_1] =
-  (BIF.erlang__min__2 [t_0, min_1])
+  (erlps__min__2 [t_0, min_1])
 erlps__min__2 [(ErlangEmptyList), min_0] = min_0
 erlps__min__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__min__2 args =
@@ -463,8 +462,7 @@ erlps__min__2 args =
      (ErlangFun 2 (\ _ -> (ErlangAtom "purs_tco_sucks"))) args)
 
 erlps__max__1 :: ErlangFun
-erlps__max__1 [(ErlangCons h_0 t_1)] =
-  (BIF.erlang__max__2 [t_1, h_0])
+erlps__max__1 [(ErlangCons h_0 t_1)] = (erlps__max__2 [t_1, h_0])
 erlps__max__1 [arg_4] = (EXC.function_clause unit)
 erlps__max__1 args =
   (EXC.badarity
@@ -473,9 +471,9 @@ erlps__max__1 args =
 erlps__max__2 :: ErlangFun
 erlps__max__2 [(ErlangCons h_0 t_1), max_2]
   | (weakGt h_0 max_2) =
-  (BIF.erlang__max__2 [t_1, h_0])
+  (erlps__max__2 [t_1, h_0])
 erlps__max__2 [(ErlangCons _ t_0), max_1] =
-  (BIF.erlang__max__2 [t_0, max_1])
+  (erlps__max__2 [t_0, max_1])
 erlps__max__2 [(ErlangEmptyList), max_0] = max_0
 erlps__max__2 [arg_1, arg_2] = (EXC.function_clause unit)
 erlps__max__2 args =
