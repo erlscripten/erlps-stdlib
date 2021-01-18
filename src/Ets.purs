@@ -136,9 +136,14 @@ erlps__insert__2 :: ErlangFun
 erlps__insert__2 [ErlangAtom name, entry]
   | DM.Just ref <- solveName name
   = erlps__insert__2 [ErlangReference ref, entry]
-erlps__insert__2 [ErlangReference ref, ErlangTuple entry] =
+erlps__insert__2 ([ErlangReference ref, ErlangTuple entry]) =
     let _ = etsInsert ref entry
     in ErlangAtom "true"
+erlps__insert__2 ([ErlangReference _, ErlangEmptyList]) =
+    ErlangAtom "true"
+erlps__insert__2 ([ErlangReference ref, ErlangCons (ErlangTuple entry) rest]) =
+    let _ = etsInsert ref entry
+    in erlps__insert__2 [ErlangReference ref, rest]
 erlps__insert__2 [_, _] = EXC.badarg unit
 erlps__insert__2 args = EXC.badarity (ErlangFun 2 erlps__insert__2) args
 
