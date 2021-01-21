@@ -106,29 +106,45 @@ in  upstream
 -}
 
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.13.8-20201204/packages.dhall sha256:5edc9af74593eab8834d7e324e5868a3d258bbab75c5531d2eb770d4324a2900
+      https://github.com/purescript/package-sets/releases/download/psc-0.13.8-20210118/packages.dhall sha256:a59c5c93a68d5d066f3815a89f398bcf00e130a51cb185b2da29b20e2d8ae115
 
 in  upstream
-    with purescript-erlps-core =
-        { dependencies =
-          [ "prelude" ]
-        , repo =
-          "https://github.com/erlscripten/erlps-core.git"
-        , version =
-          "master"
-        }
-    with base58 =
-        { dependencies =
-          [ "prelude" ]
-        , repo =
-          "https://github.com/throughnothing/purescript-base58.git"
-        , version =
-          "v0.0.3"
-        }
-    with math.repo = "https://github.com/minoki/purescript-math/"
-    with math.version = "es6-functions"
-
-
-
-
-
+  with purescript-erlps-core =
+    { dependencies = [ "prelude" ]
+    , repo = "https://github.com/erlscripten/erlps-core.git"
+    , version = "master"
+    }
+  with base58 =
+    { dependencies = [ "prelude" ]
+    , repo = "https://github.com/throughnothing/purescript-base58.git"
+    , version = "v0.0.3"
+    }
+  with safe-coerce =
+    { dependencies = [ "prelude" ]
+    , repo = "https://github.com/purescript/purescript-safe-coerce"
+    , version = "master"
+    }
+  with math.repo = "https://github.com/minoki/purescript-math/"
+  with math.version = "es6-functions"
+  with metadata.version = "v0.14.0-rc5"
+  with prelude.version = "master"
+  with psci-support.version = "master"
+  with node-buffer.version = "master"
+  with bigints.version = "master"
+  with float32.version = "ps-0.14"
+  with float32.repo = "https://github.com/erlscripten/purescript-float32"
+  with uint.version = "ps-0.14"
+  with uint.repo = "https://github.com/erlscripten/purescript-uint"
+  with argonaut-codecs.version = "main"
+  with profunctor-lenses.version = "main"
+  with quickcheck.version = "master"
+  with spec =
+   { repo = "https://github.com/Woody88/purescript-spec"
+   , version = "ps-0.14"
+   , dependencies = upstream.spec.dependencies
+   }
+  with typelevel.version = "master"
+  with typelevel-prelude.version = "master"
+  with newtype.version = "master"
+  with record.version = "master"
+  with foreign-object.version = "master"

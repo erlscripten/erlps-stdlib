@@ -20,6 +20,7 @@ You can edit this file as you like.
   , "b64"
   , "arraybuffer-types"
   , "purescript-erlps-core"
+  , "safe-coerce"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
