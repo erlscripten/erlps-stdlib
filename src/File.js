@@ -21,8 +21,10 @@ exports.readFileImpl = function(makeBinary) {
 	return function(filename) {
 	    var filename = simplifyPath(filename);
 	    var file = fs[filename];
-	    if(file) return makeBinary(Buffer.from(file));
-	    else return enoent;
+	    if(file || file === "") {
+		return makeBinary(Buffer.from(file))
+	    };
+	    return enoent;
 	}
     }
 }
