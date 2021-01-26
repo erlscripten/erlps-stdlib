@@ -2,6 +2,6 @@
 
 var SHA256 = require("crypto-js/sha256");
 
-exports.sha256Impl = function(str) {
-    return Buffer.from(SHA256(str).toString(), 'hex');
+exports.sha256Impl = function(buf) {
+    return Buffer.from(SHA256(buf).toString(), 'hex');
 }

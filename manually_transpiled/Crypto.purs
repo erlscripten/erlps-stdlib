@@ -12,16 +12,13 @@ import Partial.Unsafe
 import Node.Buffer
 import Unsafe.Coerce
 
-foreign import sha256Impl :: String -> Buffer
+foreign import sha256Impl :: Buffer -> Buffer
 
 erlps__hash__2 :: ErlangFun
 erlps__hash__2 [ErlangAtom "sha256", ErlangBinary buf]
   = unsafePartial
     $ ErlangBinary
     $ sha256Impl
-    $ DM.fromJust
-    $ H.erlangListToString
-    $ BIN.to_erlang_list
     $ buf
 erlps__hash__2 [alg, iolist] =
   erlps__hash__2 [alg, BIF.erlang__iolist_to_binary__1 [iolist]]
