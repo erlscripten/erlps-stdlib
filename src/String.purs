@@ -3853,10 +3853,7 @@ erlps__search_compile__1 [(ErlangTuple [sep_0, cps_1,
                                         (ErlangAtom "undefined")])]
   =
   let    arg_5 = (erlps__bin_pattern__1 [cps_1])
-  in let
-    tup_el_4 =
-      (BIF.do_remote_fun_call "Binary" "erlps__compile_pattern__1"
-         [arg_5])
+  in let tup_el_4 = (BIF.binary__compile_pattern__1 [arg_5])
   in (ErlangTuple [sep_0, cps_1, tup_el_4])
 erlps__search_compile__1 [compiled_0@(ErlangTuple [_, _, _])] =
   compiled_0
@@ -3927,10 +3924,7 @@ erlps__bin_search_loop__5 [bin0_0, start_1, binseps_2, cont_3,
                            , (BIN.Ok bin_10 bin_9) <-
                                ((BIN.chop_bin bin_7 size_8 8))
                            , (BIN.empty bin_9) ->
-      let
-        case_12 =
-          (BIF.do_remote_fun_call "Binary" "erlps__match__2"
-             [bin_10, binseps_2])
+      let case_12 = (BIF.binary__match__2 [bin_10, binseps_2])
       in
         case case_12 of
           (ErlangAtom "nomatch") ->
@@ -4199,10 +4193,7 @@ erlps__bin_search_str__4 [bin0_0, start_1, (ErlangEmptyList),
     arg_3 =
       (BIF.do_remote_fun_call "Erlang.Unicode"
          "erlps__characters_to_binary__1" [searchcps_2])
-  in let
-    compiled_5 =
-      (BIF.do_remote_fun_call "Binary" "erlps__compile_pattern__1"
-         [arg_3])
+  in let compiled_5 = (BIF.binary__compile_pattern__1 [arg_3])
   in
     (erlps__bin_search_str_1__4
        [bin0_0, start_1, compiled_5, searchcps_2])
@@ -4213,10 +4204,7 @@ erlps__bin_search_str__4 [bin0_0, start_1, cont_2,
     arg_5 =
       (ErlangBinary
          (BIN.from_int cp_3 (ErlangInt (DBI.fromInt 8)) 1 BIN.Big))
-  in let
-    first_7 =
-      (BIF.do_remote_fun_call "Binary" "erlps__compile_pattern__1"
-         [arg_5])
+  in let first_7 = (BIF.binary__compile_pattern__1 [arg_5])
   in
     (erlps__bin_search_str_2__5
        [bin0_0, start_1, cont_2, first_7, searchcps_4])
@@ -4238,10 +4226,7 @@ erlps__bin_search_str_1__4 [bin0_0, start_1, first_2,
                            , (BIN.Ok bin_9 bin_8) <-
                                ((BIN.chop_bin bin_6 size_7 8))
                            , (BIN.empty bin_8) ->
-      let
-        case_11 =
-          (BIF.do_remote_fun_call "Binary" "erlps__match__2"
-             [bin_9, first_2])
+      let case_11 = (BIF.binary__match__2 [bin_9, first_2])
       in
         case case_11 of
           (ErlangAtom "nomatch") ->
@@ -4317,10 +4302,7 @@ erlps__bin_search_str_2__5 [bin0_0, start_1, cont_2, first_3,
                            , (BIN.Ok bin_10 bin_9) <-
                                ((BIN.chop_bin bin_7 size_8 8))
                            , (BIN.empty bin_9) ->
-      let
-        case_12 =
-          (BIF.do_remote_fun_call "Binary" "erlps__match__2"
-             [bin_10, first_3])
+      let case_12 = (BIF.binary__match__2 [bin_10, first_3])
       in
         case case_12 of
           (ErlangAtom "nomatch") ->

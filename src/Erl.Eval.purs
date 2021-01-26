@@ -3103,8 +3103,8 @@ erlps__eval_bc1__6 [e_0, (ErlangEmptyList), bs_1, lf_2, ef_3,
       (ErlangTuple [(ErlangAtom "value"), v_10, _]) ->
         (ErlangBinary
            (BIN.concat
-              [(BIN.format_bin acc_4 (BIN.packed_size acc_4) 8),
-               (BIN.format_bin v_10 (BIN.packed_size v_10) 8)]))
+              [(BIN.format_bin acc_4 (BIN.packed_size acc_4) 1),
+               (BIN.format_bin v_10 (BIN.packed_size v_10) 1)]))
       _ -> (EXC.badmatch match_expr_11)
 erlps__eval_bc1__6 [arg_14, arg_15, arg_16, arg_17, arg_18,
                     arg_19]

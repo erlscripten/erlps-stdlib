@@ -860,7 +860,7 @@ erlps__extension__1 [name_0]
                   (ErlangInt (DBI.fromInt 8)) 1 BIN.Big))
         in let
           case_9 =
-            (BIF.do_remote_fun_call "Binary" "erlps__matches__2"
+            (BIF.binary__matches__2
                [name_0, (ErlangCons head_12 ErlangEmptyList)])
         in
           case case_9 of
@@ -890,7 +890,7 @@ erlps__extension__1 [name_0]
                                   (ErlangInt (DBI.fromInt 8)) 1 BIN.Big))
                         in let
                           case_26 =
-                            (BIF.do_remote_fun_call "Binary" "erlps__match__2"
+                            (BIF.binary__match__2
                                [part_24, (ErlangCons head_29 slist_8)])
                         in
                           case case_26 of

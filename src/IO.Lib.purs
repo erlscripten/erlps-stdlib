@@ -732,7 +732,7 @@ erlps__write_binary_body__4 [(ErlangBinary bin_c_0), d_7, t_8,
   , (BIN.Ok x_3 bin_2) <-
       ((BIN.chop_int bin_c_0 size_1 1 BIN.Big BIN.Unsigned))
   , (ErlangInt size_4) <- ((BIN.size bin_2))
-  , (BIN.Ok rest_6 bin_5) <- ((BIN.chop_bin bin_2 size_4 8))
+  , (BIN.Ok rest_6 bin_5) <- ((BIN.chop_bin bin_2 size_4 1))
   , (BIN.empty bin_5) =
   let    s_11 = (BIF.erlang__integer_to_list__1 [x_3])
   in let
