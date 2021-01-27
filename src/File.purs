@@ -23,5 +23,5 @@ erlps__native_name_encoding__0 [] = ErlangAtom "utf8"
 erlps__native_name_encoding__0 args = EXC.badarity (ErlangFun 0 erlps__native_name_encoding__0) args
 
 erlps__get_cwd__0 :: ErlangFun
-erlps__get_cwd__0 [] = H.make_string "."  -- XD
+erlps__get_cwd__0 [] = ErlangTuple [ErlangAtom "ok", H.make_string "."]  -- XD
 erlps__get_cwd__0 args = EXC.badarity (ErlangFun 0 erlps__get_cwd__0) args
