@@ -94,7 +94,7 @@ etsTab2List ref =
           Map.values m
         ETSBag _ s ->
           Set.toUnfoldable s
-  in arrayToErlangList $ map ErlangTuple $ arr
+  in arrayToErlangList $ map ErlangTuple $ DA.reverse $ arr
 
 
 mkref :: Unit -> Int
