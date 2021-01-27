@@ -31,12 +31,18 @@ erlps__get_cwd__0 args = EXC.badarity (ErlangFun 0 erlps__get_cwd__0) args
 erlps__format_error__1 :: ErlangFun
 erlps__format_error__1 [ErlangTuple [_, ErlangAtom "file", ErlangAtom "undefined_script"]] =
   H.make_string "no value returned from script"
-erlps__format_error__1 [ErlangTuple [line, ErlangAtom "file", ErlangTuple [clas, reason, stack]]] = H.make_string $ show line <> ": evaluation failed with reason " <> show clas <> ":" <> show reason <> " and stacktrace " <> show stack
-erlps__format_error__1 [ErlangTuple [line, ErlangAtom "file", ErlangTuple [reason, stack]]] = H.make_string $ show line <> ": evaluation failed with reason " <> show reason <> " and stacktrace " <> show stack
+erlps__format_error__1 [ErlangTuple [line, ErlangAtom "file", ErlangTuple [clas, reason, stack]]] =
+  H.make_string $ show line <> ": evaluation failed with reason " <> show clas <> ":" <> show reason <> " and stacktrace " <> show stack
+erlps__format_error__1 [ErlangTuple [line, ErlangAtom "file", ErlangTuple [reason, stack]]] =
+  H.make_string $ show line <> ": evaluation failed with reason " <> show reason <> " and stacktrace " <> show stack
 erlps__format_error__1 [ErlangTuple [line, ErlangAtom modul, reason]] =
   BIF.erlang__append__2 [H.make_string $ show line <> ": ", BIF.do_remote_fun_call modul "erlps__format_error__1" [reason]]
-erlps__format_error__1 [ErlangAtom "badarg"] = H.make_string "bad argument"
-erlps__format_error__1 [ErlangAtom "system_limit"] = H.make_string "a system limit was hit, probably not enough ports"
-erlps__format_error__1 [ErlangAtom "terminated"] = H.make_string "the file server process is terminated"
-erlps__format_error__1 [e] = H.make_string $ "some other error that I was too lazy to implement: " <> show e
+erlps__format_error__1 [ErlangAtom "badarg"] =
+  H.make_string "bad argument"
+erlps__format_error__1 [ErlangAtom "system_limit"] =
+  H.make_string "a system limit was hit, probably not enough ports"
+erlps__format_error__1 [ErlangAtom "terminated"] =
+  H.make_string "the file server process is terminated"
+erlps__format_error__1 [e] =
+  BIF.do_remote_fun_call "Erl.Posix.Msg" "erlps__message__1" [e]
 erlps__format_error__1 args = EXC.badarity (ErlangFun 0 erlps__format_error__1) args

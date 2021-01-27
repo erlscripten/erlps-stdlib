@@ -32,6 +32,7 @@ build_stdlib:
 	./erlscripten -s $(BEAM_PATH)/io_lib.beam -o src/IO.Lib.purs
 	./erlscripten -s $(BEAM_PATH)/io_lib_format.beam -o src/IO.Lib.Format.purs
 	./erlscripten -s $(BEAM_PATH)/io_lib_pretty.beam -o src/IO.Lib.Pretty.purs
+	./erlscripten -s $(BEAM_PATH)/erl_posix_msg.beam -o src/Erl.Posix.Msg.purs
 	./erlscripten -s $(BEAM_PATH)/filename.beam -o src/Filename.purs
 	sed -n -f sed/os_type.sed src/Filename.purs > /tmp/erlps-stdl
 	mv /tmp/erlps-stdl src/Filename.purs # for some reason -i doesn't work
