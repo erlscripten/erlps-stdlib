@@ -18,6 +18,7 @@ import Erlang.Binary as BIN
 import Erlang.Builtins as BIF
 import Erlang.Exception as EXC
 import Erlang.Helpers as H
+import Erlang.Utils as Util
 
 import Data.Set as Set
 import Data.Map as Map
@@ -75,12 +76,12 @@ etsLookup ref key =
   case getTable ref of
     ETSSet _ m -> case Map.lookup key m of
       DM.Nothing -> ErlangEmptyList
-      DM.Just arr -> arrayToErlangList [ErlangTuple arr]
+      DM.Just arr -> toErl [ErlangTuple arr]
     ETSBag _ s ->
-      arrayToErlangList $
+      toErl $
       map ErlangTuple $
       DA.filter (\arr -> case DA.uncons arr of
-                    DM.Nothing -> H.error "Malformed ETS bag"
+                    DM.Nothing -> Util.runtimeError "Malformed ETS bag"
                     DM.Just {head: key'} -> key' == key
                 ) $
       Set.toUnfoldable $
@@ -94,13 +95,13 @@ etsTab2List ref =
           Map.values m
         ETSBag _ s ->
           Set.toUnfoldable s
-  in arrayToErlangList $ map ErlangTuple $ DA.reverse $ arr
+  in toErl $ map ErlangTuple $ DA.reverse $ arr
 
 
 mkref :: Unit -> Int
 mkref unit = case BIF.erlang__make_ref__0 [] of
   ErlangReference i -> i
-  _ -> H.error "make_ref error"
+  _ -> Util.runtimeError "make_ref error"
 
 buildOpts :: DL.List ErlangTerm -> ETSOpts -> ETSOpts
 buildOpts DL.Nil acc = acc
@@ -108,15 +109,15 @@ buildOpts (DL.Cons opt rest) acc =
   let acc1 = case opt of
         ErlangAtom "set" -> acc{table_type = "set"}
         ErlangAtom "bag" -> acc{table_type = "bag"}
-        ErlangAtom "ordered_set" -> H.error $ "Unimplemented ets type: ordered_set"
-        ErlangAtom "duplicate_bag" -> H.error $ "Unimplemented ets type: duplicate_bag"
+        ErlangAtom "ordered_set" -> Util.runtimeError $ "Unimplemented ets type: ordered_set"
+        ErlangAtom "duplicate_bag" -> Util.runtimeError $ "Unimplemented ets type: duplicate_bag"
         ErlangAtom "named_table" -> acc{named = true}
         _ -> EXC.badarg unit
   in buildOpts rest acc1
 
 erlps__new__2 :: ErlangFun
 erlps__new__2 [ErlangAtom name, eopts]
-  | DM.Just optlist <- erlangListToList eopts
+  | DM.Just optlist <- fromErl eopts
   = let opts = buildOpts optlist defaultOpts
         ref = mkref unit
         table = case opts.table_type of

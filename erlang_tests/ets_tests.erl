@@ -9,7 +9,7 @@ test_set() ->
     true = ets:insert(T, {1, b}),
     true = ets:insert(T, {1.0, c}),
     [{1, b}] = ets:lookup(T, 1),
-    [{1, b}, {1.0, c}] = ets:tab2list(T),
+    [{1.0, c}, {1, b}] = ets:tab2list(T),
     true = ets:delete(T),
     ok.
 
@@ -21,6 +21,6 @@ test_bag() ->
     true = ets:insert(T, {1, b}),
     true = ets:insert(T, {1.0, c}),
     [{1, a}, {1, b}] = ets:lookup(T, 1),
-    [{1, a}, {1, b}, {1.0, c}] = ets:tab2list(T),
+    [{1.0, c}, {1, b}, {1, a}] = ets:tab2list(T),
     true = ets:delete(T),
     ok.

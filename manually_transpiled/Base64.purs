@@ -20,8 +20,8 @@ foreign import bufToU8 :: Buffer -> Uint8Array
 
 erlps__decode__1 :: ErlangFun
 erlps__decode__1 [ErlangBinary buf] =
-  erlps__decode__1 [BIN.to_erlang_list buf]
-erlps__decode__1 [el] | DM.Just str <- H.erlangListToString el
+  erlps__decode__1 [BIN.toErlangList buf]
+erlps__decode__1 [el] | DM.Just str <- fromErl el
   = case decode str of
       DE.Left _ -> EXC.badarg unit
       DE.Right u -> ErlangBinary $ u8ToBuf u
@@ -40,7 +40,7 @@ erlps__encode__1 args = EXC.badarity (ErlangFun 1 erlps__encode__1) args
 
 erlps__encode_to_string__1 :: ErlangFun
 erlps__encode_to_string__1 [ErlangBinary buf] =
-  H.make_string $ encode $ bufToU8 buf
+  toErl $ encode $ bufToU8 buf
 erlps__encode_to_string__1 [el] =
   erlps__encode_to_string__1 [erlang__list_to_binary__1 [el]]
 erlps__encode_to_string__1 args = EXC.badarity (ErlangFun 1 erlps__encode_to_string__1) args
