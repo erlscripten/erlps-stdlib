@@ -77,9 +77,9 @@ erlps__test_set__0 [] =
                                       "erlps__tab2list__1" [t_4]
                                 in
                                   case matchExpr_31 of
-                                    (ErlangCons (ErlangTuple [(ErlangFloat 1.00000000000000000000e+0),
-                                                              (ErlangAtom "c")]) (ErlangCons (ErlangTuple [(ErlangInt num_30),
-                                                                                                           (ErlangAtom "b")]) (ErlangEmptyList))) | ((ErlangInt
+                                    (ErlangCons (ErlangTuple [(ErlangInt num_30),
+                                                              (ErlangAtom "b")]) (ErlangCons (ErlangTuple [(ErlangFloat 1.00000000000000000000e+0),
+                                                                                                           (ErlangAtom "c")]) (ErlangEmptyList))) | ((ErlangInt
                                                                                                                                                         num_30) ==
                                                                                                                                                        (toErl
                                                                                                                                                           1)) ->
@@ -89,7 +89,101 @@ erlps__test_set__0 [] =
                                             "erlps__delete__1" [t_4]
                                       in
                                         case matchExpr_33 of
-                                          (ErlangAtom "true") -> ErlangAtom "ok"
+                                          (ErlangAtom "true") ->
+                                            let   
+                                              t1_38 =
+                                                BIF.do_remote_fun_call "Ets"
+                                                  "erlps__new__2"
+                                                  [ErlangAtom "t1",
+                                                   ErlangCons (ErlangAtom "set")
+                                                     ErlangEmptyList]
+                                            in let
+                                              arg_40 =
+                                                ErlangTuple [ErlangAtom "b"]
+                                            in let
+                                              matchExpr_42 =
+                                                BIF.do_remote_fun_call "Ets"
+                                                  "erlps__insert__2"
+                                                  [t1_38, arg_40]
+                                            in
+                                              case matchExpr_42 of
+                                                (ErlangAtom "true") ->
+                                                  let   
+                                                    arg_44 =
+                                                      ErlangTuple
+                                                        [ErlangAtom "c"]
+                                                  in let
+                                                    matchExpr_46 =
+                                                      BIF.do_remote_fun_call
+                                                        "Ets" "erlps__insert__2"
+                                                        [t1_38, arg_44]
+                                                  in
+                                                    case matchExpr_46 of
+                                                      (ErlangAtom "true") ->
+                                                        let   
+                                                          arg_48 =
+                                                            ErlangTuple
+                                                              [ErlangAtom "b"]
+                                                        in let
+                                                          matchExpr_50 =
+                                                            BIF.do_remote_fun_call
+                                                              "Ets"
+                                                              "erlps__insert__2"
+                                                              [t1_38, arg_48]
+                                                        in
+                                                          case matchExpr_50 of
+                                                            (ErlangAtom "true") ->
+                                                              let   
+                                                                arg_52 =
+                                                                  ErlangTuple
+                                                                    [ErlangAtom
+                                                                       "a"]
+                                                              in let
+                                                                matchExpr_54 =
+                                                                  BIF.do_remote_fun_call
+                                                                    "Ets"
+                                                                    "erlps__insert__2"
+                                                                    [t1_38,
+                                                                     arg_52]
+                                                              in
+                                                                case matchExpr_54 of
+                                                                  (ErlangAtom "true") ->
+                                                                    let
+                                                                      matchExpr_56 =
+                                                                        BIF.do_remote_fun_call
+                                                                          "Ets"
+                                                                          "erlps__tab2list__1"
+                                                                          [t1_38]
+                                                                    in
+                                                                      case matchExpr_56 of
+                                                                        (ErlangCons (ErlangTuple [(ErlangAtom "a")]) (ErlangCons (ErlangTuple [(ErlangAtom "b")]) (ErlangCons (ErlangTuple [(ErlangAtom "c")]) (ErlangEmptyList)))) ->
+                                                                          let
+                                                                            matchExpr_58 =
+                                                                              BIF.do_remote_fun_call
+                                                                                "Ets"
+                                                                                "erlps__delete__1"
+                                                                                [t1_38]
+                                                                          in
+                                                                            case matchExpr_58 of
+                                                                              (ErlangAtom "true") ->
+                                                                                ErlangAtom
+                                                                                  "ok"
+                                                                              _ ->
+                                                                                EXC.badmatch
+                                                                                  matchExpr_58
+                                                                        _ ->
+                                                                          EXC.badmatch
+                                                                            matchExpr_56
+                                                                  _ ->
+                                                                    EXC.badmatch
+                                                                      matchExpr_54
+                                                            _ ->
+                                                              EXC.badmatch
+                                                                matchExpr_50
+                                                      _ ->
+                                                        EXC.badmatch
+                                                          matchExpr_46
+                                                _ -> EXC.badmatch matchExpr_42
                                           _ -> EXC.badmatch matchExpr_33
                                     _ -> EXC.badmatch matchExpr_31
                               _ -> EXC.badmatch matchExpr_28
@@ -163,10 +257,10 @@ erlps__test_bag__0 [] =
                                       "erlps__tab2list__1" [t_4]
                                 in
                                   case matchExpr_33 of
-                                    (ErlangCons (ErlangTuple [(ErlangFloat 1.00000000000000000000e+0),
-                                                              (ErlangAtom "c")]) (ErlangCons (ErlangTuple [(ErlangInt num_31),
-                                                                                                           (ErlangAtom "b")]) (ErlangCons (ErlangTuple [(ErlangInt num_32),
-                                                                                                                                                        (ErlangAtom "a")]) (ErlangEmptyList)))) | ((ErlangInt
+                                    (ErlangCons (ErlangTuple [(ErlangInt num_31),
+                                                              (ErlangAtom "a")]) (ErlangCons (ErlangTuple [(ErlangInt num_32),
+                                                                                                           (ErlangAtom "b")]) (ErlangCons (ErlangTuple [(ErlangFloat 1.00000000000000000000e+0),
+                                                                                                                                                        (ErlangAtom "c")]) (ErlangEmptyList)))) | ((ErlangInt
                                                                                                                                                                                                       num_31) ==
                                                                                                                                                                                                      (toErl
                                                                                                                                                                                                         1))
@@ -180,7 +274,101 @@ erlps__test_bag__0 [] =
                                             "erlps__delete__1" [t_4]
                                       in
                                         case matchExpr_35 of
-                                          (ErlangAtom "true") -> ErlangAtom "ok"
+                                          (ErlangAtom "true") ->
+                                            let   
+                                              t1_40 =
+                                                BIF.do_remote_fun_call "Ets"
+                                                  "erlps__new__2"
+                                                  [ErlangAtom "t1",
+                                                   ErlangCons (ErlangAtom "bag")
+                                                     ErlangEmptyList]
+                                            in let
+                                              arg_42 =
+                                                ErlangTuple [ErlangAtom "b"]
+                                            in let
+                                              matchExpr_44 =
+                                                BIF.do_remote_fun_call "Ets"
+                                                  "erlps__insert__2"
+                                                  [t1_40, arg_42]
+                                            in
+                                              case matchExpr_44 of
+                                                (ErlangAtom "true") ->
+                                                  let   
+                                                    arg_46 =
+                                                      ErlangTuple
+                                                        [ErlangAtom "c"]
+                                                  in let
+                                                    matchExpr_48 =
+                                                      BIF.do_remote_fun_call
+                                                        "Ets" "erlps__insert__2"
+                                                        [t1_40, arg_46]
+                                                  in
+                                                    case matchExpr_48 of
+                                                      (ErlangAtom "true") ->
+                                                        let   
+                                                          arg_50 =
+                                                            ErlangTuple
+                                                              [ErlangAtom "b"]
+                                                        in let
+                                                          matchExpr_52 =
+                                                            BIF.do_remote_fun_call
+                                                              "Ets"
+                                                              "erlps__insert__2"
+                                                              [t1_40, arg_50]
+                                                        in
+                                                          case matchExpr_52 of
+                                                            (ErlangAtom "true") ->
+                                                              let   
+                                                                arg_54 =
+                                                                  ErlangTuple
+                                                                    [ErlangAtom
+                                                                       "a"]
+                                                              in let
+                                                                matchExpr_56 =
+                                                                  BIF.do_remote_fun_call
+                                                                    "Ets"
+                                                                    "erlps__insert__2"
+                                                                    [t1_40,
+                                                                     arg_54]
+                                                              in
+                                                                case matchExpr_56 of
+                                                                  (ErlangAtom "true") ->
+                                                                    let
+                                                                      matchExpr_58 =
+                                                                        BIF.do_remote_fun_call
+                                                                          "Ets"
+                                                                          "erlps__tab2list__1"
+                                                                          [t1_40]
+                                                                    in
+                                                                      case matchExpr_58 of
+                                                                        (ErlangCons (ErlangTuple [(ErlangAtom "a")]) (ErlangCons (ErlangTuple [(ErlangAtom "b")]) (ErlangCons (ErlangTuple [(ErlangAtom "c")]) (ErlangEmptyList)))) ->
+                                                                          let
+                                                                            matchExpr_60 =
+                                                                              BIF.do_remote_fun_call
+                                                                                "Ets"
+                                                                                "erlps__delete__1"
+                                                                                [t1_40]
+                                                                          in
+                                                                            case matchExpr_60 of
+                                                                              (ErlangAtom "true") ->
+                                                                                ErlangAtom
+                                                                                  "ok"
+                                                                              _ ->
+                                                                                EXC.badmatch
+                                                                                  matchExpr_60
+                                                                        _ ->
+                                                                          EXC.badmatch
+                                                                            matchExpr_58
+                                                                  _ ->
+                                                                    EXC.badmatch
+                                                                      matchExpr_56
+                                                            _ ->
+                                                              EXC.badmatch
+                                                                matchExpr_52
+                                                      _ ->
+                                                        EXC.badmatch
+                                                          matchExpr_48
+                                                _ -> EXC.badmatch matchExpr_44
                                           _ -> EXC.badmatch matchExpr_35
                                     _ -> EXC.badmatch matchExpr_33
                               _ -> EXC.badmatch matchExpr_29

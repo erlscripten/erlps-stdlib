@@ -1,21 +1,21 @@
 { name = "my-project"
 , dependencies =
   [ "arraybuffer"
+  , "arraybuffer-types"
+  , "b64"
   , "base58"
-  , "numbers"
   , "bigints"
   , "console"
   , "effect"
   , "integers"
-  , "numbers"
   , "lists"
   , "node-buffer"
+  , "numbers"
+  , "ordered-set"
   , "psci-support"
+  , "purescript-erlps-core"
   , "rationals"
   , "spec"
-  , "b64"
-  , "arraybuffer-types"
-  , "purescript-erlps-core"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
