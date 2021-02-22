@@ -378,14 +378,14 @@ main =
             testExecOk ok QS.erlps__to_list__1 [ErlangEmptyList]
         it "io_test" do
             testExecOk ok QS.erlps__io_test__1 [ErlangEmptyList]
-        -- it "op_test" do
-        --     r <- exec QS.erlps__op_test__1 [ErlangEmptyList]
-        --     makeOk ok `shouldEqual` r
+        it "op_test" do
+            r <- exec QS.erlps__op_test__1 [ErlangEmptyList]
+            makeOk ok `shouldEqual` r
         it "error" do
             testExecOk ok QS.erlps__error__1 [ErlangEmptyList]
-        -- it "oops" do
-        --     r <- exec QS.erlps__oops__1 [ErlangEmptyList]
-        --     makeOk ok `shouldEqual` r
+        --it "oops" do
+        --    r <- exec QS.erlps__oops__1 [ErlangEmptyList]
+        --    makeOk ok `shouldEqual` r
 
     describe "Real Dict tests taken from OTP - dict_SUITE.erl" do
         it "create" do
