@@ -104,6 +104,8 @@ main =
     describe "ETS" do
       it "set table" do
         testExecOk ok ETS.erlps__test_set__0 []
+      it "ordered set table" do
+        testExecOk ok ETS.erlps__test_ordered_set__0 []
       it "bag table" do
         testExecOk ok ETS.erlps__test_bag__0 []
 
