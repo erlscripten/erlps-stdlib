@@ -47,7 +47,7 @@ import Erl.Scan.SUITE as ESS
 import Erl.Anno.SUITE as EAS
 import Erl.Eval.SUITE as EES
 import Ets.Tests as ETS
-
+import Io.Lib as IOLIB
 
 test_reverse :: forall e. ToErlang e => Array e -> Aff Unit
 test_reverse a = do
@@ -91,6 +91,12 @@ test_seq from to expected = do
     let out = makeOk $ toErl expected
     out `shouldEqual` calc
 
+test_iolib_format :: String -> Array ErlangTerm -> Aff Unit
+test_iolib_format expected args = do
+    calc <- exec IOLIB.erlps__format__2 args
+    nested <- unpackOk calc
+    testExecOk (toErl expected) erlps__flatten__1 [nested]
+
 main :: Effect Unit
 main =
     launchAff_ $ runSpec [consoleReporter] do
@@ -108,6 +114,24 @@ main =
         testExecOk ok ETS.erlps__test_ordered_set__0 []
       it "bag table" do
         testExecOk ok ETS.erlps__test_bag__0 []
+
+    describe "io_lib_format" do
+      it "no terms" do
+        test_iolib_format "" [toErl "", ErlangEmptyList]
+        test_iolib_format "asdf" [toErl "asdf", ErlangEmptyList]
+        test_iolib_format "asdf 1337" [toErl "asdf 1337", ErlangEmptyList]
+      it "~p works" do
+        test_iolib_format "test: []" [toErl "test: ~p", toErl [ErlangEmptyList]]
+        test_iolib_format "test: \"asdf\"" [toErl "test: ~p", toErl ["asdf"]]
+        test_iolib_format "test: 1337" [toErl "test: ~p", toErl [1337]]
+        test_iolib_format "test: {1,2,\"asdf\"}" [toErl "test: ~p", toErl [ErlangTuple [toErl 1, toErl 2, toErl "asdf"]]]
+        test_iolib_format "test: <<>>" [toErl "test: ~p", toErl [bin []]]
+        -- Works but output different than in erlang
+        --test_iolib_format "test: <<1,2,3,4>>" [toErl "test: ~p", toErl [bin [1,2,3,4]]]
+      it "~s works" do
+        test_iolib_format "test:  " [toErl "test: ~s", toErl ""]
+        test_iolib_format "test: asdf" [toErl "test: ~s", toErl "asdf"]
+        test_iolib_format "test: asdf" [toErl "test: ~s", ErlangAtom "asdf"]
 
     describe "STDLIB Lists" do
         it "reverse/1" do
