@@ -131,6 +131,7 @@ main =
       it "~s works" do
         test_iolib_format "test:  " [toErl "test: ~s", toErl ""]
         test_iolib_format "test: asdf" [toErl "test: ~s", toErl "asdf"]
+        test_iolib_format "test: A" [toErl "test: ~s", bin [65]]
         test_iolib_format "test: asdf" [toErl "test: ~s", ErlangAtom "asdf"]
 
     describe "STDLIB Lists" do
