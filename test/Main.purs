@@ -129,10 +129,10 @@ main =
         -- Works but output different than in erlang
         --test_iolib_format "test: <<1,2,3,4>>" [toErl "test: ~p", toErl [bin [1,2,3,4]]]
       it "~s works" do
-        test_iolib_format "test:  " [toErl "test: ~s", toErl ""]
-        test_iolib_format "test: asdf" [toErl "test: ~s", toErl "asdf"]
-        test_iolib_format "test: A" [toErl "test: ~s", bin [65]]
-        test_iolib_format "test: asdf" [toErl "test: ~s", ErlangAtom "asdf"]
+        test_iolib_format "test: " [toErl "test: ~s", toErl [""]]
+        test_iolib_format "test: asdf" [toErl "test: ~s", toErl ["asdf"]]
+        test_iolib_format "test: A" [toErl "test: ~s", toErl [bin [65]]]
+        test_iolib_format "test: asdf" [toErl "test: ~s", toErl [ErlangAtom "asdf"]]
 
     describe "STDLIB Lists" do
         it "reverse/1" do
