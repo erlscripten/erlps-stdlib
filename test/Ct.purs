@@ -33,5 +33,4 @@ erlps__fail__1 [arg_0] =
   in BIF.erlang__throw__1 [ErlangAtom "failed"]
 erlps__fail__1 [arg_7] = EXC.function_clause unit
 erlps__fail__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__fail__1) args

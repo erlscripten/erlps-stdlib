@@ -26,43 +26,38 @@ erlps__system_bitdefault__0 :: ErlangFun
 erlps__system_bitdefault__0 [] =
   ErlangAtom "no_system_bitdefault"
 erlps__system_bitdefault__0 args =
-  EXC.badarity (ErlangFun 0 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 0 erlps__system_bitdefault__0) args
 
 erlps__system_bittypes__0 :: ErlangFun
 erlps__system_bittypes__0 [] = ErlangAtom "no_system_types"
 erlps__system_bittypes__0 args =
-  EXC.badarity (ErlangFun 0 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 0 erlps__system_bittypes__0) args
 
 erlps__as_list__1 :: ErlangFun
 erlps__as_list__1 [bt_0] =
   let   
     head_1 =
       case bt_0 of
-        (ErlangTuple arr_4) | (DM.Just field_3) <- ((arr_4 DA.!! 1)) ->
+        (ErlangTuple arr_4) | (DM.Just field_3) <- (arr_4 DA.!! 1) ->
           field_3
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
     tup_el_8 =
       case bt_0 of
-        (ErlangTuple arr_11) | (DM.Just field_10) <-
-                                 ((arr_11 DA.!! 2)) ->
+        (ErlangTuple arr_11) | (DM.Just field_10) <- (arr_11 DA.!! 2) ->
           field_10
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let head_6 = ErlangTuple [ErlangAtom "unit", tup_el_8]
   in let
     head_13 =
       case bt_0 of
-        (ErlangTuple arr_16) | (DM.Just field_15) <-
-                                 ((arr_16 DA.!! 3)) ->
+        (ErlangTuple arr_16) | (DM.Just field_15) <- (arr_16 DA.!! 3) ->
           field_15
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
     head_18 =
       case bt_0 of
-        (ErlangTuple arr_21) | (DM.Just field_20) <-
-                                 ((arr_21 DA.!! 4)) ->
+        (ErlangTuple arr_21) | (DM.Just field_20) <- (arr_21 DA.!! 4) ->
           field_20
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in
@@ -71,8 +66,7 @@ erlps__as_list__1 [bt_0] =
          (ErlangCons head_13 (ErlangCons head_18 ErlangEmptyList)))
 erlps__as_list__1 [arg_23] = EXC.function_clause unit
 erlps__as_list__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__as_list__1) args
 
 erlps__set_bit_type__2 :: ErlangFun
 erlps__set_bit_type__2 [size_0, (ErlangAtom "default")] =
@@ -95,8 +89,7 @@ erlps__set_bit_type__2 [size_0, typelist_1] =
 erlps__set_bit_type__2 [arg_17, arg_18] =
   EXC.function_clause unit
 erlps__set_bit_type__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__set_bit_type__2) args
 
 erlps__set_bit__1 :: ErlangFun
 erlps__set_bit__1 [(ErlangEmptyList)] =
@@ -109,8 +102,7 @@ erlps__set_bit__1 [(ErlangCons h_0 t_1)] =
   in erlps__set_bit_1__2 [t_1, arg_3]
 erlps__set_bit__1 [arg_5] = EXC.function_clause unit
 erlps__set_bit__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__set_bit__1) args
 
 erlps__set_bit_1__2 :: ErlangFun
 erlps__set_bit_1__2 [(ErlangCons t0_0 ts_1), bt0_2] =
@@ -120,8 +112,7 @@ erlps__set_bit_1__2 [(ErlangCons t0_0 ts_1), bt0_2] =
 erlps__set_bit_1__2 [(ErlangEmptyList), bt_0] = bt_0
 erlps__set_bit_1__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__set_bit_1__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__set_bit_1__2) args
 
 erlps__type_to_record__1 :: ErlangFun
 erlps__type_to_record__1 [(ErlangAtom "integer")] =
@@ -180,8 +171,8 @@ erlps__type_to_record__1 [(ErlangTuple [(ErlangAtom "unit"),
      ErlangAtom "undefined"]
 erlps__type_to_record__1 [(ErlangTuple [(ErlangAtom "unit"),
                                         sz_0])]
-  | (((isEInt sz_0) && (weakGt sz_0 (toErl 0))) &&
-       (weakLeq sz_0 (toErl 256))) =
+  | ((isEInt sz_0) && (weakGt sz_0 (toErl 0))) &&
+      (weakLeq sz_0 (toErl 256)) =
   ErlangTuple
     [ErlangAtom "bittype", ErlangAtom "undefined", sz_0,
      ErlangAtom "undefined", ErlangAtom "undefined"]
@@ -216,21 +207,20 @@ erlps__type_to_record__1 [name_0] =
   in BIF.erlang__throw__1 [arg_1]
 erlps__type_to_record__1 [arg_6] = EXC.function_clause unit
 erlps__type_to_record__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__type_to_record__1) args
 
 erlps__merge_bittype__2 :: ErlangFun
 erlps__merge_bittype__2 [b1_0, b2_1] =
   let   
     arg_2 =
       case b1_0 of
-        (ErlangTuple arr_5) | (DM.Just field_4) <- ((arr_5 DA.!! 4)) ->
+        (ErlangTuple arr_5) | (DM.Just field_4) <- (arr_5 DA.!! 4) ->
           field_4
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
     arg_6 =
       case b2_1 of
-        (ErlangTuple arr_9) | (DM.Just field_8) <- ((arr_9 DA.!! 4)) ->
+        (ErlangTuple arr_9) | (DM.Just field_8) <- (arr_9 DA.!! 4) ->
           field_8
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
@@ -239,15 +229,13 @@ erlps__merge_bittype__2 [b1_0, b2_1] =
   in let
     arg_12 =
       case b1_0 of
-        (ErlangTuple arr_15) | (DM.Just field_14) <-
-                                 ((arr_15 DA.!! 3)) ->
+        (ErlangTuple arr_15) | (DM.Just field_14) <- (arr_15 DA.!! 3) ->
           field_14
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
     arg_16 =
       case b2_1 of
-        (ErlangTuple arr_19) | (DM.Just field_18) <-
-                                 ((arr_19 DA.!! 3)) ->
+        (ErlangTuple arr_19) | (DM.Just field_18) <- (arr_19 DA.!! 3) ->
           field_18
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
@@ -256,15 +244,13 @@ erlps__merge_bittype__2 [b1_0, b2_1] =
   in let
     arg_22 =
       case b1_0 of
-        (ErlangTuple arr_25) | (DM.Just field_24) <-
-                                 ((arr_25 DA.!! 1)) ->
+        (ErlangTuple arr_25) | (DM.Just field_24) <- (arr_25 DA.!! 1) ->
           field_24
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
     arg_26 =
       case b2_1 of
-        (ErlangTuple arr_29) | (DM.Just field_28) <-
-                                 ((arr_29 DA.!! 1)) ->
+        (ErlangTuple arr_29) | (DM.Just field_28) <- (arr_29 DA.!! 1) ->
           field_28
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
@@ -273,15 +259,13 @@ erlps__merge_bittype__2 [b1_0, b2_1] =
   in let
     arg_32 =
       case b1_0 of
-        (ErlangTuple arr_35) | (DM.Just field_34) <-
-                                 ((arr_35 DA.!! 2)) ->
+        (ErlangTuple arr_35) | (DM.Just field_34) <- (arr_35 DA.!! 2) ->
           field_34
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
     arg_36 =
       case b2_1 of
-        (ErlangTuple arr_39) | (DM.Just field_38) <-
-                                 ((arr_39 DA.!! 2)) ->
+        (ErlangTuple arr_39) | (DM.Just field_38) <- (arr_39 DA.!! 2) ->
           field_38
         _ -> EXC.badrecord (ErlangAtom "bittype")
   in let
@@ -293,13 +277,12 @@ erlps__merge_bittype__2 [b1_0, b2_1] =
 erlps__merge_bittype__2 [arg_47, arg_48] =
   EXC.function_clause unit
 erlps__merge_bittype__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__merge_bittype__2) args
 
 erlps__merge_field__3 :: ErlangFun
 erlps__merge_field__3 [(ErlangAtom "undefined"), b_0, _] = b_0
 erlps__merge_field__3 [a_0, (ErlangAtom "undefined"), _] = a_0
-erlps__merge_field__3 [a_0, a_1, _] | (a_1 == a_0) = a_0
+erlps__merge_field__3 [a_0, a_1, _] | a_1 == a_0 = a_0
 erlps__merge_field__3 [x_0, y_1, what_2] =
   let    tup_el_9 = BIF.erlang__atom_to_list__1 [what_2]
   in let
@@ -310,8 +293,7 @@ erlps__merge_field__3 [x_0, y_1, what_2] =
 erlps__merge_field__3 [arg_11, arg_12, arg_13] =
   EXC.function_clause unit
 erlps__merge_field__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__merge_field__3) args
 
 erlps__apply_defaults__5 :: ErlangFun
 erlps__apply_defaults__5 [(ErlangAtom "undefined"), size_0,
@@ -401,8 +383,7 @@ erlps__apply_defaults__5 [arg_16, arg_17, arg_18, arg_19, arg_20]
   =
   EXC.function_clause unit
 erlps__apply_defaults__5 args =
-  EXC.badarity (ErlangFun 5 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 5 erlps__apply_defaults__5) args
 
 erlps__check_size_unit__3 :: ErlangFun
 erlps__check_size_unit__3 [(ErlangAtom "utf8"), size_0, unit_1] =
@@ -417,8 +398,7 @@ erlps__check_size_unit__3 [_, _, _] = ErlangAtom "ok"
 erlps__check_size_unit__3 [arg_0, arg_1, arg_2] =
   EXC.function_clause unit
 erlps__check_size_unit__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__check_size_unit__3) args
 
 erlps__check_size_unit_1__2 :: ErlangFun
 erlps__check_size_unit_1__2 [size_0, unit_1] =
@@ -451,8 +431,7 @@ erlps__check_size_unit_1__2 [size_0, unit_1] =
 erlps__check_size_unit_1__2 [arg_10, arg_11] =
   EXC.function_clause unit
 erlps__check_size_unit_1__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__check_size_unit_1__2) args
 
 erlps__check_unit__1 :: ErlangFun
 erlps__check_unit__1 [(ErlangAtom "undefined")] = ErlangAtom "ok"
@@ -463,5 +442,4 @@ erlps__check_unit__1 [_] =
   in BIF.erlang__throw__1 [arg_0]
 erlps__check_unit__1 [arg_3] = EXC.function_clause unit
 erlps__check_unit__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__check_unit__1) args

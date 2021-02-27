@@ -24,36 +24,36 @@ import Partial.Unsafe (unsafePartial)
 erlps__obsolete__3 :: ErlangFun
 erlps__obsolete__3 [(ErlangAtom "auth"), (ErlangAtom "cookie"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use erlang:get_cookie/0 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "auth"), (ErlangAtom "cookie"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use erlang:set_cookie/2 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "auth"), (ErlangAtom "is_auth"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use net_adm:ping/1 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "calendar"),
                     (ErlangAtom "local_time_to_universal_time"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let
     tup_el_2 =
       toErl "use calendar:local_time_to_universal_time_dst/1 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "code"), (ErlangAtom "rehash"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let
     tup_el_2 = toErl "the code path cache feature has been removed"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "block_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let   
     tup_el_2 =
       toErl
@@ -62,7 +62,7 @@ erlps__obsolete__3 [(ErlangAtom "crypto"),
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "block_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let   
     tup_el_2 =
       toErl
@@ -71,7 +71,7 @@ erlps__obsolete__3 [(ErlangAtom "crypto"),
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "block_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let   
     tup_el_2 =
       toErl
@@ -80,7 +80,7 @@ erlps__obsolete__3 [(ErlangAtom "crypto"),
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "block_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let   
     tup_el_2 =
       toErl
@@ -89,113 +89,113 @@ erlps__obsolete__3 [(ErlangAtom "crypto"),
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "cmac"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use crypto:mac/4 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "cmac"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use crypto:macN/5 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "hmac"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use crypto:mac/4 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "hmac"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use crypto:macN/5 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "hmac_final"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use crypto:mac_final/1 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "hmac_final_n"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use crypto:mac_finalN/2 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "hmac_init"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use crypto:mac_init/3 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "hmac_update"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use crypto:mac_update/2 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "poly1305"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use crypto:mac/3 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rand_uniform"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use rand:uniform/1 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "stream_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use crypto:crypto_update/2 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "stream_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use crypto:crypto_update/2 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "erl_tidy"), (ErlangAtom "dir"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let   
     tup_el_2 = toErl "use https://github.com/richcarl/erl_tidy"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "erl_tidy"), (ErlangAtom "dir"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let   
     tup_el_2 = toErl "use https://github.com/richcarl/erl_tidy"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "erl_tidy"), (ErlangAtom "file"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let   
     tup_el_2 = toErl "use https://github.com/richcarl/erl_tidy"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "erl_tidy"),
                     (ErlangAtom "module"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let   
     tup_el_2 = toErl "use https://github.com/richcarl/erl_tidy"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "erl_tidy"),
                     (ErlangAtom "module"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let   
     tup_el_2 = toErl "use https://github.com/richcarl/erl_tidy"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "erlang"),
                     (ErlangAtom "get_stacktrace"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let   
     tup_el_2 =
       toErl
@@ -204,7 +204,7 @@ erlps__obsolete__3 [(ErlangAtom "erlang"),
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "erlang"), (ErlangAtom "now"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let
     tup_el_2 =
       toErl
@@ -212,544 +212,544 @@ erlps__obsolete__3 [(ErlangAtom "erlang"), (ErlangAtom "now"),
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "filename"),
                     (ErlangAtom "safe_relative_path"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let   
     tup_el_2 = toErl "use filelib:safe_relative_path/2 instead"
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "http_uri"),
                     (ErlangAtom "decode"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use uri_string functions instead"
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "http_uri"),
                     (ErlangAtom "encode"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use uri_string functions instead"
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "http_uri"),
                     (ErlangAtom "parse"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use uri_string functions instead"
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "http_uri"),
                     (ErlangAtom "parse"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use uri_string functions instead"
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "http_uri"),
                     (ErlangAtom "scheme_defaults"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use uri_string functions instead"
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "httpd"),
                     (ErlangAtom "parse_query"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use uri_string:dissect_query/1 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "megaco"),
                     (ErlangAtom "format_versions"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let   
     tup_el_2 = toErl "use megaco:print_version_info/0,1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "net"), (ErlangAtom "broadcast"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use rpc:eval_everywhere/3 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "net"), (ErlangAtom "call"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let tup_el_2 = toErl "use rpc:call/4 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "net"), (ErlangAtom "cast"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let tup_el_2 = toErl "use rpc:cast/4 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "net"), (ErlangAtom "ping"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use net_adm:ping/1 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "net"), (ErlangAtom "relay"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use slave:relay/1 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "net"), (ErlangAtom "sleep"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use \'receive after T -> ok end\' instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "queue"), (ErlangAtom "lait"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use queue:liat/1 instead"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "add_agent_caps"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:add_agent_caps/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "c"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpc:compile/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "c"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpc:compile/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "change_log_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpa:change_log_size/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "compile"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpc:compile/3 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "current_address"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use snmpa:current_address/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "current_community"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use snmpa:current_community/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "current_context"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use snmpa:current_context/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "current_net_if_data"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let   
     tup_el_2 = toErl "use snmpa:current_net_if_data/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "current_request_id"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use snmpa:current_request_id/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "del_agent_caps"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpa:del_agent_caps/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "dump_mibs"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use snmpa:dump_mibs/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "dump_mibs"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpa:dump_mibs/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "enum_to_int"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:enum_to_int/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "enum_to_int"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpa:enum_to_int/3 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "get"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:get/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "get_agent_caps"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use snmpa:get_agent_caps/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "get_symbolic_store_db"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let   
     tup_el_2 = toErl "use snmpa:get_symbolic_store_db/0 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"), (ErlangAtom "info"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpa:info/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "int_to_enum"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:int_to_enum/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "int_to_enum"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpa:int_to_enum/3 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "is_consistent"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpc:is_consistent/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "load_mibs"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:load_mibs/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "log_to_txt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:log_to_txt/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "log_to_txt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpa:log_to_txt/3 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "log_to_txt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpa:log_to_txt/4 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "mib_to_hrl"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpc:mib_to_hrl/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "name_to_oid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpa:name_to_oid/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "name_to_oid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:name_to_oid/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "oid_to_name"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use snmpa:oid_to_name/1 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "oid_to_name"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:oid_to_name/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "register_subagent"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpa:register_subagent/3 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "send_notification"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpa:send_notification/3 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "send_notification"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpa:send_notification/4 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "send_notification"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpa:send_notification/5 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "send_notification"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpa:send_notification/6 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "send_trap"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpa:send_trap/3 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "send_trap"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpa:send_trap/4 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "unload_mibs"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let    tup_el_2 = toErl "use snmpa:unload_mibs/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmp"),
                     (ErlangAtom "unregister_subagent"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let   
     tup_el_2 = toErl "use snmpa:unregister_subagent/2 instead."
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpa"),
                     (ErlangAtom "old_info_format"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use \"new\" format instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpm:async_get2/3 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpm:async_get2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:async_get2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:async_get2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:async_get_bulk2/5 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:async_get_bulk2/6 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 7)) =
+  | (ErlangInt num_0) == (toErl 7) =
   let    tup_el_2 = toErl "use snmpm:async_get_bulk2/6 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 8)) =
+  | (ErlangInt num_0) == (toErl 8) =
   let    tup_el_2 = toErl "use snmpm:async_get_bulk2/6 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpm:async_get_next2/3 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpm:async_get_next2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:async_get_next2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:async_get_next2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpm:async_set2/3 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpm:async_set2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:async_set2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "async_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:async_set2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpm:sync_get2/3 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpm:sync_get2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:sync_get2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:sync_get2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:sync_get_bulk2/5 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:sync_get_bulk2/6 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 7)) =
+  | (ErlangInt num_0) == (toErl 7) =
   let    tup_el_2 = toErl "use snmpm:sync_get_bulk2/6 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_bulk"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 8)) =
+  | (ErlangInt num_0) == (toErl 8) =
   let    tup_el_2 = toErl "use snmpm:sync_get_bulk2/6 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpm:sync_get_next2/3 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpm:sync_get_next2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:sync_get_next2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_get_next"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:sync_get_next2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let    tup_el_2 = toErl "use snmpm:sync_set2/3 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let    tup_el_2 = toErl "use snmpm:sync_set2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let    tup_el_2 = toErl "use snmpm:sync_set2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "snmpm"),
                     (ErlangAtom "sync_set"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 6)) =
+  | (ErlangInt num_0) == (toErl 6) =
   let    tup_el_2 = toErl "use snmpm:sync_set2/4 instead."
   in let tup_el_3 = toErl "OTP 25"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "ssl"),
                     (ErlangAtom "cipher_suites"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let    tup_el_2 = toErl "use cipher_suites/2,3 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "ssl"),
                     (ErlangAtom "cipher_suites"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let    tup_el_2 = toErl "use cipher_suites/2,3 instead"
   in let tup_el_3 = toErl "OTP 24"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2, tup_el_3]
 erlps__obsolete__3 [(ErlangAtom "sys"), (ErlangAtom "get_debug"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let
     tup_el_2 =
       toErl
@@ -757,534 +757,534 @@ erlps__obsolete__3 [(ErlangAtom "sys"), (ErlangAtom "get_debug"),
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxCalendarCtrl"),
                     (ErlangAtom "enableYearChange"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxCalendarCtrl"),
                     (ErlangAtom "enableYearChange"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxClientDC"),
                     (ErlangAtom "new"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxCursor"), (ErlangAtom "new"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxCursor"), (ErlangAtom "new"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxDC"),
                     (ErlangAtom "computeScaleAndOrigin"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxGraphicsRenderer"),
                     (ErlangAtom "createLinearGradientBrush"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 7)) =
+  | (ErlangInt num_0) == (toErl 7) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxGraphicsRenderer"),
                     (ErlangAtom "createRadialGradientBrush"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 8)) =
+  | (ErlangInt num_0) == (toErl 8) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxGridCellEditor"),
                     (ErlangAtom "endEdit"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxGridCellEditor"),
                     (ErlangAtom "paintBackground"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxIdleEvent"),
                     (ErlangAtom "canSend"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxMDIClientWindow"),
                     (ErlangAtom "new"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxMDIClientWindow"),
                     (ErlangAtom "new"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxPaintDC"), (ErlangAtom "new"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxPostScriptDC"),
                     (ErlangAtom "getResolution"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxPostScriptDC"),
                     (ErlangAtom "setResolution"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "wxWindowDC"),
                     (ErlangAtom "new"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "not available in wxWidgets-2.9 and later"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "core_lib"),
                     (ErlangAtom "get_anno"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use cerl:get_ann/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "core_lib"),
                     (ErlangAtom "is_literal"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use cerl:is_literal/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "core_lib"),
                     (ErlangAtom "is_literal_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use cerl:is_literal_list/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "core_lib"),
                     (ErlangAtom "literal_value"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use cerl:concrete/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "core_lib"),
                     (ErlangAtom "set_anno"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use cerl:set_ann/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_cbc_128_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_cbc_128_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_cbc_256_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_cbc_256_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_cbc_ivec"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:next_iv/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_cfb_128_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_cfb_128_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_ctr_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:stream_decrypt/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_ctr_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:stream_encrypt/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_ctr_stream_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:stream_decrypt/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_ctr_stream_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:stream_encrypt/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "aes_ctr_stream_init"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:stream_init/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_cbc_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_cbc_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_cfb64_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_cfb64_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_ecb_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:block_decrypt/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_ecb_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:block_encrypt/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_ofb64_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "blowfish_ofb64_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des3_cbc_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des3_cbc_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des3_cfb_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des3_cfb_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des3_ede3_cbc_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_cbc_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_cbc_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_cbc_ivec"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:next_iv/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_cfb_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_cfb_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_cfb_ivec"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:next_iv/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_ecb_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:block_decrypt/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_ecb_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:block_encrypt/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "des_ede3_cbc_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "dh_compute_key"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:compute_key/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "dh_generate_key"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:generate_key/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "dh_generate_key"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:generate_key/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "erlint"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "only needed by other removed functions"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "info"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use crypto:module_info/0 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "md4"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:hash/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md4_final"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:hash_final/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md4_init"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use crypto:hash_init/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md4_update"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:hash_update/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "md5"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:hash/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md5_final"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:hash_final/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md5_init"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use crypto:hash_init/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md5_mac"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:hmac/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md5_mac_96"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:hmac/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "md5_update"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:hash_update/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "mod_exp"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:mod_pow/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "mpint"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "only needed by other removed functions"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rand_bytes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:strong_rand_bytes/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rc2_40_cbc_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rc2_40_cbc_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rc2_cbc_decrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_decrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rc2_cbc_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:block_encrypt/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rc4_encrypt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:stream_encrypt/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rc4_encrypt_with_state"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:stream_encrypt/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "rc4_set_key"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:stream_init/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"), (ErlangAtom "sha"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:hash/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "sha_final"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use crypto:hash_final/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "sha_init"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use crypto:hash_init/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "sha_mac"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:hmac/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "sha_mac"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use crypto:hmac/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "sha_mac_96"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:hmac/4 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "sha_update"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use crypto:hash_update/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "crypto"),
                     (ErlangAtom "strong_rand_mpint"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "only needed by other removed functions"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "erl_lint"),
                     (ErlangAtom "modify_line"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use erl_parse:map_anno/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "erl_parse"),
                     (ErlangAtom "get_attribute"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let
     tup_el_2 = toErl "erl_anno:{column,line,location,text}/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "erl_parse"),
                     (ErlangAtom "get_attributes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let
     tup_el_2 = toErl "erl_anno:{column,line,location,text}/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "erl_parse"),
                     (ErlangAtom "set_line"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use erl_anno:set_line/2"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "erl_scan"),
                     (ErlangAtom "set_attribute"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use erl_anno:set_line/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "erlang"), (ErlangAtom "hash"),
                     (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use erlang:phash2/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "httpd_conf"),
                     (ErlangAtom "check_enum"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use lists:member/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "httpd_conf"),
                     (ErlangAtom "clean"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let
     tup_el_2 =
       toErl "use sting:strip/1 instead or possibly the re module"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "httpd_conf"),
                     (ErlangAtom "custom_clean"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let
     tup_el_2 =
       toErl "use sting:strip/1 instead or possibly the re module"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "httpd_conf"),
                     (ErlangAtom "is_directory"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use filelib:is_dir/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "httpd_conf"),
                     (ErlangAtom "is_file"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use filelib:is_file/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "httpd_conf"),
                     (ErlangAtom "make_integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use erlang:list_to_integer/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "rpc"),
                     (ErlangAtom "safe_multi_server_call"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   let tup_el_2 = toErl "use rpc:multi_server_call/2 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "rpc"),
                     (ErlangAtom "safe_multi_server_call"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   let tup_el_2 = toErl "use rpc:multi_server_call/3 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "ssl"),
                     (ErlangAtom "connection_info"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let
     tup_el_2 = toErl "use ssl:connection_information/[1,2] instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "ssl"),
                     (ErlangAtom "negotiated_next_protocol"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   let tup_el_2 = toErl "use ssl:negotiated_protocol/1 instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete__3 [(ErlangAtom "auth"),
@@ -1389,53 +1389,51 @@ erlps__obsolete__3 [_, _, _] = ErlangAtom "no"
 erlps__obsolete__3 [arg_0, arg_1, arg_2] =
   EXC.function_clause unit
 erlps__obsolete__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__obsolete__3) args
 
 erlps__obsolete_type__3 :: ErlangFun
 erlps__obsolete_type__3 [(ErlangAtom "crypto"),
                          (ErlangAtom "retired_cbc_cipher_aliases"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "Use aes_*_cbc or des_ede3_cbc"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete_type__3 [(ErlangAtom "crypto"),
                          (ErlangAtom "retired_cfb_cipher_aliases"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let
     tup_el_2 = toErl "Use aes_*_cfb8, aes_*_cfb128 or des_ede3_cfb"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete_type__3 [(ErlangAtom "crypto"),
                          (ErlangAtom "retired_ctr_cipher_aliases"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "Use aes_*_ctr"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete_type__3 [(ErlangAtom "crypto"),
                          (ErlangAtom "retired_ecb_cipher_aliases"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "Use aes_*_ecb"
   in ErlangTuple [ErlangAtom "deprecated", tup_el_2]
 erlps__obsolete_type__3 [(ErlangAtom "erl_scan"),
                          (ErlangAtom "column"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use erl_anno:column() instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete_type__3 [(ErlangAtom "erl_scan"),
                          (ErlangAtom "line"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use erl_anno:line() instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete_type__3 [(ErlangAtom "erl_scan"),
                          (ErlangAtom "location"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   let tup_el_2 = toErl "use erl_anno:location() instead"
   in ErlangTuple [ErlangAtom "removed", tup_el_2]
 erlps__obsolete_type__3 [_, _, _] = ErlangAtom "no"
 erlps__obsolete_type__3 [arg_0, arg_1, arg_2] =
   EXC.function_clause unit
 erlps__obsolete_type__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__obsolete_type__3) args

@@ -29,8 +29,7 @@ import Partial.Unsafe (unsafePartial)
 erlps__new__0 :: ErlangFun
 erlps__new__0 [] = ErlangEmptyList
 erlps__new__0 args =
-  EXC.badarity (ErlangFun 0 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 0 erlps__new__0) args
 
 erlps__is_set__1 :: ErlangFun
 erlps__is_set__1 [(ErlangCons e_0 es_1)] =
@@ -39,8 +38,7 @@ erlps__is_set__1 [(ErlangEmptyList)] = ErlangAtom "true"
 erlps__is_set__1 [_] = ErlangAtom "false"
 erlps__is_set__1 [arg_0] = EXC.function_clause unit
 erlps__is_set__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__is_set__1) args
 
 erlps__is_set__2 :: ErlangFun
 erlps__is_set__2 [(ErlangCons e2_0 es_1), e1_2]
@@ -50,38 +48,33 @@ erlps__is_set__2 [(ErlangCons _ _), _] = ErlangAtom "false"
 erlps__is_set__2 [(ErlangEmptyList), _] = ErlangAtom "true"
 erlps__is_set__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__is_set__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__is_set__2) args
 
 erlps__size__1 :: ErlangFun
 erlps__size__1 [s_0] = BIF.erlang__length__1 [s_0]
 erlps__size__1 [arg_2] = EXC.function_clause unit
 erlps__size__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__size__1) args
 
 erlps__is_empty__1 :: ErlangFun
 erlps__is_empty__1 [s_0] =
   BIF.erlang__op_exactEq [s_0, ErlangEmptyList]
 erlps__is_empty__1 [arg_3] = EXC.function_clause unit
 erlps__is_empty__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__is_empty__1) args
 
 erlps__to_list__1 :: ErlangFun
 erlps__to_list__1 [s_0] = s_0
 erlps__to_list__1 [arg_1] = EXC.function_clause unit
 erlps__to_list__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__to_list__1) args
 
 erlps__from_list__1 :: ErlangFun
 erlps__from_list__1 [l_0] =
   BIF.do_remote_fun_call "Lists" "erlps__usort__1" [l_0]
 erlps__from_list__1 [arg_2] = EXC.function_clause unit
 erlps__from_list__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__from_list__1) args
 
 erlps__is_element__2 :: ErlangFun
 erlps__is_element__2 [e_0, (ErlangCons h_1 es_2)]
@@ -94,8 +87,7 @@ erlps__is_element__2 [_e_0, (ErlangCons _h_1 _)] =
 erlps__is_element__2 [_, (ErlangEmptyList)] = ErlangAtom "false"
 erlps__is_element__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__is_element__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__is_element__2) args
 
 erlps__add_element__2 :: ErlangFun
 erlps__add_element__2 [e_0, (ErlangCons h_1 es_2)]
@@ -110,8 +102,7 @@ erlps__add_element__2 [e_0, (ErlangEmptyList)] =
   ErlangCons e_0 ErlangEmptyList
 erlps__add_element__2 [arg_3, arg_4] = EXC.function_clause unit
 erlps__add_element__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__add_element__2) args
 
 erlps__del_element__2 :: ErlangFun
 erlps__del_element__2 [e_0, (ErlangCons h_1 es_2)]
@@ -125,8 +116,7 @@ erlps__del_element__2 [_e_0, (ErlangCons _h_1 es_2)] = es_2
 erlps__del_element__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__del_element__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__del_element__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__del_element__2) args
 
 erlps__union__2 :: ErlangFun
 erlps__union__2 [(ErlangCons e1_0 es1_1),
@@ -148,16 +138,14 @@ erlps__union__2 [(ErlangEmptyList), es2_0] = es2_0
 erlps__union__2 [es1_0, (ErlangEmptyList)] = es1_0
 erlps__union__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__union__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__union__2) args
 
 erlps__union__1 :: ErlangFun
 erlps__union__1 [ordsetlist_0] =
   BIF.do_remote_fun_call "Lists" "erlps__umerge__1" [ordsetlist_0]
 erlps__union__1 [arg_2] = EXC.function_clause unit
 erlps__union__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__union__1) args
 
 erlps__intersection__2 :: ErlangFun
 erlps__intersection__2 [(ErlangCons e1_0 es1_1),
@@ -177,8 +165,7 @@ erlps__intersection__2 [(ErlangEmptyList), _] = ErlangEmptyList
 erlps__intersection__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__intersection__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__intersection__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__intersection__2) args
 
 erlps__intersection__1 :: ErlangFun
 erlps__intersection__1 [(ErlangCons s1_0 (ErlangCons s2_1 ss_2))]
@@ -188,8 +175,7 @@ erlps__intersection__1 [(ErlangCons s1_0 (ErlangCons s2_1 ss_2))]
 erlps__intersection__1 [(ErlangCons s_0 (ErlangEmptyList))] = s_0
 erlps__intersection__1 [arg_1] = EXC.function_clause unit
 erlps__intersection__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__intersection__1) args
 
 erlps__intersection1__2 :: ErlangFun
 erlps__intersection1__2 [s1_0, (ErlangCons s2_1 ss_2)] =
@@ -198,8 +184,7 @@ erlps__intersection1__2 [s1_0, (ErlangCons s2_1 ss_2)] =
 erlps__intersection1__2 [s1_0, (ErlangEmptyList)] = s1_0
 erlps__intersection1__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__intersection1__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__intersection1__2) args
 
 erlps__is_disjoint__2 :: ErlangFun
 erlps__is_disjoint__2 [(ErlangCons e1_0 es1_1),
@@ -218,8 +203,7 @@ erlps__is_disjoint__2 [(ErlangEmptyList), _] = ErlangAtom "true"
 erlps__is_disjoint__2 [_, (ErlangEmptyList)] = ErlangAtom "true"
 erlps__is_disjoint__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__is_disjoint__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__is_disjoint__2) args
 
 erlps__subtract__2 :: ErlangFun
 erlps__subtract__2 [(ErlangCons e1_0 es1_1),
@@ -239,8 +223,7 @@ erlps__subtract__2 [(ErlangEmptyList), _] = ErlangEmptyList
 erlps__subtract__2 [es1_0, (ErlangEmptyList)] = es1_0
 erlps__subtract__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__subtract__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__subtract__2) args
 
 erlps__is_subset__2 :: ErlangFun
 erlps__is_subset__2 [(ErlangCons e1_0 _), (ErlangCons e2_1 _)]
@@ -258,8 +241,7 @@ erlps__is_subset__2 [(ErlangEmptyList), _] = ErlangAtom "true"
 erlps__is_subset__2 [_, (ErlangEmptyList)] = ErlangAtom "false"
 erlps__is_subset__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__is_subset__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__is_subset__2) args
 
 erlps__fold__3 :: ErlangFun
 erlps__fold__3 [f_0, acc_1, set_2] =
@@ -267,13 +249,11 @@ erlps__fold__3 [f_0, acc_1, set_2] =
     [f_0, acc_1, set_2]
 erlps__fold__3 [arg_6, arg_7, arg_8] = EXC.function_clause unit
 erlps__fold__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__fold__3) args
 
 erlps__filter__2 :: ErlangFun
 erlps__filter__2 [f_0, set_1] =
   BIF.do_remote_fun_call "Lists" "erlps__filter__2" [f_0, set_1]
 erlps__filter__2 [arg_4, arg_5] = EXC.function_clause unit
 erlps__filter__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__filter__2) args

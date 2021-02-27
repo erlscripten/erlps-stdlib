@@ -92,8 +92,7 @@ erlps__new__2 [mod_0, eq_1] =
      in lambda_2)
 erlps__new__2 [arg_120, arg_121] = EXC.function_clause unit
 erlps__new__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__new__2) args
 
 erlps__singleton__2 :: ErlangFun
 erlps__singleton__2 [mod_0, e_1] =
@@ -114,8 +113,7 @@ erlps__singleton__2 [mod_0, e_1] =
       something_else -> EXC.case_clause something_else
 erlps__singleton__2 [arg_18, arg_19] = EXC.function_clause unit
 erlps__singleton__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__singleton__2) args
 
 erlps__add_element__3 :: ErlangFun
 erlps__add_element__3 [mod_0, el_1, s0_2] =
@@ -153,8 +151,7 @@ erlps__add_element__3 [mod_0, el_1, s0_2] =
 erlps__add_element__3 [arg_31, arg_32, arg_33] =
   EXC.function_clause unit
 erlps__add_element__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__add_element__3) args
 
 erlps__del_element__3 :: ErlangFun
 erlps__del_element__3 [mod_0, el_1, s0_2] =
@@ -183,8 +180,7 @@ erlps__del_element__3 [mod_0, el_1, s0_2] =
 erlps__del_element__3 [arg_25, arg_26, arg_27] =
   EXC.function_clause unit
 erlps__del_element__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__del_element__3) args
 
 erlps__intersection__4 :: ErlangFun
 erlps__intersection__4 [mod_0, equal_1, s1_2, s2_3] =
@@ -216,7 +212,7 @@ erlps__intersection__4 [mod_0, equal_1, s1_2, s2_3] =
                ErlangCons s1_2 (ErlangCons s2_3 ErlangEmptyList)]
         in
           case matchExpr_37 of
-            disjoint_36 | (disjoint_36 == disjoint_28) ->
+            disjoint_36 | disjoint_36 == disjoint_28 ->
               let
                 matchExpr_46 =
                   BIF.erlang__apply__3
@@ -224,15 +220,14 @@ erlps__intersection__4 [mod_0, equal_1, s1_2, s2_3] =
                      ErlangCons s2_3 (ErlangCons s1_2 ErlangEmptyList)]
               in
                 case matchExpr_46 of
-                  disjoint_45 | (disjoint_45 == disjoint_28) -> s_11
+                  disjoint_45 | disjoint_45 == disjoint_28 -> s_11
                   _ -> EXC.badmatch matchExpr_46
             _ -> EXC.badmatch matchExpr_37
       _ -> EXC.badmatch matchExpr_22
 erlps__intersection__4 [arg_47, arg_48, arg_49, arg_50] =
   EXC.function_clause unit
 erlps__intersection__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__intersection__4) args
 
 erlps__intersection__3 :: ErlangFun
 erlps__intersection__3 [mod_0, equal_1, ss_2] =
@@ -260,8 +255,7 @@ erlps__intersection__3 [mod_0, equal_1, ss_2] =
 erlps__intersection__3 [arg_19, arg_20, arg_21] =
   EXC.function_clause unit
 erlps__intersection__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__intersection__3) args
 
 erlps__subtract__3 :: ErlangFun
 erlps__subtract__3 [mod_0, s1_1, s2_2] =
@@ -294,8 +288,7 @@ erlps__subtract__3 [mod_0, s1_1, s2_2] =
 erlps__subtract__3 [arg_30, arg_31, arg_32] =
   EXC.function_clause unit
 erlps__subtract__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__subtract__3) args
 
 erlps__union__4 :: ErlangFun
 erlps__union__4 [mod_0, equal_1, s1_2, s2_3] =
@@ -328,8 +321,7 @@ erlps__union__4 [mod_0, equal_1, s1_2, s2_3] =
 erlps__union__4 [arg_29, arg_30, arg_31, arg_32] =
   EXC.function_clause unit
 erlps__union__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__union__4) args
 
 erlps__union__3 :: ErlangFun
 erlps__union__3 [mod_0, equal_1, ss_2] =
@@ -355,8 +347,7 @@ erlps__union__3 [mod_0, equal_1, ss_2] =
 erlps__union__3 [arg_19, arg_20, arg_21] =
   EXC.function_clause unit
 erlps__union__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__union__3) args
 
 erlps__is_subset__4 :: ErlangFun
 erlps__is_subset__4 [mod_0, equal_1, s_2, set_3] =
@@ -394,8 +385,7 @@ erlps__is_subset__4 [mod_0, equal_1, s_2, set_3] =
 erlps__is_subset__4 [arg_26, arg_27, arg_28, arg_29] =
   EXC.function_clause unit
 erlps__is_subset__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__is_subset__4) args
 
 erlps__fold__4 :: ErlangFun
 erlps__fold__4 [mod_0, f_1, a_2, s_3] =
@@ -413,8 +403,7 @@ erlps__fold__4 [mod_0, f_1, a_2, s_3] =
 erlps__fold__4 [arg_19, arg_20, arg_21, arg_22] =
   EXC.function_clause unit
 erlps__fold__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__fold__4) args
 
 erlps__filter__3 :: ErlangFun
 erlps__filter__3 [mod_0, f_1, s_2] =
@@ -432,5 +421,4 @@ erlps__filter__3 [mod_0, f_1, s_2] =
 erlps__filter__3 [arg_16, arg_17, arg_18] =
   EXC.function_clause unit
 erlps__filter__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__filter__3) args

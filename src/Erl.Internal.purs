@@ -28,81 +28,80 @@ import Partial.Unsafe (unsafePartial)
 
 erlps__guard_bif__2 :: ErlangFun
 erlps__guard_bif__2 [(ErlangAtom "abs"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "binary_part"),
                      (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "binary_part"),
                      (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "bit_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "byte_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "ceil"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "element"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "floor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "hd"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "is_map_key"),
                      (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "length"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "map_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "map_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "round"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "self"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "tl"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "trunc"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [(ErlangAtom "tuple_size"),
                      (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__guard_bif__2 [name_0, a_1] =
   erlps__new_type_test__2 [name_0, a_1]
 erlps__guard_bif__2 [arg_4, arg_5] = EXC.function_clause unit
 erlps__guard_bif__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__guard_bif__2) args
 
 erlps__type_test__2 :: ErlangFun
 erlps__type_test__2 [name_0, arity_1] =
@@ -114,1472 +113,1453 @@ erlps__type_test__2 [name_0, arity_1] =
       _ -> EXC.badarg1 lop_2
 erlps__type_test__2 [arg_7, arg_8] = EXC.function_clause unit
 erlps__type_test__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__type_test__2) args
 
 erlps__new_type_test__2 :: ErlangFun
 erlps__new_type_test__2 [(ErlangAtom "is_atom"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_binary"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_bitstring"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_boolean"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_float"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_function"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_function"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_integer"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_list"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_map"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_number"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_pid"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_port"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_record"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_record"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_reference"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [(ErlangAtom "is_tuple"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__new_type_test__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+  | (isEAtom name_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__new_type_test__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__new_type_test__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__new_type_test__2) args
 
 erlps__old_type_test__2 :: ErlangFun
 erlps__old_type_test__2 [(ErlangAtom "integer"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "number"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "atom"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "tuple"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "pid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "reference"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "port"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "binary"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "record"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_type_test__2 [(ErlangAtom "function"),
                          (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_type_test__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+  | (isEAtom name_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__old_type_test__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__old_type_test__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__old_type_test__2) args
 
 erlps__arith_op__2 :: ErlangFun
 erlps__arith_op__2 [(ErlangAtom "+"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "-"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "*"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "/"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "+"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "-"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "bnot"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "div"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "rem"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "band"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "bor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "bxor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "bsl"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__arith_op__2 [(ErlangAtom "bsr"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
-erlps__arith_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+erlps__arith_op__2 [op_0, a_1] | (isEAtom op_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__arith_op__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__arith_op__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__arith_op__2) args
 
 erlps__bool_op__2 :: ErlangFun
 erlps__bool_op__2 [(ErlangAtom "not"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bool_op__2 [(ErlangAtom "and"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bool_op__2 [(ErlangAtom "or"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bool_op__2 [(ErlangAtom "xor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
-erlps__bool_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+erlps__bool_op__2 [op_0, a_1] | (isEAtom op_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__bool_op__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__bool_op__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__bool_op__2) args
 
 erlps__comp_op__2 :: ErlangFun
 erlps__comp_op__2 [(ErlangAtom "=="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__comp_op__2 [(ErlangAtom "/="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__comp_op__2 [(ErlangAtom "=<"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__comp_op__2 [(ErlangAtom "<"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__comp_op__2 [(ErlangAtom ">="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__comp_op__2 [(ErlangAtom ">"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__comp_op__2 [(ErlangAtom "=:="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__comp_op__2 [(ErlangAtom "=/="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
-erlps__comp_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+erlps__comp_op__2 [op_0, a_1] | (isEAtom op_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__comp_op__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__comp_op__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__comp_op__2) args
 
 erlps__list_op__2 :: ErlangFun
 erlps__list_op__2 [(ErlangAtom "++"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__list_op__2 [(ErlangAtom "--"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
-erlps__list_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+erlps__list_op__2 [op_0, a_1] | (isEAtom op_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__list_op__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__list_op__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__list_op__2) args
 
 erlps__send_op__2 :: ErlangFun
 erlps__send_op__2 [(ErlangAtom "!"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
-erlps__send_op__2 [op_0, a_1]
-  | ((isEAtom op_0) && (isEInt a_1)) =
+erlps__send_op__2 [op_0, a_1] | (isEAtom op_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__send_op__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__send_op__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__send_op__2) args
 
 erlps__op_type__2 :: ErlangFun
 erlps__op_type__2 [(ErlangAtom "+"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "-"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "*"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "/"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "+"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "-"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "bnot"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "div"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "rem"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "band"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "bor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "bxor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "bsl"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "bsr"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "arith"
 erlps__op_type__2 [(ErlangAtom "not"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "bool"
 erlps__op_type__2 [(ErlangAtom "and"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "bool"
 erlps__op_type__2 [(ErlangAtom "or"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "bool"
 erlps__op_type__2 [(ErlangAtom "xor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "bool"
 erlps__op_type__2 [(ErlangAtom "=="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom "/="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom "=<"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom "<"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom ">="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom ">"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom "=:="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom "=/="), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "comp"
 erlps__op_type__2 [(ErlangAtom "++"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "list"
 erlps__op_type__2 [(ErlangAtom "--"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "list"
 erlps__op_type__2 [(ErlangAtom "!"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "send"
 erlps__op_type__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__op_type__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__op_type__2) args
 
 erlps__bif__3 :: ErlangFun
 erlps__bif__3 [(ErlangAtom "erlang"), name_0, arity_1] =
   erlps__bif__2 [name_0, arity_1]
 erlps__bif__3 [m_0, f_1, a_2]
-  | (((isEAtom m_0) && (isEAtom f_1)) && (isEInt a_2)) =
+  | ((isEAtom m_0) && (isEAtom f_1)) && (isEInt a_2) =
   ErlangAtom "false"
 erlps__bif__3 [arg_3, arg_4, arg_5] = EXC.function_clause unit
 erlps__bif__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__bif__3) args
 
 erlps__bif__2 :: ErlangFun
 erlps__bif__2 [(ErlangAtom "abs"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "apply"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "apply"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "atom_to_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "atom_to_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "atom_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_part"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_part"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_atom"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_atom"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_existing_atom"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_existing_atom"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_integer"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_integer"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_term"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "binary_to_term"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "bitsize"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "bit_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "bitstring_to_list"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "byte_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "ceil"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "check_old_code"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "check_process_code"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "check_process_code"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "date"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "delete_module"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "demonitor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "demonitor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "disconnect_node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "element"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "erase"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "erase"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "error"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "error"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "exit"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "exit"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "float_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "float_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "float_to_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "float_to_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "floor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "garbage_collect"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "garbage_collect"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "garbage_collect"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "get_keys"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "get_keys"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "group_leader"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "group_leader"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "halt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "halt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "halt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "hd"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "integer_to_binary"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "integer_to_binary"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "integer_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "integer_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "iolist_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "iolist_to_binary"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_alive"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_process_alive"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_atom"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_boolean"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_bitstring"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_function"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_function"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_map"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_map_key"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_number"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_pid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_port"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_reference"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_tuple"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_record"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "is_record"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "length"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_atom"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_bitstring"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_existing_atom"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_pid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_port"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_ref"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "list_to_tuple"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "load_module"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "make_ref"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "map_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "map_get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "max"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "min"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "module_loaded"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "monitor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "monitor_node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "nodes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "nodes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "now"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "open_port"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "pid_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "port_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "port_close"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "port_command"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "port_command"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "port_connect"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "port_control"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "pre_loaded"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "process_flag"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "process_flag"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "process_info"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "process_info"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "processes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "purge_module"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "put"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "ref_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "register"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "registered"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "round"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "self"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "setelement"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_request"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_request"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_request"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_request"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_request"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_request_abandon"),
                (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_monitor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_monitor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_monitor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_monitor"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "split_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "statistics"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "term_to_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "term_to_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "term_to_iovec"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "term_to_iovec"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "throw"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "time"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "tl"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "trunc"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "tuple_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "tuple_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "unlink"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "unregister"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "whereis"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
-erlps__bif__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+erlps__bif__2 [name_0, a_1] | (isEAtom name_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__bif__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__bif__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__bif__2) args
 
 erlps__old_bif__2 :: ErlangFun
 erlps__old_bif__2 [(ErlangAtom "abs"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "apply"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "apply"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "atom_to_binary"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "atom_to_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "binary_to_atom"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "binary_to_existing_atom"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "binary_to_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "binary_to_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "binary_to_term"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "bitsize"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "bit_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "bitstring_to_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "byte_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "check_process_code"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "date"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "delete_module"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "disconnect_node"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "element"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "erase"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "erase"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "exit"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "exit"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "float_to_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "garbage_collect"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "garbage_collect"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "get"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "get_keys"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "group_leader"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "group_leader"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "halt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "halt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "hd"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "integer_to_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "iolist_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "iolist_to_binary"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_alive"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_process_alive"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_atom"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_boolean"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_bitstring"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_function"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_function"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_number"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_pid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_port"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_reference"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_tuple"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_record"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "is_record"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "length"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_atom"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_binary"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_bitstring"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_existing_atom"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_float"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_integer"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_pid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "list_to_tuple"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "load_module"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "make_ref"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "module_loaded"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "monitor_node"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "nodes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "nodes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "now"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "open_port"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "pid_to_list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "port_close"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "port_command"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "port_connect"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "port_control"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "pre_loaded"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "process_flag"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "process_flag"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "process_info"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "process_info"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "processes"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "purge_module"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "put"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "register"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "registered"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "round"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "self"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "setelement"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_link"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_monitor"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_monitor"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 3)) =
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 4)) =
+  | (ErlangInt num_0) == (toErl 4) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "spawn_opt"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 5)) =
+  | (ErlangInt num_0) == (toErl 5) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "split_binary"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "statistics"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "term_to_binary"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "term_to_binary"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "throw"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "time"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "tl"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "trunc"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "tuple_size"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "tuple_to_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "unlink"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "unregister"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [(ErlangAtom "whereis"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__old_bif__2 [name_0, a_1]
-  | ((isEAtom name_0) && (isEInt a_1)) =
+  | (isEAtom name_0) && (isEInt a_1) =
   ErlangAtom "false"
 erlps__old_bif__2 [arg_2, arg_3] = EXC.function_clause unit
 erlps__old_bif__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__old_bif__2) args
 
 erlps__is_type__2 :: ErlangFun
 erlps__is_type__2 [(ErlangAtom "any"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "arity"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "atom"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "binary"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "bitstring"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "bool"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "boolean"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "byte"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "char"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "float"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "function"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "identifier"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "iodata"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "iolist"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "list"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "map"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "maybe_improper_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "maybe_improper_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "mfa"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "module"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "neg_integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nil"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "no_return"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "node"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "non_neg_integer"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "none"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nonempty_improper_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nonempty_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nonempty_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 1)) =
+  | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nonempty_maybe_improper_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nonempty_maybe_improper_list"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 2)) =
+  | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nonempty_string"),
                    (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "number"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "pid"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "port"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "pos_integer"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "reference"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "string"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "term"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "timeout"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "tuple"), (ErlangInt num_0)]
-  | ((ErlangInt num_0) == (toErl 0)) =
+  | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [_, _] = ErlangAtom "false"
 erlps__is_type__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__is_type__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__is_type__2) args
 
 erlps__add_predefined_functions__1 :: ErlangFun
 erlps__add_predefined_functions__1 [forms_0] =
@@ -1588,7 +1568,7 @@ erlps__add_predefined_functions__1 [forms_0] =
 erlps__add_predefined_functions__1 [arg_4] =
   EXC.function_clause unit
 erlps__add_predefined_functions__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
+  EXC.badarity (ErlangFun 1 erlps__add_predefined_functions__1)
     args
 
 erlps__predefined_functions__1 :: ErlangFun
@@ -1657,8 +1637,7 @@ erlps__predefined_functions__1 [forms_0] =
 erlps__predefined_functions__1 [arg_48] =
   EXC.function_clause unit
 erlps__predefined_functions__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__predefined_functions__1) args
 
 erlps__get_optional_callbacks__1 :: ErlangFun
 erlps__get_optional_callbacks__1 [attrs_0] =
@@ -1679,21 +1658,19 @@ erlps__get_optional_callbacks__1 [attrs_0] =
 erlps__get_optional_callbacks__1 [arg_9] =
   EXC.function_clause unit
 erlps__get_optional_callbacks__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__get_optional_callbacks__1) args
 
 erlps__is_fa_list__1 :: ErlangFun
 erlps__is_fa_list__1 [(ErlangCons (ErlangTuple [funcname_0,
                                                 arity_1]) l_2)]
-  | (((isEAtom funcname_0) && (isEInt arity_1)) &&
-       (weakGeq arity_1 (toErl 0))) =
+  | ((isEAtom funcname_0) && (isEInt arity_1)) &&
+      (weakGeq arity_1 (toErl 0)) =
   erlps__is_fa_list__1 [l_2]
 erlps__is_fa_list__1 [(ErlangEmptyList)] = ErlangAtom "true"
 erlps__is_fa_list__1 [_] = ErlangAtom "false"
 erlps__is_fa_list__1 [arg_0] = EXC.function_clause unit
 erlps__is_fa_list__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__is_fa_list__1) args
 
 erlps__module_predef_func_beh_info__2 :: ErlangFun
 erlps__module_predef_func_beh_info__2 [(ErlangEmptyList), _] =
@@ -1749,7 +1726,7 @@ erlps__module_predef_func_beh_info__2 [callbacks0_0,
 erlps__module_predef_func_beh_info__2 [arg_46, arg_47] =
   EXC.function_clause unit
 erlps__module_predef_func_beh_info__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
+  EXC.badarity (ErlangFun 2 erlps__module_predef_func_beh_info__2)
     args
 
 erlps__make_list__1 :: ErlangFun
@@ -1776,8 +1753,7 @@ erlps__make_list__1 [(ErlangCons (ErlangTuple [name_0,
   in ErlangTuple [ErlangAtom "cons", tup_el_4, tup_el_5, tup_el_19]
 erlps__make_list__1 [arg_21] = EXC.function_clause unit
 erlps__make_list__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__make_list__1) args
 
 erlps__module_predef_funcs_mod_info__1 :: ErlangFun
 erlps__module_predef_funcs_mod_info__1 [mod_0] =
@@ -1863,5 +1839,5 @@ erlps__module_predef_funcs_mod_info__1 [mod_0] =
 erlps__module_predef_funcs_mod_info__1 [arg_79] =
   EXC.function_clause unit
 erlps__module_predef_funcs_mod_info__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
+  EXC.badarity (ErlangFun 1 erlps__module_predef_funcs_mod_info__1)
     args

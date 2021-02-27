@@ -30,8 +30,7 @@ import Partial.Unsafe (unsafePartial)
 erlps__new__0 :: ErlangFun
 erlps__new__0 [] = ErlangEmptyList
 erlps__new__0 args =
-  EXC.badarity (ErlangFun 0 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 0 erlps__new__0) args
 
 erlps__is_key__2 :: ErlangFun
 erlps__is_key__2 [key_0, (ErlangCons (ErlangTuple [k_1, _]) _)]
@@ -48,15 +47,13 @@ erlps__is_key__2 [_key_0,
 erlps__is_key__2 [_, (ErlangEmptyList)] = ErlangAtom "false"
 erlps__is_key__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__is_key__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__is_key__2) args
 
 erlps__to_list__1 :: ErlangFun
 erlps__to_list__1 [dict_0] = dict_0
 erlps__to_list__1 [arg_1] = EXC.function_clause unit
 erlps__to_list__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__to_list__1) args
 
 erlps__from_list__1 :: ErlangFun
 erlps__from_list__1 [(ErlangEmptyList)] = ErlangEmptyList
@@ -72,23 +69,20 @@ erlps__from_list__1 [pairs_0] =
       [arg_1, arg_2]
 erlps__from_list__1 [arg_5] = EXC.function_clause unit
 erlps__from_list__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__from_list__1) args
 
 erlps__size__1 :: ErlangFun
 erlps__size__1 [d_0] = BIF.erlang__length__1 [d_0]
 erlps__size__1 [arg_2] = EXC.function_clause unit
 erlps__size__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__size__1) args
 
 erlps__is_empty__1 :: ErlangFun
 erlps__is_empty__1 [(ErlangEmptyList)] = ErlangAtom "true"
 erlps__is_empty__1 [(ErlangCons _ _)] = ErlangAtom "false"
 erlps__is_empty__1 [arg_0] = EXC.function_clause unit
 erlps__is_empty__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__is_empty__1) args
 
 erlps__fetch__2 :: ErlangFun
 erlps__fetch__2 [key_0, (ErlangCons (ErlangTuple [k_1, _]) d_2)]
@@ -100,8 +94,7 @@ erlps__fetch__2 [key_0,
   value_2
 erlps__fetch__2 [arg_3, arg_4] = EXC.function_clause unit
 erlps__fetch__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__fetch__2) args
 
 erlps__find__2 :: ErlangFun
 erlps__find__2 [key_0, (ErlangCons (ErlangTuple [k_1, _]) _)]
@@ -117,8 +110,7 @@ erlps__find__2 [_key_0,
 erlps__find__2 [_, (ErlangEmptyList)] = ErlangAtom "error"
 erlps__find__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__find__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__find__2) args
 
 erlps__fetch_keys__1 :: ErlangFun
 erlps__fetch_keys__1 [(ErlangCons (ErlangTuple [key_0,
@@ -129,8 +121,7 @@ erlps__fetch_keys__1 [(ErlangCons (ErlangTuple [key_0,
 erlps__fetch_keys__1 [(ErlangEmptyList)] = ErlangEmptyList
 erlps__fetch_keys__1 [arg_0] = EXC.function_clause unit
 erlps__fetch_keys__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__fetch_keys__1) args
 
 erlps__erase__2 :: ErlangFun
 erlps__erase__2 [key_0,
@@ -149,16 +140,14 @@ erlps__erase__2 [_key_0,
 erlps__erase__2 [_, (ErlangEmptyList)] = ErlangEmptyList
 erlps__erase__2 [arg_0, arg_1] = EXC.function_clause unit
 erlps__erase__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__erase__2) args
 
 erlps__take__2 :: ErlangFun
 erlps__take__2 [key_0, dict_1] =
   erlps__take_1__3 [key_0, dict_1, ErlangEmptyList]
 erlps__take__2 [arg_5, arg_6] = EXC.function_clause unit
 erlps__take__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__take__2) args
 
 erlps__take_1__3 :: ErlangFun
 erlps__take_1__3 [key_0, (ErlangCons (ErlangTuple [k_1, _]) _),
@@ -177,8 +166,7 @@ erlps__take_1__3 [_key_0,
 erlps__take_1__3 [_, (ErlangEmptyList), _] = ErlangAtom "error"
 erlps__take_1__3 [arg_0, arg_1, arg_2] = EXC.function_clause unit
 erlps__take_1__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__take_1__3) args
 
 erlps__store__3 :: ErlangFun
 erlps__store__3 [key_0, new_1,
@@ -201,8 +189,7 @@ erlps__store__3 [key_0, new_1, (ErlangEmptyList)] =
   in ErlangCons head_2 ErlangEmptyList
 erlps__store__3 [arg_6, arg_7, arg_8] = EXC.function_clause unit
 erlps__store__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__store__3) args
 
 erlps__append__3 :: ErlangFun
 erlps__append__3 [key_0, new_1,
@@ -231,8 +218,7 @@ erlps__append__3 [key_0, new_1, (ErlangEmptyList)] =
 erlps__append__3 [arg_8, arg_9, arg_10] =
   EXC.function_clause unit
 erlps__append__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__append__3) args
 
 erlps__append_list__3 :: ErlangFun
 erlps__append_list__3 [key_0, newlist_1,
@@ -257,8 +243,7 @@ erlps__append_list__3 [key_0, newlist_1, (ErlangEmptyList)] =
 erlps__append_list__3 [arg_6, arg_7, arg_8] =
   EXC.function_clause unit
 erlps__append_list__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__append_list__3) args
 
 erlps__update__3 :: ErlangFun
 erlps__update__3 [key_0, fun_1,
@@ -277,8 +262,7 @@ erlps__update__3 [key_0, fun_1,
 erlps__update__3 [arg_11, arg_12, arg_13] =
   EXC.function_clause unit
 erlps__update__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__update__3) args
 
 erlps__update__4 :: ErlangFun
 erlps__update__4 [key_0, _, init_1,
@@ -305,8 +289,7 @@ erlps__update__4 [key_0, _, init_1, (ErlangEmptyList)] =
 erlps__update__4 [arg_6, arg_7, arg_8, arg_9] =
   EXC.function_clause unit
 erlps__update__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__update__4) args
 
 erlps__update_counter__3 :: ErlangFun
 erlps__update_counter__3 [key_0, incr_1,
@@ -331,8 +314,7 @@ erlps__update_counter__3 [key_0, incr_1, (ErlangEmptyList)] =
 erlps__update_counter__3 [arg_6, arg_7, arg_8] =
   EXC.function_clause unit
 erlps__update_counter__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__update_counter__3) args
 
 erlps__fold__3 :: ErlangFun
 erlps__fold__3 [f_0, acc_1,
@@ -350,8 +332,7 @@ erlps__fold__3 [f_0, acc_1, (ErlangEmptyList)]
   acc_1
 erlps__fold__3 [arg_2, arg_3, arg_4] = EXC.function_clause unit
 erlps__fold__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__fold__3) args
 
 erlps__map__2 :: ErlangFun
 erlps__map__2 [f_0,
@@ -368,8 +349,7 @@ erlps__map__2 [f_0, (ErlangEmptyList)] | isEFunA f_0 (toErl 2) =
   ErlangEmptyList
 erlps__map__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__map__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__map__2) args
 
 erlps__filter__2 :: ErlangFun
 erlps__filter__2 [f_0,
@@ -391,8 +371,7 @@ erlps__filter__2 [f_0, (ErlangEmptyList)]
   ErlangEmptyList
 erlps__filter__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__filter__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__filter__2) args
 
 erlps__merge__3 :: ErlangFun
 erlps__merge__3 [f_0,
@@ -428,8 +407,7 @@ erlps__merge__3 [f_0, d1_1, (ErlangEmptyList)]
   d1_1
 erlps__merge__3 [arg_2, arg_3, arg_4] = EXC.function_clause unit
 erlps__merge__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__merge__3) args
 
 erlps__reverse_pairs__2 :: ErlangFun
 erlps__reverse_pairs__2 [(ErlangCons h_0@(ErlangTuple [_,
@@ -440,5 +418,4 @@ erlps__reverse_pairs__2 [(ErlangCons h_0@(ErlangTuple [_,
 erlps__reverse_pairs__2 [(ErlangEmptyList), acc_0] = acc_0
 erlps__reverse_pairs__2 [arg_1, arg_2] = EXC.function_clause unit
 erlps__reverse_pairs__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__reverse_pairs__2) args

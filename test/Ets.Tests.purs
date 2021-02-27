@@ -68,10 +68,10 @@ erlps__test_set__0 [] =
                           in
                             case matchExpr_28 of
                               (ErlangCons (ErlangTuple [(ErlangInt num_27),
-                                                        (ErlangAtom "b")]) (ErlangEmptyList)) | ((ErlangInt
-                                                                                                    num_27) ==
-                                                                                                   (toErl
-                                                                                                      1)) ->
+                                                        (ErlangAtom "b")]) (ErlangEmptyList)) | (ErlangInt
+                                                                                                   num_27) ==
+                                                                                                  (toErl
+                                                                                                     1) ->
                                 let
                                   matchExpr_31 =
                                     BIF.do_remote_fun_call "Ets"
@@ -80,10 +80,10 @@ erlps__test_set__0 [] =
                                   case matchExpr_31 of
                                     (ErlangCons (ErlangTuple [(ErlangInt num_30),
                                                               (ErlangAtom "b")]) (ErlangCons (ErlangTuple [(ErlangFloat 1.00000000000000000000e+0),
-                                                                                                           (ErlangAtom "c")]) (ErlangEmptyList))) | ((ErlangInt
-                                                                                                                                                        num_30) ==
-                                                                                                                                                       (toErl
-                                                                                                                                                          1)) ->
+                                                                                                           (ErlangAtom "c")]) (ErlangEmptyList))) | (ErlangInt
+                                                                                                                                                       num_30) ==
+                                                                                                                                                      (toErl
+                                                                                                                                                         1) ->
                                       let
                                         matchExpr_33 =
                                           BIF.do_remote_fun_call "Ets"
@@ -193,8 +193,7 @@ erlps__test_set__0 [] =
             _ -> EXC.badmatch matchExpr_14
       _ -> EXC.badmatch matchExpr_9
 erlps__test_set__0 args =
-  EXC.badarity (ErlangFun 0 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 0 erlps__test_set__0) args
 
 erlps__test_ordered_set__0 :: ErlangFun
 erlps__test_ordered_set__0 [] =
@@ -362,8 +361,7 @@ erlps__test_ordered_set__0 [] =
             _ -> EXC.badmatch matchExpr_14
       _ -> EXC.badmatch matchExpr_9
 erlps__test_ordered_set__0 args =
-  EXC.badarity (ErlangFun 0 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 0 erlps__test_ordered_set__0) args
 
 erlps__test_bag__0 :: ErlangFun
 erlps__test_bag__0 [] =
@@ -413,14 +411,14 @@ erlps__test_bag__0 [] =
                             case matchExpr_29 of
                               (ErlangCons (ErlangTuple [(ErlangInt num_27),
                                                         (ErlangAtom "a")]) (ErlangCons (ErlangTuple [(ErlangInt num_28),
-                                                                                                     (ErlangAtom "b")]) (ErlangEmptyList))) | ((ErlangInt
-                                                                                                                                                  num_27) ==
-                                                                                                                                                 (toErl
-                                                                                                                                                    1))
-                                                                                                                                            , ((ErlangInt
-                                                                                                                                                  num_28) ==
-                                                                                                                                                 (toErl
-                                                                                                                                                    1)) ->
+                                                                                                     (ErlangAtom "b")]) (ErlangEmptyList))) | (ErlangInt
+                                                                                                                                                 num_27) ==
+                                                                                                                                                (toErl
+                                                                                                                                                   1)
+                                                                                                                                            , (ErlangInt
+                                                                                                                                                 num_28) ==
+                                                                                                                                                (toErl
+                                                                                                                                                   1) ->
                                 let
                                   matchExpr_33 =
                                     BIF.do_remote_fun_call "Ets"
@@ -430,14 +428,14 @@ erlps__test_bag__0 [] =
                                     (ErlangCons (ErlangTuple [(ErlangInt num_31),
                                                               (ErlangAtom "a")]) (ErlangCons (ErlangTuple [(ErlangInt num_32),
                                                                                                            (ErlangAtom "b")]) (ErlangCons (ErlangTuple [(ErlangFloat 1.00000000000000000000e+0),
-                                                                                                                                                        (ErlangAtom "c")]) (ErlangEmptyList)))) | ((ErlangInt
-                                                                                                                                                                                                      num_31) ==
-                                                                                                                                                                                                     (toErl
-                                                                                                                                                                                                        1))
-                                                                                                                                                                                                , ((ErlangInt
-                                                                                                                                                                                                      num_32) ==
-                                                                                                                                                                                                     (toErl
-                                                                                                                                                                                                        1)) ->
+                                                                                                                                                        (ErlangAtom "c")]) (ErlangEmptyList)))) | (ErlangInt
+                                                                                                                                                                                                     num_31) ==
+                                                                                                                                                                                                    (toErl
+                                                                                                                                                                                                       1)
+                                                                                                                                                                                                , (ErlangInt
+                                                                                                                                                                                                     num_32) ==
+                                                                                                                                                                                                    (toErl
+                                                                                                                                                                                                       1) ->
                                       let
                                         matchExpr_35 =
                                           BIF.do_remote_fun_call "Ets"
@@ -547,5 +545,4 @@ erlps__test_bag__0 [] =
             _ -> EXC.badmatch matchExpr_14
       _ -> EXC.badmatch matchExpr_9
 erlps__test_bag__0 args =
-  EXC.badarity (ErlangFun 0 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 0 erlps__test_bag__0) args

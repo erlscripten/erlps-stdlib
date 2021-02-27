@@ -35,8 +35,7 @@ erlps__components__1 [g_0] =
   in erlps__forest__2 [g_0, arg_2]
 erlps__components__1 [arg_3] = EXC.function_clause unit
 erlps__components__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__components__1) args
 
 erlps__strong_components__1 :: ErlangFun
 erlps__strong_components__1 [g_0] =
@@ -45,8 +44,7 @@ erlps__strong_components__1 [g_0] =
   in erlps__forest__3 [g_0, arg_2, arg_3]
 erlps__strong_components__1 [arg_5] = EXC.function_clause unit
 erlps__strong_components__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__strong_components__1) args
 
 erlps__cyclic_strong_components__1 :: ErlangFun
 erlps__cyclic_strong_components__1 [g_0] =
@@ -55,7 +53,7 @@ erlps__cyclic_strong_components__1 [g_0] =
 erlps__cyclic_strong_components__1 [arg_5] =
   EXC.function_clause unit
 erlps__cyclic_strong_components__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
+  EXC.badarity (ErlangFun 1 erlps__cyclic_strong_components__1)
     args
 
 erlps__reachable__2 :: ErlangFun
@@ -66,8 +64,7 @@ erlps__reachable__2 [vs_0, g_1] | isEList vs_0 =
   in BIF.do_remote_fun_call "Lists" "erlps__append__1" [arg_2]
 erlps__reachable__2 [arg_7, arg_8] = EXC.function_clause unit
 erlps__reachable__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__reachable__2) args
 
 erlps__reachable_neighbours__2 :: ErlangFun
 erlps__reachable_neighbours__2 [vs_0, g_1] | isEList vs_0 =
@@ -79,8 +76,7 @@ erlps__reachable_neighbours__2 [vs_0, g_1] | isEList vs_0 =
 erlps__reachable_neighbours__2 [arg_7, arg_8] =
   EXC.function_clause unit
 erlps__reachable_neighbours__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__reachable_neighbours__2) args
 
 erlps__reaching__2 :: ErlangFun
 erlps__reaching__2 [vs_0, g_1] | isEList vs_0 =
@@ -90,8 +86,7 @@ erlps__reaching__2 [vs_0, g_1] | isEList vs_0 =
   in BIF.do_remote_fun_call "Lists" "erlps__append__1" [arg_2]
 erlps__reaching__2 [arg_7, arg_8] = EXC.function_clause unit
 erlps__reaching__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__reaching__2) args
 
 erlps__reaching_neighbours__2 :: ErlangFun
 erlps__reaching_neighbours__2 [vs_0, g_1] | isEList vs_0 =
@@ -103,8 +98,7 @@ erlps__reaching_neighbours__2 [vs_0, g_1] | isEList vs_0 =
 erlps__reaching_neighbours__2 [arg_7, arg_8] =
   EXC.function_clause unit
 erlps__reaching_neighbours__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__reaching_neighbours__2) args
 
 erlps__topsort__1 :: ErlangFun
 erlps__topsort__1 [g_0] =
@@ -124,8 +118,7 @@ erlps__topsort__1 [g_0] =
       something_else -> EXC.case_clause something_else
 erlps__topsort__1 [arg_12] = EXC.function_clause unit
 erlps__topsort__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__topsort__1) args
 
 erlps__is_acyclic__1 :: ErlangFun
 erlps__is_acyclic__1 [g_0] =
@@ -140,8 +133,7 @@ erlps__is_acyclic__1 [g_0] =
       _ -> EXC.badarg1 lop_1
 erlps__is_acyclic__1 [arg_8] = EXC.function_clause unit
 erlps__is_acyclic__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__is_acyclic__1) args
 
 erlps__arborescence_root__1 :: ErlangFun
 erlps__arborescence_root__1 [g_0] =
@@ -170,11 +162,10 @@ erlps__arborescence_root__1 [g_0] =
                               "erlps__in_degree__2" [g_0, v_11]
                         in
                           case case_13 of
-                            (ErlangInt num_16) | ((ErlangInt num_16) ==
-                                                    (toErl 1)) ->
+                            (ErlangInt num_16) | (ErlangInt num_16) ==
+                                                   (toErl 1) ->
                               z_12
-                            (ErlangInt num_17) | ((ErlangInt num_17) ==
-                                                    (toErl 0))
+                            (ErlangInt num_17) | (ErlangInt num_17) == (toErl 0)
                                                , (==) z_12 ErlangEmptyList ->
                               ErlangCons v_11 ErlangEmptyList
                             something_else -> EXC.case_clause something_else
@@ -201,8 +192,7 @@ erlps__arborescence_root__1 [g_0] =
       something_else -> EXC.case_clause something_else
 erlps__arborescence_root__1 [arg_32] = EXC.function_clause unit
 erlps__arborescence_root__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__arborescence_root__1) args
 
 erlps__is_arborescence__1 :: ErlangFun
 erlps__is_arborescence__1 [g_0] =
@@ -210,8 +200,7 @@ erlps__is_arborescence__1 [g_0] =
   in BIF.erlang__op_exactNeq [lop_1, ErlangAtom "no"]
 erlps__is_arborescence__1 [arg_4] = EXC.function_clause unit
 erlps__is_arborescence__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__is_arborescence__1) args
 
 erlps__is_tree__1 :: ErlangFun
 erlps__is_tree__1 [g_0] =
@@ -235,8 +224,7 @@ erlps__is_tree__1 [g_0] =
       _ -> EXC.badarg1 lop_1
 erlps__is_tree__1 [arg_12] = EXC.function_clause unit
 erlps__is_tree__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__is_tree__1) args
 
 erlps__loop_vertices__1 :: ErlangFun
 erlps__loop_vertices__1 [g_0] =
@@ -254,8 +242,7 @@ erlps__loop_vertices__1 [g_0] =
       lcSrc_1
 erlps__loop_vertices__1 [arg_9] = EXC.function_clause unit
 erlps__loop_vertices__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__loop_vertices__1) args
 
 erlps__subgraph__2 :: ErlangFun
 erlps__subgraph__2 [g_0, vs_1] =
@@ -268,8 +255,7 @@ erlps__subgraph__2 [g_0, vs_1] =
          ex_7 -> EXC.raise ex_7)
 erlps__subgraph__2 [arg_9, arg_10] = EXC.function_clause unit
 erlps__subgraph__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__subgraph__2) args
 
 erlps__subgraph__3 :: ErlangFun
 erlps__subgraph__3 [g_0, vs_1, opts_2] =
@@ -282,8 +268,7 @@ erlps__subgraph__3 [g_0, vs_1, opts_2] =
 erlps__subgraph__3 [arg_10, arg_11, arg_12] =
   EXC.function_clause unit
 erlps__subgraph__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__subgraph__3) args
 
 erlps__condensation__1 :: ErlangFun
 erlps__condensation__1 [g_0] =
@@ -363,8 +348,7 @@ erlps__condensation__1 [g_0] =
   in scg_40
 erlps__condensation__1 [arg_53] = EXC.function_clause unit
 erlps__condensation__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__condensation__1) args
 
 erlps__preorder__1 :: ErlangFun
 erlps__preorder__1 [g_0] =
@@ -372,8 +356,7 @@ erlps__preorder__1 [g_0] =
   in BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [arg_1]
 erlps__preorder__1 [arg_3] = EXC.function_clause unit
 erlps__preorder__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__preorder__1) args
 
 erlps__postorder__1 :: ErlangFun
 erlps__postorder__1 [g_0] =
@@ -381,8 +364,7 @@ erlps__postorder__1 [g_0] =
   in BIF.do_remote_fun_call "Lists" "erlps__reverse__1" [arg_1]
 erlps__postorder__1 [arg_3] = EXC.function_clause unit
 erlps__postorder__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__postorder__1) args
 
 erlps__forest__2 :: ErlangFun
 erlps__forest__2 [g_0, sf_1] =
@@ -392,16 +374,14 @@ erlps__forest__2 [g_0, sf_1] =
   in erlps__forest__3 [g_0, sf_1, arg_4]
 erlps__forest__2 [arg_6, arg_7] = EXC.function_clause unit
 erlps__forest__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__forest__2) args
 
 erlps__forest__3 :: ErlangFun
 erlps__forest__3 [g_0, sf_1, vs_2] =
   erlps__forest__4 [g_0, sf_1, vs_2, ErlangAtom "first"]
 erlps__forest__3 [arg_7, arg_8, arg_9] = EXC.function_clause unit
 erlps__forest__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__forest__3) args
 
 erlps__forest__4 :: ErlangFun
 erlps__forest__4 [g_0, sf_1, vs_2, handlefirst_3] =
@@ -429,8 +409,7 @@ erlps__forest__4 [g_0, sf_1, vs_2, handlefirst_3] =
 erlps__forest__4 [arg_26, arg_27, arg_28, arg_29] =
   EXC.function_clause unit
 erlps__forest__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__forest__4) args
 
 erlps__pretraverse__6 :: ErlangFun
 erlps__pretraverse__6 [(ErlangAtom "first"), v_0, sf_1, g_2, t_3,
@@ -464,8 +443,7 @@ erlps__pretraverse__6 [arg_18, arg_19, arg_20, arg_21, arg_22,
   =
   EXC.function_clause unit
 erlps__pretraverse__6 args =
-  EXC.badarity (ErlangFun 6 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 6 erlps__pretraverse__6) args
 
 erlps__ptraverse__6 :: ErlangFun
 erlps__ptraverse__6 [(ErlangCons v_0 vs_1), sf_2, g_3, t_4, rs_5,
@@ -504,8 +482,7 @@ erlps__ptraverse__6 [arg_7, arg_8, arg_9, arg_10, arg_11, arg_12]
   =
   EXC.function_clause unit
 erlps__ptraverse__6 args =
-  EXC.badarity (ErlangFun 6 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 6 erlps__ptraverse__6) args
 
 erlps__revpreorder__1 :: ErlangFun
 erlps__revpreorder__1 [g_0] =
@@ -514,8 +491,7 @@ erlps__revpreorder__1 [g_0] =
   in BIF.do_remote_fun_call "Lists" "erlps__append__1" [arg_1]
 erlps__revpreorder__1 [arg_4] = EXC.function_clause unit
 erlps__revpreorder__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__revpreorder__1) args
 
 erlps__revpostorder__1 :: ErlangFun
 erlps__revpostorder__1 [g_0] =
@@ -533,8 +509,7 @@ erlps__revpostorder__1 [g_0] =
   in l_11
 erlps__revpostorder__1 [arg_13] = EXC.function_clause unit
 erlps__revpostorder__1 args =
-  EXC.badarity (ErlangFun 1 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 1 erlps__revpostorder__1) args
 
 erlps__posttraverse__4 :: ErlangFun
 erlps__posttraverse__4 [(ErlangCons v_0 vs_1), g_2, t_3, l_4] =
@@ -558,8 +533,7 @@ erlps__posttraverse__4 [(ErlangEmptyList), _g_0, _t_1, l_2] = l_2
 erlps__posttraverse__4 [arg_3, arg_4, arg_5, arg_6] =
   EXC.function_clause unit
 erlps__posttraverse__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__posttraverse__4) args
 
 erlps__in__3 :: ErlangFun
 erlps__in__3 [g_0, v_1, vs_2] =
@@ -569,9 +543,7 @@ erlps__in__3 [g_0, v_1, vs_2] =
         [g_0, v_1]
   in BIF.erlang__op_append [lop_3, vs_2]
 erlps__in__3 [arg_7, arg_8, arg_9] = EXC.function_clause unit
-erlps__in__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+erlps__in__3 args = EXC.badarity (ErlangFun 3 erlps__in__3) args
 
 erlps__out__3 :: ErlangFun
 erlps__out__3 [g_0, v_1, vs_2] =
@@ -582,8 +554,7 @@ erlps__out__3 [g_0, v_1, vs_2] =
   in BIF.erlang__op_append [lop_3, vs_2]
 erlps__out__3 [arg_7, arg_8, arg_9] = EXC.function_clause unit
 erlps__out__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__out__3) args
 
 erlps__inout__3 :: ErlangFun
 erlps__inout__3 [g_0, v_1, vs_2] =
@@ -592,8 +563,7 @@ erlps__inout__3 [g_0, v_1, vs_2] =
 erlps__inout__3 [arg_9, arg_10, arg_11] =
   EXC.function_clause unit
 erlps__inout__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__inout__3) args
 
 erlps__remove_singletons__3 :: ErlangFun
 erlps__remove_singletons__3 [(ErlangCons c_1@(ErlangCons v_0 (ErlangEmptyList)) cs_2),
@@ -613,8 +583,7 @@ erlps__remove_singletons__3 [(ErlangEmptyList), _g_0, l_1] = l_1
 erlps__remove_singletons__3 [arg_2, arg_3, arg_4] =
   EXC.function_clause unit
 erlps__remove_singletons__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__remove_singletons__3) args
 
 erlps__is_reflexive_vertex__2 :: ErlangFun
 erlps__is_reflexive_vertex__2 [v_0, g_1] =
@@ -626,8 +595,7 @@ erlps__is_reflexive_vertex__2 [v_0, g_1] =
 erlps__is_reflexive_vertex__2 [arg_6, arg_7] =
   EXC.function_clause unit
 erlps__is_reflexive_vertex__2 args =
-  EXC.badarity (ErlangFun 2 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 2 erlps__is_reflexive_vertex__2) args
 
 erlps__subgraph_opts__3 :: ErlangFun
 erlps__subgraph_opts__3 [g_0, vs_1, opts_2] =
@@ -636,29 +604,19 @@ erlps__subgraph_opts__3 [g_0, vs_1, opts_2] =
 erlps__subgraph_opts__3 [arg_8, arg_9, arg_10] =
   EXC.function_clause unit
 erlps__subgraph_opts__3 args =
-  EXC.badarity (ErlangFun 3 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 3 erlps__subgraph_opts__3) args
 
 erlps__subgraph_opts__5 :: ErlangFun
 erlps__subgraph_opts__5 [(ErlangCons (ErlangTuple [(ErlangAtom "type"),
                                                    type_0]) opts_1),
                          _type0_2, keep_3, g_4, vs_5]
-  | ((ErlangAtom "true") ==
-       (falsifyErrors
-          (\ _ ->
-             let
-               lop_11 = BIF.erlang__op_exactEq [type_0, ErlangAtom "inherit"]
-             in
-               case lop_11 of
-                 (ErlangAtom "true") -> ErlangAtom "true"
-                 (ErlangAtom "false") -> BIF.erlang__is_list__1 [type_0]
-                 _ -> EXC.badarg1 lop_11))) =
+  | ((==) type_0 (ErlangAtom "inherit")) || (isEList type_0) =
   erlps__subgraph_opts__5 [opts_1, type_0, keep_3, g_4, vs_5]
 erlps__subgraph_opts__5 [(ErlangCons (ErlangTuple [(ErlangAtom "keep_labels"),
                                                    keep_0]) opts_1),
                          type_2, _keep0_3, g_4, vs_5]
-  | ((ErlangAtom "true") ==
-       (falsifyErrors (\ _ -> BIF.erlang__is_boolean__1 [keep_0]))) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_boolean__1 [keep_0])) =
   erlps__subgraph_opts__5 [opts_1, type_2, keep_0, g_4, vs_5]
 erlps__subgraph_opts__5 [(ErlangEmptyList),
                          (ErlangAtom "inherit"), keep_0, g_1, vs_2]
@@ -695,8 +653,7 @@ erlps__subgraph_opts__5 [_, _type_0, _keep_1, _g_2, _vs_3] =
 erlps__subgraph_opts__5 [arg_5, arg_6, arg_7, arg_8, arg_9] =
   EXC.function_clause unit
 erlps__subgraph_opts__5 args =
-  EXC.badarity (ErlangFun 5 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 5 erlps__subgraph_opts__5) args
 
 erlps__subgraph__4 :: ErlangFun
 erlps__subgraph__4 [g_0, vs_1, type_2, keep_3] =
@@ -757,8 +714,7 @@ erlps__subgraph__4 [g_0, vs_1, type_2, keep_3] =
 erlps__subgraph__4 [arg_37, arg_38, arg_39, arg_40] =
   EXC.function_clause unit
 erlps__subgraph__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__subgraph__4) args
 
 erlps__subgraph_vertex__4 :: ErlangFun
 erlps__subgraph_vertex__4 [v_0, g_1, sg_2, keep_3] =
@@ -768,20 +724,19 @@ erlps__subgraph_vertex__4 [v_0, g_1, sg_2, keep_3] =
   in
     case case_4 of
       (ErlangAtom "false") -> ErlangAtom "ok"
-      _ | ((ErlangAtom "true") ==
-             (falsifyErrors (\ _ -> BIF.erlang__not__1 [keep_3]))) ->
+      _ | (ErlangAtom "true") ==
+            (falsifyErrors (\ _ -> BIF.erlang__not__1 [keep_3])) ->
         BIF.do_remote_fun_call "Digraph" "erlps__add_vertex__2"
           [sg_2, v_0]
-      (ErlangTuple [_v_10, label_11]) | ((ErlangAtom "true") ==
-                                           (falsifyErrors (\ _ -> keep_3))) ->
+      (ErlangTuple [_v_10, label_11]) | (==) (ErlangAtom "true")
+                                          keep_3 ->
         BIF.do_remote_fun_call "Digraph" "erlps__add_vertex__3"
           [sg_2, v_0, label_11]
       something_else -> EXC.case_clause something_else
 erlps__subgraph_vertex__4 [arg_15, arg_16, arg_17, arg_18] =
   EXC.function_clause unit
 erlps__subgraph_vertex__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__subgraph_vertex__4) args
 
 erlps__subgraph_edge__4 :: ErlangFun
 erlps__subgraph_edge__4 [e_0, g_1, sg_2, keep_3] =
@@ -797,11 +752,11 @@ erlps__subgraph_edge__4 [e_0, g_1, sg_2, keep_3] =
         in
           case case_11 of
             (ErlangAtom "false") -> ErlangAtom "ok"
-            _ | ((ErlangAtom "true") ==
-                   (falsifyErrors (\ _ -> BIF.erlang__not__1 [keep_3]))) ->
+            _ | (ErlangAtom "true") ==
+                  (falsifyErrors (\ _ -> BIF.erlang__not__1 [keep_3])) ->
               BIF.do_remote_fun_call "Digraph" "erlps__add_edge__5"
                 [sg_2, e_0, v1_7, v2_8, ErlangEmptyList]
-            _ | ((ErlangAtom "true") == (falsifyErrors (\ _ -> keep_3))) ->
+            _ | (==) (ErlangAtom "true") keep_3 ->
               BIF.do_remote_fun_call "Digraph" "erlps__add_edge__5"
                 [sg_2, e_0, v1_7, v2_8, label_9]
             something_else -> EXC.case_clause something_else
@@ -809,8 +764,7 @@ erlps__subgraph_edge__4 [e_0, g_1, sg_2, keep_3] =
 erlps__subgraph_edge__4 [arg_25, arg_26, arg_27, arg_28] =
   EXC.function_clause unit
 erlps__subgraph_edge__4 args =
-  EXC.badarity (ErlangFun 4 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 4 erlps__subgraph_edge__4) args
 
 erlps__condense__5 :: ErlangFun
 erlps__condense__5 [sc_0, g_1, scg_2, v2i_3, i2c_4] =
@@ -869,8 +823,7 @@ erlps__condense__5 [sc_0, g_1, scg_2, v2i_3, i2c_4] =
 erlps__condense__5 [arg_40, arg_41, arg_42, arg_43, arg_44] =
   EXC.function_clause unit
 erlps__condense__5 args =
-  EXC.badarity (ErlangFun 5 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 5 erlps__condense__5) args
 
 erlps__condense__6 :: ErlangFun
 erlps__condense__6 [(ErlangAtom "$end_of_table"), _t_0, _sc_1,
@@ -908,5 +861,4 @@ erlps__condense__6 [arg_28, arg_29, arg_30, arg_31, arg_32,
   =
   EXC.function_clause unit
 erlps__condense__6 args =
-  EXC.badarity (ErlangFun 6 (\ _ -> ErlangAtom "purs_tco_sucks"))
-    args
+  EXC.badarity (ErlangFun 6 erlps__condense__6) args
