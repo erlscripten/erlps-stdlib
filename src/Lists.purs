@@ -777,11 +777,7 @@ erlps__keydelete__3 args =
 
 erlps__keydelete3__3 :: ErlangFun
 erlps__keydelete3__3 [key_0, n_1, (ErlangCons h_2 t_3)]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let lop_4 = BIF.erlang__element__2 [n_1, h_2]
-            in BIF.erlang__op_eq [lop_4, key_0])) =
+  | onElement n_1 h_2 weakEq key_0 =
   t_3
 erlps__keydelete3__3 [key_0, n_1, (ErlangCons h_2 t_3)] =
   let tail_5 = erlps__keydelete3__3 [key_0, n_1, t_3]
@@ -804,11 +800,7 @@ erlps__keyreplace__4 args =
 erlps__keyreplace3__4 :: ErlangFun
 erlps__keyreplace3__4 [key_0, pos_1, (ErlangCons tup_2 tail_3),
                        new_4]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let lop_7 = BIF.erlang__element__2 [pos_1, tup_2]
-            in BIF.erlang__op_eq [lop_7, key_0])) =
+  | onElement pos_1 tup_2 weakEq key_0 =
   ErlangCons new_4 tail_3
 erlps__keyreplace3__4 [key_0, pos_1, (ErlangCons h_2 t_3), new_4]
   =
@@ -832,11 +824,7 @@ erlps__keytake__3 args =
 
 erlps__keytake__4 :: ErlangFun
 erlps__keytake__4 [key_0, n_1, (ErlangCons h_2 t_3), l_4]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let lop_10 = BIF.erlang__element__2 [n_1, h_2]
-            in BIF.erlang__op_eq [lop_10, key_0])) =
+  | onElement n_1 h_2 weakEq key_0 =
   let tup_el_7 = BIF.lists__reverse__2 [l_4, t_3]
   in ErlangTuple [ErlangAtom "value", h_2, tup_el_7]
 erlps__keytake__4 [key_0, n_1, (ErlangCons h_2 t_3), l_4] =
@@ -859,11 +847,7 @@ erlps__keystore__4 args =
 
 erlps__keystore2__4 :: ErlangFun
 erlps__keystore2__4 [key_0, n_1, (ErlangCons h_2 t_3), new_4]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let lop_7 = BIF.erlang__element__2 [n_1, h_2]
-            in BIF.erlang__op_eq [lop_7, key_0])) =
+  | onElement n_1 h_2 weakEq key_0 =
   ErlangCons new_4 t_3
 erlps__keystore2__4 [key_0, n_1, (ErlangCons h_2 t_3), new_4] =
   let tail_6 = erlps__keystore2__4 [key_0, n_1, t_3, new_4]

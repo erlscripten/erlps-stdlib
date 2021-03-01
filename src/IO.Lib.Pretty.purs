@@ -1550,41 +1550,16 @@ erlps__find_upper__9 [lower_0, term_1, t_2, dl_3, dd_4, d_5,
                                                                (toErl 0) ->
         if_27
       (ErlangTuple [_, _len_32@t_31, _, _]) | t_31 == t_2 -> if_27
-      (ErlangTuple [_, len_33, _, _]) | (ErlangAtom "true") ==
-                                          (falsifyErrors
-                                             (\ _ ->
-                                                let
-                                                  lop_34 =
-                                                    BIF.erlang__op_lesser
-                                                      [len_33, t_2]
-                                                in
-                                                  case lop_34 of
-                                                    (ErlangAtom "false") ->
-                                                      ErlangAtom "false"
-                                                    (ErlangAtom "true") ->
-                                                      let
-                                                        lop_37 =
-                                                          BIF.erlang__op_lesser
-                                                            [d1_21, d_5]
-                                                      in
-                                                        case lop_37 of
-                                                          (ErlangAtom "true") ->
-                                                            ErlangAtom "true"
-                                                          (ErlangAtom "false") ->
-                                                            let rop_41 = toErl 0
-                                                            in
-                                                              BIF.erlang__op_lesser
-                                                                [d_5, rop_41]
-                                                          _ ->
-                                                            EXC.badarg1 lop_37
-                                                    _ -> EXC.badarg1 lop_34)) ->
+      (ErlangTuple [_, len_33, _, _]) | (weakLt len_33 t_2) &&
+                                          ((weakLt d1_21 d_5) ||
+                                             (weakLt d_5 (toErl 0))) ->
         erlps__find_upper__9
           [if_27, term_1, t_2, d1_21, dd2_11, d_5, rf_6, enc_7, str_8]
       _ ->
         erlps__search_depth__9
           [lower_0, if_27, term_1, t_2, dl_3, d1_21, rf_6, enc_7, str_8]
-erlps__find_upper__9 [arg_60, arg_61, arg_62, arg_63, arg_64,
-                      arg_65, arg_66, arg_67, arg_68]
+erlps__find_upper__9 [arg_52, arg_53, arg_54, arg_55, arg_56,
+                      arg_57, arg_58, arg_59, arg_60]
   =
   EXC.function_clause unit
 erlps__find_upper__9 args =

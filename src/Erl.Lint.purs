@@ -9043,44 +9043,37 @@ erlps__check_type__3 [(ErlangTuple [(ErlangAtom "type"), la_0,
               erlps__obsolete_builtin_type__1 [typepair_12]
             _ -> EXC.badarg1 lop_13
       in let
-        st1_42 =
+        st1_38 =
           case obsolete_17 of
-            (ErlangTuple [(ErlangAtom "deprecated"), repl_19,
-                          _]) | (ErlangAtom "true") ==
-                                  (falsifyErrors
-                                     (\ _ ->
-                                        let    arg_21 = toErl 1
-                                        in let
-                                          lop_20 =
-                                            BIF.erlang__element__2
-                                              [arg_21, repl_19]
-                                        in
-                                          BIF.erlang__op_exactNeq
-                                            [lop_20, module_5])) ->
-              let case_24 = BIF.maps__find__2 [typepair_12, types_6]
+            (ErlangTuple [(ErlangAtom "deprecated"), repl_19, _]) | onElement
+                                                                      (toErl 1)
+                                                                      repl_19
+                                                                      (/=)
+                                                                      module_5 ->
+              let case_20 = BIF.maps__find__2 [typepair_12, types_6]
               in
-                case case_24 of
+                case case_20 of
                   (ErlangTuple [(ErlangAtom "ok"), _]) ->
                     erlps__used_type__3 [typepair_12, la_0, st_4]
                   (ErlangAtom "error") ->
                     case obsolete_17 of
-                      (ErlangTuple [(ErlangAtom "deprecated"), replacement_30,
-                                    rel_31]) ->
+                      (ErlangTuple [(ErlangAtom "deprecated"), replacement_26,
+                                    rel_27]) ->
                         let
-                          w_38 =
+                          w_34 =
                             ErlangTuple
                               [ErlangAtom "deprecated_builtin_type",
-                               typepair_12, replacement_30, rel_31]
-                        in erlps__add_warning__3 [la_0, w_38, st_4]
+                               typepair_12, replacement_26, rel_27]
+                        in erlps__add_warning__3 [la_0, w_34, st_4]
                       _ -> EXC.badmatch obsolete_17
                   something_else -> EXC.case_clause something_else
             _ -> st_4
-      in let tup_el_45 = erlps__nowarn__0 []
+      in let tup_el_41 = erlps__nowarn__0 []
       in let
-        arg_43 =
+        arg_39 =
           ErlangTuple
-            [ErlangAtom "type", tup_el_45, ErlangAtom "product", args_2]
-      in erlps__check_type__3 [arg_43, seenvars_3, st1_42]
+            [ErlangAtom "type", tup_el_41, ErlangAtom "product", args_2]
+      in erlps__check_type__3 [arg_39, seenvars_3, st1_38]
     _ -> EXC.badmatch st_4
 erlps__check_type__3 [(ErlangTuple [(ErlangAtom "user_type"),
                                     l_0, typename_1, args_2]),
