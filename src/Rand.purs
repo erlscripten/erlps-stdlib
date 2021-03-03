@@ -742,53 +742,48 @@ erlps__uniform_real_s__7 [alg_0, next_1, m0_2, bitno_3, r1_4,
             in let tup_el_130 = BIF.erlang__op_mult [m1_77, rop_132]
             in let tup_el_137 = ErlangTuple [alg_0, r1_4]
             in ErlangTuple [tup_el_130, tup_el_137]
-          _ | (ErlangAtom "true") ==
-                (falsifyErrors
-                   (\ _ ->
-                      let    op_arg_142 = toErl 1008
-                      in let rop_141 = BIF.erlang__op_neg [op_arg_142]
-                      in BIF.erlang__op_exactEq [bitno_3, rop_141])) ->
+          _ | (==) bitno_3 (toErl (-1008)) ->
             case ErlangAtom "true" of
               _ | (ErlangAtom "true") ==
                     (falsifyErrors
                        (\ _ ->
-                          let    lop_144 = toErl 1
-                          in let rop_145 = toErl 42
-                          in let lop_143 = BIF.erlang__bsl__2 [lop_144, rop_145]
-                          in BIF.erlang__op_lesserEq [lop_143, m1_77])) ->
-                let    rop_152 = toErl 56
-                in let arg_150 = BIF.erlang__op_minus [bitno_3, rop_152]
+                          let    lop_141 = toErl 1
+                          in let rop_142 = toErl 42
+                          in let lop_140 = BIF.erlang__bsl__2 [lop_141, rop_142]
+                          in BIF.erlang__op_lesserEq [lop_140, m1_77])) ->
+                let    rop_149 = toErl 56
+                in let arg_147 = BIF.erlang__op_minus [bitno_3, rop_149]
                 in
-                  erlps__uniform_real_s__5 [alg_0, next_1, m1_77, arg_150, r1_4]
+                  erlps__uniform_real_s__5 [alg_0, next_1, m1_77, arg_147, r1_4]
               _ ->
-                let arg_154 = ErlangTuple [alg_0, r1_4]
-                in erlps__uniform_real_s__1 [arg_154]
+                let arg_151 = ErlangTuple [alg_0, r1_4]
+                in erlps__uniform_real_s__1 [arg_151]
           _ ->
-            let    rop_162 = toErl 56
-            in let arg_160 = BIF.erlang__op_minus [bitno_3, rop_162]
-            in erlps__uniform_real_s__5 [alg_0, next_1, m1_77, arg_160, r1_4]
+            let    rop_159 = toErl 56
+            in let arg_157 = BIF.erlang__op_minus [bitno_3, rop_159]
+            in erlps__uniform_real_s__5 [alg_0, next_1, m1_77, arg_157, r1_4]
     _ ->
-      let    lop_164 = toErl 53
-      in let lop_168 = toErl 1
-      in let lop_170 = toErl 49
-      in let rop_171 = toErl 1
-      in let rop_169 = BIF.erlang__op_minus [lop_170, rop_171]
-      in let arg_167 = BIF.erlang__bsl__2 [lop_168, rop_169]
-      in let arg_172 = toErl 49
-      in let rop_165 = erlps__bc__3 [m0_2, arg_167, arg_172]
-      in let b0_173 = BIF.erlang__op_minus [lop_164, rop_165]
-      in let lop_176 = BIF.erlang__bsl__2 [m0_2, b0_173]
-      in let rop_181 = BIF.erlang__op_minus [bits_6, b0_173]
-      in let rop_179 = BIF.erlang__bsr__2 [v1_5, rop_181]
-      in let lop_175 = BIF.erlang__bor__2 [lop_176, rop_179]
-      in let arg_185 = ErlangFloat 2.00000000000000000000e+0
-      in let arg_186 = BIF.erlang__op_minus [bitno_3, b0_173]
-      in let rop_184 = BIF.math__pow__2 [arg_185, arg_186]
-      in let tup_el_174 = BIF.erlang__op_mult [lop_175, rop_184]
-      in let tup_el_189 = ErlangTuple [alg_0, r1_4]
-      in ErlangTuple [tup_el_174, tup_el_189]
-erlps__uniform_real_s__7 [arg_192, arg_193, arg_194, arg_195,
-                          arg_196, arg_197, arg_198]
+      let    lop_161 = toErl 53
+      in let lop_165 = toErl 1
+      in let lop_167 = toErl 49
+      in let rop_168 = toErl 1
+      in let rop_166 = BIF.erlang__op_minus [lop_167, rop_168]
+      in let arg_164 = BIF.erlang__bsl__2 [lop_165, rop_166]
+      in let arg_169 = toErl 49
+      in let rop_162 = erlps__bc__3 [m0_2, arg_164, arg_169]
+      in let b0_170 = BIF.erlang__op_minus [lop_161, rop_162]
+      in let lop_173 = BIF.erlang__bsl__2 [m0_2, b0_170]
+      in let rop_178 = BIF.erlang__op_minus [bits_6, b0_170]
+      in let rop_176 = BIF.erlang__bsr__2 [v1_5, rop_178]
+      in let lop_172 = BIF.erlang__bor__2 [lop_173, rop_176]
+      in let arg_182 = ErlangFloat 2.00000000000000000000e+0
+      in let arg_183 = BIF.erlang__op_minus [bitno_3, b0_170]
+      in let rop_181 = BIF.math__pow__2 [arg_182, arg_183]
+      in let tup_el_171 = BIF.erlang__op_mult [lop_172, rop_181]
+      in let tup_el_186 = ErlangTuple [alg_0, r1_4]
+      in ErlangTuple [tup_el_171, tup_el_186]
+erlps__uniform_real_s__7 [arg_189, arg_190, arg_191, arg_192,
+                          arg_193, arg_194, arg_195]
   =
   EXC.function_clause unit
 erlps__uniform_real_s__7 args =

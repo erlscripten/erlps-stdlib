@@ -1141,9 +1141,7 @@ erlps__abstract__3 [t_0, a_1, _e_2] | isEAtom t_0 =
   ErlangTuple [ErlangAtom "atom", a_1, t_0]
 erlps__abstract__3 [(ErlangEmptyList), a_0, _e_1] =
   ErlangTuple [ErlangAtom "nil", a_0]
-erlps__abstract__3 [b_0, a_1, _e_2]
-  | (ErlangAtom "true") ==
-      (falsifyErrors (\ _ -> BIF.erlang__is_bitstring__1 [b_0])) =
+erlps__abstract__3 [b_0, a_1, _e_2] | isEBinary b_0 =
   let    lcSrc_6 = BIF.erlang__bitstring_to_list__1 [b_0]
   in let
     tup_el_5 =

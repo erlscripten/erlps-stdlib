@@ -375,13 +375,9 @@ erlps__write1__3 [term_0, _d_1, _e_2]
   | (ErlangAtom "true") ==
       (falsifyErrors (\ _ -> BIF.erlang__is_port__1 [term_0])) =
   erlps__write_port__1 [term_0]
-erlps__write1__3 [term_0, _d_1, _e_2]
-  | (ErlangAtom "true") ==
-      (falsifyErrors (\ _ -> BIF.erlang__is_pid__1 [term_0])) =
+erlps__write1__3 [term_0, _d_1, _e_2] | isEPID term_0 =
   BIF.erlang__pid_to_list__1 [term_0]
-erlps__write1__3 [term_0, _d_1, _e_2]
-  | (ErlangAtom "true") ==
-      (falsifyErrors (\ _ -> BIF.erlang__is_reference__1 [term_0])) =
+erlps__write1__3 [term_0, _d_1, _e_2] | isEReference term_0 =
   erlps__write_ref__1 [term_0]
 erlps__write1__3 [term_1@(ErlangBinary binSeg_0), d_2, _e_3] =
   erlps__write_binary__2 [term_1, d_2]

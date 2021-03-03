@@ -3595,18 +3595,12 @@ erlps__bin_pattern__1 args =
 
 erlps__bin_search_loop__5 :: ErlangFun
 erlps__bin_search_loop__5 [bin0_0, start_1, _, cont_2, _seps_3]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let    lop_7 = BIF.erlang__byte_size__1 [bin0_0]
-            in let lop_6 = BIF.erlang__op_lesserEq [lop_7, start_1]
-            in
-              case lop_6 of
-                (ErlangAtom "true") -> ErlangAtom "true"
-                (ErlangAtom "false") ->
-                  let rop_11 = toErl 0
-                  in BIF.erlang__op_lesser [start_1, rop_11]
-                _ -> EXC.badarg1 lop_6)) =
+  | ((ErlangAtom "true") ==
+       (falsifyErrors
+          (\ _ ->
+             let lop_6 = BIF.erlang__byte_size__1 [bin0_0]
+             in BIF.erlang__op_lesserEq [lop_6, start_1]))) ||
+      (weakLt start_1 (toErl 0)) =
   ErlangTuple [ErlangAtom "nomatch", cont_2]
 erlps__bin_search_loop__5 [bin0_0, start_1, binseps_2, cont_3,
                            seps_4]

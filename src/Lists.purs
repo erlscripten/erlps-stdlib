@@ -276,46 +276,43 @@ erlps__seq__3 :: ErlangFun
 erlps__seq__3 [first_0, last_1, inc_2]
   | ((isEInt first_0) && (isEInt last_1)) && (isEInt inc_2) =
   case ErlangAtom "true" of
-    _ | (ErlangAtom "true") ==
-          (falsifyErrors
-             (\ _ ->
-                let    rop_6 = toErl 0
-                in let lop_4 = BIF.erlang__op_greater [inc_2, rop_6]
-                in let
-                  lop_3 =
-                    case lop_4 of
-                      (ErlangAtom "false") -> ErlangAtom "false"
-                      (ErlangAtom "true") ->
-                        let lop_7 = BIF.erlang__op_minus [first_0, inc_2]
-                        in BIF.erlang__op_lesserEq [lop_7, last_1]
-                      _ -> EXC.badarg1 lop_4
-                in
-                  case lop_3 of
-                    (ErlangAtom "true") -> ErlangAtom "true"
-                    (ErlangAtom "false") ->
-                      let    rop_13 = toErl 0
-                      in let lop_11 = BIF.erlang__op_lesser [inc_2, rop_13]
-                      in
-                        case lop_11 of
-                          (ErlangAtom "false") -> ErlangAtom "false"
-                          (ErlangAtom "true") ->
-                            let lop_14 = BIF.erlang__op_minus [first_0, inc_2]
-                            in BIF.erlang__op_greaterEq [lop_14, last_1]
-                          _ -> EXC.badarg1 lop_11
-                    _ -> EXC.badarg1 lop_3)) ->
-      let    lop_19 = BIF.erlang__op_minus [last_1, first_0]
-      in let lop_18 = BIF.erlang__op_plus [lop_19, inc_2]
-      in let n_24 = BIF.erlang__op_div_strict [lop_18, inc_2]
-      in let rop_31 = toErl 1
-      in let rop_29 = BIF.erlang__op_minus [n_24, rop_31]
-      in let lop_27 = BIF.erlang__op_mult [inc_2, rop_29]
-      in let arg_26 = BIF.erlang__op_plus [lop_27, first_0]
-      in erlps__seq_loop__4 [n_24, arg_26, inc_2, ErlangEmptyList]
+    _ | ((ErlangAtom "true") ==
+           (falsifyErrors
+              (\ _ ->
+                 let    rop_5 = toErl 0
+                 in let lop_3 = BIF.erlang__op_greater [inc_2, rop_5]
+                 in
+                   case lop_3 of
+                     (ErlangAtom "false") -> ErlangAtom "false"
+                     (ErlangAtom "true") ->
+                       let lop_6 = BIF.erlang__op_minus [first_0, inc_2]
+                       in BIF.erlang__op_lesserEq [lop_6, last_1]
+                     _ -> EXC.badarg1 lop_3))) ||
+          ((ErlangAtom "true") ==
+             (falsifyErrors
+                (\ _ ->
+                   let    rop_12 = toErl 0
+                   in let lop_10 = BIF.erlang__op_lesser [inc_2, rop_12]
+                   in
+                     case lop_10 of
+                       (ErlangAtom "false") -> ErlangAtom "false"
+                       (ErlangAtom "true") ->
+                         let lop_13 = BIF.erlang__op_minus [first_0, inc_2]
+                         in BIF.erlang__op_greaterEq [lop_13, last_1]
+                       _ -> EXC.badarg1 lop_10))) ->
+      let    lop_18 = BIF.erlang__op_minus [last_1, first_0]
+      in let lop_17 = BIF.erlang__op_plus [lop_18, inc_2]
+      in let n_23 = BIF.erlang__op_div_strict [lop_17, inc_2]
+      in let rop_30 = toErl 1
+      in let rop_28 = BIF.erlang__op_minus [n_23, rop_30]
+      in let lop_26 = BIF.erlang__op_mult [inc_2, rop_28]
+      in let arg_25 = BIF.erlang__op_plus [lop_26, first_0]
+      in erlps__seq_loop__4 [n_23, arg_25, inc_2, ErlangEmptyList]
     _ | ((==) inc_2 (toErl 0)) && ((==) first_0 last_1) ->
-      let arg_35 = toErl 1
-      in erlps__seq_loop__4 [arg_35, first_0, inc_2, ErlangEmptyList]
+      let arg_34 = toErl 1
+      in erlps__seq_loop__4 [arg_34, first_0, inc_2, ErlangEmptyList]
     _ -> EXC.if_clause unit
-erlps__seq__3 [arg_39, arg_40, arg_41] = EXC.function_clause unit
+erlps__seq__3 [arg_38, arg_39, arg_40] = EXC.function_clause unit
 erlps__seq__3 args =
   EXC.badarity (ErlangFun 3 erlps__seq__3) args
 
