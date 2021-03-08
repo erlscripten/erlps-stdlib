@@ -763,7 +763,16 @@ erlps__rewrite__2 [(ErlangTuple [(ErlangAtom "sep"), ds_0, n_1,
       in let arg_24 = erlps__nest__2 [n1_20, arg_26]
       in let arg_22 = erlps__above__2 [d1_19, arg_24]
       in erlps__rewrite__2 [arg_22, c1_21]
-    _ -> erlps__enter_sep__4 [ds_0, n_1, p_2, c_3]
+    _ ->
+      case ds_0 of
+        (ErlangCons d_32 (ErlangEmptyList)) ->
+          erlps__rewrite__2 [d_32, c_3]
+        (ErlangCons d_35 ds1_36) ->
+          let
+            arg_38 =
+              ErlangTuple [ErlangAtom "c_sep_nest", ds1_36, n_1, p_2, c_3]
+          in erlps__rewrite__2 [d_35, arg_38]
+        something_else -> EXC.case_clause something_else
 erlps__rewrite__2 [(ErlangTuple [(ErlangAtom "union"), d1_0,
                                  d2_1]),
                    c_2]
@@ -1067,22 +1076,6 @@ erlps__fit__1 [d_0] = ErlangTuple [ErlangAtom "fit", d_0]
 erlps__fit__1 [arg_3] = EXC.function_clause unit
 erlps__fit__1 args =
   EXC.badarity (ErlangFun 1 erlps__fit__1) args
-
-erlps__enter_sep__4 :: ErlangFun
-erlps__enter_sep__4 [ds_0, n_1, p_2, c_3] =
-  case ds_0 of
-    (ErlangCons d_5 (ErlangEmptyList)) ->
-      erlps__rewrite__2 [d_5, c_3]
-    (ErlangCons d_8 ds1_9) ->
-      let
-        arg_11 =
-          ErlangTuple [ErlangAtom "c_sep_nest", ds1_9, n_1, p_2, c_3]
-      in erlps__rewrite__2 [d_8, arg_11]
-    something_else -> EXC.case_clause something_else
-erlps__enter_sep__4 [arg_17, arg_18, arg_19, arg_20] =
-  EXC.function_clause unit
-erlps__enter_sep__4 args =
-  EXC.badarity (ErlangFun 4 erlps__enter_sep__4) args
 
 erlps__expand_sep__3 :: ErlangFun
 erlps__expand_sep__3 [d_0, ds_1, n_2] =

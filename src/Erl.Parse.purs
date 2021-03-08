@@ -179,8 +179,16 @@ erlps__build_typed_attribute__2 [(ErlangTuple [(ErlangAtom "atom"),
                                                                            typename_2]),
                                                              args_3]),
                                                type_4])]
-  | ((==) attr_1 (ErlangAtom "type")) ||
-      ((==) attr_1 (ErlangAtom "opaque")) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let lop_26 = BIF.erlang__op_exactEq [attr_1, ErlangAtom "type"]
+            in
+              case lop_26 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") ->
+                  BIF.erlang__op_exactEq [attr_1, ErlangAtom "opaque"]
+                _ -> EXC.badarg1 lop_26)) =
   let   
     arg_5 =
       ErlangFun 1
@@ -240,8 +248,16 @@ erlps__build_typed_attribute__2 args =
 erlps__build_type_spec__2 :: ErlangFun
 erlps__build_type_spec__2 [(ErlangTuple [kind_0, aa_1]),
                            (ErlangTuple [specfun_2, typespecs_3])]
-  | ((==) kind_0 (ErlangAtom "spec")) ||
-      ((==) kind_0 (ErlangAtom "callback")) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let lop_22 = BIF.erlang__op_exactEq [kind_0, ErlangAtom "spec"]
+            in
+              case lop_22 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") ->
+                  BIF.erlang__op_exactEq [kind_0, ErlangAtom "callback"]
+                _ -> EXC.badarg1 lop_22)) =
   let   
     newspecfun_15 =
       case specfun_2 of
@@ -255,7 +271,7 @@ erlps__build_type_spec__2 [(ErlangTuple [kind_0, aa_1]),
         something_else -> EXC.case_clause something_else
   in let tup_el_19 = ErlangTuple [newspecfun_15, typespecs_3]
   in ErlangTuple [ErlangAtom "attribute", aa_1, kind_0, tup_el_19]
-erlps__build_type_spec__2 [arg_22, arg_23] =
+erlps__build_type_spec__2 [arg_27, arg_28] =
   EXC.function_clause unit
 erlps__build_type_spec__2 args =
   EXC.badarity (ErlangFun 2 erlps__build_type_spec__2) args
@@ -1141,7 +1157,9 @@ erlps__abstract__3 [t_0, a_1, _e_2] | isEAtom t_0 =
   ErlangTuple [ErlangAtom "atom", a_1, t_0]
 erlps__abstract__3 [(ErlangEmptyList), a_0, _e_1] =
   ErlangTuple [ErlangAtom "nil", a_0]
-erlps__abstract__3 [b_0, a_1, _e_2] | isEBinary b_0 =
+erlps__abstract__3 [b_0, a_1, _e_2]
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_bitstring__1 [b_0])) =
   let    lcSrc_6 = BIF.erlang__bitstring_to_list__1 [b_0]
   in let
     tup_el_5 =

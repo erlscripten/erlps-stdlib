@@ -977,7 +977,14 @@ rewrite(#sep{ds = Ds, i = N, p = P}, C) ->
 	    %% Floats are not moved in or out of sep's
 	    rewrite(above(D1, nest(N1, mksep(Ds, N, P))), C1);
 	_ ->
-	    enter_sep(Ds, N, P, C)		% pass on
+	    case Ds of
+		[D] ->
+		    rewrite(D, C);    % Handle this case separately
+		[D | Ds1] ->
+		    %% Note that we never build a `sep'-context with an
+		    %% empty "tail" list! `Ds1' is nonempty here!
+		    rewrite(D, #c_sep_nest{ds = Ds1, i = N, p = P, c = C})
+	    end
     end;
 rewrite(#union{d1 = D1, d2 = D2}, C) ->
     %% Introduced by the occurrence of an empty `text' string in a
@@ -1218,16 +1225,6 @@ union(D1, D2) ->
 
 fit(D) ->
     #fit{d = D}.
-
-enter_sep(Ds, N, P, C) ->
-    case Ds of
-	[D] ->
-	    rewrite(D, C);    % Handle this case separately
-	[D | Ds1] ->
-	    %% Note that we never build a `sep'-context with an
-	    %% empty "tail" list! `Ds1' is nonempty here!
-	    rewrite(D, #c_sep_nest{ds = Ds1, i = N, p = P, c = C})
-    end.
 
 %% When we expand a `sep', the extra indentation appears as `nest'
 %% operators, but not until then.

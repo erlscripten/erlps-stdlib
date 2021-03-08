@@ -231,8 +231,21 @@ erlps__format_prompt__2 [(ErlangTuple [(ErlangAtom "format"),
   =
   erlps__do_format_prompt__2 [format_0, args_1]
 erlps__format_prompt__2 [prompt_0, encoding_1]
-  | ((isEList prompt_0) || (isEAtom prompt_0)) ||
-      (isEBinary prompt_0) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let    lop_9 = BIF.erlang__is_list__1 [prompt_0]
+            in let
+              lop_8 =
+                case lop_9 of
+                  (ErlangAtom "true") -> ErlangAtom "true"
+                  (ErlangAtom "false") -> BIF.erlang__is_atom__1 [prompt_0]
+                  _ -> EXC.badarg1 lop_9
+            in
+              case lop_8 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") -> BIF.erlang__is_binary__1 [prompt_0]
+                _ -> EXC.badarg1 lop_8)) =
   let    arg_4 = toErl "s"
   in let arg_2 = erlps__add_modifier__2 [encoding_1, arg_4]
   in
@@ -325,26 +338,37 @@ erlps__write__2 [term_0, options_1] | isEList options_1 =
         [ErlangAtom "chars_limit", options_1, arg_13]
   in
     case ErlangAtom "true" of
-      _ | ((==) depth_6 (toErl 0)) || ((==) charslimit_15 (toErl 0)) ->
+      _ | (ErlangAtom "true") ==
+            (falsifyErrors
+               (\ _ ->
+                  let    rop_18 = toErl 0
+                  in let lop_16 = BIF.erlang__op_exactEq [depth_6, rop_18]
+                  in
+                    case lop_16 of
+                      (ErlangAtom "true") -> ErlangAtom "true"
+                      (ErlangAtom "false") ->
+                        let rop_20 = toErl 0
+                        in BIF.erlang__op_exactEq [charslimit_15, rop_20]
+                      _ -> EXC.badarg1 lop_16)) ->
         toErl "..."
       _ | weakLt charslimit_15 (toErl 0) ->
         erlps__write1__3 [term_0, depth_6, encoding_10]
       _ | weakGt charslimit_15 (toErl 0) ->
         let   
-          recdeffun_22 =
+          recdeffun_27 =
             ErlangFun 2
               (let
-                 lambda_19 [_, _] = ErlangAtom "no"
-                 lambda_19 [arg_20, arg_21] = EXC.function_clause unit
-                 lambda_19 args = EXC.badarity (ErlangFun 2 lambda_19) args
-               in lambda_19)
+                 lambda_24 [_, _] = ErlangAtom "no"
+                 lambda_24 [arg_25, arg_26] = EXC.function_clause unit
+                 lambda_24 args = EXC.badarity (ErlangFun 2 lambda_24) args
+               in lambda_24)
         in let
-          if_30 =
+          if_35 =
             BIF.do_remote_fun_call "Io.Lib.Pretty" "erlps__intermediate__6"
-              [term_0, depth_6, charslimit_15, recdeffun_22, encoding_10,
+              [term_0, depth_6, charslimit_15, recdeffun_27, encoding_10,
                ErlangAtom "false"]
         in
-          BIF.do_remote_fun_call "Io.Lib.Pretty" "erlps__write__1" [if_30]
+          BIF.do_remote_fun_call "Io.Lib.Pretty" "erlps__write__1" [if_35]
       _ -> EXC.if_clause unit
 erlps__write__2 [term_0, depth_1] =
   let    head_4 = ErlangTuple [ErlangAtom "depth", depth_1]
@@ -375,9 +399,13 @@ erlps__write1__3 [term_0, _d_1, _e_2]
   | (ErlangAtom "true") ==
       (falsifyErrors (\ _ -> BIF.erlang__is_port__1 [term_0])) =
   erlps__write_port__1 [term_0]
-erlps__write1__3 [term_0, _d_1, _e_2] | isEPID term_0 =
+erlps__write1__3 [term_0, _d_1, _e_2]
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_pid__1 [term_0])) =
   BIF.erlang__pid_to_list__1 [term_0]
-erlps__write1__3 [term_0, _d_1, _e_2] | isEReference term_0 =
+erlps__write1__3 [term_0, _d_1, _e_2]
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_reference__1 [term_0])) =
   erlps__write_ref__1 [term_0]
 erlps__write1__3 [term_1@(ErlangBinary binSeg_0), d_2, _e_3] =
   erlps__write_binary__2 [term_1, d_2]
@@ -615,7 +643,18 @@ erlps__write_binary_body__4 [b_1@(ErlangBinary binEnd_0), _d_2,
   | BIN.empty binEnd_0 =
   ErlangTuple [acc_4, b_1]
 erlps__write_binary_body__4 [b_0, d_1, t_2, acc_3]
-  | ((==) d_1 (toErl 1)) || ((==) t_2 (toErl 0)) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let    rop_10 = toErl 1
+            in let lop_8 = BIF.erlang__op_exactEq [d_1, rop_10]
+            in
+              case lop_8 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") ->
+                  let rop_12 = toErl 0
+                  in BIF.erlang__op_exactEq [t_2, rop_12]
+                _ -> EXC.badarg1 lop_8)) =
   let head_5 = toErl "..."
   in ErlangTuple [ErlangCons head_5 acc_3, b_0]
 erlps__write_binary_body__4 [(ErlangBinary binSeg_0), _d_4, _t_5,
@@ -1040,12 +1079,69 @@ erlps__latin1_char_list__1 args =
 
 erlps__char_list__1 :: ErlangFun
 erlps__char_list__1 [(ErlangCons c_0 cs_1)]
-  | ((((isEInt c_0) && (weakGeq c_0 (toErl 0))) &&
-        (weakLt c_0 (toErl 55296))) ||
-       (((isEInt c_0) && (weakGt c_0 (toErl 57343))) &&
-          (weakLt c_0 (toErl 65534)))) ||
-      (((isEInt c_0) && (weakGt c_0 (toErl 65535))) &&
-         (weakLeq c_0 (toErl 1114111))) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let    lop_6 = BIF.erlang__is_integer__1 [c_0]
+            in let
+              lop_5 =
+                case lop_6 of
+                  (ErlangAtom "false") -> ErlangAtom "false"
+                  (ErlangAtom "true") ->
+                    let rop_9 = toErl 0
+                    in BIF.erlang__op_greaterEq [c_0, rop_9]
+                  _ -> EXC.badarg1 lop_6
+            in let
+              lop_4 =
+                case lop_5 of
+                  (ErlangAtom "false") -> ErlangAtom "false"
+                  (ErlangAtom "true") ->
+                    let rop_11 = toErl 55296
+                    in BIF.erlang__op_lesser [c_0, rop_11]
+                  _ -> EXC.badarg1 lop_5
+            in let
+              lop_3 =
+                case lop_4 of
+                  (ErlangAtom "true") -> ErlangAtom "true"
+                  (ErlangAtom "false") ->
+                    let    lop_13 = BIF.erlang__is_integer__1 [c_0]
+                    in let
+                      lop_12 =
+                        case lop_13 of
+                          (ErlangAtom "false") -> ErlangAtom "false"
+                          (ErlangAtom "true") ->
+                            let rop_16 = toErl 57343
+                            in BIF.erlang__op_greater [c_0, rop_16]
+                          _ -> EXC.badarg1 lop_13
+                    in
+                      case lop_12 of
+                        (ErlangAtom "false") -> ErlangAtom "false"
+                        (ErlangAtom "true") ->
+                          let rop_18 = toErl 65534
+                          in BIF.erlang__op_lesser [c_0, rop_18]
+                        _ -> EXC.badarg1 lop_12
+                  _ -> EXC.badarg1 lop_4
+            in
+              case lop_3 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") ->
+                  let    lop_20 = BIF.erlang__is_integer__1 [c_0]
+                  in let
+                    lop_19 =
+                      case lop_20 of
+                        (ErlangAtom "false") -> ErlangAtom "false"
+                        (ErlangAtom "true") ->
+                          let rop_23 = toErl 65535
+                          in BIF.erlang__op_greater [c_0, rop_23]
+                        _ -> EXC.badarg1 lop_20
+                  in
+                    case lop_19 of
+                      (ErlangAtom "false") -> ErlangAtom "false"
+                      (ErlangAtom "true") ->
+                        let rop_25 = toErl 1114111
+                        in BIF.erlang__op_lesserEq [c_0, rop_25]
+                      _ -> EXC.badarg1 lop_19
+                _ -> EXC.badarg1 lop_3)) =
   erlps__char_list__1 [cs_1]
 erlps__char_list__1 [(ErlangEmptyList)] = ErlangAtom "true"
 erlps__char_list__1 [_] = ErlangAtom "false"
@@ -1095,12 +1191,69 @@ erlps__deep_char_list__2 [(ErlangCons c_0 cs_1), more_2]
   | isEList c_0 =
   erlps__deep_char_list__2 [c_0, ErlangCons cs_1 more_2]
 erlps__deep_char_list__2 [(ErlangCons c_0 cs_1), more_2]
-  | ((((isEInt c_0) && (weakGeq c_0 (toErl 0))) &&
-        (weakLt c_0 (toErl 55296))) ||
-       (((isEInt c_0) && (weakGt c_0 (toErl 57343))) &&
-          (weakLt c_0 (toErl 65534)))) ||
-      (((isEInt c_0) && (weakGt c_0 (toErl 65535))) &&
-         (weakLeq c_0 (toErl 1114111))) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let    lop_8 = BIF.erlang__is_integer__1 [c_0]
+            in let
+              lop_7 =
+                case lop_8 of
+                  (ErlangAtom "false") -> ErlangAtom "false"
+                  (ErlangAtom "true") ->
+                    let rop_11 = toErl 0
+                    in BIF.erlang__op_greaterEq [c_0, rop_11]
+                  _ -> EXC.badarg1 lop_8
+            in let
+              lop_6 =
+                case lop_7 of
+                  (ErlangAtom "false") -> ErlangAtom "false"
+                  (ErlangAtom "true") ->
+                    let rop_13 = toErl 55296
+                    in BIF.erlang__op_lesser [c_0, rop_13]
+                  _ -> EXC.badarg1 lop_7
+            in let
+              lop_5 =
+                case lop_6 of
+                  (ErlangAtom "true") -> ErlangAtom "true"
+                  (ErlangAtom "false") ->
+                    let    lop_15 = BIF.erlang__is_integer__1 [c_0]
+                    in let
+                      lop_14 =
+                        case lop_15 of
+                          (ErlangAtom "false") -> ErlangAtom "false"
+                          (ErlangAtom "true") ->
+                            let rop_18 = toErl 57343
+                            in BIF.erlang__op_greater [c_0, rop_18]
+                          _ -> EXC.badarg1 lop_15
+                    in
+                      case lop_14 of
+                        (ErlangAtom "false") -> ErlangAtom "false"
+                        (ErlangAtom "true") ->
+                          let rop_20 = toErl 65534
+                          in BIF.erlang__op_lesser [c_0, rop_20]
+                        _ -> EXC.badarg1 lop_14
+                  _ -> EXC.badarg1 lop_6
+            in
+              case lop_5 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") ->
+                  let    lop_22 = BIF.erlang__is_integer__1 [c_0]
+                  in let
+                    lop_21 =
+                      case lop_22 of
+                        (ErlangAtom "false") -> ErlangAtom "false"
+                        (ErlangAtom "true") ->
+                          let rop_25 = toErl 65535
+                          in BIF.erlang__op_greater [c_0, rop_25]
+                        _ -> EXC.badarg1 lop_22
+                  in
+                    case lop_21 of
+                      (ErlangAtom "false") -> ErlangAtom "false"
+                      (ErlangAtom "true") ->
+                        let rop_27 = toErl 1114111
+                        in BIF.erlang__op_lesserEq [c_0, rop_27]
+                      _ -> EXC.badarg1 lop_21
+                _ -> EXC.badarg1 lop_5)) =
   erlps__deep_char_list__2 [cs_1, more_2]
 erlps__deep_char_list__2 [(ErlangEmptyList),
                           (ErlangCons cs_0 more_1)]
@@ -1180,12 +1333,69 @@ erlps__printable_unicode_list__1 [(ErlangCons c_0 cs_1)]
       (weakLeq c_0 (toErl 126)) =
   erlps__printable_unicode_list__1 [cs_1]
 erlps__printable_unicode_list__1 [(ErlangCons c_0 cs_1)]
-  | ((((isEInt c_0) && (weakGeq c_0 (toErl 160))) &&
-        (weakLt c_0 (toErl 55296))) ||
-       (((isEInt c_0) && (weakGt c_0 (toErl 57343))) &&
-          (weakLt c_0 (toErl 65534)))) ||
-      (((isEInt c_0) && (weakGt c_0 (toErl 65535))) &&
-         (weakLeq c_0 (toErl 1114111))) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let    lop_6 = BIF.erlang__is_integer__1 [c_0]
+            in let
+              lop_5 =
+                case lop_6 of
+                  (ErlangAtom "false") -> ErlangAtom "false"
+                  (ErlangAtom "true") ->
+                    let rop_9 = toErl 160
+                    in BIF.erlang__op_greaterEq [c_0, rop_9]
+                  _ -> EXC.badarg1 lop_6
+            in let
+              lop_4 =
+                case lop_5 of
+                  (ErlangAtom "false") -> ErlangAtom "false"
+                  (ErlangAtom "true") ->
+                    let rop_11 = toErl 55296
+                    in BIF.erlang__op_lesser [c_0, rop_11]
+                  _ -> EXC.badarg1 lop_5
+            in let
+              lop_3 =
+                case lop_4 of
+                  (ErlangAtom "true") -> ErlangAtom "true"
+                  (ErlangAtom "false") ->
+                    let    lop_13 = BIF.erlang__is_integer__1 [c_0]
+                    in let
+                      lop_12 =
+                        case lop_13 of
+                          (ErlangAtom "false") -> ErlangAtom "false"
+                          (ErlangAtom "true") ->
+                            let rop_16 = toErl 57343
+                            in BIF.erlang__op_greater [c_0, rop_16]
+                          _ -> EXC.badarg1 lop_13
+                    in
+                      case lop_12 of
+                        (ErlangAtom "false") -> ErlangAtom "false"
+                        (ErlangAtom "true") ->
+                          let rop_18 = toErl 65534
+                          in BIF.erlang__op_lesser [c_0, rop_18]
+                        _ -> EXC.badarg1 lop_12
+                  _ -> EXC.badarg1 lop_4
+            in
+              case lop_3 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") ->
+                  let    lop_20 = BIF.erlang__is_integer__1 [c_0]
+                  in let
+                    lop_19 =
+                      case lop_20 of
+                        (ErlangAtom "false") -> ErlangAtom "false"
+                        (ErlangAtom "true") ->
+                          let rop_23 = toErl 65535
+                          in BIF.erlang__op_greater [c_0, rop_23]
+                        _ -> EXC.badarg1 lop_20
+                  in
+                    case lop_19 of
+                      (ErlangAtom "false") -> ErlangAtom "false"
+                      (ErlangAtom "true") ->
+                        let rop_25 = toErl 1114111
+                        in BIF.erlang__op_lesserEq [c_0, rop_25]
+                      _ -> EXC.badarg1 lop_19
+                _ -> EXC.badarg1 lop_3)) =
   erlps__printable_unicode_list__1 [cs_1]
 erlps__printable_unicode_list__1 [(ErlangCons (ErlangInt num_0) cs_1)]
   | (ErlangInt num_0) == (toErl 10) =
@@ -1301,7 +1511,8 @@ erlps__collect_chars__3 args =
 erlps__collect_chars__4 :: ErlangFun
 erlps__collect_chars__4 [(ErlangAtom "start"), data_0,
                          (ErlangAtom "unicode"), n_1]
-  | isEBinary data_0 =
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_binary__1 [data_0])) =
   let matchExpr_6 = erlps__count_and_find_utf8__2 [data_0, n_1]
   in
     case matchExpr_6 of
@@ -1324,7 +1535,8 @@ erlps__collect_chars__4 [(ErlangAtom "start"), data_0,
       _ -> EXC.badmatch matchExpr_6
 erlps__collect_chars__4 [(ErlangAtom "start"), data_0,
                          (ErlangAtom "latin1"), n_1]
-  | isEBinary data_0 =
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_binary__1 [data_0])) =
   let size_3 = BIF.erlang__byte_size__1 [data_0]
   in
     case ErlangAtom "true" of
@@ -1491,7 +1703,8 @@ erlps__collect_line__3 args =
 erlps__collect_line__4 :: ErlangFun
 erlps__collect_line__4 [(ErlangAtom "start"), data_0, encoding_1,
                         _]
-  | isEBinary data_0 =
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_binary__1 [data_0])) =
   erlps__collect_line_bin__4
     [data_0, data_0, ErlangEmptyList, encoding_1]
 erlps__collect_line__4 [(ErlangAtom "start"), data_0, _, _]
@@ -1503,13 +1716,15 @@ erlps__collect_line__4 [(ErlangAtom "start"), (ErlangAtom "eof"),
   ErlangTuple
     [ErlangAtom "stop", ErlangAtom "eof", ErlangAtom "eof"]
 erlps__collect_line__4 [stack_0, data_1, encoding_2, _]
-  | isEBinary data_1 =
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_binary__1 [data_1])) =
   erlps__collect_line_bin__4 [data_1, data_1, stack_0, encoding_2]
 erlps__collect_line__4 [stack_0, data_1, _, _] | isEList data_1 =
   erlps__collect_line_list__2 [data_1, stack_0]
 erlps__collect_line__4 [stack_1@(ErlangCons b_0 _),
                         (ErlangAtom "eof"), _, _]
-  | isEBinary b_0 =
+  | (ErlangAtom "true") ==
+      (falsifyErrors (\ _ -> BIF.erlang__is_binary__1 [b_0])) =
   let tup_el_3 = erlps__binrev__1 [stack_1]
   in ErlangTuple [ErlangAtom "stop", tup_el_3, ErlangAtom "eof"]
 erlps__collect_line__4 [stack_0, (ErlangAtom "eof"), _, _] =
@@ -1682,37 +1897,73 @@ erlps__get_until__4 [cont_0, data_1, encoding_2,
                      (ErlangTuple [mod_3, func_4, xtraargs_5])]
   =
   let   
-    chars_9 =
+    chars_14 =
       case ErlangAtom "true" of
-        _ | (isEBinary data_1) &&
-              ((==) encoding_2 (ErlangAtom "unicode")) ->
+        _ | (ErlangAtom "true") ==
+              (falsifyErrors
+                 (\ _ ->
+                    let lop_6 = BIF.erlang__is_binary__1 [data_1]
+                    in
+                      case lop_6 of
+                        (ErlangAtom "false") -> ErlangAtom "false"
+                        (ErlangAtom "true") ->
+                          BIF.erlang__op_exactEq
+                            [encoding_2, ErlangAtom "unicode"]
+                        _ -> EXC.badarg1 lop_6)) ->
           BIF.do_remote_fun_call "Erlang.Unicode"
             "erlps__characters_to_list__2" [data_1, ErlangAtom "utf8"]
-        _ | isEBinary data_1 -> BIF.erlang__binary_to_list__1 [data_1]
+        _ | (ErlangAtom "true") ==
+              (falsifyErrors (\ _ -> BIF.erlang__is_binary__1 [data_1])) ->
+          BIF.erlang__binary_to_list__1 [data_1]
         _ -> data_1
   in let
-    case_10 =
+    case_15 =
       BIF.erlang__apply__3
         [mod_3, func_4,
-         ErlangCons cont_0 (ErlangCons chars_9 xtraargs_5)]
+         ErlangCons cont_0 (ErlangCons chars_14 xtraargs_5)]
   in
-    case case_10 of
-      (ErlangTuple [(ErlangAtom "done"), result_18, buf_19]) ->
+    case case_15 of
+      (ErlangTuple [(ErlangAtom "done"), result_23, buf_24]) ->
         let
-          tup_el_21 =
+          tup_el_26 =
             case ErlangAtom "true" of
-              _ | ((isEBinary data_1) && (isEList result_18)) &&
-                    ((==) encoding_2 (ErlangAtom "unicode")) ->
+              _ | (ErlangAtom "true") ==
+                    (falsifyErrors
+                       (\ _ ->
+                          let    lop_28 = BIF.erlang__is_binary__1 [data_1]
+                          in let
+                            lop_27 =
+                              case lop_28 of
+                                (ErlangAtom "false") -> ErlangAtom "false"
+                                (ErlangAtom "true") ->
+                                  BIF.erlang__is_list__1 [result_23]
+                                _ -> EXC.badarg1 lop_28
+                          in
+                            case lop_27 of
+                              (ErlangAtom "false") -> ErlangAtom "false"
+                              (ErlangAtom "true") ->
+                                BIF.erlang__op_exactEq
+                                  [encoding_2, ErlangAtom "unicode"]
+                              _ -> EXC.badarg1 lop_27)) ->
                 BIF.do_remote_fun_call "Erlang.Unicode"
                   "erlps__characters_to_binary__3"
-                  [result_18, ErlangAtom "unicode", ErlangAtom "unicode"]
-              _ | (isEBinary data_1) && (isEList result_18) ->
-                BIF.erlang__iolist_to_binary__1 [result_18]
-              _ -> result_18
-        in ErlangTuple [ErlangAtom "stop", tup_el_21, buf_19]
-      (ErlangTuple [(ErlangAtom "more"), newcont_27]) -> newcont_27
+                  [result_23, ErlangAtom "unicode", ErlangAtom "unicode"]
+              _ | (ErlangAtom "true") ==
+                    (falsifyErrors
+                       (\ _ ->
+                          let lop_36 = BIF.erlang__is_binary__1 [data_1]
+                          in
+                            case lop_36 of
+                              (ErlangAtom "false") -> ErlangAtom "false"
+                              (ErlangAtom "true") ->
+                                BIF.erlang__is_list__1 [result_23]
+                              _ -> EXC.badarg1 lop_36)) ->
+                BIF.erlang__iolist_to_binary__1 [result_23]
+              _ -> result_23
+        in ErlangTuple [ErlangAtom "stop", tup_el_26, buf_24]
+      (ErlangTuple [(ErlangAtom "more"), newcont_41]) -> newcont_41
       something_else -> EXC.case_clause something_else
-erlps__get_until__4 [arg_28, arg_29, arg_30, arg_31] =
+erlps__get_until__4 [arg_42, arg_43, arg_44, arg_45] =
   EXC.function_clause unit
 erlps__get_until__4 args =
   EXC.badarity (ErlangFun 4 erlps__get_until__4) args

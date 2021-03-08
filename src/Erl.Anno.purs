@@ -532,9 +532,13 @@ erlps__is_settable__2 :: ErlangFun
 erlps__is_settable__2 [(ErlangAtom "file"), file_0] =
   erlps__is_filename__1 [file_0]
 erlps__is_settable__2 [(ErlangAtom "generated"), boolean_0]
-  | ((==) (ErlangAtom "true") boolean_0) ||
-      ((ErlangAtom "true") ==
-         (falsifyErrors (\ _ -> BIF.erlang__not__1 [boolean_0]))) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            case boolean_0 of
+              (ErlangAtom "true") -> ErlangAtom "true"
+              (ErlangAtom "false") -> BIF.erlang__not__1 [boolean_0]
+              _ -> EXC.badarg1 boolean_0)) =
   ErlangAtom "true"
 erlps__is_settable__2 [(ErlangAtom "location"), line_0]
   | (isEInt line_0) && (weakGeq line_0 (toErl 0)) =
@@ -546,9 +550,13 @@ erlps__is_settable__2 [(ErlangAtom "location"),
       (weakGeq column_1 (toErl 1)) =
   ErlangAtom "true"
 erlps__is_settable__2 [(ErlangAtom "record"), boolean_0]
-  | ((==) (ErlangAtom "true") boolean_0) ||
-      ((ErlangAtom "true") ==
-         (falsifyErrors (\ _ -> BIF.erlang__not__1 [boolean_0]))) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            case boolean_0 of
+              (ErlangAtom "true") -> ErlangAtom "true"
+              (ErlangAtom "false") -> BIF.erlang__not__1 [boolean_0]
+              _ -> EXC.badarg1 boolean_0)) =
   ErlangAtom "true"
 erlps__is_settable__2 [(ErlangAtom "text"), text_0] =
   erlps__is_string__1 [text_0]

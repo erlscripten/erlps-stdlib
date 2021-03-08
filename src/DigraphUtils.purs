@@ -610,7 +610,16 @@ erlps__subgraph_opts__5 :: ErlangFun
 erlps__subgraph_opts__5 [(ErlangCons (ErlangTuple [(ErlangAtom "type"),
                                                    type_0]) opts_1),
                          _type0_2, keep_3, g_4, vs_5]
-  | ((==) type_0 (ErlangAtom "inherit")) || (isEList type_0) =
+  | (ErlangAtom "true") ==
+      (falsifyErrors
+         (\ _ ->
+            let
+              lop_11 = BIF.erlang__op_exactEq [type_0, ErlangAtom "inherit"]
+            in
+              case lop_11 of
+                (ErlangAtom "true") -> ErlangAtom "true"
+                (ErlangAtom "false") -> BIF.erlang__is_list__1 [type_0]
+                _ -> EXC.badarg1 lop_11)) =
   erlps__subgraph_opts__5 [opts_1, type_0, keep_3, g_4, vs_5]
 erlps__subgraph_opts__5 [(ErlangCons (ErlangTuple [(ErlangAtom "keep_labels"),
                                                    keep_0]) opts_1),
@@ -728,8 +737,8 @@ erlps__subgraph_vertex__4 [v_0, g_1, sg_2, keep_3] =
             (falsifyErrors (\ _ -> BIF.erlang__not__1 [keep_3])) ->
         BIF.do_remote_fun_call "Digraph" "erlps__add_vertex__2"
           [sg_2, v_0]
-      (ErlangTuple [_v_10, label_11]) | (==) (ErlangAtom "true")
-                                          keep_3 ->
+      (ErlangTuple [_v_10, label_11]) | (ErlangAtom "true") ==
+                                          (falsifyErrors (\ _ -> keep_3)) ->
         BIF.do_remote_fun_call "Digraph" "erlps__add_vertex__3"
           [sg_2, v_0, label_11]
       something_else -> EXC.case_clause something_else
@@ -756,7 +765,7 @@ erlps__subgraph_edge__4 [e_0, g_1, sg_2, keep_3] =
                   (falsifyErrors (\ _ -> BIF.erlang__not__1 [keep_3])) ->
               BIF.do_remote_fun_call "Digraph" "erlps__add_edge__5"
                 [sg_2, e_0, v1_7, v2_8, ErlangEmptyList]
-            _ | (==) (ErlangAtom "true") keep_3 ->
+            _ | (ErlangAtom "true") == (falsifyErrors (\ _ -> keep_3)) ->
               BIF.do_remote_fun_call "Digraph" "erlps__add_edge__5"
                 [sg_2, e_0, v1_7, v2_8, label_9]
             something_else -> EXC.case_clause something_else

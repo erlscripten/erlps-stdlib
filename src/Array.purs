@@ -117,7 +117,8 @@ erlps__new__3 [size_0, fixed_1, default_2] =
   in let
     m_8 =
       case ErlangAtom "true" of
-        _ | (==) (ErlangAtom "true") fixed_1 -> toErl 0
+        _ | (ErlangAtom "true") == (falsifyErrors (\ _ -> fixed_1)) ->
+          toErl 0
         _ -> e_7
   in ErlangTuple [ErlangAtom "array", size_0, m_8, default_2, e_7]
 erlps__new__3 [arg_14, arg_15, arg_16] = EXC.function_clause unit
