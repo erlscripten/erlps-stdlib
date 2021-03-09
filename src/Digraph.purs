@@ -1030,29 +1030,12 @@ erlps__other_edge_exists__4 [(ErlangTuple [(ErlangAtom "digraph"),
     case case_4 of
       (ErlangCons (ErlangTuple [e_7, vert1_8, vert2_9,
                                 _]) (ErlangEmptyList)) | e_7 == e_1
-                                                       , (ErlangAtom "true") ==
-                                                           (falsifyErrors
-                                                              (\ _ ->
-                                                                 let
-                                                                   lop_10 =
-                                                                     BIF.erlang__op_exactNeq
-                                                                       [vert1_8,
-                                                                        v1_2]
-                                                                 in
-                                                                   case lop_10 of
-                                                                     (ErlangAtom "true") ->
-                                                                       ErlangAtom
-                                                                         "true"
-                                                                     (ErlangAtom "false") ->
-                                                                       BIF.erlang__op_exactNeq
-                                                                         [vert2_9,
-                                                                          v2_3]
-                                                                     _ ->
-                                                                       EXC.badarg1
-                                                                         lop_10)) ->
+                                                       , ((/=) vert1_8 v1_2) ||
+                                                           ((/=) vert2_9
+                                                              v2_3) ->
         ErlangAtom "true"
       _ -> ErlangAtom "false"
-erlps__other_edge_exists__4 [arg_15, arg_16, arg_17, arg_18] =
+erlps__other_edge_exists__4 [arg_10, arg_11, arg_12, arg_13] =
   EXC.function_clause unit
 erlps__other_edge_exists__4 args =
   EXC.badarity (ErlangFun 4 erlps__other_edge_exists__4) args

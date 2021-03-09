@@ -5073,12 +5073,10 @@ erlps__eval_str__1 [str_0] | isEList str_0 =
               in ErlangTuple [ErlangAtom "error", tup_el_58]
             something_else -> EXC.case_clause something_else
       something_else -> EXC.case_clause something_else
-erlps__eval_str__1 [bin_0]
-  | (ErlangAtom "true") ==
-      (falsifyErrors (\ _ -> BIF.erlang__is_binary__1 [bin_0])) =
+erlps__eval_str__1 [bin_0] | isEBinary bin_0 =
   let arg_1 = BIF.erlang__binary_to_list__1 [bin_0]
   in erlps__eval_str__1 [arg_1]
-erlps__eval_str__1 [arg_4] = EXC.function_clause unit
+erlps__eval_str__1 [arg_3] = EXC.function_clause unit
 erlps__eval_str__1 args =
   EXC.badarity (ErlangFun 1 erlps__eval_str__1) args
 

@@ -1954,80 +1954,73 @@ erlps__disallowed_compile_flags__2 [forms_0, st0_1] =
       erlps__is_warn_enabled__2 [ErlangAtom "bif_clash", st0_1]
   in let disabled_45 = BIF.erlang__not__1 [op_arg_42]
   in let
-    errors_73 =
+    errors_70 =
       case ErlangAtom "true" of
-        _ | (ErlangAtom "true") ==
-              (falsifyErrors
-                 (\ _ ->
-                    case disabled_45 of
-                      (ErlangAtom "false") -> ErlangAtom "false"
-                      (ErlangAtom "true") ->
-                        BIF.erlang__op_exactEq [errors0_21, ErlangEmptyList]
-                      _ -> EXC.badarg1 disabled_45)) ->
+        _ | ((==) (ErlangAtom "true") disabled_45) &&
+              ((==) errors0_21 ErlangEmptyList) ->
           let   
-            tup_el_50 =
+            tup_el_47 =
               case st0_1 of
-                (ErlangTuple arr_53) | (DM.Just field_52) <-
-                                         (arr_53 DA.!! 22) ->
-                  field_52
+                (ErlangTuple arr_50) | (DM.Just field_49) <-
+                                         (arr_50 DA.!! 22) ->
+                  field_49
                 _ -> EXC.badrecord (ErlangAtom "lint")
           in let
-            tup_el_54 =
+            tup_el_51 =
               ErlangTuple
                 [ErlangAtom "erl_lint",
                  ErlangAtom "disallowed_nowarn_bif_clash"]
-          in let head_49 = ErlangTuple [tup_el_50, tup_el_54]
+          in let head_46 = ErlangTuple [tup_el_47, tup_el_51]
           in let
-            tail_57 =
+            tail_54 =
               case st0_1 of
-                (ErlangTuple arr_60) | (DM.Just field_59) <-
-                                         (arr_60 DA.!! 20) ->
-                  field_59
+                (ErlangTuple arr_57) | (DM.Just field_56) <-
+                                         (arr_57 DA.!! 20) ->
+                  field_56
                 _ -> EXC.badrecord (ErlangAtom "lint")
-          in ErlangCons head_49 tail_57
-        _ | (ErlangAtom "true") ==
-              (falsifyErrors (\ _ -> disabled_45)) ->
+          in ErlangCons head_46 tail_54
+        _ | (==) (ErlangAtom "true") disabled_45 ->
           let   
-            rop_64 =
+            rop_61 =
               case st0_1 of
-                (ErlangTuple arr_67) | (DM.Just field_66) <-
-                                         (arr_67 DA.!! 20) ->
-                  field_66
+                (ErlangTuple arr_64) | (DM.Just field_63) <-
+                                         (arr_64 DA.!! 20) ->
+                  field_63
                 _ -> EXC.badrecord (ErlangAtom "lint")
-          in let rop_62 = BIF.erlang__op_append [errors1_41, rop_64]
-          in BIF.erlang__op_append [errors0_21, rop_62]
+          in let rop_59 = BIF.erlang__op_append [errors1_41, rop_61]
+          in BIF.erlang__op_append [errors0_21, rop_59]
         _ ->
           let
-            rop_69 =
+            rop_66 =
               case st0_1 of
-                (ErlangTuple arr_72) | (DM.Just field_71) <-
-                                         (arr_72 DA.!! 20) ->
-                  field_71
+                (ErlangTuple arr_69) | (DM.Just field_68) <-
+                                         (arr_69 DA.!! 20) ->
+                  field_68
                 _ -> EXC.badrecord (ErlangAtom "lint")
-          in BIF.erlang__op_append [errors1_41, rop_69]
+          in BIF.erlang__op_append [errors1_41, rop_66]
   in
     case st0_1 of
-      (ErlangTuple [(ErlangAtom "lint"), state_76, module_77,
-                    behaviour_78, exports_79, imports_80, compile_81,
-                    records_82, locals_83, no_auto_84, defined_85, on_load_86,
-                    on_load_line_87, clashes_88, not_deprecated_89,
-                    not_removed_90, func_91, warn_format_92,
-                    enabled_warnings_93, nowarn_bif_clash_94, errors_95,
-                    warnings_96, file_97, recdef_top_98, xqlc_99, called_100,
-                    usage_101, specs_102, callbacks_103, optional_callbacks_104,
-                    types_105, exp_types_106, in_try_head_107, bvt_108,
-                    gexpr_context_109]) ->
+      (ErlangTuple [(ErlangAtom "lint"), state_73, module_74,
+                    behaviour_75, exports_76, imports_77, compile_78,
+                    records_79, locals_80, no_auto_81, defined_82, on_load_83,
+                    on_load_line_84, clashes_85, not_deprecated_86,
+                    not_removed_87, func_88, warn_format_89,
+                    enabled_warnings_90, nowarn_bif_clash_91, errors_92,
+                    warnings_93, file_94, recdef_top_95, xqlc_96, called_97,
+                    usage_98, specs_99, callbacks_100, optional_callbacks_101,
+                    types_102, exp_types_103, in_try_head_104, bvt_105,
+                    gexpr_context_106]) ->
         ErlangTuple
-          [ErlangAtom "lint", state_76, module_77, behaviour_78,
-           exports_79, imports_80, compile_81, records_82, locals_83,
-           no_auto_84, defined_85, on_load_86, on_load_line_87, clashes_88,
-           not_deprecated_89, not_removed_90, func_91, warn_format_92,
-           enabled_warnings_93, nowarn_bif_clash_94, errors_73, warnings_96,
-           file_97, recdef_top_98, xqlc_99, called_100, usage_101,
-           specs_102, callbacks_103, optional_callbacks_104, types_105,
-           exp_types_106, in_try_head_107, bvt_108, gexpr_context_109]
+          [ErlangAtom "lint", state_73, module_74, behaviour_75,
+           exports_76, imports_77, compile_78, records_79, locals_80,
+           no_auto_81, defined_82, on_load_83, on_load_line_84, clashes_85,
+           not_deprecated_86, not_removed_87, func_88, warn_format_89,
+           enabled_warnings_90, nowarn_bif_clash_91, errors_70, warnings_93,
+           file_94, recdef_top_95, xqlc_96, called_97, usage_98, specs_99,
+           callbacks_100, optional_callbacks_101, types_102, exp_types_103,
+           in_try_head_104, bvt_105, gexpr_context_106]
       _ -> EXC.badrecord (ErlangAtom "lint")
-erlps__disallowed_compile_flags__2 [arg_110, arg_111] =
+erlps__disallowed_compile_flags__2 [arg_107, arg_108] =
   EXC.function_clause unit
 erlps__disallowed_compile_flags__2 args =
   EXC.badarity (ErlangFun 2 erlps__disallowed_compile_flags__2)
@@ -6673,18 +6666,8 @@ erlps__is_map_fields__2 :: ErlangFun
 erlps__is_map_fields__2 [(ErlangCons (ErlangTuple [tag_0, _, k_1,
                                                    v_2]) fs_3),
                          info_4]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let
-              lop_13 =
-                BIF.erlang__op_exactEq [tag_0, ErlangAtom "map_field_assoc"]
-            in
-              case lop_13 of
-                (ErlangAtom "true") -> ErlangAtom "true"
-                (ErlangAtom "false") ->
-                  BIF.erlang__op_exactEq [tag_0, ErlangAtom "map_field_exact"]
-                _ -> EXC.badarg1 lop_13)) =
+  | ((==) tag_0 (ErlangAtom "map_field_assoc")) ||
+      ((==) tag_0 (ErlangAtom "map_field_exact")) =
   let lop_5 = erlps__is_gexpr__2 [k_1, info_4]
   in
     case lop_5 of
@@ -7530,16 +7513,8 @@ erlps__expr1__3 [(ErlangTuple [(ErlangAtom "op"), _line_0, _op_1,
 erlps__expr1__3 [(ErlangTuple [(ErlangAtom "op"), line_0, op_1,
                                l_2, r_3]),
                  vt_4, st0_5]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let lop_33 = BIF.erlang__op_exactEq [op_1, ErlangAtom "orelse"]
-            in
-              case lop_33 of
-                (ErlangAtom "true") -> ErlangAtom "true"
-                (ErlangAtom "false") ->
-                  BIF.erlang__op_exactEq [op_1, ErlangAtom "andalso"]
-                _ -> EXC.badarg1 lop_33)) =
+  | ((==) op_1 (ErlangAtom "orelse")) ||
+      ((==) op_1 (ErlangAtom "andalso")) =
   let matchExpr_11 = erlps__expr__3 [l_2, vt_4, st0_5]
   in
     case matchExpr_11 of
@@ -7635,18 +7610,8 @@ erlps__map_fields__4 :: ErlangFun
 erlps__map_fields__4 [(ErlangCons (ErlangTuple [tag_0, _, k_1,
                                                 v_2]) fs_3),
                       vt_4, st_5, f_6]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let
-              lop_29 =
-                BIF.erlang__op_exactEq [tag_0, ErlangAtom "map_field_assoc"]
-            in
-              case lop_29 of
-                (ErlangAtom "true") -> ErlangAtom "true"
-                (ErlangAtom "false") ->
-                  BIF.erlang__op_exactEq [tag_0, ErlangAtom "map_field_exact"]
-                _ -> EXC.badarg1 lop_29)) =
+  | ((==) tag_0 (ErlangAtom "map_field_assoc")) ||
+      ((==) tag_0 (ErlangAtom "map_field_exact")) =
   let
     matchExpr_17 =
       BIF.erlang__apply__2
@@ -9041,24 +9006,9 @@ erlps__check_type__3 [(ErlangTuple [(ErlangAtom "type"), l_0,
 erlps__check_type__3 [(ErlangTuple [(ErlangAtom "type"), _l_0,
                                     tag_1, args_2]),
                       seenvars_3, st_4]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let   
-              lop_20 = BIF.erlang__op_exactEq [tag_1, ErlangAtom "product"]
-            in let
-              lop_19 =
-                case lop_20 of
-                  (ErlangAtom "true") -> ErlangAtom "true"
-                  (ErlangAtom "false") ->
-                    BIF.erlang__op_exactEq [tag_1, ErlangAtom "union"]
-                  _ -> EXC.badarg1 lop_20
-            in
-              case lop_19 of
-                (ErlangAtom "true") -> ErlangAtom "true"
-                (ErlangAtom "false") ->
-                  BIF.erlang__op_exactEq [tag_1, ErlangAtom "tuple"]
-                _ -> EXC.badarg1 lop_19)) =
+  | (((==) tag_1 (ErlangAtom "product")) ||
+       ((==) tag_1 (ErlangAtom "union"))) ||
+      ((==) tag_1 (ErlangAtom "tuple")) =
   let   
     arg_5 =
       ErlangFun 2
@@ -9093,44 +9043,37 @@ erlps__check_type__3 [(ErlangTuple [(ErlangAtom "type"), la_0,
               erlps__obsolete_builtin_type__1 [typepair_12]
             _ -> EXC.badarg1 lop_13
       in let
-        st1_42 =
+        st1_38 =
           case obsolete_17 of
-            (ErlangTuple [(ErlangAtom "deprecated"), repl_19,
-                          _]) | (ErlangAtom "true") ==
-                                  (falsifyErrors
-                                     (\ _ ->
-                                        let    arg_21 = toErl 1
-                                        in let
-                                          lop_20 =
-                                            BIF.erlang__element__2
-                                              [arg_21, repl_19]
-                                        in
-                                          BIF.erlang__op_exactNeq
-                                            [lop_20, module_5])) ->
-              let case_24 = BIF.maps__find__2 [typepair_12, types_6]
+            (ErlangTuple [(ErlangAtom "deprecated"), repl_19, _]) | onElement
+                                                                      (toErl 1)
+                                                                      repl_19
+                                                                      (/=)
+                                                                      module_5 ->
+              let case_20 = BIF.maps__find__2 [typepair_12, types_6]
               in
-                case case_24 of
+                case case_20 of
                   (ErlangTuple [(ErlangAtom "ok"), _]) ->
                     erlps__used_type__3 [typepair_12, la_0, st_4]
                   (ErlangAtom "error") ->
                     case obsolete_17 of
-                      (ErlangTuple [(ErlangAtom "deprecated"), replacement_30,
-                                    rel_31]) ->
+                      (ErlangTuple [(ErlangAtom "deprecated"), replacement_26,
+                                    rel_27]) ->
                         let
-                          w_38 =
+                          w_34 =
                             ErlangTuple
                               [ErlangAtom "deprecated_builtin_type",
-                               typepair_12, replacement_30, rel_31]
-                        in erlps__add_warning__3 [la_0, w_38, st_4]
+                               typepair_12, replacement_26, rel_27]
+                        in erlps__add_warning__3 [la_0, w_34, st_4]
                       _ -> EXC.badmatch obsolete_17
                   something_else -> EXC.case_clause something_else
             _ -> st_4
-      in let tup_el_45 = erlps__nowarn__0 []
+      in let tup_el_41 = erlps__nowarn__0 []
       in let
-        arg_43 =
+        arg_39 =
           ErlangTuple
-            [ErlangAtom "type", tup_el_45, ErlangAtom "product", args_2]
-      in erlps__check_type__3 [arg_43, seenvars_3, st1_42]
+            [ErlangAtom "type", tup_el_41, ErlangAtom "product", args_2]
+      in erlps__check_type__3 [arg_39, seenvars_3, st1_38]
     _ -> EXC.badmatch st_4
 erlps__check_type__3 [(ErlangTuple [(ErlangAtom "user_type"),
                                     l_0, typename_1, args_2]),

@@ -5224,61 +5224,48 @@ erlps__relprod_n__4 [rl_0, r_1, emptyr_2, isr_3] =
         in let rtype_17 = erlps__range_type__2 [rl_0, ErlangEmptyList]
         in let type_20 = ErlangTuple [dtype_9, rtype_17]
         in let
-          prod_52 =
+          prod_47 =
             case empty_14 of
-              (ErlangAtom "true") | (ErlangAtom "true") ==
-                                      (falsifyErrors
-                                         (\ _ ->
-                                            let
-                                              lop_22 =
-                                                BIF.erlang__op_exactEq
-                                                  [dtype_9, ErlangAtom "_"]
-                                            in
-                                              case lop_22 of
-                                                (ErlangAtom "true") ->
-                                                  ErlangAtom "true"
-                                                (ErlangAtom "false") ->
-                                                  BIF.erlang__op_exactEq
-                                                    [rtype_17, ErlangAtom "_"]
-                                                _ -> EXC.badarg1 lop_22)) ->
+              (ErlangAtom "true") | ((==) dtype_9 (ErlangAtom "_")) ||
+                                      ((==) rtype_17 (ErlangAtom "_")) ->
                 erlps__empty_set__0 []
               (ErlangAtom "true") ->
                 ErlangTuple [ErlangAtom "Set", ErlangEmptyList, type_20]
               (ErlangAtom "false") ->
-                let    record_30 = erlps__relprod_n__1 [rl_0]
+                let    record_25 = erlps__relprod_n__1 [rl_0]
                 in let
-                  tl_34 =
-                    case record_30 of
-                      (ErlangTuple arr_33) | (DM.Just field_32) <-
-                                               (arr_33 DA.!! 1) ->
-                        field_32
+                  tl_29 =
+                    case record_25 of
+                      (ErlangTuple arr_28) | (DM.Just field_27) <-
+                                               (arr_28 DA.!! 1) ->
+                        field_27
                       _ -> EXC.badrecord (ErlangAtom "Set")
-                in let sz_36 = BIF.erlang__length__1 [rl_0]
+                in let sz_31 = BIF.erlang__length__1 [rl_0]
                 in let
-                  fun_46 =
+                  fun_41 =
                     ErlangFun 1
                       (let
-                         lambda_37 [(ErlangTuple [x_39, a_40])] =
+                         lambda_32 [(ErlangTuple [x_34, a_35])] =
                            let
-                             tup_el_42 =
-                               erlps__flat__3 [sz_36, a_40, ErlangEmptyList]
-                           in ErlangTuple [x_39, tup_el_42]
-                         lambda_37 [arg_38] = EXC.function_clause unit
-                         lambda_37 args =
-                           EXC.badarity (ErlangFun 1 lambda_37) args
-                       in lambda_37)
+                             tup_el_37 =
+                               erlps__flat__3 [sz_31, a_35, ErlangEmptyList]
+                           in ErlangTuple [x_34, tup_el_37]
+                         lambda_32 [arg_33] = EXC.function_clause unit
+                         lambda_32 args =
+                           EXC.badarity (ErlangFun 1 lambda_32) args
+                       in lambda_32)
                 in let
-                  tup_el_48 =
+                  tup_el_43 =
                     BIF.do_remote_fun_call "Lists" "erlps__map__2"
-                      [fun_46, tl_34]
-                in ErlangTuple [ErlangAtom "Set", tup_el_48, type_20]
+                      [fun_41, tl_29]
+                in ErlangTuple [ErlangAtom "Set", tup_el_43, type_20]
               something_else -> EXC.case_clause something_else
         in
           case isr_3 of
-            (ErlangAtom "true") -> erlps__relative_product__2 [prod_52, r_1]
-            (ErlangAtom "false") -> prod_52
+            (ErlangAtom "true") -> erlps__relative_product__2 [prod_47, r_1]
+            (ErlangAtom "false") -> prod_47
             something_else -> EXC.case_clause something_else
-erlps__relprod_n__4 [arg_56, arg_57, arg_58, arg_59] =
+erlps__relprod_n__4 [arg_51, arg_52, arg_53, arg_54] =
   EXC.function_clause unit
 erlps__relprod_n__4 args =
   EXC.badarity (ErlangFun 4 erlps__relprod_n__4) args

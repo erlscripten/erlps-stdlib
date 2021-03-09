@@ -2147,16 +2147,8 @@ erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0,
 erlps__lexpr__3 [(ErlangTuple [(ErlangAtom "op"), _, op_0,
                                larg_1, rarg_2]),
                  prec_3, opts_4]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let lop_41 = BIF.erlang__op_exactEq [op_0, ErlangAtom "orelse"]
-            in
-              case lop_41 of
-                (ErlangAtom "true") -> ErlangAtom "true"
-                (ErlangAtom "false") ->
-                  BIF.erlang__op_exactEq [op_0, ErlangAtom "andalso"]
-                _ -> EXC.badarg1 lop_41)) =
+  | ((==) op_0 (ErlangAtom "orelse")) ||
+      ((==) op_0 (ErlangAtom "andalso")) =
   let
     matchExpr_9 =
       BIF.do_remote_fun_call "Erl.Parse" "erlps__inop_prec__1" [op_0]
@@ -3878,17 +3870,7 @@ erlps__write_a_char__2 args =
 
 erlps__write_a_string__3 :: ErlangFun
 erlps__write_a_string__3 [s_0, i_1, pp_2]
-  | (ErlangAtom "true") ==
-      (falsifyErrors
-         (\ _ ->
-            let    rop_8 = toErl 0
-            in let lop_6 = BIF.erlang__op_lesser [i_1, rop_8]
-            in
-              case lop_6 of
-                (ErlangAtom "true") -> ErlangAtom "true"
-                (ErlangAtom "false") ->
-                  BIF.erlang__op_exactEq [s_0, ErlangEmptyList]
-                _ -> EXC.badarg1 lop_6)) =
+  | (weakLt i_1 (toErl 0)) || ((==) s_0 ErlangEmptyList) =
   let arg_3 = erlps__write_string__2 [s_0, pp_2]
   in erlps__flat_leaf__1 [arg_3]
 erlps__write_a_string__3 [s_0, i_1, pp_2] =
