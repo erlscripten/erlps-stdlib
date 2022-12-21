@@ -378,6 +378,11 @@ erlps__pp__8 [arg_9, arg_10, arg_11, arg_12, arg_13, arg_14,
 erlps__pp__8 args = EXC.badarity (ErlangFun 8 erlps__pp__8) args
 
 erlps__pp_tag_tuple__8 :: ErlangFun
+erlps__pp_tag_tuple__8 [(ErlangTuple [(ErlangAtom "dots"), _, _,
+                                      _]),
+                        _col_0, _ll_1, _m_2, _tind_3, _ind_4, _ld_5, _w_6]
+  =
+  toErl "..."
 erlps__pp_tag_tuple__8 [(ErlangCons (ErlangTuple [tag_0, tlen_1,
                                                   _, _]) l_2),
                         col_3, ll_4, m_5, tind_6, ind_7, ld_8, w_9]
@@ -1471,57 +1476,61 @@ erlps__intermediate__6 [term_0, d_1, t_2, rf_3, enc_4, str_5]
                                                  (weakGt len_15 t_2)) ||
                                                 ((==) d_1 (toErl 1)) ->
         if_13
-      _ ->
-        let arg_21 = toErl 2
+      (ErlangTuple [_, len_17, _, _]) ->
+        let arg_22 = toErl 2
         in
-          erlps__find_upper__9
-            [if_13, term_0, t_2, d0_6, arg_21, d_1, rf_3, enc_4, str_5]
-erlps__intermediate__6 [arg_26, arg_27, arg_28, arg_29, arg_30,
-                        arg_31]
+          erlps__find_upper__10
+            [if_13, term_0, t_2, d0_6, arg_22, d_1, rf_3, enc_4, str_5,
+             len_17]
+      something_else -> EXC.case_clause something_else
+erlps__intermediate__6 [arg_28, arg_29, arg_30, arg_31, arg_32,
+                        arg_33]
   =
   EXC.function_clause unit
 erlps__intermediate__6 args =
   EXC.badarity (ErlangFun 6 erlps__intermediate__6) args
 
-erlps__find_upper__9 :: ErlangFun
-erlps__find_upper__9 [lower_0, term_1, t_2, dl_3, dd_4, d_5,
-                      rf_6, enc_7, str_8]
+erlps__find_upper__10 :: ErlangFun
+erlps__find_upper__10 [lower_0, term_1, t_2, dl_3, dd_4, d_5,
+                       rf_6, enc_7, str_8, lastlen_9]
   =
-  let    rop_10 = toErl 2
-  in let dd2_11 = BIF.erlang__op_mult [dd_4, rop_10]
-  in let rop_14 = toErl 0
-  in let case_12 = BIF.erlang__op_lesser [d_5, rop_14]
+  let    rop_11 = toErl 2
+  in let dd2_12 = BIF.erlang__op_mult [dd_4, rop_11]
+  in let rop_15 = toErl 0
+  in let case_13 = BIF.erlang__op_lesser [d_5, rop_15]
   in let
-    d1_21 =
-      case case_12 of
-        (ErlangAtom "true") -> BIF.erlang__op_plus [dl_3, dd2_11]
+    d1_22 =
+      case case_13 of
+        (ErlangAtom "true") -> BIF.erlang__op_plus [dl_3, dd2_12]
         (ErlangAtom "false") ->
-          let arg_17 = BIF.erlang__op_plus [dl_3, dd2_11]
-          in BIF.erlang__min__2 [arg_17, d_5]
+          let arg_18 = BIF.erlang__op_plus [dl_3, dd2_12]
+          in BIF.erlang__min__2 [arg_18, d_5]
         something_else -> EXC.case_clause something_else
-  in let arg_24 = BIF.erlang__op_minus [d1_21, dl_3]
-  in let if_27 = erlps__expand__3 [lower_0, t_2, arg_24]
+  in let arg_25 = BIF.erlang__op_minus [d1_22, dl_3]
+  in let if_28 = erlps__expand__3 [lower_0, t_2, arg_25]
   in
-    case if_27 of
-      (ErlangTuple [_, _, _dots_30@(ErlangInt num_29), _]) | (ErlangInt
-                                                                num_29) ==
+    case if_28 of
+      (ErlangTuple [_, _, _dots_31@(ErlangInt num_30), _]) | (ErlangInt
+                                                                num_30) ==
                                                                (toErl 0) ->
-        if_27
-      (ErlangTuple [_, _len_32@t_31, _, _]) | t_31 == t_2 -> if_27
-      (ErlangTuple [_, len_33, _, _]) | (weakLt len_33 t_2) &&
-                                          ((weakLt d1_21 d_5) ||
+        if_28
+      (ErlangTuple [_, lastlen_32, _, _]) | lastlen_32 == lastlen_9 ->
+        if_28
+      (ErlangTuple [_, len_33, _, _]) | (weakLeq len_33 t_2) &&
+                                          ((weakLt d1_22 d_5) ||
                                              (weakLt d_5 (toErl 0))) ->
-        erlps__find_upper__9
-          [if_27, term_1, t_2, d1_21, dd2_11, d_5, rf_6, enc_7, str_8]
+        erlps__find_upper__10
+          [if_28, term_1, t_2, d1_22, dd2_12, d_5, rf_6, enc_7, str_8,
+           len_33]
       _ ->
         erlps__search_depth__9
-          [lower_0, if_27, term_1, t_2, dl_3, d1_21, rf_6, enc_7, str_8]
-erlps__find_upper__9 [arg_52, arg_53, arg_54, arg_55, arg_56,
-                      arg_57, arg_58, arg_59, arg_60]
+          [lower_0, if_28, term_1, t_2, dl_3, d1_22, rf_6, enc_7, str_8]
+erlps__find_upper__10 [arg_53, arg_54, arg_55, arg_56, arg_57,
+                       arg_58, arg_59, arg_60, arg_61, arg_62]
   =
   EXC.function_clause unit
-erlps__find_upper__9 args =
-  EXC.badarity (ErlangFun 9 erlps__find_upper__9) args
+erlps__find_upper__10 args =
+  EXC.badarity (ErlangFun 10 erlps__find_upper__10) args
 
 erlps__search_depth__9 :: ErlangFun
 erlps__search_depth__9 [lower_0, upper_1, _term_2, t_3, dl_4,
@@ -1988,30 +1997,36 @@ erlps__print_length_map_pairs__7 [(ErlangTuple [k_0, v_1,
                                                 iter_2]),
                                   d_3, d0_4, t_5, rf_6, enc_7, str_8]
   =
-  let    arg_14 = toErl 1
-  in let arg_12 = erlps__tsub__2 [t_5, arg_14]
+  let   
+    next_10 = BIF.do_remote_fun_call "Maps" "erlps__next__1" [iter_2]
   in let
-    pair1_18 =
+    case_11 = BIF.erlang__op_exactEq [next_10, ErlangAtom "none"]
+  in let
+    t1_16 =
+      case case_11 of
+        (ErlangAtom "false") ->
+          let arg_15 = toErl 1
+          in erlps__tsub__2 [t_5, arg_15]
+        (ErlangAtom "true") -> t_5
+        something_else -> EXC.case_clause something_else
+  in let
+    pair1_24 =
       erlps__print_length_map_pair__7
-        [k_0, v_1, d0_4, arg_12, rf_6, enc_7, str_8]
+        [k_0, v_1, d0_4, t1_16, rf_6, enc_7, str_8]
   in
-    case pair1_18 of
-      (ErlangTuple [_, len1_19, _, _]) ->
-        let   
-          next_22 = BIF.do_remote_fun_call "Maps" "erlps__next__1" [iter_2]
-        in let rop_28 = toErl 1
-        in let arg_26 = BIF.erlang__op_minus [d_3, rop_28]
-        in let rop_34 = toErl 1
-        in let arg_32 = BIF.erlang__op_plus [len1_19, rop_34]
-        in let arg_30 = erlps__tsub__2 [t_5, arg_32]
+    case pair1_24 of
+      (ErlangTuple [_, len1_25, _, _]) ->
+        let    rop_32 = toErl 1
+        in let arg_30 = BIF.erlang__op_minus [d_3, rop_32]
+        in let arg_34 = erlps__tsub__2 [t1_16, len1_25]
         in let
-          tail_24 =
+          tail_28 =
             erlps__print_length_map_pairs__7
-              [next_22, arg_26, d0_4, arg_30, rf_6, enc_7, str_8]
-        in ErlangCons pair1_18 tail_24
-      _ -> EXC.badmatch pair1_18
-erlps__print_length_map_pairs__7 [arg_38, arg_39, arg_40, arg_41,
-                                  arg_42, arg_43, arg_44]
+              [next_10, arg_30, d0_4, arg_34, rf_6, enc_7, str_8]
+        in ErlangCons pair1_24 tail_28
+      _ -> EXC.badmatch pair1_24
+erlps__print_length_map_pairs__7 [arg_40, arg_41, arg_42, arg_43,
+                                  arg_44, arg_45, arg_46]
   =
   EXC.function_clause unit
 erlps__print_length_map_pairs__7 args =
@@ -2139,29 +2154,37 @@ erlps__print_length_tuple1__7 [tuple_0, i_1, d_2, t_3, rf_4,
                                enc_5, str_6]
   =
   let    e_9 = BIF.erlang__element__2 [i_1, tuple_0]
-  in let arg_11 = toErl 1
-  in let t1_12 = erlps__tsub__2 [t_3, arg_11]
-  in let rop_16 = toErl 1
-  in let arg_14 = BIF.erlang__op_minus [d_2, rop_16]
+  in let rop_12 = BIF.erlang__tuple_size__1 [tuple_0]
+  in let case_10 = BIF.erlang__op_exactEq [i_1, rop_12]
   in let
-    elem1_21 =
-      erlps__print_length__6 [e_9, arg_14, t1_12, rf_4, enc_5, str_6]
+    t1_16 =
+      case case_10 of
+        (ErlangAtom "false") ->
+          let arg_15 = toErl 1
+          in erlps__tsub__2 [t_3, arg_15]
+        (ErlangAtom "true") -> t_3
+        something_else -> EXC.case_clause something_else
+  in let rop_20 = toErl 1
+  in let arg_18 = BIF.erlang__op_minus [d_2, rop_20]
+  in let
+    elem1_25 =
+      erlps__print_length__6 [e_9, arg_18, t1_16, rf_4, enc_5, str_6]
   in
-    case elem1_21 of
-      (ErlangTuple [_, len1_22, _, _]) ->
-        let    t2_26 = erlps__tsub__2 [t1_12, len1_22]
-        in let rop_32 = toErl 1
-        in let arg_30 = BIF.erlang__op_plus [i_1, rop_32]
-        in let rop_35 = toErl 1
-        in let arg_33 = BIF.erlang__op_minus [d_2, rop_35]
+    case elem1_25 of
+      (ErlangTuple [_, len1_26, _, _]) ->
+        let    t2_30 = erlps__tsub__2 [t1_16, len1_26]
+        in let rop_36 = toErl 1
+        in let arg_34 = BIF.erlang__op_plus [i_1, rop_36]
+        in let rop_39 = toErl 1
+        in let arg_37 = BIF.erlang__op_minus [d_2, rop_39]
         in let
-          tail_28 =
+          tail_32 =
             erlps__print_length_tuple1__7
-              [tuple_0, arg_30, arg_33, t2_26, rf_4, enc_5, str_6]
-        in ErlangCons elem1_21 tail_28
-      _ -> EXC.badmatch elem1_21
-erlps__print_length_tuple1__7 [arg_40, arg_41, arg_42, arg_43,
-                               arg_44, arg_45, arg_46]
+              [tuple_0, arg_34, arg_37, t2_30, rf_4, enc_5, str_6]
+        in ErlangCons elem1_25 tail_32
+      _ -> EXC.badmatch elem1_25
+erlps__print_length_tuple1__7 [arg_44, arg_45, arg_46, arg_47,
+                               arg_48, arg_49, arg_50]
   =
   EXC.function_clause unit
 erlps__print_length_tuple1__7 args =
@@ -2261,30 +2284,38 @@ erlps__print_length_fields__8 [(ErlangCons def_0 defs_1), d_2,
                                t_3, tuple_4, i_5, rf_6, enc_7, str_8]
   =
   let    e_11 = BIF.erlang__element__2 [i_5, tuple_4]
-  in let arg_13 = toErl 1
-  in let t1_14 = erlps__tsub__2 [t_3, arg_13]
-  in let rop_18 = toErl 1
-  in let arg_16 = BIF.erlang__op_minus [d_2, rop_18]
+  in let rop_14 = BIF.erlang__tuple_size__1 [tuple_4]
+  in let case_12 = BIF.erlang__op_exactEq [i_5, rop_14]
   in let
-    field1_24 =
+    t1_18 =
+      case case_12 of
+        (ErlangAtom "false") ->
+          let arg_17 = toErl 1
+          in erlps__tsub__2 [t_3, arg_17]
+        (ErlangAtom "true") -> t_3
+        something_else -> EXC.case_clause something_else
+  in let rop_22 = toErl 1
+  in let arg_20 = BIF.erlang__op_minus [d_2, rop_22]
+  in let
+    field1_28 =
       erlps__print_length_field__7
-        [def_0, arg_16, t1_14, e_11, rf_6, enc_7, str_8]
+        [def_0, arg_20, t1_18, e_11, rf_6, enc_7, str_8]
   in
-    case field1_24 of
-      (ErlangTuple [_, len1_25, _, _]) ->
-        let    t2_29 = erlps__tsub__2 [t1_14, len1_25]
-        in let rop_35 = toErl 1
-        in let arg_33 = BIF.erlang__op_minus [d_2, rop_35]
-        in let rop_40 = toErl 1
-        in let arg_38 = BIF.erlang__op_plus [i_5, rop_40]
+    case field1_28 of
+      (ErlangTuple [_, len1_29, _, _]) ->
+        let    t2_33 = erlps__tsub__2 [t1_18, len1_29]
+        in let rop_39 = toErl 1
+        in let arg_37 = BIF.erlang__op_minus [d_2, rop_39]
+        in let rop_44 = toErl 1
+        in let arg_42 = BIF.erlang__op_plus [i_5, rop_44]
         in let
-          tail_31 =
+          tail_35 =
             erlps__print_length_fields__8
-              [defs_1, arg_33, t2_29, tuple_4, arg_38, rf_6, enc_7, str_8]
-        in ErlangCons field1_24 tail_31
-      _ -> EXC.badmatch field1_24
-erlps__print_length_fields__8 [arg_44, arg_45, arg_46, arg_47,
-                               arg_48, arg_49, arg_50, arg_51]
+              [defs_1, arg_37, t2_33, tuple_4, arg_42, rf_6, enc_7, str_8]
+        in ErlangCons field1_28 tail_35
+      _ -> EXC.badmatch field1_28
+erlps__print_length_fields__8 [arg_48, arg_49, arg_50, arg_51,
+                               arg_52, arg_53, arg_54, arg_55]
   =
   EXC.function_clause unit
 erlps__print_length_fields__8 args =
@@ -2374,27 +2405,32 @@ erlps__print_length_list1__6 [term_0, d_1, t_2, rf_3, enc_4,
 erlps__print_length_list1__6 [(ErlangCons e_0 es_1), d_2, t_3,
                               rf_4, enc_5, str_6]
   =
-  let    rop_10 = toErl 1
-  in let arg_8 = BIF.erlang__op_minus [d_2, rop_10]
-  in let arg_13 = toErl 1
-  in let arg_11 = erlps__tsub__2 [t_3, arg_13]
+  let    case_7 = BIF.erlang__op_exactEq [es_1, ErlangEmptyList]
   in let
-    elem1_17 =
-      erlps__print_length__6 [e_0, arg_8, arg_11, rf_4, enc_5, str_6]
+    t1_12 =
+      case case_7 of
+        (ErlangAtom "false") ->
+          let arg_11 = toErl 1
+          in erlps__tsub__2 [t_3, arg_11]
+        (ErlangAtom "true") -> t_3
+        something_else -> EXC.case_clause something_else
+  in let rop_16 = toErl 1
+  in let arg_14 = BIF.erlang__op_minus [d_2, rop_16]
+  in let
+    elem1_21 =
+      erlps__print_length__6 [e_0, arg_14, t1_12, rf_4, enc_5, str_6]
   in
-    case elem1_17 of
-      (ErlangTuple [_, len1_18, _, _]) ->
-        let    rop_25 = toErl 1
-        in let arg_23 = BIF.erlang__op_minus [d_2, rop_25]
-        in let rop_30 = toErl 1
-        in let arg_28 = BIF.erlang__op_plus [len1_18, rop_30]
-        in let arg_26 = erlps__tsub__2 [t_3, arg_28]
+    case elem1_21 of
+      (ErlangTuple [_, len1_22, _, _]) ->
+        let    rop_29 = toErl 1
+        in let arg_27 = BIF.erlang__op_minus [d_2, rop_29]
+        in let arg_30 = erlps__tsub__2 [t1_12, len1_22]
         in let
-          tail_21 =
+          tail_25 =
             erlps__print_length_list1__6
-              [es_1, arg_23, arg_26, rf_4, enc_5, str_6]
-        in ErlangCons elem1_17 tail_21
-      _ -> EXC.badmatch elem1_17
+              [es_1, arg_27, arg_30, rf_4, enc_5, str_6]
+        in ErlangCons elem1_21 tail_25
+      _ -> EXC.badmatch elem1_21
 erlps__print_length_list1__6 [e_0, d_1, t_2, rf_3, enc_4, str_5]
   =
   let    rop_9 = toErl 1
@@ -2765,12 +2801,14 @@ erlps__printable_latin1_list__2 [(ErlangCons _ _),
   | (ErlangInt num_0) == (toErl 0) =
   toErl 0
 erlps__printable_latin1_list__2 [(ErlangCons c_0 cs_1), n_2]
-  | (weakGeq c_0 (toErl 32)) && (weakLeq c_0 (toErl 126)) =
+  | ((isEInt c_0) && (weakGeq c_0 (toErl 32))) &&
+      (weakLeq c_0 (toErl 126)) =
   let    rop_6 = toErl 1
   in let arg_4 = BIF.erlang__op_minus [n_2, rop_6]
   in erlps__printable_latin1_list__2 [cs_1, arg_4]
 erlps__printable_latin1_list__2 [(ErlangCons c_0 cs_1), n_2]
-  | (weakGeq c_0 (toErl 160)) && (weakLeq c_0 (toErl 255)) =
+  | ((isEInt c_0) && (weakGeq c_0 (toErl 160))) &&
+      (weakLeq c_0 (toErl 255)) =
   let    rop_6 = toErl 1
   in let arg_4 = BIF.erlang__op_minus [n_2, rop_6]
   in erlps__printable_latin1_list__2 [cs_1, arg_4]
@@ -3142,18 +3180,23 @@ erlps__expand_list__3 :: ErlangFun
 erlps__expand_list__3 [(ErlangEmptyList), _t_0, _dd_1] =
   ErlangEmptyList
 erlps__expand_list__3 [(ErlangCons if_0 ifs_1), t_2, dd_3] =
-  let    arg_7 = toErl 1
-  in let arg_5 = erlps__tsub__2 [t_2, arg_7]
-  in let elem1_9 = erlps__expand__3 [if_0, arg_5, dd_3]
+  let    case_4 = BIF.erlang__op_exactEq [ifs_1, ErlangEmptyList]
+  in let
+    t1_9 =
+      case case_4 of
+        (ErlangAtom "false") ->
+          let arg_8 = toErl 1
+          in erlps__tsub__2 [t_2, arg_8]
+        (ErlangAtom "true") -> t_2
+        something_else -> EXC.case_clause something_else
+  in let elem1_13 = erlps__expand__3 [if_0, t1_9, dd_3]
   in
-    case elem1_9 of
-      (ErlangTuple [_, len1_10, _, _]) ->
-        let    rop_19 = toErl 1
-        in let arg_17 = BIF.erlang__op_plus [len1_10, rop_19]
-        in let arg_15 = erlps__tsub__2 [t_2, arg_17]
-        in let tail_13 = erlps__expand_list__3 [ifs_1, arg_15, dd_3]
-        in ErlangCons elem1_9 tail_13
-      _ -> EXC.badmatch elem1_9
+    case elem1_13 of
+      (ErlangTuple [_, len1_14, _, _]) ->
+        let    arg_19 = erlps__tsub__2 [t1_9, len1_14]
+        in let tail_17 = erlps__expand_list__3 [ifs_1, arg_19, dd_3]
+        in ErlangCons elem1_13 tail_17
+      _ -> EXC.badmatch elem1_13
 erlps__expand_list__3 [(ErlangTuple [_, _, _, more_0]), t_1,
                        dd_2]
   =
@@ -3313,8 +3356,12 @@ erlps__cind_tag_tuple__7 [(ErlangCons (ErlangTuple [_tag_0,
           erlps__cind_list__7
             [l_2, tcol_14, ll_4, m_5, ind_6, ld_7, arg_51]
       _ -> BIF.erlang__throw__1 [ErlangAtom "no_good"]
-erlps__cind_tag_tuple__7 [arg_57, arg_58, arg_59, arg_60, arg_61,
-                          arg_62, arg_63]
+erlps__cind_tag_tuple__7 [_, _col_0, _ll_1, _m_2, ind_3, _ld_4,
+                          _w_5]
+  =
+  ind_3
+erlps__cind_tag_tuple__7 [arg_6, arg_7, arg_8, arg_9, arg_10,
+                          arg_11, arg_12]
   =
   EXC.function_clause unit
 erlps__cind_tag_tuple__7 args =

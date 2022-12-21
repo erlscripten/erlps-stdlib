@@ -2,7 +2,7 @@
 test: build_tests
 	spago test --purs-args "+RTS -I5 -w -A128M --"
 
-BEAM_PATH = /usr/lib/erlang/lib/stdlib-3.14/ebin
+BEAM_PATH = /usr/lib/erlang/lib/stdlib-4.0.1/ebin
 build_stdlib:
 	ln -f manually_transpiled/* src/
 

@@ -1087,7 +1087,7 @@ erlps__is_set__1 args =
   EXC.badarity (ErlangFun 1 erlps__is_set__1) args
 
 erlps__filter__2 :: ErlangFun
-erlps__filter__2 [f_0, s_1] =
+erlps__filter__2 [f_0, s_1] | isEFunA f_0 (toErl 1) =
   let    lcSrc_3 = erlps__to_list__1 [s_1]
   in let
     arg_2 =

@@ -1,6 +1,6 @@
 "use static";
 
-var fs = require("./filemap.json");
+import * as fs from "./filemap.json";
 
 function simplifyPath(path) {
     var stack = [],
@@ -16,7 +16,7 @@ function simplifyPath(path) {
     return stack.join("/");
 }
 
-exports.readFileImpl = function(makeBinary) {
+export const readFileImpl = function(makeBinary) {
     return function(enoent) {
 	return function(filename) {
 	    var filename = simplifyPath(filename);

@@ -418,7 +418,7 @@ erlps__message_1__1 [(ErlangAtom "eproto")] =
     (BIN.fromInts (toErl "protocol error") (toErl 8) 1 BIN.Big)
 erlps__message_1__1 [(ErlangAtom "eprotonosupport")] =
   ErlangBinary
-    (BIN.fromInts (toErl "protocol not suppored") (toErl 8) 1
+    (BIN.fromInts (toErl "protocol not supported") (toErl 8) 1
        BIN.Big)
 erlps__message_1__1 [(ErlangAtom "eprototype")] =
   ErlangBinary

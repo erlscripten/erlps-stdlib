@@ -469,6 +469,12 @@ erlps__bif__2 :: ErlangFun
 erlps__bif__2 [(ErlangAtom "abs"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
+erlps__bif__2 [(ErlangAtom "alias"), (ErlangInt num_0)]
+  | (ErlangInt num_0) == (toErl 0) =
+  ErlangAtom "true"
+erlps__bif__2 [(ErlangAtom "alias"), (ErlangInt num_0)]
+  | (ErlangInt num_0) == (toErl 1) =
+  ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "apply"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
@@ -583,6 +589,9 @@ erlps__bif__2 [(ErlangAtom "error"), (ErlangInt num_0)]
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "error"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 2) =
+  ErlangAtom "true"
+erlps__bif__2 [(ErlangAtom "error"), (ErlangInt num_0)]
+  | (ErlangInt num_0) == (toErl 3) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "exit"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 1) =
@@ -794,6 +803,9 @@ erlps__bif__2 [(ErlangAtom "module_loaded"), (ErlangInt num_0)]
 erlps__bif__2 [(ErlangAtom "monitor"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
+erlps__bif__2 [(ErlangAtom "monitor"), (ErlangInt num_0)]
+  | (ErlangInt num_0) == (toErl 3) =
+  ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "monitor_node"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 2) =
   ErlangAtom "true"
@@ -982,6 +994,9 @@ erlps__bif__2 [(ErlangAtom "tuple_size"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "tuple_to_list"), (ErlangInt num_0)]
+  | (ErlangInt num_0) == (toErl 1) =
+  ErlangAtom "true"
+erlps__bif__2 [(ErlangAtom "unalias"), (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 1) =
   ErlangAtom "true"
 erlps__bif__2 [(ErlangAtom "unlink"), (ErlangInt num_0)]
@@ -1503,6 +1518,14 @@ erlps__is_type__2 [(ErlangAtom "non_neg_integer"),
   | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "none"), (ErlangInt num_0)]
+  | (ErlangInt num_0) == (toErl 0) =
+  ErlangAtom "true"
+erlps__is_type__2 [(ErlangAtom "nonempty_binary"),
+                   (ErlangInt num_0)]
+  | (ErlangInt num_0) == (toErl 0) =
+  ErlangAtom "true"
+erlps__is_type__2 [(ErlangAtom "nonempty_bitstring"),
+                   (ErlangInt num_0)]
   | (ErlangInt num_0) == (toErl 0) =
   ErlangAtom "true"
 erlps__is_type__2 [(ErlangAtom "nonempty_improper_list"),

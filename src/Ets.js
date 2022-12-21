@@ -3,7 +3,7 @@
 var ets_map = {};
 var ets_name_map = {};
 
-exports.registerNamed
+export const registerNamed
     = function(name) {
         return function(ref) {
             return function(table) {
@@ -13,14 +13,14 @@ exports.registerNamed
         };
     };
 
-exports.register
+export const register
     = function(ref) {
         return function(table) {
             ets_map[ref] = table;
         };
     };
 
-exports.getTableImpl
+export const getTableImpl
     = function(badargCallback) {
         return function(ref) {
             var t = ets_map[ref];
@@ -32,7 +32,7 @@ exports.getTableImpl
         };
     };
 
-exports.solveNameImpl
+export const solveNameImpl
     = function(nothing) {
         return function(just) {
             return function(name) {
@@ -46,7 +46,7 @@ exports.solveNameImpl
         };
     };
 
-exports.etsDeleteImpl
+export const etsDeleteImpl
     = function(badargCallback){
         return function(ref) {
             if(!ets_map[ref]) {

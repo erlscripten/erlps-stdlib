@@ -8,7 +8,9 @@
     "big-integer": "^1.6.48",
     "core-js": "^3.7.0",
     "crypto": "^1.0.1",
-    "crypto-js": "^4.0.0"
+    "crypto-js": "^4.0.0",
+    "es6-require": "^0.2.1",
+    "require": "^2.4.20"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
